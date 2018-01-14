@@ -27,6 +27,7 @@
     "nodemon": "^1.14.8",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "request": "^2.83.0"
   }
 }

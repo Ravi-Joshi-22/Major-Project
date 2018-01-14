@@ -18,4 +18,5 @@ module.exports = {
   HOSTNAME: {
     URI: process.env.HOST_URI,
   },
+  OTP_AUTH_KEY: process.env.OTP_KEY,
 };

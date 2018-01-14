@@ -32,6 +32,25 @@ function registerUser(userData, callback) {
   });
 }
 
+/**
+ * Function get user details by ID
+ * @param {objectId} userId user objectId
+ * @param {Function} callback function two param err and fetched user
+ */
+function fetchUser(userId, callback) {
+  User.findById(userId).exec(function(err, user) {
+    if (err) {
+      callback({
+        type: CONSTANTS.ERROR_TYPES.DB_ERROR,
+        msg: 'Unable to get user details',
+        errorDetail: JSON.stringify(err),
+      });
+    } else {
+      callback(null, user);
+    }
+  });
+}
 module.exports = {
   registerUser: registerUser,
+  fetchUser: fetchUser,
 };

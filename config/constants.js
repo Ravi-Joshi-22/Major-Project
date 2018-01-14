@@ -39,5 +39,11 @@ module.exports = {
         ADMIN_DECLINED: 'admin_declined',
       },
     },
+    OTP_RESPONSE_TYPE: {
+      SUCCESS: 'success',
+      ERROR: 'error',
+    },
   },
+  SENDER_ID: 'SMARTHYRE',
+  OTP_EXPIRY: 20,
 };

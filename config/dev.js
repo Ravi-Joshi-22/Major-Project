@@ -18,4 +18,5 @@ module.exports = {
   HOSTNAME: {
     URI: 'http://localhost:2000',
   },
+  OTP_AUTH_KEY: '186133AyQXQfeIYD5a1fb8a3',
 };
