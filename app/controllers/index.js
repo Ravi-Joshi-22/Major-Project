@@ -10,11 +10,17 @@
  * to it.
  *
  */
-
 const express = require('express');
+//const adminRoutes = require('./admin');
 const appRoutes = require('./app');
+const companyRoutes = require('./company');
+const intervieweeRoutes = require('./interviewee');
 
 const router = express.Router();
 
+//router.use('/admin', adminRoutes);
+
 router.use('/app', appRoutes);
+router.use('/company', companyRoutes);
+router.use('/interviewee', intervieweeRoutes);
 module.exports = router;
