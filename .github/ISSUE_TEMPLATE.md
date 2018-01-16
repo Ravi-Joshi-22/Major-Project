@@ -5,7 +5,6 @@ NOTE: Kindly delete this section before creating the issue.
 
 * Prefix the GitHub issue with relevant dashboard ( [COMPANY] , [Admin] , [USER] )
 * Assign proper labels corresponding to the priority ( [High], [Low], [Medium], [Very High] )
-* Check https://github.com/nitish-mehta/cp_dashboards/wiki/Testing-Process-Guidelines#creating-an-issue for more
 
 ---
 
