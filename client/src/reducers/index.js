@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import testReducers from './testReducers';
+import userReducers from './app/userReducers';
+import cureentStepReducer from './app/currentStepReducer';
 
 export default combineReducers({
-  test: testReducers,
+  user: userReducers,
+  currentStep: cureentStepReducer,
 });
