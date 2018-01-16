@@ -21,14 +21,14 @@ function otpMessageSender(receiverDetails, callback) {
     method: 'POST',
     url: `http://control.msg91.com/api/sendotp.php?authkey=${
       KEYS.OTP_AUTH_KEY
-    }&sender=${CONSTANTS.SENDER_ID}&mobile=${
+      }&sender=${CONSTANTS.SENDER_ID}&mobile=${
       receiverDetails.phone
-    }&otp_expiry=${CONSTANTS.OTP_EXPIRY}`,
+      }&otp_expiry=${CONSTANTS.OTP_EXPIRY}`,
     headers: {},
     json: true,
   };
 
-  request(otpObject, function(error, res, body) {
+  request(otpObject, function (error, res, body) {
     if (error) {
       callback({
         type: CONSTANTS.ERRORS.OTP_ERROR,
@@ -53,12 +53,12 @@ function isOtpMessageVerified(otpPayload, callback) {
     method: 'POST',
     url: `https://control.msg91.com/api/verifyRequestOTP.php?authkey=${
       KEYS.OTP_AUTH_KEY
-    }&mobile=${otpPayload.phone}&otp=${otpPayload.otp}`,
+      }&mobile=${otpPayload.phone}&otp=${otpPayload.otp}`,
     headers: {},
     json: true,
   };
 
-  request(otpObject, function(error, res, body) {
+  request(otpObject, function (error, res, body) {
     if (error) {
       callback({
         type: CONSTANTS.ERRORS.OTP_ERROR,
@@ -81,19 +81,19 @@ function isOtpMessageVerified(otpPayload, callback) {
 function sendOtp(userId, callback) {
   async.waterfall(
     [
-      function(waterfallcallback) {
-        userHelper.fetchUser(userId, function(err, user) {
+      function (waterfallcallback) {
+        userHelper.fetchUser(userId, function (err, user) {
           waterfallcallback(err, user);
         });
       },
 
-      function(userDetail, waterfallcallback) {
-        otpMessageSender(userDetail, function(otpError, sendOtp) {
+      function (userDetail, waterfallcallback) {
+        otpMessageSender(userDetail, function (otpError, sendOtp) {
           waterfallcallback(otpError, sendOtp);
         });
       },
     ],
-    function(err, data) {
+    function (err, data) {
       callback(err, data);
     }
   );
@@ -108,27 +108,27 @@ function sendOtp(userId, callback) {
 function verifyOtp(otp, userId, callback) {
   async.waterfall(
     [
-      function(waterfallcallback) {
-        userHelper.fetchUser(userId, function(userError, userDetail) {
+      function (waterfallcallback) {
+        userHelper.fetchUser(userId, function (userError, userDetail) {
           waterfallcallback(userError, userDetail);
         });
       },
 
-      function(userDetail, waterfallcallback) {
+      function (userDetail, waterfallcallback) {
         const otpPayload = {
           phone: userDetail.phone,
           otp: otp,
         };
-        isOtpMessageVerified(otpPayload, function(err, verified) {
+        isOtpMessageVerified(otpPayload, function (err, verified) {
           waterfallcallback(err, verified, userDetail);
         });
       },
 
-      function(verified, userDetail, waterfallcallback) {
+      function (verified, userDetail, waterfallcallback) {
         if (verified.type === CONSTANTS.ENUMS.OTP_RESPONSE_TYPE.SUCCESS) {
           userDetail.verification_status =
             CONSTANTS.ENUMS.USER.VERIFICATION_STATUS.OTP_VERIFIED;
-          userDetail.save(function(err, updatedUser) {
+          userDetail.save(function (err, updatedUser) {
             waterfallcallback(err, updatedUser);
           });
         } else {
@@ -140,7 +140,7 @@ function verifyOtp(otp, userId, callback) {
         }
       },
     ],
-    function(err, user) {
+    function (err, user) {
       callback(err, user);
     }
   );
