@@ -30,6 +30,12 @@ module.exports = {
         EMAIL_VERIFIED: 'email_verified',
         OTP_VERIFIED: 'otp_verified',
       },
+      INTERVIEW_STATUS: {
+        APPLIED: 'applied',
+        GIVEN: 'given',
+        SELECTED: 'selected',
+        REJECTED: 'rejected',
+      },
     },
     COMPANY: {
       VERIFICATION_STATUS: {
