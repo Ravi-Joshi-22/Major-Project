@@ -7,9 +7,11 @@ const educationSchema = new Schema(
         secondary: {
             year_of_comp: {
                 type: Number,
+                required: true,
             },
             board: {
                 type: String,
+                required: true,
             },
             performance: {
                 scale: {
@@ -22,12 +24,13 @@ const educationSchema = new Schema(
                 },
                 value: {
                     type: Number,
+                    required: true,
                 },
             },
             school: {
                 type: String,
+                required: true,
             },
-            required: true,
         },
         senior_sec: {
             year_of_comp: {
