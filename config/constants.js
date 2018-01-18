@@ -64,6 +64,7 @@ module.exports = {
       ERROR: 'error',
     },
   },
+  CURRENT_DAY: 'Current Day',
   SENDER_ID: 'SMARTHYRE',
   OTP_EXPIRY: 20,
 };

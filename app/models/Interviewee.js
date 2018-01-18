@@ -47,6 +47,7 @@ const intervieweeSchema = new Schema(
                 },
                 description: {
                     type: String,
+                    maxlength: 150,
                 },
             },
         ],
@@ -75,7 +76,7 @@ const intervieweeSchema = new Schema(
                     type: String,
                 },
                 date: {
-                    type: Date,
+                    type: String,
                 },
             },
         ],
@@ -85,13 +86,21 @@ const intervieweeSchema = new Schema(
                     type: String,
                 },
                 start_date: {
-                    type: Date,
+                    type: String,
+                },
+                currently_working: {
+                    type: Boolean,
                 },
                 end_date: {
-                    type: Date,
+                    type: String,
+                    required: function () {
+                        return (!(this.currently_working == true));
+                    },
+                    default: CONSTANTS.CURRENT_DAY,
                 },
                 description: {
                     type: String,
+                    maxlength: 250,
                 },
                 url: {
                     type: String,
@@ -102,6 +111,7 @@ const intervieweeSchema = new Schema(
             {
                 description: {
                     type: String,
+                    maxlenght: 250,
                 },
             },
         ],
