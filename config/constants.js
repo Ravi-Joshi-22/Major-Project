@@ -36,6 +36,10 @@ module.exports = {
         SELECTED: 'selected',
         REJECTED: 'rejected',
       },
+      PERFORMANCE_SCALE: {
+        CGPA: 'CGPA(Scale of 10)',
+        PERCENTAGE: 'percentage',
+      },
     },
     COMPANY: {
       VERIFICATION_STATUS: {
