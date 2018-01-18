@@ -40,6 +40,16 @@ module.exports = {
         CGPA: 'CGPA(Scale of 10)',
         PERCENTAGE: 'percentage',
       },
+      STREAM_VALUE: {
+        SCIENCE: 'Science',
+        COMMERCE: 'Commerce',
+        ARTS: 'Arts',
+      },
+      SKILLS_RATE: {
+        BEGINNER: 'Beginner',
+        INTERMEDIATE: 'Intermediate',
+        ADVANCED: 'Advanced',
+      }
     },
     COMPANY: {
       VERIFICATION_STATUS: {

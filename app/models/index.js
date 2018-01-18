@@ -5,6 +5,7 @@ const companySchema = require('./Company');
 const jobOpeningSchema = require('./JobOpening');
 const interviewTrackSchema = require('./InterviewTrack');
 const intervieweeAnsSchema = require('./intervieweeAns');
+const intervieweeSchema = require('./Interviewee');
 
 /**
  * This file should import all the schema and register a mongoose model
@@ -18,4 +19,5 @@ module.exports = {
   JobOpening: mongoose.model('JobOpening', jobOpeningSchema),
   InterviewTrack: mongoose.model('InterviewTrack', interviewTrackSchema),
   IntervieweeAns: mongoose.model('IntervieweeAns', intervieweeAnsSchema),
+  Interviewee: mongoose.model('Interviewee', intervieweeSchema),
 };
