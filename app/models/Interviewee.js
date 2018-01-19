@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const CONSTANTS = require('../../config/constants');
 const educationSchema = require('./Education');
 const jobDescriptionSchema = require('./JobDescription');
+const certificationSchema = require('./Certification');
+const projectSchema = require('./Project')
 
 const Schema = mongoose.Schema;
 const intervieweeSchema = new Schema(
@@ -12,14 +14,10 @@ const intervieweeSchema = new Schema(
         },
         educations: educationSchema,
         jobs: [
-            {
-                jobDescriptionSchema,
-            },
+            jobDescriptionSchema,
         ],
         internships: [
-            {
-                jobDescriptionSchema,
-            },
+            jobDescriptionSchema,
         ],
         skills: [
             {
@@ -52,20 +50,7 @@ const intervieweeSchema = new Schema(
             },
         ],
         certifications: [
-            {
-                name: {
-                    type: String,
-                },
-                authority: {
-                    type: String,
-                },
-                lic_number: {
-                    type: String,
-                },
-                url: {
-                    type: String,
-                },
-            },
+            certificationSchema,
         ],
         tests: [
             {
@@ -81,31 +66,7 @@ const intervieweeSchema = new Schema(
             },
         ],
         projects: [
-            {
-                title: {
-                    type: String,
-                },
-                start_date: {
-                    type: String,
-                },
-                currently_working: {
-                    type: Boolean,
-                },
-                end_date: {
-                    type: String,
-                    required: function () {
-                        return (!(this.currently_working == true));
-                    },
-                    default: CONSTANTS.CURRENT_DAY,
-                },
-                description: {
-                    type: String,
-                    maxlength: 250,
-                },
-                url: {
-                    type: String,
-                },
-            },
+            projectSchema,
         ],
         additionals: [
             {

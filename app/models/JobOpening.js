@@ -52,7 +52,7 @@ const jobOpeningSchema = new Schema(
             type: Date,
             required: true,
         },
-        interviews: [
+        interviewees: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User',
