@@ -30,6 +30,26 @@ module.exports = {
         EMAIL_VERIFIED: 'email_verified',
         OTP_VERIFIED: 'otp_verified',
       },
+      INTERVIEW_STATUS: {
+        APPLIED: 'applied',
+        GIVEN: 'given',
+        SELECTED: 'selected',
+        REJECTED: 'rejected',
+      },
+      PERFORMANCE_SCALE: {
+        CGPA: 'CGPA(Scale of 10)',
+        PERCENTAGE: 'percentage',
+      },
+      STREAM_VALUE: {
+        SCIENCE: 'Science',
+        COMMERCE: 'Commerce',
+        ARTS: 'Arts',
+      },
+      SKILLS_RATE: {
+        BEGINNER: 'Beginner',
+        INTERMEDIATE: 'Intermediate',
+        ADVANCED: 'Advanced',
+      }
     },
     COMPANY: {
       VERIFICATION_STATUS: {
@@ -44,6 +64,7 @@ module.exports = {
       ERROR: 'error',
     },
   },
+  CURRENT_DAY: 'Current Day',
   SENDER_ID: 'SMARTHYRE',
   OTP_EXPIRY: 20,
 };
