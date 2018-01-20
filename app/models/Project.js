@@ -17,7 +17,7 @@ const projectSchema = new Schema(
             required: function () {
                 return (!(this.currently_working == true));
             },
-            default: CONSTANTS.CURRENT_DAY,
+            default: Date.now(),
         },
         description: {
             type: String,

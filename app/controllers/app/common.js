@@ -68,6 +68,10 @@ router.post(
   }
 );
 
+router.get('/fetchUser', (req, res) => {
+  res.send(req.user);
+})
+
 router.get('/verifyEmail', verifyUserEmail);
 router.get('/requestOTP', sendOTP);
 router.post('/verifyOTP', verifyOTP);

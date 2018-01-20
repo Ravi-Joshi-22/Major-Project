@@ -27,6 +27,10 @@ const companySchema = new Schema(
     company_certificate: {
       type: String,
     },
+    credits: {
+      type: Number,
+      default: 0,
+    },
     verification_status: {
       type: String,
       enum: [
