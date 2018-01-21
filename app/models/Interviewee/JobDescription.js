@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const CONSTANTS = require('../../../config/constants');
 
 const Schema = mongoose.Schema;
 const jobDescriptionSchema = new Schema(
