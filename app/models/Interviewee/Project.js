@@ -29,7 +29,7 @@ const projectSchema = new Schema(
     },
     {
         _id: true,
-    },
+    }
 );
 
 module.exports = projectSchema;

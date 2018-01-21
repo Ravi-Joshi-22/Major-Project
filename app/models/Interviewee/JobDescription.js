@@ -36,7 +36,7 @@ const jobDescriptionSchema = new Schema(
     },
     {
         _id: true,
-    },
+    }
 );
 
 module.exports = jobDescriptionSchema;
