@@ -25,9 +25,9 @@ const jobDescriptionSchema = new Schema(
         },
         end_date: {
             type: String,
-            required: function () {
-                return (!(this.currently_working == true));
-            },
+            /**    required: function () {
+                    return (!(this.currently_working == true));
+                },*/
             default: CONSTANTS.CURRENT_DAY,
         },
         description: {
