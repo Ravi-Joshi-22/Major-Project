@@ -22,11 +22,14 @@ const projectSchema = new Schema(
         },
         description: {
             type: String,
-            maxlength: 250,
+            maxlength: 400,
         },
         url: {
             type: String,
         },
+    },
+    {
+        _id: true,
     },
 );
 

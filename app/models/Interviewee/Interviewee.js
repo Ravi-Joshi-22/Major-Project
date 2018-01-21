@@ -49,7 +49,7 @@ const intervieweeSchema = new Schema(
                 },
                 description: {
                     type: String,
-                    maxlength: 150,
+                    maxlength: 250,
                 },
             },
         ],
