@@ -10,15 +10,15 @@ const projectSchema = new Schema(
         start_date: {
             type: String,
         },
-        /**    currently_working: {
-                type: Boolean,
-            },*/
+        currently_working: {
+            type: Boolean,
+        },
         end_date: {
             type: String,
-            /**    required: function () {
-                    return (!(this.currently_working == true));
-                },*/
-            default: CONSTANTS.CURRENT_DAY,
+            required: function () {
+                return (!(this.currently_working == true));
+            },
+            default: Date.now(),
         },
         description: {
             type: String,
