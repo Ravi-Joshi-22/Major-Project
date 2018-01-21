@@ -5,6 +5,7 @@ const projectSchema = new Schema(
     {
         title: {
             type: String,
+            required: true,
         },
         start_date: {
             type: String,
@@ -21,14 +22,12 @@ const projectSchema = new Schema(
         },
         description: {
             type: String,
-            maxlength: 250,
+            required: true,
+            maxlength: 400,
         },
         url: {
             type: String,
         },
-    },
-    {
-        _id: false,
     },
 );
 

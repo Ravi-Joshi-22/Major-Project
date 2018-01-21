@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const CONSTANTS = require('../../config/constants');
+const CONSTANTS = require('../../../../config/constants');
 
 const Schema = mongoose.Schema;
-const educationSchema = new Schema(
+const beforeSeniorSecSchema = new Schema(
     {
         secondary: {
             year_of_comp: {
@@ -62,44 +62,12 @@ const educationSchema = new Schema(
             },
             school: {
                 type: String,
-            }
-        },
-        after_senior_sec: [
-            {
-                college: {
-                    type: String,
-                },
-                start_year: {
-                    type: Number,
-                },
-                end_year: {
-                    type: Number,
-                },
-                degree: {
-                    type: String,
-                },
-                stream: {
-                    type: String,
-                },
-                performance: {
-                    scale: {
-                        type: String,
-                        enum: [
-                            CONSTANTS.ENUMS.USER.PERFORMANCE_SCALE.PERCENTAGE,
-                            CONSTANTS.ENUMS.USER.PERFORMANCE_SCALE.CGPA
-                        ],
-                        default: CONSTANTS.ENUMS.USER.PERFORMANCE_SCALE.CGPA,
-                    },
-                    value: {
-                        type: Number,
-                    },
-                },
             },
-        ],
+        },
     },
     {
         _id: false,
     },
 );
 
-module.exports = educationSchema;
+module.exports = beforeSeniorSecSchema;

@@ -32,12 +32,9 @@ const jobDescriptionSchema = new Schema(
         },
         description: {
             type: String,
-            maxlength: 200,
+            maxlength: 300,
         },
     },
-    {
-        _id: false,
-    }
 );
 
 module.exports = jobDescriptionSchema;
