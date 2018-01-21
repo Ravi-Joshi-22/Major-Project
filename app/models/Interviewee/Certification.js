@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const CONSTANTS = require('../../config/constants');
+const CONSTANTS = require('../../../config/constants');
 
 const Schema = mongoose.Schema;
 const certificationSchema = new Schema(
@@ -16,9 +16,6 @@ const certificationSchema = new Schema(
         url: {
             type: String,
         },
-    },
-    {
-        _id: false,
     },
 );
 

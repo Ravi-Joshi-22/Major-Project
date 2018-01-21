@@ -1,13 +1,24 @@
 const mongoose = require('mongoose');
+const CONSTANTS = require('../../../config/constants');
 
 const Schema = mongoose.Schema;
-const projectSchema = new Schema(
+const jobDescriptionSchema = new Schema(
     {
-        title: {
+        profile: {
             type: String,
+            required: true,
+        },
+        organization: {
+            type: String,
+            required: true,
+        },
+        location: {
+            type: String,
+            required: true,
         },
         start_date: {
             type: String,
+            required: true,
         },
         currently_working: {
             type: Boolean,
@@ -21,15 +32,9 @@ const projectSchema = new Schema(
         },
         description: {
             type: String,
-            maxlength: 250,
+            maxlength: 200,
         },
-        url: {
-            type: String,
-        },
-    },
-    {
-        _id: false,
     },
 );
 
-module.exports = projectSchema;
+module.exports = jobDescriptionSchema;

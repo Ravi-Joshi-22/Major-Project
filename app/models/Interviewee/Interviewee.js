@@ -1,18 +1,22 @@
 const mongoose = require('mongoose');
-const CONSTANTS = require('../../config/constants');
-const educationSchema = require('./Education');
+const CONSTANTS = require('../../../config/constants');
+const beforeSeniorSecSchema = require('./Education/BeforeSeniorSec');
+const afterSeniorSecSchema = require('./Education/AfterSeniorSec');
 const jobDescriptionSchema = require('./JobDescription');
 const certificationSchema = require('./Certification');
-const projectSchema = require('./Project')
+const projectSchema = require('./Project');
 
 const Schema = mongoose.Schema;
 const intervieweeSchema = new Schema(
     {
-        user: {
+        userId: {
             type: Schema.Types.ObjectId,
             ref: 'User',
         },
-        educations: educationSchema,
+        before_senior_sec: beforeSeniorSecSchema,
+        after_senior_sec: [
+            afterSeniorSecSchema,
+        ],
         jobs: [
             jobDescriptionSchema,
         ],
