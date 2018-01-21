@@ -20,9 +20,9 @@ const jobDescriptionSchema = new Schema(
             type: String,
             required: true,
         },
-        currently_working: {
-            type: Boolean,
-        },
+        /**    currently_working: {
+                type: Boolean,
+            },*/
         end_date: {
             type: String,
             /**    required: function () {

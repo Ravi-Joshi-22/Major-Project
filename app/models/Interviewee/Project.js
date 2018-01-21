@@ -10,9 +10,9 @@ const projectSchema = new Schema(
         start_date: {
             type: String,
         },
-        currently_working: {
-            type: Boolean,
-        },
+        /**    currently_working: {
+                type: Boolean,
+            },*/
         end_date: {
             type: String,
             /**    required: function () {
