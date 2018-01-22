@@ -19,4 +19,5 @@ module.exports = {
     URI: process.env.HOST_URI,
   },
   OTP_AUTH_KEY: process.env.OTP_KEY,
+  stripeSecretKey: process.env.STRIPE_SECRET_KEY,
 };

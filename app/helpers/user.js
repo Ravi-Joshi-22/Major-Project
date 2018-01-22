@@ -2,6 +2,7 @@ const Models = require('../models');
 const CONSTANTS = require('../../config/constants');
 
 const User = Models.User;
+const Company = Models.Company;
 
 /**
  * This function is used to create new user
@@ -19,7 +20,7 @@ function registerUser(userData, callback) {
     role: userData.role,
   });
 
-  newUser.save(function(savedUserError, savedUser) {
+  newUser.save(function (savedUserError, savedUser) {
     if (savedUserError) {
       callback({
         type: CONSTANTS.ERROR_TYPES.DB_ERROR,
@@ -38,7 +39,7 @@ function registerUser(userData, callback) {
  * @param {Function} callback function two param err and fetched user
  */
 function fetchUser(userId, callback) {
-  User.findById(userId).exec(function(err, user) {
+  User.findById(userId).exec(function (err, user) {
     if (err) {
       callback({
         type: CONSTANTS.ERROR_TYPES.DB_ERROR,
@@ -50,7 +51,36 @@ function fetchUser(userId, callback) {
     }
   });
 }
+
+/**
+ * Function to get company details from userId 
+ * @param {objectId} userId user objectId
+ * @param {Function} callback function two param err and fetched user
+ */
+function getCompanyDetailsFromUser(userId, callback) {
+  Company.findOne({
+    users: userId,
+  }).exec(function (companyFetchError, companyDetails) {
+    if (companyFetchError) {
+      callback({
+        type: CONSTANTS.ERROR_TYPES.DB_ERROR,
+        msg: 'Unable to fetch company details',
+        errorDetail: String(companyFetchError),
+      });
+    } else if (!companyDetails) {
+      callback({
+        type: CONSTANTS.ERROR_TYPES.INVALID_RECORD,
+        msg: 'No company with given id',
+        errorDetail: 'Invalid User ID.',
+      });
+    } else {
+      callback(null, companyDetails);
+    }
+  });
+}
+
 module.exports = {
   registerUser: registerUser,
   fetchUser: fetchUser,
+  getCompanyDetailsFromUser: getCompanyDetailsFromUser
 };
