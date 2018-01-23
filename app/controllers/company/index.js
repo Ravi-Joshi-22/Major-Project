@@ -1,5 +1,4 @@
 const express = require('express');
-const testRoutes = require('./test');
 const openingRoutes = require('./opening');
 const CONSTANTS = require('../../../config/constants');
 

@@ -15,6 +15,9 @@ const activationTemplateDir = path.join(
 );
 const activation = new EmailTemplate(activationTemplateDir);
 
+const openingTemplateDir = path.join(__dirname, '../../templates', 'opening');
+const opening = new EmailTemplate(openingTemplateDir);
+
 /**
  * Send mail using transporter
  * @param {Object} mailOptions //setup email data with unicode symbols
@@ -63,6 +66,39 @@ function sendVerificationMail(recipientObject, callback) {
    */
 
   activation.render(recipientObject, function(err, result) {
+    if (err) {
+      callback(err);
+      return;
+    }
+    //setup email data with unicode symbols
+    const mailOptions = {
+      from: `"SmartHyre" <${KEYS.MAIL.USER}>`, // sender address
+      to: recipientObject.email, // list of receivers
+      subject: result.subject, // Subject line
+      html: result.html, //rendered text goes here
+    };
+    transporterMail(mailOptions, function(errorInSending, sentMail) {
+      callback(errorInSending, sentMail);
+    });
+  });
+}
+
+/**
+ * Sends an activation mail to seller.
+ * @param {Object} recipientObject The receipent and url object.
+ *        {
+ *          url:  <String>,
+ *         firstName:<String>,
+ *        }
+ * @param {Function}  callback The callback
+ */
+function sendOpeningMail(recipientObject, callback) {
+  /**
+   * Render Function of email-templates library .
+   * renders html  ,text , subject also style as well.
+   */
+
+  opening.render(recipientObject, function(err, result) {
     if (err) {
       callback(err);
       return;
@@ -174,4 +210,5 @@ function emailVerifier(jwtToken, callback) {
 module.exports = {
   sendVerificationMail: sendVerificationMail,
   emailVerifier: emailVerifier,
+  sendOpeningMail: sendOpeningMail,
 };
