@@ -1,19 +1,21 @@
 import React from "react";
+import { connect } from 'react-redux';
+import * as actions from '../../actions/company';
 
-export default class InterviewOpening extends React.Component {
+ class InterviewOpening extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       position: "",
       responsibilities: [],
       skills: [],
-      qualification: [],
-      minExperience: "",
-      maxExperience: "",
+      qualifications: [],
+      exMin: "",
+      exMax: "",
       location: "",
       salary: "",
-      startDate: "",
-      endDate: ""
+      sDate: "",
+      eDate: ""
     };
     this.updatePosition = this.updatePosition.bind(this);
     this.updateResponsibilities = this.updateResponsibilities.bind(this);
@@ -25,8 +27,12 @@ export default class InterviewOpening extends React.Component {
     this.updateSalary = this.updateSalary.bind(this);
     this.updateSDate = this.updateSDate.bind(this);
     this.updateEDate = this.updateEDate.bind(this);
+    this.createNewOpening = this.createNewOpening.bind(this);
   }
 
+  async createNewOpening(openingData){
+    await this.props.newOpening(openingData);
+  }
   updatePosition(e) {
     this.setState({ position: e.target.value });
     if (e.target.value == null) {
@@ -37,12 +43,12 @@ export default class InterviewOpening extends React.Component {
   }
   updateMaxExp(e) {
     if (e.target.value < 50) {
-      this.setState({ maxExperience: e.target.value });
+      this.setState({ exMax: e.target.value });
     }
   }
   updateMinExp(e) {
     if (e.target.value < 40) {
-      this.setState({ minExperience: e.target.value });
+      this.setState({ exMin: e.target.value });
     }
     if (e.target.value == null) {
       this.refs.minExpInput.className = "input is-danger";
@@ -69,28 +75,31 @@ export default class InterviewOpening extends React.Component {
     }
   }
   updateSDate(e) {
-    this.setState({ startDate: e.target.value });
+    this.setState({ sDate: e.target.value });
   }
   updateEDate(e) {
-    this.setState({ endDate: e.target.value });
+    this.setState({ eDate: e.target.value });
   }
 
   updateResponsibilities(e) {
-    this.setState({responsibilities: e.target.value});
-    var resp = e.target.value;
-    var respArr = resp.split(",");
+    var responsibilities = e.target.value;
+    var respArr = responsibilities.split(',').map(responsibility => responsibility.trim());
+    console.log(respArr);
+    this.setState({responsibilities: respArr});
     }
 
   updateSkills(e) {
-    this.setState({skills: e.target.value});
     var skills = e.target.value;
-    var skillsArr = skills.split(",");
+    var skillsArr = skills.split(',').map(skill => skill.trim());
+    console.log(skillsArr);
+    this.setState({skills: skillsArr});
   }
 
   updateQualification(e) {
-    this.setState({qualification: e.target.value});
-    var qual = e.target.value;
-    var qualArr = qual.split(",");
+    var qualifications = e.target.value;
+    var qualArr = qualifications.split(',').map(qualification => qualification.trim());
+    console.log(qualArr);
+    this.setState({qualifications: qualArr});
   }
 
   render() {
@@ -179,7 +188,7 @@ export default class InterviewOpening extends React.Component {
                 className="input"
                 type="number" required
                 placeholder="Minimum Experience"
-                value={this.state.minExperience}
+                value={this.state.exMin}
                 onChange={this.updateMinExp}
               />
               <span className="icon is-small is-left">
@@ -195,7 +204,7 @@ export default class InterviewOpening extends React.Component {
                 className="input"
                 type="number"
                 placeholder="Maximum Experience"
-                value={this.state.maxExperience}
+                value={this.state.exMax}
                 onChange={this.updateMaxExp}
               />
               <span className="icon is-small is-left">
@@ -252,7 +261,7 @@ export default class InterviewOpening extends React.Component {
                 className="input"
                 type="date"
                 placeholder="Start Date"
-                value={this.state.startDate}
+                value={this.state.sDate}
                 onChange={this.updateSDate}
               />
               <span className="icon is-small is-left">
@@ -269,7 +278,7 @@ export default class InterviewOpening extends React.Component {
                 className="input"
                 type="date"
                 placeholder="End Date"
-                value={this.state.endDate}
+                value={this.state.eDate}
                 onChange={this.updateEDate}
               />
               <span className="icon is-small is-left">
@@ -282,7 +291,7 @@ export default class InterviewOpening extends React.Component {
         <br />
         <div className="field is-grouped">
           <div className="control">
-            <button className="button is-primary is-rounded">
+            <button className="button is-primary is-rounded" onClick={()=>this.createNewOpening(this.state)}>
               <span className="icon is-small is-left">
                 <i className="fas fa-plus" />
               </span>
@@ -294,3 +303,4 @@ export default class InterviewOpening extends React.Component {
     );
   }
 }
+export default connect(null, actions)(InterviewOpening);
