@@ -33,7 +33,7 @@ export default class Courses extends React.Component {
   }
   async submit() {
     await this.setState({ currentModalClass: "modal" });
-    this.props.gradCB(this.state);
+    this.props.coursesCB(this.state);
   }
 
   render() {

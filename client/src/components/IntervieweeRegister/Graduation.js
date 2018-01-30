@@ -9,9 +9,9 @@ export default class Graduation extends React.Component {
       end_year: "",
       degree: "",
       stream: "",
-      Performance: "",
+      performance: "",
       value: "",
-      currentModalClass: "modal",
+      currentModalClass: "modal"
     };
 
     this.updateCollege = this.updateCollege.bind(this);
@@ -72,7 +72,15 @@ export default class Graduation extends React.Component {
 
   async submit() {
     await this.setState({ currentModalClass: "modal" });
-    this.props.gradCB(this.state);
+    let gradData = this.state;
+    let val = this.state.value;
+    let sca = this.state.performance;
+    const perf = {
+      scale: sca,
+      value: val
+    };
+    gradData.performance = perf;
+    this.props.gradCB(gradData);
   }
 
   render() {
@@ -250,6 +258,7 @@ export default class Graduation extends React.Component {
                         value={this.state.performance}
                         onChange={this.updateCategory}
                       >
+                       <option selected>Choose option</option>
                         <option>Percentage</option>
                         <option>CGPA(Scale of 10)</option>
                       </select>

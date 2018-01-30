@@ -61,7 +61,7 @@ export default class Internship extends React.Component {
 
   async submit() {
     await this.setState({ currentModalClass: "modal" });
-    this.props.gradCB(this.state);
+    this.props.interCB(this.state);
   }
 
   render() {
@@ -187,9 +187,8 @@ export default class Internship extends React.Component {
             <footer class="modal-card-foot">
               <button
                 class="button is-primary is-rounded"
-                onClick={() => {
-                  this.props.interCB(this.state);
-                }}
+                onClick={this.submit}
+                
               >
                 Save changes
               </button>

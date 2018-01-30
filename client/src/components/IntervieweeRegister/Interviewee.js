@@ -4,7 +4,7 @@ export default class Interviewee extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fname: "",
+      fName: "",
       phone: "",
       email: "",
       password: "",
@@ -22,7 +22,7 @@ export default class Interviewee extends React.Component {
   }
 
   updateName(e) {
-    this.setState({ fname: e.target.value });
+    this.setState({ fName: e.target.value });
   }
 
   updatePhone(e) {
@@ -110,7 +110,7 @@ export default class Interviewee extends React.Component {
                       type="text"
                       placeholder="Name"
                       required
-                      value={this.state.fname}
+                      value={this.state.fName}
                       onChange={this.updateName}
                     />
                     <span className="icon is-small is-left">

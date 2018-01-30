@@ -1,6 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/app';
 import Interviewee from "../../components/IntervieweeRegister/Interviewee";
 import Secondary from "../../components/IntervieweeRegister/Secondary";
 import Graduation from "../../components/IntervieweeRegister/Graduation";
@@ -44,69 +47,73 @@ class Profile extends React.Component {
 
   async getUserDetails(userData) {
     await this.setState({ user: userData });
-    console.log(this.state);
+    
   }
 
   async getSecondaryDetails(secondaryData) {
     await this.setState({ secondary: secondaryData });
-    console.log(this.state);
+    
   }
 
   async getSeniorSecondary(seniorData) {
     await this.setState({ seniorSecondary: seniorData });
-    console.log(this.state);
+    
   }
 
   async getGraduation(gradData) {
     let graduationData = this.state.after_senior_sec;
     graduationData.push(gradData);
     await this.setState({ after_senior_sec: graduationData });
-    console.log(this.state);
+    
   }
   async getJobs(jobData) {
     let jobsData = this.state.jobs;
-    jobsData.push(jobsData);
+    jobsData.push(jobData);
     await this.setState({ jobs: jobsData });
-    console.log(this.state);
+    
   }
   async getskills(skillData) {
     let skillsData = this.state.skills;
-    skillsData.push(skillsData);
+    skillsData.push(skillData);
     await this.setState({ skills: skillsData });
-    console.log(this.state);
+    
   }
   async getcertification(certificationData) {
     let certificationsData = this.state.certifications;
-    certificationsData.push(certificationsData);
+    certificationsData.push(certificationData);
     await this.setState({ certifications: certificationsData });
-    console.log(this.state);
+    
   }
   async getinternships(internshipData) {
     let internshipsData = this.state.internships;
     internshipsData.push(internshipData);
     await this.setState({ internships: internshipsData });
-    console.log(this.state);
+    
   }
 
   async getProjects(projectData) {
     let projectsData = this.state.projects;
     projectsData.push(projectData);
     await this.setState({ projects: projectsData });
-    console.log(this.state);
+    
   }
 
   async getTests(testData) {
     let testsData = this.state.tests;
     testsData.push(testData);
     await this.setState({ tests: testsData });
-    console.log(this.state);
+    
   }
 
   async getCourses(courseData) {
     let coursesData = this.state.courses;
     coursesData.push(courseData);
     await this.setState({ courses: coursesData });
-    console.log(this.state);
+    
+  }
+
+  async callRegisterApi(registerData){
+    await this.props.registerInterview(registerData, this.props.history);
   }
 
   render() {
@@ -196,9 +203,21 @@ class Profile extends React.Component {
             </tr>
           </tbody>
         </table>
+        <button
+       class="button is-primary is-rounded"
+       onClick={()=>this.callRegisterApi(this.state)}  
+     >
+     Submit Details
+     </button>
       </div>
+      
+    
     );
   }
 }
 
-export default Profile;
+function mapStateToProps({ currentStep }) {
+  return { currentStep };
+}
+export default connect(mapStateToProps, actions)(withRouter(Profile));
+

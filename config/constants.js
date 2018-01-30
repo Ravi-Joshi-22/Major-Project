@@ -38,7 +38,7 @@ module.exports = {
       },
       PERFORMANCE_SCALE: {
         CGPA: 'CGPA(Scale of 10)',
-        PERCENTAGE: 'percentage',
+        PERCENTAGE: 'Percentage',
       },
       STREAM_VALUE: {
         SCIENCE: 'Science',
