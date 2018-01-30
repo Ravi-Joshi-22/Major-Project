@@ -1,5 +1,4 @@
 const express = require('express');
-const passport = require('passport');
 const openingLib = require('../../../lib/company/opening');
 
 const router = express.Router();

@@ -7,7 +7,9 @@ function authenticator(req, res, next) {
   if (
     req.user &&
     (req.user.role === CONSTANTS.USER_ROLES.COMPANY_HEAD ||
-      req.user.role === CONSTANTS.USER_ROLES.COMPANY_USER)
+      req.user.role === CONSTANTS.USER_ROLES.COMPANY_USER) &&
+    req.user.verification_status ===
+      CONSTANTS.ENUMS.USER.VERIFICATION_STATUS.OTP_VERIFIED
   ) {
     next();
   } else {
