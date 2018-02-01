@@ -38,6 +38,7 @@ export const registerCompany = (
 };
 
 export const registerInterview = (
+  userData,
   intervieweeData,
   history
 ) => async dispatch => {
@@ -61,11 +62,13 @@ export const registerInterview = (
       school: intervieweeData.seniorSecondary.school
     }
   };
-  intervieweeData.before_senior_sec= beforeSeniorSec;
-  console.log('---------');
-  console.log(intervieweeData);
-  const res = await axios.post('/smarthyre/api/v1/app/interviewee', intervieweeData);
-  history.push('/');
+  intervieweeData.before_senior_sec = beforeSeniorSec;
+  intervieweeData.user = userData;
+  const res = await axios.post(
+    "/smarthyre/api/v1/app/interviewee",
+    intervieweeData
+  );
+  history.push("/");
   dispatch({ type: REGISTER_USER, payload: res.data });
 };
 

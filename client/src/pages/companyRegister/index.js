@@ -28,9 +28,7 @@ class CompanyRegister extends React.Component {
     this.stepShow = this.stepShow.bind(this);
   }
 
-  componentDidMount() {
-    console.log(this.props.currentStep);
-  }
+  
   async crRegister(crData) {
     await this.setState({ userData: crData });
     await this.props.changeCurrentStep(1);

@@ -1,217 +1,102 @@
+import "rc-steps/assets/index.css";
+import "rc-steps/assets/iconfont.css";
 import React from "react";
 import ReactDOM from "react-dom";
+import { withRouter } from "react-router-dom";
 import "./index.css";
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import * as actions from '../../actions/app';
+import { connect } from "react-redux";
+import * as actions from "../../actions/app";
+import Steps, { Step } from "rc-steps";
+
 import Interviewee from "../../components/IntervieweeRegister/Interviewee";
-import Secondary from "../../components/IntervieweeRegister/Secondary";
-import Graduation from "../../components/IntervieweeRegister/Graduation";
-import SeniorSecondary from "../../components/IntervieweeRegister/SeniorSecondary";
-import Skills from "../../components/IntervieweeRegister/Skills";
-import Project from "../../components/IntervieweeRegister/Project";
-import Jobs from "../../components/IntervieweeRegister/Jobs";
-import Internship from "../../components/IntervieweeRegister/Internship";
-import Courses from "../../components/IntervieweeRegister/Courses";
-import Test from "../../components/IntervieweeRegister/Test";
-import Certification from "../../components/IntervieweeRegister/Certification";
+import Academic from "../../components/IntervieweeRegister/Academic";
+import OTPVerification from "../../components/register/OTPVerification";
+import EmailVerification from "../../components/register/EmailVerification";
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      user: "",
-      secondary: "",
-      seniorSecondary: "",
-      after_senior_sec: [],
-      jobs: [],
-      internships: [],
-      skills: [],
-      courses: [],
-      certifications: [],
-      tests: [],
-      projects: []
+      currentStep: 0,
+      user: ""
     };
-    this.getUserDetails = this.getUserDetails.bind(this);
-    this.getSecondaryDetails = this.getSecondaryDetails.bind(this);
-    this.getSeniorSecondary = this.getSeniorSecondary.bind(this);
-    this.getGraduation = this.getGraduation.bind(this);
-    this.getJobs = this.getJobs.bind(this);
-    this.getinternships = this.getinternships.bind(this);
-    this.getskills = this.getskills.bind(this);
-    this.getcertification = this.getcertification.bind(this);
-    this.getProjects = this.getProjects.bind(this);
-    this.getTests = this.getTests.bind(this);
-    this.getCourses = this.getCourses.bind(this);
+    this.userRegister = this.userRegister.bind(this);
+    this.callRegisterApi = this.callRegisterApi.bind(this);
+    this.stepShow = this.stepShow.bind(this);
   }
 
-  async getUserDetails(userData) {
+  componentDidMount() {
+    this.stepShow();
+  }
+
+  async userRegister(userData) {
+    console.log("CALLBACK CALL");
     await this.setState({ user: userData });
-    
+    await this.props.changeCurrentStep(1);
+    this.stepShow();
   }
 
-  async getSecondaryDetails(secondaryData) {
-    await this.setState({ secondary: secondaryData });
-    
+  async callRegisterApi(academicData) {
+    console.log("---------");
+    console.log(this.state.user);
+    console.log("---------INTERVIEWEE-------");
+    console.log(academicData);
+    console.log("---------------------------------");
+    await this.props.registerInterview(
+      this.state.user,
+      academicData,
+      this.props.history
+    );
   }
 
-  async getSeniorSecondary(seniorData) {
-    await this.setState({ seniorSecondary: seniorData });
-    
-  }
+  stepShow() {
+    this.refs.step0.className = "hidden";
+    this.refs.step1.className = "hidden";
+    this.refs.step2.className = "hidden";
+    this.refs.step3.className = "hidden";
+    // this.refs.step4.className = 'hidden';
 
-  async getGraduation(gradData) {
-    let graduationData = this.state.after_senior_sec;
-    graduationData.push(gradData);
-    await this.setState({ after_senior_sec: graduationData });
-    
-  }
-  async getJobs(jobData) {
-    let jobsData = this.state.jobs;
-    jobsData.push(jobData);
-    await this.setState({ jobs: jobsData });
-    
-  }
-  async getskills(skillData) {
-    let skillsData = this.state.skills;
-    skillsData.push(skillData);
-    await this.setState({ skills: skillsData });
-    
-  }
-  async getcertification(certificationData) {
-    let certificationsData = this.state.certifications;
-    certificationsData.push(certificationData);
-    await this.setState({ certifications: certificationsData });
-    
-  }
-  async getinternships(internshipData) {
-    let internshipsData = this.state.internships;
-    internshipsData.push(internshipData);
-    await this.setState({ internships: internshipsData });
-    
-  }
-
-  async getProjects(projectData) {
-    let projectsData = this.state.projects;
-    projectsData.push(projectData);
-    await this.setState({ projects: projectsData });
-    
-  }
-
-  async getTests(testData) {
-    let testsData = this.state.tests;
-    testsData.push(testData);
-    await this.setState({ tests: testsData });
-    
-  }
-
-  async getCourses(courseData) {
-    let coursesData = this.state.courses;
-    coursesData.push(courseData);
-    await this.setState({ courses: coursesData });
-    
-  }
-
-  async callRegisterApi(registerData){
-    await this.props.registerInterview(registerData, this.props.history);
+    switch (this.props.currentStep) {
+      case 0:
+        this.refs.step0.className = "";
+        break;
+      case 1:
+        this.refs.step1.className = "";
+        break;
+      case 2:
+        this.refs.step2.className = "";
+        break;
+      case 3:
+        this.refs.step3.className = "";
+        break;
+    }
   }
 
   render() {
     return (
-      <div>
-        <table class="table is-striped is-hoverable is-fullwidth">
-          <thead>
-            <center>User Details </center>
-          </thead>
-          <tbody>
-            <tr>
-              <th>1.</th>
-
-              <td>Personal Details</td>
-              <td>
-                <Interviewee userCB={this.getUserDetails} />
-              </td>
-            </tr>
-            <tr>
-              <th>2.</th>
-
-              <td>Education Details</td>
-              <td>
-                <div style={{ display: "flex" }}>
-                  <Secondary scCB={this.getSecondaryDetails} />
-                  <SeniorSecondary ssCB={this.getSeniorSecondary} />
-                  <Graduation gradCB={this.getGraduation} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th>3.</th>
-
-              <td>Internship Details</td>
-              <td>
-                <Internship interCB={this.getinternships} />
-              </td>
-            </tr>
-            <tr>
-              <th>4.</th>
-
-              <td>Project Details </td>
-              <td>
-                <Project projectCB={this.getProjects} />
-              </td>
-            </tr>
-            <tr>
-              <th>5.</th>
-
-              <td>Job Details </td>
-              <td>
-                <Jobs jobCB={this.getJobs} />
-              </td>
-            </tr>
-            <tr>
-              <th>6.</th>
-
-              <td>Courses Done</td>
-              <td>
-                <Courses coursesCB={this.getCourses} />
-              </td>
-            </tr>
-            <tr>
-              <th>7.</th>
-
-              <td>Skills Acquired</td>
-              <td>
-                <Skills skillCB={this.getskills} />
-              </td>
-            </tr>
-            <tr>
-              <th>8.</th>
-
-              <td>Certification</td>
-              <td>
-                <Certification certiCB={this.getcertification} />
-              </td>
-            </tr>
-            <tr>
-              <th>9.</th>
-
-              <td>Test</td>
-              <td>
-                <Test testCB={this.getTests} />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <button
-       class="button is-primary is-rounded"
-       onClick={()=>this.callRegisterApi(this.state)}  
-     >
-     Submit Details
-     </button>
+      <div style={{ padding: 50 }}>
+        <Steps labelPlacement="vertical" current={this.props.currentStep}>
+          <Step title="Personal Details" />
+          <Step title="Qualification" />
+          <Step title="E-Mail Verification" />
+          <Step title="OTP Verification" />
+        </Steps>
+        <br />
+        <br />
+        <div ref="step0" className="hidden">
+          <Interviewee userCB={this.userRegister} />
+        </div>
+        <div ref="step1" className="hidden">
+          <Academic academicCB={this.callRegisterApi} />
+        </div>
+        <div ref="step2" className="hidden">
+          <EmailVerification />
+        </div>
+        <div ref="step3" className="hidden">
+          <OTPVerification />
+        </div>
       </div>
-      
-    
     );
   }
 }
@@ -220,4 +105,3 @@ function mapStateToProps({ currentStep }) {
   return { currentStep };
 }
 export default connect(mapStateToProps, actions)(withRouter(Profile));
-
