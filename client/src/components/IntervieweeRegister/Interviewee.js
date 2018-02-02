@@ -9,7 +9,6 @@ export default class Interviewee extends React.Component {
       email: "",
       password: "",
       cPassword: "",
-      currentModalClass: "modal",
       role: "interviewee"
     };
     this.updateName = this.updateName.bind(this);
@@ -17,8 +16,6 @@ export default class Interviewee extends React.Component {
     this.updateEmail = this.updateEmail.bind(this);
     this.updatePwd = this.updatePwd.bind(this);
     this.updateCPwd = this.updateCPwd.bind(this);
-    this.renderModal = this.renderModal.bind(this);
-    this.submit = this.submit.bind(this);
   }
 
   updateName(e) {
@@ -72,35 +69,16 @@ export default class Interviewee extends React.Component {
     }
   }
 
-  async renderModal() {
-    if (this.state.currentModalClass === "modal") {
-      await this.setState({ currentModalClass: "modal is-active" });
-    } else {
-      await this.setState({ currentModalClass: "modal" });
-    }
-  }
 
-  async submit() {
-    await this.setState({ currentModalClass: "modal" });
-    this.props.userCB(this.state);
-  }
+
+  
 
   render() {
     return (
       (
-        <div>
-          <div className={this.state.currentModalClass}>
-            <div class="modal-background" />
-            <div class="modal-card">
-              <header class="modal-card-head">
-                <p class="modal-card-title">Personal Details</p>
-                <button
-                  class="delete"
-                  aria-label="close"
-                  onClick={this.renderModal}
-                />
-              </header>
-              <section class="modal-card-body">
+        <div  className="card"
+        style={{ width: '80%', maxWidth: 800, margin: 'auto', padding: 50 }}>
+        
                 <div className="field">
                   <label className="label">Name</label>
                   <div className="control has-icons-left has-icons-right">
@@ -207,22 +185,15 @@ export default class Interviewee extends React.Component {
                   <div className="control">
                     <button
                       className="button is-link is-rounded"
-                      onClick={this.submit}
+                      onClick={() => {
+                        this.props.userCB(this.state);
+                      }}
                     >
                       Submit
                     </button>
                   </div>
                 </div>
-              </section>
-            </div>
-          </div>
-          <a
-            class="button is-black is-inverted  is-hovered"
-            onClick={this.renderModal}
-          >
-            {" "}
-            +About Me{" "}
-          </a>
+            
         </div>
       )
     );
