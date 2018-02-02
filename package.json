@@ -11,7 +11,7 @@
     "start": "node ./bin/www",
     "server": "nodemon ./bin/www",
     "heroku-postbuild":
-      "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+      " npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",
