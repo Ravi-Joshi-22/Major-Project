@@ -1,17 +1,17 @@
-import "rc-steps/assets/index.css";
-import "rc-steps/assets/iconfont.css";
-import React from "react";
-import ReactDOM from "react-dom";
-import { withRouter } from "react-router-dom";
-import "./index.css";
-import { connect } from "react-redux";
-import * as actions from "../../actions/app";
-import Steps, { Step } from "rc-steps";
+import 'rc-steps/assets/index.css';
+import 'rc-steps/assets/iconfont.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { withRouter } from 'react-router-dom';
+import './index.css';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/app';
+import Steps, { Step } from 'rc-steps';
 
-import Interviewee from "../../components/IntervieweeRegister/Interviewee";
-import Academic from "../../components/IntervieweeRegister/Academic";
-import OTPVerification from "../../components/register/OTPVerification";
-import EmailVerification from "../../components/register/EmailVerification";
+import Interviewee from '../../components/IntervieweeRegister/Interviewee';
+import Academic from '../../components/IntervieweeRegister/Academic';
+import OTPVerification from '../../components/register/OTPVerification';
+import EmailVerification from '../../components/register/EmailVerification';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -19,30 +19,30 @@ class Profile extends React.Component {
 
     this.state = {
       currentStep: 0,
-      user: ""
+      user: '',
     };
     this.userRegister = this.userRegister.bind(this);
     this.callRegisterApi = this.callRegisterApi.bind(this);
     this.stepShow = this.stepShow.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await this.props.fetchUser();
+    if (this.props.auth.verification_status === 'in_process') {
+      await this.props.changeCurrentStep(2);
+    } else if (this.props.auth.verification_status === 'email_verified') {
+      await this.props.changeCurrentStep(3);
+    }
     this.stepShow();
   }
 
   async userRegister(userData) {
-    console.log("CALLBACK CALL");
     await this.setState({ user: userData });
     await this.props.changeCurrentStep(1);
     this.stepShow();
   }
 
   async callRegisterApi(academicData) {
-    console.log("---------");
-    console.log(this.state.user);
-    console.log("---------INTERVIEWEE-------");
-    console.log(academicData);
-    console.log("---------------------------------");
     await this.props.registerInterview(
       this.state.user,
       academicData,
@@ -51,24 +51,24 @@ class Profile extends React.Component {
   }
 
   stepShow() {
-    this.refs.step0.className = "hidden";
-    this.refs.step1.className = "hidden";
-    this.refs.step2.className = "hidden";
-    this.refs.step3.className = "hidden";
+    this.refs.step0.className = 'hidden';
+    this.refs.step1.className = 'hidden';
+    this.refs.step2.className = 'hidden';
+    this.refs.step3.className = 'hidden';
     // this.refs.step4.className = 'hidden';
 
     switch (this.props.currentStep) {
       case 0:
-        this.refs.step0.className = "";
+        this.refs.step0.className = '';
         break;
       case 1:
-        this.refs.step1.className = "";
+        this.refs.step1.className = '';
         break;
       case 2:
-        this.refs.step2.className = "";
+        this.refs.step2.className = '';
         break;
       case 3:
-        this.refs.step3.className = "";
+        this.refs.step3.className = '';
         break;
     }
   }
@@ -101,7 +101,7 @@ class Profile extends React.Component {
   }
 }
 
-function mapStateToProps({ currentStep }) {
-  return { currentStep };
+function mapStateToProps({ currentStep, auth }) {
+  return { currentStep, auth };
 }
 export default connect(mapStateToProps, actions)(withRouter(Profile));
