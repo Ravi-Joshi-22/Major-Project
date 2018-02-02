@@ -28,4 +28,16 @@ const routes = require('./app/controllers');
 
 app.use('/smarthyre/api/v1', routes);
 
+if (process.env.NODE_ENV === 'production') {
+  //Express will serve up production assesst
+  //like our main.js file and main.css file
+  app.use(express.static('client/build'));
+  //Express will serve index.html
+  //if dont finds the route
+  const path = require('path');
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
 module.exports = app;
