@@ -14,9 +14,10 @@ const router = express.Router();
 
 function verifyUserEmail(req, res, next) {
   const jwtToken = req.query.token;
-  mailHelper.emailVerifier(jwtToken, function (err, verified) {
+  mailHelper.emailVerifier(jwtToken, function(err, verified) {
     if (err) {
-      res.send('Unable to verify . Request a new verification link');
+      console.log(err);
+      res.send('Unable to verify . Request a new verification link' + err);
     } else {
       res.send('Your Email is succesfully verified');
     }
@@ -30,7 +31,7 @@ function verifyUserEmail(req, res, next) {
  * @param  {Function} next Function to pass control to the next middleware
  */
 function sendOTP(req, res, next) {
-  otpHelper.sendOtp(req.query.id, function (err, fetchedInstance) {
+  otpHelper.sendOtp(req.query.id, function(err, fetchedInstance) {
     if (err) {
       res.status(500).json(err);
       return;
@@ -46,7 +47,7 @@ function sendOTP(req, res, next) {
  * @param  {Function} next Function to pass control to the next middleware
  */
 function verifyOTP(req, res, next) {
-  otpHelper.verifyOtp(req.body.otp, req.body.id, function (
+  otpHelper.verifyOtp(req.body.otp, req.body.id, function(
     err,
     fetchedInstance
   ) {
@@ -63,14 +64,14 @@ function verifyOTP(req, res, next) {
 router.post(
   '/login',
   passport.authenticate('local', { failureRedirect: '/' }),
-  function (req, res) {
+  function(req, res) {
     res.status(200).json(req.user);
   }
 );
 
 router.get('/fetchUser', (req, res) => {
   res.send(req.user);
-})
+});
 
 router.get('/verifyEmail', verifyUserEmail);
 router.get('/requestOTP', sendOTP);
