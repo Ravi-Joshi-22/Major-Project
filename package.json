@@ -10,6 +10,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "server": "nodemon ./bin/www",
+    "client": "npm run start --prefix client",
     "heroku-postbuild":
       " npm install --prefix client && npm run build --prefix client"
   },
