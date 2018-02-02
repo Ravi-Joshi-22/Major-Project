@@ -39,7 +39,7 @@ export default class Register extends React.Component {
                     className="tile is-child notification is-warning has-text-centered"
                     style={{ maxWidth: 250 }}
                   >
-                    <a>
+                    <a href="/intervieweeRegister">
                       As Employee<br />
                       <img
                         className="img-responsive"
