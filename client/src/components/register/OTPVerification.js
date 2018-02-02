@@ -21,13 +21,13 @@ class OTPVerification extends React.Component {
   }
 
   async requestOtp() {
-    const userId = this.props.user._id;
+    const userId = this.props.auth._id;
     await axios.get(`/smarthyre/api/v1/app/requestOTP?id=${userId}`);
   }
 
   async verifyOtp() {
     this.props.verifyOTP(
-      this.props.user._id,
+      this.props.auth._id,
       this.state.otp,
       this.props.history
     );
@@ -85,7 +85,7 @@ class OTPVerification extends React.Component {
   }
 }
 
-function mapStateToProps({ user }) {
-  return { user };
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 export default connect(mapStateToProps, actions)(withRouter(OTPVerification));
