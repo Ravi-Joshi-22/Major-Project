@@ -14,7 +14,7 @@ class Payments extends Component {
                 token={token => this.props.handleToken(token)}
                 stripeKey='pk_test_kvIqGQihVs5DqxWtISyWbbLD'
             >
-                <button className="btn">Add Credits</button>
+                <button className="btn button is-success is-rounded">+ Add Credits</button>
             </StripeCheckout>
         );
     }
