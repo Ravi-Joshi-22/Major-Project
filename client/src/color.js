@@ -1,0 +1,1 @@
+export const openingHeading = '#00d1b2';
