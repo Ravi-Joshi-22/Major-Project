@@ -1,8 +1,8 @@
 import React from "react";
-import { connect } from 'react-redux';
-import * as actions from '../../actions/company';
+import { connect } from "react-redux";
+import * as actions from "../../actions/company";
 
- class InterviewOpening extends React.Component {
+class InterviewOpening extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +30,17 @@ import * as actions from '../../actions/company';
     this.createNewOpening = this.createNewOpening.bind(this);
   }
 
-  async createNewOpening(openingData){
+  async createNewOpening(openingData) {
+    var trimmedResponsibilities = openingData.responsibilities.map(
+      responsibility => responsibility.trim()
+    );
+    var trimmedSkills = openingData.skills.map(skill => skill.trim());
+    var trimmedQualifications = openingData.qualifications.map(qualification =>
+      qualification.trim()
+    );
+    this.setState({ responsibilities: trimmedResponsibilities });
+    this.setState({ skills: trimmedSkills });
+    this.setState({ qualifications: trimmedQualifications });
     await this.props.newOpening(openingData);
   }
   updatePosition(e) {
@@ -83,39 +93,47 @@ import * as actions from '../../actions/company';
 
   updateResponsibilities(e) {
     var responsibilities = e.target.value;
-    var respArr = responsibilities.split(',').map(responsibility => responsibility.trim());
-    console.log(respArr);
-    this.setState({responsibilities: respArr});
-    }
+    var respArr = responsibilities
+      .split(",");
+    this.setState({ responsibilities: respArr });
+  }
 
   updateSkills(e) {
     var skills = e.target.value;
-    var skillsArr = skills.split(',').map(skill => skill.trim());
-    console.log(skillsArr);
-    this.setState({skills: skillsArr});
+    var skillsArr = skills.split(",");
+    this.setState({ skills: skillsArr });
   }
 
   updateQualification(e) {
     var qualifications = e.target.value;
-    var qualArr = qualifications.split(',').map(qualification => qualification.trim());
-    console.log(qualArr);
-    this.setState({qualifications: qualArr});
+    var qualArr = qualifications.split(",");
+    this.setState({ qualifications: qualArr });
   }
 
   render() {
     return (
       <div
         className="card"
-        style={{ width: "80%", maxWidth: 800, margin: "auto", padding: 50, backgroundImage: "/assets/jobs.png"}}
+        style={{
+          width: "80%",
+          maxWidth: 800,
+          margin: "auto",
+          padding: 50,
+        }}
       >
+      <div class="content">
+  <center><h1><font color="#00d1b2">Create Interview Opening</font></h1></center>
+  </div>
         <div className="field">
-          <label className="label">Position<font color="red">*</font>
+          <label className="label">
+            Position<font color="red">*</font>
           </label>
           <div className="control has-icons-left has-icons-right">
             <input
               ref="positionInput"
               className="input"
-              type="text" required
+              type="text"
+              required
               placeholder="Job Position"
               value={this.state.position}
               onChange={this.updatePosition}
@@ -127,6 +145,9 @@ import * as actions from '../../actions/company';
         </div>
         <div className="field">
           <label className="label">Responsibilities</label>
+          <label className="label">
+          <p><font color="#00d1b2">(Enter each responsibility comma separated)</font></p>
+          </label>
           <div className="control has-icons-left has-icons-right">
             <textarea
               ref="responsibilitiesInput"
@@ -146,11 +167,15 @@ import * as actions from '../../actions/company';
           <label className="label">
             Skills<font color="red">*</font>
           </label>
+          <label className="label">
+          <p><font color="#00d1b2">(Enter each skill comma separated)</font></p>
+          </label>
           <div className="control has-icons-left has-icons-right">
             <textarea
               ref="skillsInput"
               className="textarea"
-              type="text" required
+              type="text"
+              required
               placeholder="Enter the Skills Required"
               value={this.state.skills}
               onChange={this.updateSkills}
@@ -163,6 +188,9 @@ import * as actions from '../../actions/company';
 
         <div className="field">
           <label className="label">Qualification</label>
+          <label className="label">
+          <p><font color="#00d1b2">(Enter each qualification comma separated)</font></p>
+          </label>
           <div className="control has-icons-left has-icons-right">
             <textarea
               ref="qualificationInput"
@@ -180,14 +208,16 @@ import * as actions from '../../actions/company';
 
         <div className="columns">
           <div className="field column">
-            <label className="label">Minimum Experience<font color="red">*</font>
+            <label className="label">
+              Minimum Experience<font color="red">*</font>
             </label>
             <div className="control has-icons-left has-icons-right">
               <input
                 ref="minExpInput"
                 className="input"
-                type="number" required
-                placeholder="Minimum Experience"
+                type="number"
+                required
+                placeholder="Minimum Experience(in years)"
                 value={this.state.exMin}
                 onChange={this.updateMinExp}
               />
@@ -203,7 +233,7 @@ import * as actions from '../../actions/company';
                 ref="maxExpInput"
                 className="input"
                 type="number"
-                placeholder="Maximum Experience"
+                placeholder="Maximum Experience(in years)"
                 value={this.state.exMax}
                 onChange={this.updateMaxExp}
               />
@@ -222,7 +252,8 @@ import * as actions from '../../actions/company';
               <input
                 ref="locationInput"
                 className="input"
-                type="text" required
+                type="text"
+                required
                 placeholder="Location"
                 value={this.state.location}
                 onChange={this.updateLocation}
@@ -241,8 +272,9 @@ import * as actions from '../../actions/company';
               <input
                 ref="salaryInput"
                 className="input"
-                type="number" required
-                placeholder="Salary"
+                type="number"
+                required
+                placeholder="Salary(in lakhs)"
                 value={this.state.salary}
                 onChange={this.updateSalary}
               />
@@ -291,7 +323,10 @@ import * as actions from '../../actions/company';
         <br />
         <div className="field is-grouped">
           <div className="control">
-            <button className="button is-primary is-rounded" onClick={()=>this.createNewOpening(this.state)}>
+            <button
+              className="button is-primary is-rounded"
+              onClick={() => this.createNewOpening(this.state)}
+            >
               <span className="icon is-small is-left">
                 <i className="fas fa-plus" />
               </span>
