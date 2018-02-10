@@ -9,9 +9,10 @@ export default class Interviewee extends React.Component {
       email: "",
       password: "",
       cPassword: "",
-      currentModalClass: "modal",
+      currentModalClass: "",
       role: "interviewee"
     };
+    this.setState({currentModalClass : this.props.currentModalClass});
     this.updateName = this.updateName.bind(this);
     this.updatePhone = this.updatePhone.bind(this);
     this.updateEmail = this.updateEmail.bind(this);

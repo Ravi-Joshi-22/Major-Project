@@ -4,13 +4,15 @@ import Avatar from 'material-ui/Avatar';
 import {Card, CardMedia, CardTitle} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 
-
-
 export default class NavDrawer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
         };
+    }
+
+    renderAddOpening() {
+        
     }
 
     render() {
@@ -29,7 +31,7 @@ export default class NavDrawer extends React.Component {
                     </CardMedia>
 
                 </Card>
-                <MenuItem onClick="">
+                <MenuItem onClick={() => {this.props.openingCallback()}}>
                     Add Openings
                 </MenuItem>
             </div>
