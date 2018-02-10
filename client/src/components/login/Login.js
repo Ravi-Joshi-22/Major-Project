@@ -24,21 +24,33 @@ class Login extends React.Component {
     }
 
     async authorize() {
-        await this.props.login(this.state);
-        console.log(this.props.user.verification_status);
-        switch (this.props.user.verification_status) {
-            case 'in_process':
-                this.props.changeCurrentStep(2);
-                this.props.history.push('/companyRegister');
-                break;
-            case 'email_verified':
-                this.props.changeCurrentStep(3);
-                this.props.history.push('/companyRegister');
-                break;
-            case 'otp_verified':
-                this.props.history.push('/dashboard');
+        if(this.state.username.length > 0){
+            this.refs.usernameInput.className = 'input';
+            if(this.state.password.length > 0){
+                this.refs.passwordInput.className = 'input';
+                
+                await this.props.login(this.state);
+                console.log(this.props.user.verification_status);
+                switch (this.props.user.verification_status) {
+                    case 'in_process':
+                        this.props.changeCurrentStep(2);
+                        this.props.history.push('/companyRegister');
+                        break;
+                    case 'email_verified':
+                        this.props.changeCurrentStep(3);
+                        this.props.history.push('/companyRegister');
+                        break;
+                    case 'otp_verified':
+                        this.props.history.push('/dashboard');
+                }
 
+            }else{
+                this.refs.passwordInput.className = 'input is-danger';
+            }
+        }else{
+            this.refs.usernameInput.className = 'input is-danger';
         }
+
     }
 
     render() {
