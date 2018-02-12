@@ -4,6 +4,7 @@ import CompanyRegister from './companyRegister/index';
 import Login from './login/index';
 import CompanyDashboard from './companyDashboard'
 import Profile from "./interviewee registration";
+import IntervieweeRegister from "./interviewee registration";
 import InterviewOpeningForm from './companyDashboard/opening';
 
 
@@ -19,7 +20,7 @@ class App extends Component {
             <Route exact path="/" component={Login} />
             <Route exact path="/companyRegister" component={CompanyRegister} />
             <Route exact path="/dashboard" component={CompanyDashboard} />
-            <Route exact path="/intervieweeRegister" component={Profile} />
+            <Route exact path="/intervieweeRegister" component={IntervieweeRegister} />
             <Route exact path="/openingForm" component={InterviewOpeningForm} />
           </div>
         </BrowserRouter>
