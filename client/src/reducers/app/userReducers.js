@@ -1,8 +1,8 @@
-import { LOGIN } from '../../actions/app/types';
+import { FETCH_USER } from '../../actions/app/types';
 
-export default function (state = null, action) {
+export default function(state = null, action) {
   switch (action.type) {
-    case LOGIN:
+    case FETCH_USER:
       return action.payload || false;
     default:
       return state;

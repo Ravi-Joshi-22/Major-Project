@@ -28,9 +28,6 @@ class CompanyRegister extends React.Component {
     this.stepShow = this.stepShow.bind(this);
   }
 
-  componentDidMount() {
-    console.log(this.props.currentStep);
-  }
   async crRegister(crData) {
     await this.setState({ userData: crData });
     await this.props.changeCurrentStep(1);
@@ -72,9 +69,16 @@ class CompanyRegister extends React.Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await this.props.fetchUser();
+    if (this.props.auth.verification_status === 'in_process') {
+      await this.props.changeCurrentStep(2);
+    } else if (this.props.auth.verification_status === 'email_verified') {
+      await this.props.changeCurrentStep(3);
+    }
     this.stepShow();
   }
+
   render() {
     return (
       <div style={{ padding: 50 }}>
@@ -111,7 +115,7 @@ class CompanyRegister extends React.Component {
   }
 }
 
-function mapStateToProps({ currentStep }) {
-  return { currentStep };
+function mapStateToProps({ currentStep, auth }) {
+  return { currentStep, auth };
 }
 export default connect(mapStateToProps, actions)(withRouter(CompanyRegister));
