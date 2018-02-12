@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import InterviewOpening from '../../components/companyDashboard/InterviewOpening';
+import InterviewOpening from '../../components/companyDashboard/DrawerArea/InterviewOpening';
 
 class Opening extends React.Component {
   constructor(props) {

@@ -1,14 +1,14 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import * as actions from '../../actions/app';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actions from "../../actions/app";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: "",
+      password: ""
     };
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
@@ -24,36 +24,47 @@ class Login extends React.Component {
   }
 
   async authorize() {
-    await this.props.login(this.state);
-    if (
-      this.props.auth.role === 'company_head' ||
-      this.props.auth.role === 'company_user'
-    ) {
-      switch (this.props.auth.verification_status) {
-        case 'in_process':
-          this.props.changeCurrentStep(2);
-          this.props.history.push('/companyRegister');
-          break;
-        case 'email_verified':
-          this.props.changeCurrentStep(3);
-          this.props.history.push('/companyRegister');
-          break;
-        case 'otp_verified':
-          this.props.history.push('/dashboard');
+    if (this.state.username.length > 0) {
+      this.refs.usernameInput.className = "input";
+      if (this.state.password.length > 0) {
+        this.refs.passwordInput.className = "input";
+
+        await this.props.login(this.state);
+        if (
+          this.props.auth.role === "company_head" ||
+          this.props.auth.role === "company_user"
+        ) {
+          switch (this.props.auth.verification_status) {
+            case "in_process":
+              this.props.changeCurrentStep(2);
+              this.props.history.push("/companyRegister");
+              break;
+            case "email_verified":
+              this.props.changeCurrentStep(3);
+              this.props.history.push("/companyRegister");
+              break;
+            case "otp_verified":
+              this.props.history.push("/dashboard");
+          }
+        } else if (this.props.auth.role === "interviewee") {
+          switch (this.props.auth.verification_status) {
+            case "in_process":
+              this.props.changeCurrentStep(2);
+              this.props.history.push("/intervieweeRegister");
+              break;
+            case "email_verified":
+              this.props.changeCurrentStep(3);
+              this.props.history.push("/intervieweeRegister");
+              break;
+            case "otp_verified":
+              this.props.history.push("/dashboard");
+          }
+        }
+      } else {
+        this.refs.passwordInput.className = "input is-danger";
       }
-    } else if (this.props.auth.role === 'interviewee') {
-      switch (this.props.auth.verification_status) {
-        case 'in_process':
-          this.props.changeCurrentStep(2);
-          this.props.history.push('/intervieweeRegister');
-          break;
-        case 'email_verified':
-          this.props.changeCurrentStep(3);
-          this.props.history.push('/intervieweeRegister');
-          break;
-        case 'otp_verified':
-          this.props.history.push('/dashboard');
-      }
+    } else {
+      this.refs.usernameInput.className = "input is-danger";
     }
   }
 
