@@ -5,6 +5,7 @@ const companySchema = require('./Company');
 const jobOpeningSchema = require('./JobOpening');
 const interviewTrackSchema = require('./InterviewTrack');
 const intervieweeAnsSchema = require('./intervieweeAns');
+const questionSchema = require('./Questions');
 const intervieweeSchema = require('./Interviewee/Interviewee');
 
 /**
@@ -20,4 +21,5 @@ module.exports = {
   InterviewTrack: mongoose.model('InterviewTrack', interviewTrackSchema),
   IntervieweeAns: mongoose.model('IntervieweeAns', intervieweeAnsSchema),
   Interviewee: mongoose.model('Interviewee', intervieweeSchema),
+  Question: mongoose.model('Question', questionSchema),
 };
