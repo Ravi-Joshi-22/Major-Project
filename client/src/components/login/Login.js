@@ -8,7 +8,8 @@ class Login extends React.Component {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      submitButton: ""
     };
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
@@ -28,6 +29,8 @@ class Login extends React.Component {
       this.refs.usernameInput.className = "input";
       if (this.state.password.length > 0) {
         this.refs.passwordInput.className = "input";
+        await this.setState({ submitButton: "loading" });
+        this.refs.submitButton.innerHTML = "  Loading...";
 
         await this.props.login(this.state);
         if (
@@ -70,50 +73,52 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="field">
-          <label className="label">Username</label>
-          <div className="control has-icons-left has-icons-right">
-            <input
-              ref="usernameInput"
-              className="input"
-              type="text"
-              placeholder="Username"
-              value={this.state.username}
-              onChange={this.updateUsername}
-            />
-            <span className="icon is-small is-left">
-              <i className="fas fa-user" />
-            </span>
+        <div>
+          <div className="field">
+            <label className="label">Username</label>
+            <div className="control has-icons-left has-icons-right">
+              <input
+                ref="usernameInput"
+                className="input"
+                type="text"
+                placeholder="Username"
+                value={this.state.username}
+                onChange={this.updateUsername}
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-user" />
+              </span>
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Password</label>
+            <div className="control has-icons-left has-icons-right">
+              <input
+                ref="passwordInput"
+                className="input"
+                type="password"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={this.updatePassword}
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-key" />
+              </span>
+            </div>
+          </div>
+          <div className="field is-grouped">
+            <div className="control">
+              <button
+                ref="submitButton"
+                className="button is-link is-rounded"
+                onClick={this.authorize}
+                disabled={this.state.submitButton}
+              >
+                Submit
+              </button>
+            </div>
           </div>
         </div>
-        <div className="field">
-          <label className="label">Password</label>
-          <div className="control has-icons-left has-icons-right">
-            <input
-              ref="passwordInput"
-              className="input"
-              type="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.updatePassword}
-            />
-            <span className="icon is-small is-left">
-              <i className="fas fa-key" />
-            </span>
-          </div>
-        </div>
-        <div className="field is-grouped">
-          <div className="control">
-            <button
-              className="button is-link is-rounded"
-              onClick={this.authorize}
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-      </div>
     );
   }
 }

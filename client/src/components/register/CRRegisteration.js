@@ -98,6 +98,7 @@ export default class CRRegisteration extends React.Component {
               this.refs.passwordInput.className = 'input';
               if(this.state.cPassword === this.state.password){
                 this.refs.cPasswordInput.className = 'input';
+                this.refs.submitButton.innerHTML= "Loading...";
                 this.props.crCallback(this.state);
               }else{
                 this.refs.cPasswordInput.className = 'input is-danger';
@@ -241,6 +242,7 @@ export default class CRRegisteration extends React.Component {
         <div className="field is-grouped">
           <div className="control">
             <button
+            ref="submitButton"
               className="button is-link is-rounded"
               onClick={this.registerCall}
             >
