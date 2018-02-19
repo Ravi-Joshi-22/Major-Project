@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
 export default class Test extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      score: "",
-      date: "",
-      currentModalClass: "modal"
+      name: '',
+      score: '',
+      date: '',
+      currentModalClass: 'modal',
     };
     this.updateName = this.updateName.bind(this);
     this.updateScore = this.updateScore.bind(this);
@@ -28,22 +28,21 @@ export default class Test extends React.Component {
   }
 
   async renderModal() {
-    if (this.state.currentModalClass === "modal") {
-      await this.setState({ currentModalClass: "modal is-active" });
+    if (this.state.currentModalClass === 'modal') {
+      await this.setState({ currentModalClass: 'modal is-active' });
     } else {
-      await this.setState({ currentModalClass: "modal" });
+      await this.setState({ currentModalClass: 'modal' });
     }
   }
   async submit() {
-    await this.setState({ currentModalClass: "modal" });
-    this.refs.submitButton.innerHTML = "Loading...";
+    await this.setState({ currentModalClass: 'modal' });
     this.props.testCB(this.state);
   }
   render() {
     return (
       <div
         className="card"
-        style={{ width: "80%", maxWidth: 800, margin: "auto", padding: 50 }}
+        style={{ width: '80%', maxWidth: 800, margin: 'auto', padding: 50 }}
       >
         <div className="field">
           <label className="label">Test Name</label>
@@ -78,7 +77,7 @@ export default class Test extends React.Component {
           </div>
         </div>
 
-        <div className="field " style={{ width: "100%" }}>
+        <div className="field " style={{ width: '100%' }}>
           <label className="label">Test Date</label>
           <div className="control has-icons-left ">
             <input
