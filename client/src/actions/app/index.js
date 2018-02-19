@@ -92,5 +92,5 @@ export const verifyOTP = (userId, OTP, history) => async dispatch => {
     otp: OTP,
   };
   const res = await axios.post('/smarthyre/api/v1/app/verifyOTP', requestData);
-  history.push('/dashboard');
+  history.push('/');
 };
