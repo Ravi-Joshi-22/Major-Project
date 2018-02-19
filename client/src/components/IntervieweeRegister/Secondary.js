@@ -67,19 +67,10 @@ export default class Secondary extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className={this.state.currentModalClass}>
-          <div class="modal-background" />
-          <div class="modal-card">
-            <header class="modal-card-head">
-              <p class="modal-card-title">Secondary Education Details</p>
-              <button
-                class="delete"
-                aria-label="close"
-                onClick={this.renderModal}
-              />
-            </header>
-            <section class="modal-card-body">
+      <div
+        className="card"
+        style={{ width: '80%', maxWidth: 800, margin: 'auto', padding: 50 }}
+      >
               <div class="field ">
                 <label class="label">Year Of Completion</label>
                 <p class="control has-icons-left ">
@@ -198,25 +189,18 @@ export default class Secondary extends React.Component {
                   </span>
                 </div>
               </div>
-            </section>
-            <footer class="modal-card-foot">
-              <button
-                class="button is-primary is-rounded "
-                onClick={this.submit}
-              >
-                Save changes
-              </button>
-            </footer>
-          </div>
-        </div>
-        <a
-          class="button is-black is-inverted  is-hovered"
-          onClick={this.renderModal}
-        >
-          {" "}
-          +Add Secondary{" "}
-        </a>
-      </div>
+    
+              <div className="field is-grouped">
+                <div className="control">
+                  <button
+                    className="button is-link is-rounded"
+                    onClick={this.submit}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
     );
   }
 }

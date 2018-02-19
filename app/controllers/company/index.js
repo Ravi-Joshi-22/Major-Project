@@ -1,5 +1,6 @@
 const express = require('express');
 const openingRoutes = require('./opening');
+const customRoutes = require('./custom');
 const CONSTANTS = require('../../../config/constants');
 
 const router = express.Router();
@@ -23,4 +24,5 @@ function authenticator(req, res, next) {
 
 router.use(authenticator);
 router.use('/opening', openingRoutes);
+router.use('/custom', customRoutes);
 module.exports = router;

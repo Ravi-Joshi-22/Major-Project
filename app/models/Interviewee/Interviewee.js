@@ -8,82 +8,76 @@ const projectSchema = require('./Project');
 
 const Schema = mongoose.Schema;
 const intervieweeSchema = new Schema(
-    {
-        userId: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
+  {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    before_senior_sec: beforeSeniorSecSchema,
+    after_senior_sec: [afterSeniorSecSchema],
+    jobs: [jobDescriptionSchema],
+    internships: [jobDescriptionSchema],
+    skills: [
+      {
+        name: {
+          type: String,
         },
-        before_senior_sec: beforeSeniorSecSchema,
-        after_senior_sec: [
-            afterSeniorSecSchema,
-        ],
-        jobs: [
-            jobDescriptionSchema,
-        ],
-        internships: [
-            jobDescriptionSchema,
-        ],
-        skills: [
-            {
-                name: {
-                    type: String,
-                },
-                rate: {
-                    type: String,
-                    enum: [
-                        CONSTANTS.ENUMS.USER.SKILLS_RATE.BEGINNER,
-                        CONSTANTS.ENUMS.USER.SKILLS_RATE.INTERMEDIATE,
-                        CONSTANTS.ENUMS.USER.SKILLS_RATE.ADVANCED,
-                    ],
-                    default: CONSTANTS.ENUMS.USER.SKILLS_RATE.BEGINNER,
-                },
-            },
-        ],
-        courses: [
-            {
-                name: {
-                    type: String,
-                },
-                number: {
-                    type: String,
-                },
-                description: {
-                    type: String,
-                    maxlength: 250,
-                },
-            },
-        ],
-        certifications: [
-            certificationSchema,
-        ],
-        tests: [
-            {
-                name: {
-                    type: String,
-                },
-                score: {
-                    type: String,
-                },
-                date: {
-                    type: String,
-                },
-            },
-        ],
-        projects: [
-            projectSchema,
-        ],
-        additionals: [
-            {
-                description: {
-                    type: String,
-                    maxlenght: 250,
-                },
-            },
-        ],
+        rate: {
+          type: String,
+          enum: [
+            CONSTANTS.ENUMS.USER.SKILLS_RATE.BEGINNER,
+            CONSTANTS.ENUMS.USER.SKILLS_RATE.INTERMEDIATE,
+            CONSTANTS.ENUMS.USER.SKILLS_RATE.ADVANCED,
+          ],
+          default: CONSTANTS.ENUMS.USER.SKILLS_RATE.BEGINNER,
+        },
+      },
+    ],
+    courses: [
+      {
+        name: {
+          type: String,
+        },
+        number: {
+          type: String,
+        },
+        description: {
+          type: String,
+          maxlength: 250,
+        },
+      },
+    ],
+    certifications: [certificationSchema],
+    tests: [
+      {
+        name: {
+          type: String,
+        },
+        score: {
+          type: String,
+        },
+        date: {
+          type: String,
+        },
+      },
+    ],
+    projects: [projectSchema],
+    additionals: [
+      {
+        description: {
+          type: String,
+          maxlenght: 250,
+        },
+      },
+    ],
+    total_experience: {
+      type: Number,
+      required: true,
     },
-    {
-        timestamps: true,
-    },
+  },
+  {
+    timestamps: true,
+  }
 );
 
 module.exports = intervieweeSchema;

@@ -76,7 +76,49 @@ export default class CRRegisteration extends React.Component {
     }
   }
 
-  registerCall() {}
+  registerCall() {
+    // this.props.crCallback(this.state);
+
+    if(this.state.fName.length > 0){
+      this.refs.fNameInput.className = 'input';
+      if(this.state.lName.length > 0){
+        this.refs.lNameInput.className = 'input';
+        if(this.state.phone.length > 0){
+          this.refs.phoneInput.className = 'input';
+          var email = this.state.email;
+          if(String(email).includes('@') &&
+            String(email).includes('.') &&
+            String(email).length > 5){
+            this.refs.emailInput.className = 'input';
+            var pass = this.state.password;
+            if(/[a-z]/.test(String(pass)) &&
+              /[A-Z]/.test(String(pass)) &&
+              /[0-9]/.test(String(pass)) &&
+              String(pass).length > 7){
+              this.refs.passwordInput.className = 'input';
+              if(this.state.cPassword === this.state.password){
+                this.refs.cPasswordInput.className = 'input';
+                this.refs.submitButton.innerHTML= "Loading...";
+                this.props.crCallback(this.state);
+              }else{
+                this.refs.cPasswordInput.className = 'input is-danger';
+              }
+            }else{
+              this.refs.passwordInput.className = 'input is-danger';
+            }
+          }else{
+            this.refs.emailInput.className = 'input is-danger';
+          }
+        }else{
+          this.refs.phoneInput.className = 'input is-danger';
+        }
+      }else{
+        this.refs.lNameInput.className = 'input is-danger';
+      }
+    }else{
+      this.refs.fNameInput.className = 'input is-danger';
+    }
+  }
 
   render() {
     return (
@@ -84,36 +126,39 @@ export default class CRRegisteration extends React.Component {
         className="card"
         style={{ width: '80%', maxWidth: 800, margin: 'auto', padding: 50 }}
       >
-        <div className="columns">
+        <div className="field">
           <label className="label">Name</label>
-          <div className="field column">
-            <div className="control has-icons-left has-icons-right">
-              <input
-                ref="fNameInput"
-                className="input"
-                type="text"
-                placeholder="First Name"
-                value={this.state.fName}
-                onChange={this.updateFName}
-              />
-              <span className="icon is-small is-left">
-                <i className="fas fa-user" />
-              </span>
+          <div className="columns">
+            <div className="column">
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  ref="fNameInput"
+                  className="input"
+                  type="text"
+                  placeholder="First Name"
+                  value={this.state.fName}
+                  onChange={this.updateFName}
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-user" />
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="field column">
-            <div className="control has-icons-left has-icons-right">
-              <input
-                ref="lNameInput"
-                className="input"
-                type="text"
-                placeholder="Last Name"
-                value={this.state.lName}
-                onChange={this.updateLName}
-              />
+            <div className="field column">
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  ref="lNameInput"
+                  className="input"
+                  type="text"
+                  placeholder="Last Name"
+                  value={this.state.lName}
+                  onChange={this.updateLName}
+                />
+              </div>
             </div>
           </div>
         </div>
+        
         <div className="field">
           <label className="label">Phone</label>
           <div className="control has-icons-left has-icons-right">
@@ -197,10 +242,9 @@ export default class CRRegisteration extends React.Component {
         <div className="field is-grouped">
           <div className="control">
             <button
+            ref="submitButton"
               className="button is-link is-rounded"
-              onClick={() => {
-                this.props.crCallback(this.state);
-              }}
+              onClick={this.registerCall}
             >
               Submit
             </button>

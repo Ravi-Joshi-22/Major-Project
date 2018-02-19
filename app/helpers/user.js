@@ -3,6 +3,7 @@ const CONSTANTS = require('../../config/constants');
 
 const User = Models.User;
 const Company = Models.Company;
+const Interviewee = Models.Interviewee;
 
 /**
  * This function is used to create new user
@@ -79,8 +80,25 @@ function getCompanyDetailsFromUser(userId, callback) {
   });
 }
 
+function getIntervieweeDetails(userId, callback) {
+  Interviewee.findOne({
+    userId: userId
+  }, function (errInFetch, fetchedInterviewe) {
+    if (errInFetch) {
+      callback({
+        type: CONSTANTS.ERROR_TYPES.DB_ERROR,
+        msg: 'Unable to get interviewee details',
+        errorDetail: JSON.stringify(errInFetch),
+      });
+    } else {
+      callback(null, fetchedInterviewe);
+    }
+  });
+}
+
 module.exports = {
   registerUser: registerUser,
   fetchUser: fetchUser,
-  getCompanyDetailsFromUser: getCompanyDetailsFromUser
+  getCompanyDetailsFromUser: getCompanyDetailsFromUser,
+  getIntervieweeDetails: getIntervieweeDetails,
 };

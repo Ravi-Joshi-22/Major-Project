@@ -49,7 +49,7 @@ module.exports = {
         BEGINNER: 'Beginner',
         INTERMEDIATE: 'Intermediate',
         ADVANCED: 'Advanced',
-      }
+      },
     },
     COMPANY: {
       VERIFICATION_STATUS: {
@@ -58,6 +58,12 @@ module.exports = {
         ADMIN_APPROVED: 'admin_approved',
         ADMIN_DECLINED: 'admin_declined',
       },
+    },
+    TOPIC: {
+      JAVA: 'java',
+      CPP: 'c++',
+      C: 'c',
+      JAVASCIRPT: 'javascript',
     },
     OTP_RESPONSE_TYPE: {
       SUCCESS: 'success',
