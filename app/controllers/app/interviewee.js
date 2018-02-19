@@ -22,7 +22,6 @@ function registerNewInterviewee(req, res, next) {
     req.body.tests,
     req.body.projects,
     req.body.additionals,
-    req.body.totalExp,
     function(errInRegistration, registeredInstance) {
       if (errInRegistration) {
         res.status(500).json(errInRegistration);
