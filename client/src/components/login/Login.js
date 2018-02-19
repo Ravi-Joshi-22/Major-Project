@@ -1,15 +1,15 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import * as actions from "../../actions/app";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/app';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
-      submitButton: ""
+      username: '',
+      password: '',
+      submitButton: '',
     };
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
@@ -26,99 +26,99 @@ class Login extends React.Component {
 
   async authorize() {
     if (this.state.username.length > 0) {
-      this.refs.usernameInput.className = "input";
+      this.refs.usernameInput.className = 'input';
       if (this.state.password.length > 0) {
-        this.refs.passwordInput.className = "input";
-        await this.setState({ submitButton: "loading" });
-        this.refs.submitButton.innerHTML = "  Loading...";
+        this.refs.passwordInput.className = 'input';
+        await this.setState({ submitButton: 'loading' });
+        this.refs.submitButton.innerHTML = '  Loading...';
 
         await this.props.login(this.state);
         if (
-          this.props.auth.role === "company_head" ||
-          this.props.auth.role === "company_user"
+          this.props.auth.role === 'company_head' ||
+          this.props.auth.role === 'company_user'
         ) {
           switch (this.props.auth.verification_status) {
-            case "in_process":
+            case 'in_process':
               this.props.changeCurrentStep(2);
-              this.props.history.push("/companyRegister");
+              this.props.history.push('/companyRegister');
               break;
-            case "email_verified":
+            case 'email_verified':
               this.props.changeCurrentStep(3);
-              this.props.history.push("/companyRegister");
+              this.props.history.push('/companyRegister');
               break;
-            case "otp_verified":
-              this.props.history.push("/dashboard");
+            case 'otp_verified':
+              this.props.history.push('/companyDashboard');
           }
-        } else if (this.props.auth.role === "interviewee") {
+        } else if (this.props.auth.role === 'interviewee') {
           switch (this.props.auth.verification_status) {
-            case "in_process":
+            case 'in_process':
               this.props.changeCurrentStep(2);
-              this.props.history.push("/intervieweeRegister");
+              this.props.history.push('/intervieweeRegister');
               break;
-            case "email_verified":
+            case 'email_verified':
               this.props.changeCurrentStep(3);
-              this.props.history.push("/intervieweeRegister");
+              this.props.history.push('/intervieweeRegister');
               break;
-            case "otp_verified":
-              this.props.history.push("/dashboard");
+            case 'otp_verified':
+              this.props.history.push('/userDashboard');
           }
         }
       } else {
-        this.refs.passwordInput.className = "input is-danger";
+        this.refs.passwordInput.className = 'input is-danger';
       }
     } else {
-      this.refs.usernameInput.className = "input is-danger";
+      this.refs.usernameInput.className = 'input is-danger';
     }
   }
 
   render() {
     return (
-        <div>
-          <div className="field">
-            <label className="label">Username</label>
-            <div className="control has-icons-left has-icons-right">
-              <input
-                ref="usernameInput"
-                className="input"
-                type="text"
-                placeholder="Username"
-                value={this.state.username}
-                onChange={this.updateUsername}
-              />
-              <span className="icon is-small is-left">
-                <i className="fas fa-user" />
-              </span>
-            </div>
-          </div>
-          <div className="field">
-            <label className="label">Password</label>
-            <div className="control has-icons-left has-icons-right">
-              <input
-                ref="passwordInput"
-                className="input"
-                type="password"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={this.updatePassword}
-              />
-              <span className="icon is-small is-left">
-                <i className="fas fa-key" />
-              </span>
-            </div>
-          </div>
-          <div className="field is-grouped">
-            <div className="control">
-              <button
-                ref="submitButton"
-                className="button is-link is-rounded"
-                onClick={this.authorize}
-                disabled={this.state.submitButton}
-              >
-                Submit
-              </button>
-            </div>
+      <div>
+        <div className="field">
+          <label className="label">Username</label>
+          <div className="control has-icons-left has-icons-right">
+            <input
+              ref="usernameInput"
+              className="input"
+              type="text"
+              placeholder="Username"
+              value={this.state.username}
+              onChange={this.updateUsername}
+            />
+            <span className="icon is-small is-left">
+              <i className="fas fa-user" />
+            </span>
           </div>
         </div>
+        <div className="field">
+          <label className="label">Password</label>
+          <div className="control has-icons-left has-icons-right">
+            <input
+              ref="passwordInput"
+              className="input"
+              type="password"
+              placeholder="Password"
+              value={this.state.password}
+              onChange={this.updatePassword}
+            />
+            <span className="icon is-small is-left">
+              <i className="fas fa-key" />
+            </span>
+          </div>
+        </div>
+        <div className="field is-grouped">
+          <div className="control">
+            <button
+              ref="submitButton"
+              className="button is-link is-rounded"
+              onClick={this.authorize}
+              disabled={this.state.submitButton}
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
     );
   }
 }
