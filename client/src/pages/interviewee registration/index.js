@@ -1,12 +1,12 @@
-import 'rc-steps/assets/index.css';
-import 'rc-steps/assets/iconfont.css';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { withRouter } from 'react-router-dom';
-import './index.css';
-import { connect } from 'react-redux';
-import * as actions from '../../actions/app';
-import Steps, { Step } from 'rc-steps';
+import "rc-steps/assets/index.css";
+import "rc-steps/assets/iconfont.css";
+import React from "react";
+import ReactDOM from "react-dom";
+import { withRouter } from "react-router-dom";
+import "./index.css";
+import { connect } from "react-redux";
+import * as actions from "../../actions/app";
+import Steps, { Step } from "rc-steps";
 
 import Interviewee from "../../components/IntervieweeRegister/Interviewee";
 import Secondary from "../../components/IntervieweeRegister/Secondary";
@@ -19,7 +19,8 @@ import Internship from "../../components/IntervieweeRegister/Internship";
 import Courses from "../../components/IntervieweeRegister/Courses";
 import Test from "../../components/IntervieweeRegister/Test";
 import Certification from "../../components/IntervieweeRegister/Certification";
-
+import EmailVerification from "../../components/register/EmailVerification";
+import OTPVerification from "../../components/register/OTPVerification";
 
 class IntervieweeRegister extends React.Component {
   constructor(props) {
@@ -37,9 +38,8 @@ class IntervieweeRegister extends React.Component {
       courses: [],
       certifications: [],
       tests: [],
-      projects: [],
+      projects: []
     };
-
     this.getUserDetails = this.getUserDetails.bind(this);
     this.getSecondaryDetails = this.getSecondaryDetails.bind(this);
     this.getSeniorSecondary = this.getSeniorSecondary.bind(this);
@@ -52,12 +52,13 @@ class IntervieweeRegister extends React.Component {
     this.getTests = this.getTests.bind(this);
     this.getCourses = this.getCourses.bind(this);
     this.stepShow = this.stepShow.bind(this);
+    this.callRegisterApi = this.callRegisterApi.bind(this);
   }
 
   async getUserDetails(userData) {
     await this.setState({ user: userData });
     await this.props.changeCurrentStep(1);
-    this.stepShow();    
+    this.stepShow();
   }
 
   async getSecondaryDetails(secondaryData) {
@@ -75,21 +76,21 @@ class IntervieweeRegister extends React.Component {
     await this.props.changeCurrentStep(2);
     this.stepShow();
   }
-  
+
   async getinternships(internshipData) {
     let internshipsData = this.state.internships;
     internshipsData.push(internshipData);
     await this.setState({ internships: internshipsData });
     await this.props.changeCurrentStep(3);
-    this.stepShow();    
+    this.stepShow();
   }
-  
+
   async getProjects(projectData) {
     let projectsData = this.state.projects;
     projectsData.push(projectData);
     await this.setState({ projects: projectsData });
     await this.props.changeCurrentStep(4);
-    this.stepShow();    
+    this.stepShow();
   }
 
   async getJobs(jobData) {
@@ -97,15 +98,15 @@ class IntervieweeRegister extends React.Component {
     jobsData.push(jobData);
     await this.setState({ jobs: jobsData });
     await this.props.changeCurrentStep(5);
-    this.stepShow();    
+    this.stepShow();
   }
-  
+
   async getCourses(courseData) {
     let coursesData = this.state.courses;
     coursesData.push(courseData);
     await this.setState({ courses: coursesData });
     await this.props.changeCurrentStep(6);
-    this.stepShow();    
+    this.stepShow();
   }
 
   async getskills(skillData) {
@@ -113,7 +114,7 @@ class IntervieweeRegister extends React.Component {
     skillsData.push(skillData);
     await this.setState({ skills: skillsData });
     await this.props.changeCurrentStep(7);
-    this.stepShow();    
+    this.stepShow();
   }
 
   async getcertification(certificationData) {
@@ -121,88 +122,84 @@ class IntervieweeRegister extends React.Component {
     certificationsData.push(certificationData);
     await this.setState({ certifications: certificationsData });
     await this.props.changeCurrentStep(8);
-    this.stepShow();    
+    this.stepShow();
   }
 
   async getTests(testData) {
     let testsData = this.state.tests;
     testsData.push(testData);
     await this.setState({ tests: testsData });
-    this.callRegisterApi(this.state)
+    this.callRegisterApi(this.state);
+  }
+
+  async callRegisterApi(academicData) {
+    await this.props.registerInterview(
+      this.state.user,
+      academicData,
+      this.props.history
+    );
   }
 
   stepShow() {
-    this.refs.step0.className = 'hidden';
-    this.refs.step1.className = 'hidden';
-    this.refs.step2.className = 'hidden';
-    this.refs.step3.className = 'hidden';
-    // this.refs.step4.className = 'hidden';
+    console.log("cureentStep" + this.props.currentStep);
+    this.refs.step0.className = "hidden";
+    this.refs.step1.className = "hidden";
+    this.refs.step2.className = "hidden";
+    this.refs.step3.className = "hidden";
+    this.refs.step4.className = "hidden";
+    this.refs.step5.className = "hidden";
+    this.refs.step6.className = "hidden";
+    this.refs.step7.className = "hidden";
+    this.refs.step8.className = "hidden";
+    this.refs.step9.className = "hidden";
+    this.refs.step10.className = "hidden";
 
     switch (this.props.currentStep) {
       case 0:
-        this.refs.step0.className = '';
+        this.refs.step0.className = "";
         break;
       case 1:
-        this.refs.step1.className = '';
+        this.refs.step1.className = "";
         break;
       case 2:
-        this.refs.step2.className = '';
+        this.refs.step2.className = "";
         break;
       case 3:
-        this.refs.step3.className = '';
-        break;
-    }
-  }
-  
-  stepShow() {
-    console.log('cureentStep' + this.props.currentStep);
-    this.refs.step0.className = 'hidden';
-    this.refs.step1.className = 'hidden';
-    this.refs.step2.className = 'hidden';
-    this.refs.step3.className = 'hidden';
-    this.refs.step4.className = 'hidden';
-    this.refs.step5.className = 'hidden';
-    this.refs.step6.className = 'hidden';
-    this.refs.step7.className = 'hidden';
-    this.refs.step8.className = 'hidden';
-
-    switch (this.props.currentStep) {
-      case 0:
-        this.refs.step0.className = '';
-        break;
-      case 1:
-        this.refs.step1.className = '';
-        break;
-      case 2:
-        this.refs.step2.className = '';
-        break;
-      case 3:
-        this.refs.step3.className = '';
+        this.refs.step3.className = "";
         break;
       case 4:
-        this.refs.step4.className = '';
+        this.refs.step4.className = "";
         break;
       case 5:
-        this.refs.step5.className = '';
+        this.refs.step5.className = "";
         break;
       case 6:
-        this.refs.step6.className = '';
+        this.refs.step6.className = "";
         break;
       case 7:
-        this.refs.step7.className = '';
+        this.refs.step7.className = "";
         break;
       case 8:
-        this.refs.step8.className = '';
+        this.refs.step8.className = "";
+        break;
+      case 9:
+        this.refs.step8.className = "";
+        break;
+      case 10:
+        this.refs.step8.className = "";
+        break;
+      default:
+        this.refs.step0.className = "";
         break;
     }
   }
 
   async componentDidMount() {
     await this.props.fetchUser();
-    if (this.props.auth.verification_status === 'in_process') {
-      await this.props.changeCurrentStep(2);
-    } else if (this.props.auth.verification_status === 'email_verified') {
-      await this.props.changeCurrentStep(3);
+    if (this.props.auth.verification_status === "in_process") {
+      await this.props.changeCurrentStep(9);
+    } else if (this.props.auth.verification_status === "email_verified") {
+      await this.props.changeCurrentStep(10);
     }
     this.stepShow();
   }
@@ -220,6 +217,8 @@ class IntervieweeRegister extends React.Component {
           <Step title="Skills Acquired" />
           <Step title="Certification" />
           <Step title="Test" />
+          <Step title="E-Mail Verification" />
+          <Step title="OTP Verification" />
         </Steps>
         <br />
         <br />
@@ -252,6 +251,12 @@ class IntervieweeRegister extends React.Component {
         <div ref="step8" className="hidden">
           <Test testCB={this.getTests} />
         </div>
+        <div ref="step9" className="hidden">
+          <EmailVerification />
+        </div>
+        <div ref="step10" className="hidden">
+          <OTPVerification />
+        </div>
       </div>
     );
   }
@@ -260,4 +265,6 @@ class IntervieweeRegister extends React.Component {
 function mapStateToProps({ currentStep, auth }) {
   return { currentStep, auth };
 }
-export default connect(mapStateToProps, actions)(withRouter(IntervieweeRegister));
+export default connect(mapStateToProps, actions)(
+  withRouter(IntervieweeRegister)
+);

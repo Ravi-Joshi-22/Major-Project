@@ -79,6 +79,7 @@ export default class CompanyRegistration extends React.Component {
                   this.refs.CityInput.className = 'input';
                   if(this.state.companyPin.length > 0){
                     this.refs.PinInput.className = 'input';
+                    this.refs.submitButton.innerHTML= "Loading...";
                     this.props.companyCallback(this.state);
                   }else{
                     this.refs.PinInput.className = 'input is-danger';
@@ -266,6 +267,7 @@ export default class CompanyRegistration extends React.Component {
         <div className="field is-grouped">
           <div className="control">
             <button
+            ref="submitButton"
               className="button is-link is-rounded"
               onClick={this.registerCall}
             >
