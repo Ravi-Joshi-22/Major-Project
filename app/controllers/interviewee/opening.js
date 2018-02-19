@@ -22,6 +22,7 @@ function applyForOpening(req, res, next) {
   });
 }
 
+
 /**
  * 
  *@param  {Object}   req  Request Object
@@ -34,10 +35,22 @@ function eligibleOpenings(req, res, next) {
       res.status(500).json(err);
       return;
     }
-    res.status(200).json(fetchedOpenings);
+     res.status(200).json(fetchedOpenings);
+  });
+}
+    
+function getAppliedOpenings(req, res, next) {
+  openingLib.getAppliedOpenings(req.user._id, function(err, fetchedInstance) {
+    if (err) {
+      res.status(500).json(err);
+      return;
+    }
+    res.status(200).json(fetchedInstance);
   });
 }
 
 router.post('/apply', applyForOpening);
 router.get('/eligible', eligibleOpenings);
+router.get('/applied', getAppliedOpenings);
+
 module.exports = router;

@@ -16,6 +16,7 @@ export default class Interviewee extends React.Component {
     this.updateEmail = this.updateEmail.bind(this);
     this.updatePwd = this.updatePwd.bind(this);
     this.updateCPwd = this.updateCPwd.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   updateName(e) {
@@ -69,131 +70,130 @@ export default class Interviewee extends React.Component {
     }
   }
 
-
-
-  
+  async submit() {
+    await this.setState({ currentModalClass: "modal" });
+    this.props.userCB(this.state);
+  }
 
   render() {
     return (
       (
-        <div  className="card"
-        style={{ width: '80%', maxWidth: 800, margin: 'auto', padding: 50 }}>
-        
-                <div className="field">
-                  <label className="label">Name</label>
-                  <div className="control has-icons-left has-icons-right">
-                    <input
-                      ref="nameInput"
-                      className="input"
-                      type="text"
-                      placeholder="Name"
-                      required
-                      value={this.state.fName}
-                      onChange={this.updateName}
-                    />
-                    <span className="icon is-small is-left">
-                      <i className="fas fa-user" />
-                    </span>
-                  </div>
-                </div>
+        <div
+          className="card"
+          style={{ width: '80%', maxWidth: 800, margin: 'auto', padding: 50 }}
+        >
+          <div className="field">
+            <label className="label">Name</label>
+            <div className="control has-icons-left has-icons-right">
+              <input
+                ref="nameInput"
+                className="input"
+                type="text"
+                placeholder="Name"
+                required
+                value={this.state.fName}
+                onChange={this.updateName}
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-user" />
+              </span>
+            </div>
+          </div>
 
-                <div className="field">
-                  <label className="label">Phone</label>
-                  <div className="control has-icons-left has-icons-right">
-                    <input
-                      ref="phoneInput"
-                      className="input"
-                      type="number"
-                      placeholder="Phone"
-                      required
-                      value={this.state.phone}
-                      onChange={this.updatePhone}
-                    />
-                    <span className="icon is-small is-left">
-                      <i className="fas fa-phone" />
-                    </span>
-                  </div>
-                </div>
+          <div className="field">
+            <label className="label">Phone</label>
+            <div className="control has-icons-left has-icons-right">
+              <input
+                ref="phoneInput"
+                className="input"
+                type="number"
+                placeholder="Phone"
+                value={this.state.phone}
+                onChange={this.updatePhone}
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-phone" />
+              </span>
+            </div>
+          </div>
 
-                <div className="field">
-                  <label className="label">E-mail</label>
-                  <div className="control has-icons-left has-icons-right">
-                    <input
-                      ref="emailInput"
-                      className="input"
-                      type="email"
-                      placeholder="E-mail"
-                      required
-                      value={this.state.email}
-                      onChange={this.updateEmail}
-                    />
-                    <span className="icon is-small is-left">
-                      <i className="fas fa-envelope" />
-                    </span>
-                  </div>
-                </div>
+          <div className="field">
+            <label className="label">E-mail</label>
+            <div className="control has-icons-left has-icons-right">
+              <input
+                ref="emailInput"
+                className="input"
+                type="email"
+                placeholder="E-mail"
+                required
+                value={this.state.email}
+                onChange={this.updateEmail}
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-envelope" />
+              </span>
+            </div>
+          </div>
 
-                <div className="field">
-                  <label className="label">Password</label>
-                  <div className="control has-icons-left has-icons-right">
-                    <input
-                      ref="passwordInput"
-                      className="input"
-                      type="password"
-                      placeholder="Password"
-                      required
-                      value={this.state.password}
-                      onChange={this.updatePwd}
-                    />
-                    <span className="icon is-small is-left">
-                      <i className="fas fa-key" />
-                    </span>
-                  </div>
-                </div>
+          <div className="field">
+            <label className="label">Password</label>
+            <div className="control has-icons-left has-icons-right">
+              <input
+                ref="passwordInput"
+                className="input"
+                type="password"
+                placeholder="Password"
+                required
+                value={this.state.password}
+                onChange={this.updatePwd}
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-key" />
+              </span>
+            </div>
+          </div>
 
-                <div className="field">
-                  <label className="label">Confirm Password</label>
-                  <div className="control has-icons-left has-icons-right">
-                    <input
-                      ref="cPasswordInput"
-                      className="input"
-                      type="password"
-                      placeholder="Confirm Password"
-                      required
-                      value={this.state.cPassword}
-                      onChange={this.updateCPwd}
-                    />
-                    <span className="icon is-small is-left">
-                      <i className="fas fa-key" />
-                    </span>
-                    <span
-                      ref="cPasswordCheck"
-                      className="icon is-small is-right hidden"
-                    >
-                      <i className="fas fa-check" />
-                    </span>
-                  </div>
-                </div>
-                <p>
-                  Password should have minimum 8 charaters and must include
-                  atleast one UPPERCASE character, atleast one lowercase
-                  character and atleast one number.
-                </p>
+          <div className="field">
+            <label className="label">Confirm Password</label>
+            <div className="control has-icons-left has-icons-right">
+              <input
+                ref="cPasswordInput"
+                className="input"
+                type="password"
+                placeholder="Confirm Password"
+                required
+                value={this.state.cPassword}
+                onChange={this.updateCPwd}
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-key" />
+              </span>
+              <span
+                ref="cPasswordCheck"
+                className="icon is-small is-right hidden"
+              >
+                <i className="fas fa-check" />
+              </span>
+            </div>
+          </div>
 
-                <br />
-                <div className="field is-grouped">
-                  <div className="control">
-                    <button
-                      className="button is-link is-rounded"
-                      onClick={() => {
-                        this.props.userCB(this.state);
-                      }}
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </div>
-            
+          <p>
+            Password should have minimum 8 charaters and must include
+            atleast one UPPERCASE character, atleast one lowercase
+            character and atleast one number.
+          </p>
+          <br />
+
+          <div className="field is-grouped">
+            <div className="control">
+              <button
+                className="button is-link is-rounded"
+                onClick={this.submit}
+              >
+                Submit
+              </button>
+            </div>
+          </div>
         </div>
       )
     );
