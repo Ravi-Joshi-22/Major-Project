@@ -70,6 +70,10 @@ const intervieweeSchema = new Schema(
         },
       },
     ],
+    total_experience: {
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: true,
