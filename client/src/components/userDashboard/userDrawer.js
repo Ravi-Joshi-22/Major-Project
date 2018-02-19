@@ -27,6 +27,10 @@ class UserDrawer extends React.Component {
     this.setState({ open: false });
   };
 
+  handleAppliedOpeningClick= () => {
+
+  };
+
   render() {
     return (
       <MuiThemeProvider>
@@ -51,7 +55,7 @@ class UserDrawer extends React.Component {
             <Divider/>
             <Subheader> My Account </Subheader>
               <MenuItem onClick={this.handleClose}>Elligible Openings</MenuItem>
-              <MenuItem onClick={this.handleClose}>Applied Openings</MenuItem>
+              <MenuItem onClick={this.handleAppliedOpeningClick}>Applied Openings</MenuItem>
               <MenuItem onClick={this.handleClose}>Previous Interviews</MenuItem>
               <MenuItem onClick={this.handleClose}>My History</MenuItem>
               <MenuItem onClick={this.handleClose}>Home</MenuItem>
