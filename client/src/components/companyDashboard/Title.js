@@ -1,21 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Avatar from 'material-ui/Avatar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Payment from './payment';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-export default class Title extends React.Component {
+class Title extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
         };
     }
 
-    renderContent() {
-        if (this.props.company) {
-            return <div>{this.props.company.credits}</div>;
-        } else {
-            return <div>0</div>;
+    renderContents(){
+        if(this.props.company){
+            console.log("comp");
+            return this.props.company.credits;
+        }else{
+            console.log("dash");
+            return this.props.credits;
         }
     }
 
@@ -23,48 +26,48 @@ export default class Title extends React.Component {
         return (
             <div>
             <MuiThemeProvider>
-                <nav class="navbar is-transparent">
-                    <div class="navbar-brand">
-                        <a class="" href="#">
+                <nav className="navbar is-transparent">
+                    <div className="navbar-brand">
+                        <a className="" href="#">
                         <img src="./Assets/image.svg" alt="SmartHyre"  width="112" height="28"/>
                         </a>
                     </div>
 
-                    <div id="navbarExampleTransparentExample" class="navbar-menu">
-                        <div class="navbar-start">
-                            <a class="navbar-item" href="">
+                    <div id="navbarExampleTransparentExample" className="navbar-menu">
+                        <div className="navbar-start">
+                            <a className="navbar-item" href="">
                                 Home
                             </a>
                         </div>
 
-                        <div class="navbar-end">
-                            <div class="navbar-item">
-                                <div class="field is-grouped">
-                                    <p class="control">
-                                        <span class="tag is-large">{this.renderContent()} &nbsp;
+                        <div className="navbar-end">
+                            <div className="navbar-item">
+                                <div className="field is-grouped">
+                                    <p className="control">
+                                        <span className="tag is-large">{this.renderContents()} &nbsp;
                                             <Payment />
                                         </span>
                                     </p>
 
-                                    <p class="control">
-                                        <div class="navbar-item has-dropdown is-hoverable">
-                                            <a class="navbar-link" href="#">
+                                    <div className="control">
+                                        <div className="navbar-item has-dropdown is-hoverable">
+                                            <a className="navbar-link" href="#">
                                                 <Avatar
                                                 src="./Assets/Employee.svg"
                                                 size={30}
                                                 />
                                             </a>
-                                            <div class="navbar-dropdown is-boxed">
-                                                <a class="navbar-item" href="#">
+                                            <div className="navbar-dropdown is-boxed">
+                                                <a className="navbar-item" href="#">
                                                     Profile
                                                 </a>
-                                                <hr class="navbar-divider"/>
-                                                <a class="navbar-item is-active" href="#">
+                                                <hr className="navbar-divider"/>
+                                                <a className="navbar-item is-active" href="#">
                                                     Logout
                                                 </a>
                                             </div>
                                         </div>
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -76,3 +79,8 @@ export default class Title extends React.Component {
     }
 }
 
+
+function mapStateToProps({ company }) {
+    return { company };
+}
+export default connect(mapStateToProps)(Title);
