@@ -108,15 +108,8 @@ function getTotalExperience(userId, callback) {
         },
       },
       {
-        $addFields: {
-          jobsinternships: {
-            $concatArrays: ['$jobs', '$internships'],
-          },
-        },
-      },
-      {
         $unwind: {
-          path: '$jobsinternships',
+          path: '$jobs',
         },
       },
       {
@@ -124,10 +117,7 @@ function getTotalExperience(userId, callback) {
           duration: {
             $divide: [
               {
-                $subtract: [
-                  '$jobsinternships.end_date',
-                  '$jobsinternships.start_date',
-                ],
+                $subtract: ['$jobs.end_date', '$jobs.start_date'],
               },
               1000 * 60 * 60 * 24 * 365,
             ],
@@ -150,8 +140,11 @@ function getTotalExperience(userId, callback) {
           msg: 'Unable to calculate experience',
           errorDetail: JSON.stringify(errInFetch),
         });
-      } else {
+      } else if (experience.length === 0) {
+        experience = { total_experience: 0 };
         callback(null, experience);
+      } else {
+        callback(null, experience[0]);
       }
     }
   );
