@@ -4,12 +4,12 @@ import AppBar from "material-ui/AppBar";
 import Drawer from "material-ui/Drawer";
 import MenuItem from "material-ui/MenuItem";
 import List from "material-ui/List";
-import Subheader from 'material-ui/Subheader';
+import Subheader from "material-ui/Subheader";
 import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
-import ProfileAvatar from './profileAvatar';
+import ProfileAvatar from "./profileAvatar";
 import HamburgerIcon from "material-ui/svg-icons/navigation/menu";
-import Divider from 'material-ui/Divider';
+import Divider from "material-ui/Divider";
 
 class UserDrawer extends React.Component {
   constructor(props) {
@@ -39,6 +39,7 @@ class UserDrawer extends React.Component {
               </IconButton>
             }
             onLeftIconButtonClick={this.handleToggle}
+            style={{ width: "114%", marginLeft: "-7%" }}
           />
           <Drawer
             docked={false}
@@ -47,12 +48,23 @@ class UserDrawer extends React.Component {
             onRequestChange={this.handleToggle}
           >
             <List>
-            <MenuItem onClick={this.handleClose}><ProfileAvatar/></MenuItem>
-            <Divider/>
-            <Subheader> My Account </Subheader>
+              <MenuItem onClick={this.handleClose}>
+                <ProfileAvatar />
+              </MenuItem>
+              <Divider />
+              <Subheader> My Account </Subheader>
               <MenuItem onClick={this.handleClose}>Elligible Openings</MenuItem>
-              <MenuItem onClick={this.handleClose}>Applied Openings</MenuItem>
-              <MenuItem onClick={this.handleClose}>Previous Interviews</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  console.log("toggle2")
+                  this.props.appliedOpeningCallback();
+                }}
+              >
+                Applied Openings
+              </MenuItem>
+              <MenuItem onClick={this.handleClose}>
+                Previous Interviews
+              </MenuItem>
               <MenuItem onClick={this.handleClose}>My History</MenuItem>
               <MenuItem onClick={this.handleClose}>Home</MenuItem>
               <MenuItem onClick={this.handleClose}>Help</MenuItem>
