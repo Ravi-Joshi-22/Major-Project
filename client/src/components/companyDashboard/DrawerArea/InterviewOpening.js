@@ -110,7 +110,6 @@ import * as actions from '../../../actions/company';
   }
 
   render() {
-    console.log("dodo")
     return (
       <div>
         <div className={this.props.currentModalClass}>
