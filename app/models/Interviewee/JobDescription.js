@@ -16,14 +16,14 @@ const jobDescriptionSchema = new Schema({
     required: true,
   },
   start_date: {
-    type: String,
+    type: Date,
     required: true,
   },
   currently_working: {
     type: Boolean,
   },
   end_date: {
-    type: String,
+    type: Date,
     required: function() {
       return !(this.currently_working == true);
     },

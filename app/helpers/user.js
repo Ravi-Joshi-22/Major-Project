@@ -21,7 +21,7 @@ function registerUser(userData, callback) {
     role: userData.role,
   });
 
-  newUser.save(function (savedUserError, savedUser) {
+  newUser.save(function(savedUserError, savedUser) {
     if (savedUserError) {
       callback({
         type: CONSTANTS.ERROR_TYPES.DB_ERROR,
@@ -40,7 +40,7 @@ function registerUser(userData, callback) {
  * @param {Function} callback function two param err and fetched user
  */
 function fetchUser(userId, callback) {
-  User.findById(userId).exec(function (err, user) {
+  User.findById(userId).exec(function(err, user) {
     if (err) {
       callback({
         type: CONSTANTS.ERROR_TYPES.DB_ERROR,
@@ -54,14 +54,14 @@ function fetchUser(userId, callback) {
 }
 
 /**
- * Function to get company details from userId 
+ * Function to get company details from userId
  * @param {objectId} userId user objectId
  * @param {Function} callback function two param err and fetched user
  */
 function getCompanyDetailsFromUser(userId, callback) {
   Company.findOne({
     users: userId,
-  }).exec(function (companyFetchError, companyDetails) {
+  }).exec(function(companyFetchError, companyDetails) {
     if (companyFetchError) {
       callback({
         type: CONSTANTS.ERROR_TYPES.DB_ERROR,
@@ -81,19 +81,73 @@ function getCompanyDetailsFromUser(userId, callback) {
 }
 
 function getIntervieweeDetails(userId, callback) {
-  Interviewee.findOne({
-    userId: userId
-  }, function (errInFetch, fetchedInterviewe) {
-    if (errInFetch) {
-      callback({
-        type: CONSTANTS.ERROR_TYPES.DB_ERROR,
-        msg: 'Unable to get interviewee details',
-        errorDetail: JSON.stringify(errInFetch),
-      });
-    } else {
-      callback(null, fetchedInterviewe);
+  Interviewee.findOne(
+    {
+      userId: userId,
+    },
+    function(errInFetch, fetchedInterviewe) {
+      if (errInFetch) {
+        callback({
+          type: CONSTANTS.ERROR_TYPES.DB_ERROR,
+          msg: 'Unable to get interviewee details',
+          errorDetail: JSON.stringify(errInFetch),
+        });
+      } else {
+        callback(null, fetchedInterviewe);
+      }
     }
-  });
+  );
+}
+
+function getTotalExperience(userId, callback) {
+  Interviewee.aggregate(
+    [
+      {
+        $match: {
+          userId: userId,
+        },
+      },
+      {
+        $unwind: {
+          path: '$jobs',
+        },
+      },
+      {
+        $project: {
+          duration: {
+            $divide: [
+              {
+                $subtract: ['$jobs.end_date', '$jobs.start_date'],
+              },
+              1000 * 60 * 60 * 24 * 365,
+            ],
+          },
+        },
+      },
+      {
+        $group: {
+          _id: '$_id',
+          total_experience: {
+            $sum: '$duration',
+          },
+        },
+      },
+    ],
+    function(errInFetch, experience) {
+      if (errInFetch) {
+        callback({
+          type: CONSTANTS.ERROR_TYPES.DB_ERROR,
+          msg: 'Unable to calculate experience',
+          errorDetail: JSON.stringify(errInFetch),
+        });
+      } else if (experience.length === 0) {
+        experience = { total_experience: 0 };
+        callback(null, experience);
+      } else {
+        callback(null, experience[0]);
+      }
+    }
+  );
 }
 
 module.exports = {
@@ -101,4 +155,5 @@ module.exports = {
   fetchUser: fetchUser,
   getCompanyDetailsFromUser: getCompanyDetailsFromUser,
   getIntervieweeDetails: getIntervieweeDetails,
+  getTotalExperience: getTotalExperience,
 };
