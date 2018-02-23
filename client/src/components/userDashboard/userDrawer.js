@@ -7,9 +7,9 @@ import List from "material-ui/List";
 import Subheader from "material-ui/Subheader";
 import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
-import ProfileAvatar from "./profileAvatar";
 import HamburgerIcon from "material-ui/svg-icons/navigation/menu";
 import Divider from "material-ui/Divider";
+import ProfileAvatar from "./UserDrawer/profileAvatar";
 
 class UserDrawer extends React.Component {
   constructor(props) {
@@ -39,6 +39,9 @@ class UserDrawer extends React.Component {
               </IconButton>
             }
             onLeftIconButtonClick={this.handleToggle}
+            onTitleClick={() => {
+              this.props.homeCallback();
+            }}
             style={{ width: "114%", marginLeft: "-7%" }}
           />
           <Drawer
@@ -56,7 +59,7 @@ class UserDrawer extends React.Component {
               <MenuItem onClick={this.handleClose}>Elligible Openings</MenuItem>
               <MenuItem
                 onClick={() => {
-                  console.log("toggle2")
+                  this.handleToggle();
                   this.props.appliedOpeningCallback();
                 }}
               >
