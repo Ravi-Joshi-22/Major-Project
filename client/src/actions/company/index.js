@@ -22,6 +22,7 @@ export const newOpening = openingData => async dispatch => {
 };
 
 export const fetchDash = () => async dispatch => {
+  dispatch({ type: START_LOADING });
   axios
     .get('/smarthyre/api/v1/company/custom/dashboard')
     .then(res => dispatch({ type: COMPANY_DASH, payload: res.data }))

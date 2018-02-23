@@ -22,9 +22,6 @@ class Login extends React.Component {
   }
 
   render() {
-    if (this.props.loading.isloading) {
-      return <BusyIndicator />;
-    }
     return (
       <div className="container" style={{ maxWidth: 600 }}>
         <ReactCardFlip isFlipped={this.state.isFlipped}>
@@ -59,6 +56,7 @@ class Login extends React.Component {
             <br />
           </div>
         </ReactCardFlip>
+        {this.props.loading.isloading ? <BusyIndicator /> : null}
       </div>
     );
   }

@@ -15,6 +15,7 @@ export const registerCompany = (
   userData,
   history
 ) => async dispatch => {
+  dispatch({ type: START_LOADING });
   const company = {
     name: companyData.companyName,
     number: companyData.companyNumber,
@@ -109,6 +110,7 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const verifyOTP = (userId, OTP, history) => async dispatch => {
+  dispatch({ type: START_LOADING });
   const requestData = {
     id: userId,
     otp: OTP,
