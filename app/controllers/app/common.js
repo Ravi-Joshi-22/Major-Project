@@ -61,13 +61,13 @@ function verifyOTP(req, res, next) {
 /**
  * Relate routes and functions here. Functions are like callback functions and should be defined above.
  */
-router.post(
-  '/login',
-  passport.authenticate('local', { failureRedirect: '/' }),
-  function(req, res) {
+router.post('/login', passport.authenticate('local'), function(req, res) {
+  if (req.user) {
     res.status(200).json(req.user);
+  } else {
+    res.status(500).json('Email and Password did not matched');
   }
-);
+});
 
 router.get('/fetchUser', (req, res) => {
   res.send(req.user);
