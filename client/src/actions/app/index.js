@@ -7,6 +7,7 @@ import {
   REGISTER_USER,
   CLEAR_ERROR,
   ERROR,
+  START_LOADING,
 } from './types';
 
 export const registerCompany = (
@@ -14,6 +15,7 @@ export const registerCompany = (
   userData,
   history
 ) => async dispatch => {
+  dispatch({ type: START_LOADING });
   const company = {
     name: companyData.companyName,
     number: companyData.companyNumber,
@@ -84,6 +86,7 @@ export const registerInterview = (
 };
 
 export const login = loginData => async dispatch => {
+  dispatch({ type: START_LOADING });
   await axios
     .post('/smarthyre/api/v1/app/login', loginData)
     .then(res => {
@@ -107,6 +110,7 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const verifyOTP = (userId, OTP, history) => async dispatch => {
+  dispatch({ type: START_LOADING });
   const requestData = {
     id: userId,
     otp: OTP,
@@ -122,3 +126,4 @@ export const verifyOTP = (userId, OTP, history) => async dispatch => {
 };
 
 export const clearError = () => ({ type: CLEAR_ERROR });
+export const startLoading = () => ({ type: START_LOADING });

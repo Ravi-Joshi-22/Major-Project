@@ -4,3 +4,4 @@ export const FETCH_USER = 'fetch_user';
 export const CUREENT_STEP = 'current_step';
 export const CLEAR_ERROR = 'clear_error';
 export const ERROR = 'error';
+export const START_LOADING = 'start_loading';
