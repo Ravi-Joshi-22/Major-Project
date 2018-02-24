@@ -1,0 +1,1 @@
+export const FETCH_ELLIGIBLE_OPENING = 'fetch_elligible_opening';

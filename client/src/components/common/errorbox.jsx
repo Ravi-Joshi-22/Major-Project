@@ -1,7 +1,6 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Snackbar from 'material-ui/Snackbar';
-import { Alert } from 'reactstrap';
 
 export default function ErrorBox(props) {
   const { closeErrorFunction } = props;

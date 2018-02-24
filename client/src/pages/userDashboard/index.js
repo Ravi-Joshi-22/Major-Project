@@ -34,8 +34,8 @@ class UserDashboard extends React.Component {
             <MainArea showArea={this.state.MainArea} />
             {/* <Footer /> */}
           </div>
-          {this.props.loading.isloading ? <BusyIndicator /> : null}
         </div>
+        {this.props.loading.isloading ? <BusyIndicator /> : null}
       </MuiThemeProvider>
     );
   }

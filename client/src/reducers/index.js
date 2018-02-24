@@ -5,6 +5,7 @@ import loadingReducer from './app/loadingReducer';
 import cureentStepReducer from './app/currentStepReducer';
 import companyReducer from './company/companyReducers';
 import companyDashReducer from './company/companyDash';
+import intervieweeOpeningReducer from './interviewee/openingReducer';
 
 export default combineReducers({
   auth: userReducers,
@@ -13,4 +14,5 @@ export default combineReducers({
   companyDash: companyDashReducer,
   error: errorReducer,
   loading: loadingReducer,
+  intervieweeOpenings: intervieweeOpeningReducer,
 });

@@ -8,54 +8,56 @@ class ElligibleTable extends React.Component {
   }
 
   render() {
+    const fields = [
+      'LOCATION',
+      'MIN EXPERIENCE',
+      'START DATE',
+      'END DATE',
+      'SALARY',
+      'APPLY',
+    ];
+    const sDate = new Date(this.props.interviewData.start_date);
+    const eDate = new Date(this.props.interviewData.end_date);
+    const sDateStr =
+      sDate.getDate() +
+      '-' +
+      (sDate.getMonth() + 1) +
+      '-' +
+      sDate.getFullYear();
+    const eDateStr =
+      eDate.getDate() +
+      '-' +
+      (eDate.getMonth() + 1) +
+      '-' +
+      eDate.getFullYear();
+
     return (
       <MuiThemeProvider>
         <table>
           <thead>
             <tr>
-              <th style={{ width: '20%' }}>
-                LOCATION
-              </th>
-              <th style={{ width: '15%' }}>
-                EXPERIENCE
-              </th>
-              <th style={{ width: '20%' }}>
-                START DATE
-              </th>
-              <th style={{ width: '20%' }}>
-                END DATE
-              </th>
-              <th style={{ width: '15%' }}>
-                SALARY
-              </th>
-              <th style={{ width: '20%' }}>
-                APPLY
-              </th>
+              {fields.map((eachField, key) => (
+                <th style={{ width: '15%' }}>{eachField}</th>
+              ))}
             </tr>
-            </thead>
+          </thead>
           <tbody displayRowCheckbox={false}>
-            {this.props.interviewData.map((eachInterview, key) => (
-              <tr>
-                <td style={{ width: '20%' }}>
-                  {eachInterview.location}
-                </td>
-                <td style={{ width: '15%' }}>
-                  {eachInterview.experience}
-                </td>
-                <td style={{ width: '20%' }}>
-                  {eachInterview.sDate}
-                </td>
-                <td style={{ width: '20%' }}>
-                  {eachInterview.eDate}
-                </td>
-                <td style={{ width: '15%' }}>
-                  {eachInterview.salary}
-                </td>
-                <td style={{ width: '20%' }}>
-                    <RaisedButton label="APPLY" primary={true} />
-                </td>
-              </tr>
-            ))}
+            <tr>
+              <td style={{ width: '20%' }}>
+                {this.props.interviewData.location}
+              </td>
+              <td style={{ width: '15%' }}>
+                {this.props.interviewData.experience_min}
+              </td>
+              <td style={{ width: '20%' }}>{sDateStr}</td>
+              <td style={{ width: '20%' }}>{eDateStr}</td>
+              <td style={{ width: '15%' }}>
+                {this.props.interviewData.salary}
+              </td>
+              <td style={{ width: '20%' }}>
+                <RaisedButton label="APPLY" primary={true} />
+              </td>
+            </tr>
           </tbody>
         </table>
       </MuiThemeProvider>
