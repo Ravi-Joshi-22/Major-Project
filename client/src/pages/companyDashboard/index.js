@@ -17,7 +17,6 @@ class CompanyDashboard extends React.Component {
     super(props);
     this.state = {
       open: false,
-      currentModalClass: 'modal',
     };
     this.openingForm = this.openingForm.bind(this);
     this.renderMain = this.renderMain.bind(this);
@@ -26,11 +25,12 @@ class CompanyDashboard extends React.Component {
   handleToggle = () => this.setState({ open: !this.state.open });
 
   async openingForm() {
-    if (this.state.currentModalClass === 'modal') {
+    const { showOpeningModal, hideOpeningModal } = this.props;
+    if (this.props.modals.companyOpeningModal === 'modal') {
       this.handleToggle();
-      await this.setState({ currentModalClass: 'modal is-active' });
+      showOpeningModal();
     } else {
-      await this.setState({ currentModalClass: 'modal' });
+      hideOpeningModal();
     }
   }
 
@@ -48,11 +48,6 @@ class CompanyDashboard extends React.Component {
 
   renderMain() {
     if (this.props.companyDash) {
-      console.log(
-        '3' +
-          this.props.companyDash.company_name +
-          this.props.companyDash.address.city
-      );
       let companyDetails = {
         name: this.props.companyDash.company_name,
         cin: this.props.companyDash.company_cin,
@@ -108,7 +103,7 @@ class CompanyDashboard extends React.Component {
             />
             <div style={contentStyle}>
               <InterviewOpening
-                currentModalClass={this.state.currentModalClass}
+                currentModalClass={this.props.modals.companyOpeningModal}
                 openingCallback={this.openingForm}
               />
               <Title credits={this.renderTitle()} />
@@ -135,7 +130,7 @@ class CompanyDashboard extends React.Component {
   }
 }
 
-function mapStateToProps({ company, companyDash, loading }) {
-  return { company, companyDash, loading };
+function mapStateToProps({ company, companyDash, loading, modals }) {
+  return { company, companyDash, loading, modals };
 }
 export default connect(mapStateToProps, actions)(CompanyDashboard);

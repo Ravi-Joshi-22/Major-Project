@@ -3,6 +3,7 @@ import userReducers from './app/userReducers';
 import errorReducer from './app/error';
 import loadingReducer from './app/loadingReducer';
 import cureentStepReducer from './app/currentStepReducer';
+import modalReducer from './app/modalReducer';
 import companyReducer from './company/companyReducers';
 import companyDashReducer from './company/companyDash';
 import intervieweeOpeningReducer from './interviewee/openingReducer';
@@ -15,4 +16,5 @@ export default combineReducers({
   error: errorReducer,
   loading: loadingReducer,
   intervieweeOpenings: intervieweeOpeningReducer,
+  modals: modalReducer,
 });
