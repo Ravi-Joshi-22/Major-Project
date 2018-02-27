@@ -8,6 +8,8 @@ import {
   CLEAR_ERROR,
   ERROR,
   START_LOADING,
+  SHOW_SUCCESS_BOX,
+  HIDE_SUCCESS_BOX,
 } from './types';
 
 export const registerCompany = (
@@ -127,3 +129,4 @@ export const verifyOTP = (userId, OTP, history) => async dispatch => {
 
 export const clearError = () => ({ type: CLEAR_ERROR });
 export const startLoading = () => ({ type: START_LOADING });
+export const hideSuccessBox = () => ({ type: HIDE_SUCCESS_BOX });

@@ -5,3 +5,5 @@ export const CUREENT_STEP = 'current_step';
 export const CLEAR_ERROR = 'clear_error';
 export const ERROR = 'error';
 export const START_LOADING = 'start_loading';
+export const SHOW_SUCCESS_BOX = 'show_success_box';
+export const HIDE_SUCCESS_BOX = 'hide_success_box';
