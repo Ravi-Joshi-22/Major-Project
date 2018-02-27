@@ -9,6 +9,7 @@ import UserProfile from "./userProfile";
 import CompanyDashboard from './companyDashboard';
 import IntervieweeRegister from './interviewee registration';
 import ErrorBox from '../components/common/errorBoxContainer';
+import SuccessBox from '../components/common/successBox';
 
 
 //In jsx exact={true} is similar to exact
@@ -19,6 +20,7 @@ class App extends Component {
     return (
       <div>
         <ErrorBox />
+        <SuccessBox/>
         <BrowserRouter>
           <div className="container">
             <Route exact path="/" component={Login} />
