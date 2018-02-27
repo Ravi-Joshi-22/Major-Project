@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../../actions/company";
 import "./index.css";
-// import Title from "../../components/companyDashboard/Title";
 import MainArea from "../../components/companyDashboard/MainArea";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import NavDrawer from "../../components/companyDashboard/NavDrawer";
@@ -15,7 +14,6 @@ import HamburgerIcon from "material-ui/svg-icons/navigation/menu";
 import AppBar from "material-ui/AppBar";
 import Payment from "../../components/companyDashboard/payment";
 import Avatar from "material-ui/Avatar";
-// import FloatingActionButton from "material-ui/FloatingActionButton";
 
 class CompanyDashboard extends React.Component {
   constructor(props) {
