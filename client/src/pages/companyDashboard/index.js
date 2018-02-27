@@ -107,12 +107,23 @@ class CompanyDashboard extends React.Component {
                 </IconButton>
               }
               iconElementRight={
-                <div className="control columns" style={{ margin: "auto"}}>
-                <div className="column-8">
-                  <span className="is-large" style={{ color: "#fff"}}>
-                    {this.renderTitle()} &nbsp;
-                    <Payment />
-                  </span>
+                <div
+                  className="control columns"
+                  style={{ margin: "auto 15px auto 0" }}
+                >
+                  <div className="column-8">
+                    <span>
+                      <span
+                        style={{
+                          color: "#fff",
+                          fontSize: 27,
+                          marginTop: "auto",
+                        }}
+                      >
+                        <img src="./Assets/coin.svg" style={{height: 20}}/> {this.renderTitle()}{" "}
+                      </span>
+                      <Payment />
+                    </span>
                   </div>
                   <div className="navbar-item has-dropdown is-hoverable column-4">
                     <a className="navbar-link" href="#">
