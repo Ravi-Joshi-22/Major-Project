@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../../actions/company";
 import "./index.css";
+import BusyIndicator from '../../components/common/busyIndicator';
 import MainArea from "../../components/companyDashboard/MainArea";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import NavDrawer from "../../components/companyDashboard/NavDrawer";
@@ -26,6 +27,14 @@ class CompanyDashboard extends React.Component {
   }
 
   handleToggle = () => this.setState({ open: !this.state.open });
+
+  renderContents() {
+    if (this.props.company) {
+      return this.props.company.credits;
+    } else {
+      return this.props.credits;
+    }
+  }
 
   async openingForm() {
     const { showOpeningModal, hideOpeningModal } = this.props;
@@ -84,7 +93,6 @@ class CompanyDashboard extends React.Component {
     const contentStyle = {
       marginTop: 50
     };
-
     return (
       <div>
         <MuiThemeProvider>
@@ -155,8 +163,7 @@ class CompanyDashboard extends React.Component {
                   />
                 </div>
               </Drawer>
-
-              <MainArea dashData={this.renderMain()} />
+              <MainArea companyDash={this.renderMain()} />
             </div>
           </div>
           {this.props.loading.isloading ? <BusyIndicator /> : null}
