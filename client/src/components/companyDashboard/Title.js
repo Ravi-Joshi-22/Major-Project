@@ -14,10 +14,8 @@ class Title extends React.Component {
 
     renderContents(){
         if(this.props.company){
-            console.log("comp");
             return this.props.company.credits;
         }else{
-            console.log("dash");
             return this.props.credits;
         }
     }
