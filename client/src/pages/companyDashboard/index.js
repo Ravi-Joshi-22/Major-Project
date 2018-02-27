@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../../actions/company";
 import "./index.css";
-// import Title from "../../components/companyDashboard/Title";
 import MainArea from "../../components/companyDashboard/MainArea";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import NavDrawer from "../../components/companyDashboard/NavDrawer";
@@ -15,14 +14,12 @@ import HamburgerIcon from "material-ui/svg-icons/navigation/menu";
 import AppBar from "material-ui/AppBar";
 import Payment from "../../components/companyDashboard/payment";
 import Avatar from "material-ui/Avatar";
-// import FloatingActionButton from "material-ui/FloatingActionButton";
 
 class CompanyDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      currentModalClass: "modal"
     };
     this.openingForm = this.openingForm.bind(this);
     this.renderMain = this.renderMain.bind(this);
@@ -30,20 +27,13 @@ class CompanyDashboard extends React.Component {
 
   handleToggle = () => this.setState({ open: !this.state.open });
 
-  renderContents() {
-    if (this.props.company) {
-      return this.props.company.credits;
-    } else {
-      return this.props.credits;
-    }
-  }
-
   async openingForm() {
-    if (this.state.currentModalClass === "modal") {
+    const { showOpeningModal, hideOpeningModal } = this.props;
+    if (this.props.modals.companyOpeningModal === 'modal') {
       this.handleToggle();
-      await this.setState({ currentModalClass: "modal is-active" });
+      showOpeningModal();
     } else {
-      await this.setState({ currentModalClass: "modal" });
+      hideOpeningModal();
     }
   }
 
@@ -165,16 +155,18 @@ class CompanyDashboard extends React.Component {
                   />
                 </div>
               </Drawer>
-              <MainArea companyDash={this.renderMain()} />
+
+              <MainArea dashData={this.renderMain()} />
             </div>
           </div>
+          {this.props.loading.isloading ? <BusyIndicator /> : null}
         </MuiThemeProvider>
       </div>
     );
   }
 }
 
-function mapStateToProps({ company, companyDash }) {
-  return { company, companyDash };
+function mapStateToProps({ company, companyDash, loading, modals }) {
+  return { company, companyDash, loading, modals };
 }
 export default connect(mapStateToProps, actions)(CompanyDashboard);

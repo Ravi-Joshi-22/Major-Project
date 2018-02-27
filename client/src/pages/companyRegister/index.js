@@ -7,7 +7,7 @@ import './index.css';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/app';
 import Steps, { Step } from 'rc-steps';
-
+import BusyIndicator from '../../components/common/busyIndicator';
 import CRRegisteration from '../../components/register/CRRegisteration';
 import CompanyRegistration from '../../components/register/CompanyRegistration';
 import OTPVerification from '../../components/register/OTPVerification';
@@ -110,12 +110,13 @@ class CompanyRegister extends React.Component {
         <div ref="step5" className="hidden">
           <AdminValidation />
         </div> */}
+        {this.props.loading.isloading ? <BusyIndicator /> : null}
       </div>
     );
   }
 }
 
-function mapStateToProps({ currentStep, auth }) {
-  return { currentStep, auth };
+function mapStateToProps({ currentStep, auth, loading }) {
+  return { currentStep, auth, loading };
 }
 export default connect(mapStateToProps, actions)(withRouter(CompanyRegister));
