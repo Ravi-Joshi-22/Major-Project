@@ -63,46 +63,45 @@ export default class CompanyRegistration extends React.Component {
   registerCall() {
     // this.props.companyCallback(this.state);
 
-    if(this.state.companyName.length > 0){
+    if (this.state.companyName.length > 0) {
       this.refs.companyNameInput.className = 'input';
-      if(this.state.companyNumber.length > 0){
+      if (this.state.companyNumber.length > 0) {
         this.refs.companyNumberInput.className = 'input';
-        if(this.state.companyPhone.length > 0){
+        if (this.state.companyPhone.length > 0) {
           this.refs.companyPhoneInput.className = 'input';
-          if(this.state.companyWebsite.length > 0){
+          if (this.state.companyWebsite.length > 0) {
             this.refs.companyWebsiteInput.className = 'input';
-            if(this.state.companyLogoUrl.length > 0){
+            if (this.state.companyLogoUrl.length > 0) {
               this.refs.companyLogoInput.className = 'input';
-              if(this.state.companyAddress.length > 0){
+              if (this.state.companyAddress.length > 0) {
                 this.refs.companyAddressInput.className = 'input';
-                if(this.state.companyCity.length > 0){
+                if (this.state.companyCity.length > 0) {
                   this.refs.CityInput.className = 'input';
-                  if(this.state.companyPin.length > 0){
+                  if (this.state.companyPin.length > 0) {
                     this.refs.PinInput.className = 'input';
-                    this.refs.submitButton.innerHTML= "Loading...";
                     this.props.companyCallback(this.state);
-                  }else{
+                  } else {
                     this.refs.PinInput.className = 'input is-danger';
                   }
-                }else{
+                } else {
                   this.refs.CityInput.className = 'input is-danger';
                 }
-              }else{
+              } else {
                 this.refs.companyAddressInput.className = 'input is-danger';
               }
-            }else{
+            } else {
               this.refs.companyLogoInput.className = 'input is-danger';
             }
-          }else{
+          } else {
             this.refs.companyWebsiteInput.className = 'input is-danger';
           }
-        }else{
+        } else {
           this.refs.companyPhoneInput.className = 'input is-danger';
         }
-      }else{
+      } else {
         this.refs.companyNumberInput.className = 'input is-danger';
       }
-    }else{
+    } else {
       this.refs.companyNameInput.className = 'input is-danger';
     }
   }
@@ -267,7 +266,7 @@ export default class CompanyRegistration extends React.Component {
         <div className="field is-grouped">
           <div className="control">
             <button
-            ref="submitButton"
+              ref="submitButton"
               className="button is-link is-rounded"
               onClick={this.registerCall}
             >
