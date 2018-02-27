@@ -110,7 +110,6 @@ class InterviewOpening extends React.Component {
   }
 
   render() {
-    console.log('dodo');
     return (
       <div>
         <div className={this.props.currentModalClass}>
