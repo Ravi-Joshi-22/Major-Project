@@ -7,6 +7,7 @@ import Login from './login/index';
 import UserDashboard from './userDashboard/index';
 import CompanyDashboard from './companyDashboard'
 import IntervieweeRegister from "./interviewee registration";
+import UserProfile from "./userProfile";
 
 
 //In jsx exact={true} is similar to exact
@@ -23,6 +24,7 @@ class App extends Component {
             <Route exact path="/companyDashboard" component={CompanyDashboard} />
             <Route exact path="/userDashboard" component={UserDashboard}/>
             <Route exact path="/intervieweeRegister" component={IntervieweeRegister} />
+            <Route exact path="/userProfile" component={UserProfile} />
           </div>
         </BrowserRouter>
       </div>
