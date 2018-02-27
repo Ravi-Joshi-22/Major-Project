@@ -14,13 +14,13 @@ import HamburgerIcon from "material-ui/svg-icons/navigation/menu";
 import AppBar from "material-ui/AppBar";
 import Payment from "../../components/companyDashboard/payment";
 import Avatar from "material-ui/Avatar";
+import BusyIndicator from '../../components/common/busyIndicator';
 
 class CompanyDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      currentModalClass: "modal"
     };
     this.openingForm = this.openingForm.bind(this);
     this.renderMain = this.renderMain.bind(this);
@@ -37,11 +37,12 @@ class CompanyDashboard extends React.Component {
   }
 
   async openingForm() {
-    if (this.state.currentModalClass === "modal") {
+    const { showOpeningModal, hideOpeningModal } = this.props;
+    if (this.props.modals.companyOpeningModal === 'modal') {
       this.handleToggle();
-      await this.setState({ currentModalClass: "modal is-active" });
+      showOpeningModal();
     } else {
-      await this.setState({ currentModalClass: "modal" });
+      hideOpeningModal();
     }
   }
 
@@ -83,6 +84,7 @@ class CompanyDashboard extends React.Component {
             email: ""
           }
         ]
+
       };
       return companyDetails;
     }
@@ -166,13 +168,14 @@ class CompanyDashboard extends React.Component {
               <MainArea companyDash={this.renderMain()} />
             </div>
           </div>
+          {this.props.loading.isloading ? <BusyIndicator /> : null}
         </MuiThemeProvider>
       </div>
     );
   }
 }
 
-function mapStateToProps({ company, companyDash }) {
-  return { company, companyDash };
+function mapStateToProps({ company, companyDash, loading, modals }) {
+  return { company, companyDash, loading, modals };
 }
 export default connect(mapStateToProps, actions)(CompanyDashboard);

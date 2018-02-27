@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
+import BusyIndicator from '../../components/common/busyIndicator';
 import ReactCardFlip from '../../components/login/ReactCardFlip';
 import LoginPage from '../../components/login/Login';
 import Register from '../../components/login/Register';
 import './index.css';
 
-export default class Login extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -54,7 +56,13 @@ export default class Login extends React.Component {
             <br />
           </div>
         </ReactCardFlip>
+        {this.props.loading.isloading ? <BusyIndicator /> : null}
       </div>
     );
   }
 }
+
+function mapStateToProps({ loading }) {
+  return { loading };
+}
+export default connect(mapStateToProps)(Login);
