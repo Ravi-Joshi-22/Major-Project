@@ -13,6 +13,7 @@ class ElligibleOpenings extends React.Component {
     super(props);
 
     this.renderTableContent = this.renderTableContent.bind(this);
+    this.noOpeningContent = this.noOpeningContent.bind(this);
   }
 
   componentDidMount() {
@@ -37,12 +38,19 @@ class ElligibleOpenings extends React.Component {
     return renderOpeningContent;
   }
 
+  noOpeningContent() {
+    return <p> No opening Available</p>;
+  }
+
   render() {
     console.log(this.props.intervieweeOpenings);
     return (
       <MuiThemeProvider>
         <div>
-          {this.props.intervieweeOpenings ? this.renderTableContent() : null}
+          {this.props.intervieweeOpenings &&
+          this.props.intervieweeOpenings.length > 0
+            ? this.renderTableContent()
+            : this.noOpeningContent()}
         </div>
       </MuiThemeProvider>
     );

@@ -1,10 +1,22 @@
 import React from 'react';
+import * as actions from '../../../actions/interviewee';
+import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 
 class ElligibleTable extends React.Component {
   constructor(props) {
     super(props);
+
+    this.applyOpening = this.applyOpening.bind(this);
+  }
+
+  applyOpening(elligibleOpeningId) {
+    const { applyForOpening, getElligibleOpenings } = this.props;
+    const openingData = {
+      openingId: elligibleOpeningId,
+    };
+    applyForOpening(openingData);
   }
 
   render() {
@@ -55,7 +67,13 @@ class ElligibleTable extends React.Component {
                 {this.props.interviewData.salary}
               </td>
               <td style={{ width: '20%' }}>
-                <RaisedButton label="APPLY" primary={true} />
+                <RaisedButton
+                  label="APPLY"
+                  primary={true}
+                  onClick={() =>
+                    this.applyOpening(this.props.interviewData._id)
+                  }
+                />
               </td>
             </tr>
           </tbody>
@@ -65,4 +83,4 @@ class ElligibleTable extends React.Component {
   }
 }
 
-export default ElligibleTable;
+export default connect(null, actions)(ElligibleTable);
