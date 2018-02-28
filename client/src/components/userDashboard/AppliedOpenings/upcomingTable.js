@@ -12,62 +12,50 @@ import IconButton from 'material-ui/IconButton/IconButton';
 import ClearIcon from "material-ui/svg-icons/content/clear";
 import MoreIcon from "material-ui/svg-icons/hardware/keyboard-arrow-right";
 
-class GivenTable extends React.Component {
+class UpcomingTable extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+    const fields = [
+      "COMPANY NAME",
+      "PROFILE",
+      "LOCATION",
+      "EXPERIENCE",
+      "START DATE",
+      "END DATE",
+      "MORE",
+    ];
     return (
       <MuiThemeProvider>
         <Table selectable={false}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
-              <TableHeaderColumn style={{ width: '15%' }}>
-                COMPANY NAME
-              </TableHeaderColumn>
-              <TableHeaderColumn style={{ width: '20%' }}>
-                PROFILE
-              </TableHeaderColumn>
-              <TableHeaderColumn style={{ width: '10%' }}>
-                LOCATION
-              </TableHeaderColumn>
-              <TableHeaderColumn style={{ width: '15%' }}>
-                EXPERIENCE
-              </TableHeaderColumn>
-              <TableHeaderColumn style={{ width: '10%' }}>
-                START DATE
-              </TableHeaderColumn>
-              <TableHeaderColumn style={{ width: '10%' }}>
-                END DATE
-              </TableHeaderColumn>
-              <TableHeaderColumn style={{ width: '10%' }}>
-              MORE
-              </TableHeaderColumn>
-              <TableHeaderColumn style={{ width: '10%' }}>
-              </TableHeaderColumn>
+            {fields.map((eachField, key) => (
+                <TableHeader style={{ width: "14%" }}>{eachField}</TableHeader>
+              ))}
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
-            {this.props.interviewData.map((eachInterview, key) => (
               <TableRow>
                 <TableRowColumn style={{ width: '15%' }}>
-                  {eachInterview.companyName}
+                  {this.props.interviewData.companyName}
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '20%' }}>
-                  {eachInterview.profile}
+                  {this.props.interviewData.profile}
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '10%' }}>
-                  {eachInterview.location}
+                  {this.props.interviewData.location}
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '15%' }}>
-                  {eachInterview.experience}
+                  {this.props.interviewData.experience}
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '10%' }}>
-                  {eachInterview.startDate}
+                  {this.props.interviewData.startDate}
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '10%' }}>
-                  {eachInterview.endDate}
+                  {this.props.interviewData.endDate}
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '10%' }}>
                 <IconButton><MoreIcon/></IconButton>
@@ -84,4 +72,4 @@ class GivenTable extends React.Component {
   }
 }
 
-export default GivenTable;
+export default UpcomingTable;

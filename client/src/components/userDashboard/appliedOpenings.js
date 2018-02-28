@@ -2,14 +2,14 @@ import React from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import RaisedButton from "material-ui/RaisedButton";
 import { Card, CardTitle, CardText } from "material-ui/Card";
-import PendingTable from "./AppliedOpenings/pendingTable";
-import GivenTable from "./AppliedOpenings/givenTable";
+import CurrentTable from "./AppliedOpenings/currentTable";
+import UpcomingTable from "./AppliedOpenings/upcomingTable";
 import BackIcon from "material-ui/svg-icons/av/fast-rewind";
 import { FlatButton } from "material-ui";
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 
-const notGivenAppliedData = [
+const currentAppliedData = [
   {
     companyName: "TCS",
     profile: "Associate Software Developer",
@@ -59,7 +59,7 @@ const notGivenAppliedData = [
     endDate: "18 Apr"
   }
 ];
-const givenAppliedData = [
+const upcomingAppliedData = [
   {
     companyName: "Noob Games Pvt. Ltd.",
     profile: "Software Developer",
@@ -102,12 +102,12 @@ class AppliedOpenings extends React.Component {
         <Card style={{ padding: 10, margin: 0 }}>
           {/* <CardTitle title="Your Applied Openings" /> */}
           <CardText style={{ padding: 2 }}>
-            <Subheader><font color='#00BCD4'>Pending Interviews</font></Subheader>
+            <Subheader><font color='#00BCD4'>Current Openings</font></Subheader>
             <Divider/>
-            <PendingTable interviewData={notGivenAppliedData} />
-            <Subheader><font color='#00BCD4'>Interviews Already Given</font></Subheader>
+            <CurrentTable interviewData={currentAppliedData} />
+            <Subheader><font color='#00BCD4'>Upcoming Openings</font></Subheader>
             <Divider/>
-            <GivenTable interviewData={givenAppliedData} />
+            <UpcomingTable interviewData={upcomingAppliedData} />
             {/* <FlatButton label="BACK" primary={true} icon={<BackIcon />} /> */}
           </CardText>
         </Card>
