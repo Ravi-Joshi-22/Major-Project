@@ -4,7 +4,6 @@ import Snackbar from 'material-ui/Snackbar';
 import { connect } from 'react-redux';
 import { hideSuccessBox } from '../../actions/app';
 
-
 class SuccessBox extends React.Component {
   constructor(props) {
     super(props);
@@ -21,13 +20,13 @@ class SuccessBox extends React.Component {
     const { successBox } = this.props;
     return (
       <MuiThemeProvider>
-      <Snackbar
-        open={successBox.isVisible}
-        message={JSON.stringify(successBox.msg)}
-        autoHideDuration={4000}
-        onRequestClose={this.closeSuccessBox}
-      />
-    </MuiThemeProvider>
+        <Snackbar
+          open={successBox.isVisible}
+          message={JSON.stringify(successBox.msg)}
+          autoHideDuration={4000}
+          onRequestClose={this.closeSuccessBox}
+        />
+      </MuiThemeProvider>
     );
   }
 }
