@@ -1,5 +1,5 @@
 const express = require('express');
-const profileLib = require('../../../lib/interviewee/profile');
+const educationLib = require('../../../lib/interviewee/profile/education');
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ const router = express.Router();
  * @param {Function} next Function to pass control to the next middleware
  */
 function updateSecondaryDetails(req, res, next) {
-  profileLib.updateSecondaryOfInterviewee(
+  educationLib.updateSecondaryOfInterviewee(
     req.user._id,
     req.body.secondary,
     function(errInUpdation, updatedInstance) {
@@ -30,7 +30,7 @@ function updateSecondaryDetails(req, res, next) {
  * @param {Function} next Function to pass control to the next middleware
  */
 function updateSeniorSecondaryDetails(req, res, next) {
-  profileLib.updateSeniorSecondaryOfInterviewee(
+  educationLib.updateSeniorSecondaryOfInterviewee(
     req.user._id,
     req.body.senior_secondary,
     function(errInUpdation, updatedInstance) {
@@ -50,7 +50,7 @@ function updateSeniorSecondaryDetails(req, res, next) {
  * @param {Function} next Function to pass control to the next middleware
  */
 function deleteSeniorSecondaryDetails(req, res, next) {
-  profileLib.deleteSeniorSecondaryOfInterviewee(req.user._id, function(
+  educationLib.deleteSeniorSecondaryOfInterviewee(req.user._id, function(
     errInUpdation,
     updatedInstance
   ) {
@@ -69,7 +69,7 @@ function deleteSeniorSecondaryDetails(req, res, next) {
  * @param {Function} next Function to pass control to the next middleware
  */
 function newDegreeDetails(req, res, next) {
-  profileLib.newDegreeOfInterviewee(req.user._id, req.body.degree, function(
+  educationLib.newDegreeOfInterviewee(req.user._id, req.body.degree, function(
     errInUpdation,
     updatedInstance
   ) {
@@ -88,16 +88,17 @@ function newDegreeDetails(req, res, next) {
  * @param {Function} next Function to pass control to the next middleware
  */
 function updateDegreeDetails(req, res, next) {
-  profileLib.updateDegreeOfInterviewee(req.user._id, req.body.degree, function(
-    errInUpdation,
-    updatedInstance
-  ) {
-    if (errInUpdation) {
-      res.status(500).json(errInUpdation);
-    } else {
-      res.status(200).json(updatedInstance);
+  educationLib.updateDegreeOfInterviewee(
+    req.user._id,
+    req.body.degree,
+    function(errInUpdation, updatedInstance) {
+      if (errInUpdation) {
+        res.status(500).json(errInUpdation);
+      } else {
+        res.status(200).json(updatedInstance);
+      }
     }
-  });
+  );
 }
 
 /**
@@ -107,7 +108,7 @@ function updateDegreeDetails(req, res, next) {
  * @param {Function} next Function to pass control to the next middleware
  */
 function deleteDegreeDetails(req, res, next) {
-  profileLib.deleteDegreeOfInterviewee(req.user._id, req.body._id, function(
+  educationLib.deleteDegreeOfInterviewee(req.user._id, req.body._id, function(
     errInUpdation,
     updatedInstance
   ) {
