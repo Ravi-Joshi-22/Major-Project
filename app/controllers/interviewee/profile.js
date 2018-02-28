@@ -121,9 +121,9 @@ function deleteDegreeDetails(req, res, next) {
 
 router.post('/updateSecondaryDetails', updateSecondaryDetails);
 router.post('/updateSeniorSecondaryDetails', updateSeniorSecondaryDetails);
-router.get('/deleteSeniorSecondaryDetails', deleteSeniorSecondaryDetails);
+router.delete('/deleteSeniorSecondaryDetails', deleteSeniorSecondaryDetails);
 router.post('/newDegreeDetails', newDegreeDetails);
 router.post('/updateDegreeDetails', updateDegreeDetails);
-router.post('/deleteDegreeDetails', deleteDegreeDetails);
+router.delete('/deleteDegreeDetails', deleteDegreeDetails);
 
 module.exports = router;
