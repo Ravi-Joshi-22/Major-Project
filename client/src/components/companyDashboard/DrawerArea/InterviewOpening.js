@@ -110,12 +110,11 @@ class InterviewOpening extends React.Component {
   }
 
   render() {
-    console.log('dodo');
     return (
       <div>
         <div className={this.props.currentModalClass}>
           <div className="modal-background" />
-          <div className="modal-card">
+          <div className="modal-card" style={{marginTop: 80}}>
             <header className="modal-card-head">
               <p className="modal-card-title">Create Opening</p>
               <button

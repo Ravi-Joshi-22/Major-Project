@@ -12,10 +12,12 @@ export const handleToken = token => async dispatch => {
     .post("/smarthyre/api/v1/company/opening/addCredits", token)
     .then(res => {
       dispatch({ type: FETCH_COMPANY, payload: res.data });
-      const success={
-        msg: 'Successfully added credit',
-      }
-      dispatch({type:SHOW_SUCCESS_BOX , payload: success});
+    })
+    .then(() => {
+      const success = {
+        msg: "Successfully added credit"
+      };
+      dispatch({ type: SHOW_SUCCESS_BOX, payload: success });
     })
     .catch(err => {
       dispatch({ type: ERROR, payload: err.response.data });
