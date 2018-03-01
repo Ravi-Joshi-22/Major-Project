@@ -6,6 +6,7 @@ const professionRoutes = require('./profession');
 const testRoutes = require('./test');
 const certificationRoutes = require('./certification');
 const courseRoutes = require('./course');
+const additionalRoutes = require('./additional');
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.use('/profession', professionRoutes);
 router.use('/test', testRoutes);
 router.use('/certification', certificationRoutes);
 router.use('/course', courseRoutes);
-// router.use('/additional', additionalRoutes);
+router.use('/additional', additionalRoutes);
 // router.use('/skill', skillRoutes);
 // router.use('/project', projectRoutes);
 module.exports = router;
