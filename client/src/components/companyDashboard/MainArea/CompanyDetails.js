@@ -23,10 +23,10 @@ export default class CompanyDetails extends React.Component {
                 </div>
                 <div className="columns">
                     <div className="column">
-                        {this.props.companyData.line}<br/>
-                        {this.props.companyData.city}<br/>
-                        {this.props.companyData.state} {"   "}
-                        {this.props.companyData.pin}
+                        {this.props.companyData.address.line}<br/>
+                        {this.props.companyData.address.city}<br/>
+                        {this.props.companyData.address.state} {"   "}
+                        {this.props.companyData.address.pin}
                     </div>
                     <div className="column">
                         {this.props.companyData.phone}<br/>
