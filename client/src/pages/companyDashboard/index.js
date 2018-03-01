@@ -81,11 +81,11 @@ class CompanyDashboard extends React.Component {
   }
 
   renderCredits() {
-    if (this.props.companyDash) {
+    if (this.props.company) {
+      return this.props.company.credits;
+    } else if (this.props.companyDash) {
       return this.props.companyDash.credits;
-    } else {
-      return this.props.credits;
-    }
+    } else return 0;
   }
 
   render() {
