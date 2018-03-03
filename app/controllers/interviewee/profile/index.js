@@ -1,8 +1,14 @@
 const express = require('express');
+const secondaryRoutes = require('./secondary');
+const seniorSecondaryRoutes = require('./seniorSecondary');
+const degreeRoutes = require('./degree');
 const professionRoutes = require('./profession');
 
 const router = express.Router();
 
+router.use('/secondary', secondaryRoutes);
+router.use('/seniorSecondary', seniorSecondaryRoutes);
+router.use('/degree', degreeRoutes);
 router.use('/profession', professionRoutes);
 // router.use('/test', testRoutes);
 // router.use('/certification', certificationRoutes);
