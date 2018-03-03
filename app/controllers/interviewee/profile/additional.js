@@ -63,8 +63,8 @@ function deleteAdditionalDetails(req, res, next) {
   );
 }
 
-router.post('/add', addAdditionalDetails);
-router.post('/update', updateAdditionalDetails);
-router.delete('/delete', deleteAdditionalDetails);
+router.post('/', addAdditionalDetails);
+router.put('/', updateAdditionalDetails);
+router.delete('/', deleteAdditionalDetails);
 
 module.exports = router;
