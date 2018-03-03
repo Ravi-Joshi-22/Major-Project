@@ -44,7 +44,7 @@ function fetchUser(userId, callback) {
     if (err) {
       callback({
         type: CONSTANTS.ERROR_TYPES.DB_ERROR,
-        msg: 'Unable to get user details',
+        msg: 'Unable to fetch user details from database',
         errorDetail: JSON.stringify(err),
       });
     } else {
@@ -65,13 +65,13 @@ function getCompanyDetailsFromUser(userId, callback) {
     if (companyFetchError) {
       callback({
         type: CONSTANTS.ERROR_TYPES.DB_ERROR,
-        msg: 'Unable to fetch company details',
+        msg: 'Unable to fetch company details from database',
         errorDetail: String(companyFetchError),
       });
     } else if (!companyDetails) {
       callback({
         type: CONSTANTS.ERROR_TYPES.INVALID_RECORD,
-        msg: 'No company with given id',
+        msg: 'Invalid Record,No company found with the given Id',
         errorDetail: 'Invalid User ID.',
       });
     } else {
@@ -89,7 +89,7 @@ function getIntervieweeDetails(userId, callback) {
       if (errInFetch) {
         callback({
           type: CONSTANTS.ERROR_TYPES.DB_ERROR,
-          msg: 'Unable to get interviewee details',
+          msg: 'Unable to get interviewee details from database',
           errorDetail: JSON.stringify(errInFetch),
         });
       } else {
