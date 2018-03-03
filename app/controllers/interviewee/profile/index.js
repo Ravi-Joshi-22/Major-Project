@@ -8,6 +8,7 @@ const certificationRoutes = require('./certification');
 const courseRoutes = require('./course');
 const additionalRoutes = require('./additional');
 const skillRoutes = require('./skill');
+const projectRoutes = require('./project');
 
 const router = express.Router();
 
@@ -20,5 +21,5 @@ router.use('/certification', certificationRoutes);
 router.use('/course', courseRoutes);
 router.use('/additional', additionalRoutes);
 router.use('/skill', skillRoutes);
-// router.use('/project', projectRoutes);
+router.use('/project', projectRoutes);
 module.exports = router;
