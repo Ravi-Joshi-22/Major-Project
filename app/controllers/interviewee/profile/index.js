@@ -5,6 +5,7 @@ const degreeRoutes = require('./degree');
 const professionRoutes = require('./profession');
 const testRoutes = require('./test');
 const certificationRoutes = require('./certification');
+const courseRoutes = require('./course');
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.use('/degree', degreeRoutes);
 router.use('/profession', professionRoutes);
 router.use('/test', testRoutes);
 router.use('/certification', certificationRoutes);
-// router.use('/course', courseRoutes);
+router.use('/course', courseRoutes);
 // router.use('/additional', additionalRoutes);
 // router.use('/skill', skillRoutes);
 // router.use('/project', projectRoutes);
