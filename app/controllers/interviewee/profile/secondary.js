@@ -23,6 +23,6 @@ function updateSecondaryDetails(req, res, next) {
   );
 }
 
-router.post('/update', updateSecondaryDetails);
+router.put('/', updateSecondaryDetails);
 
 module.exports = router;

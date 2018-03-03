@@ -42,7 +42,7 @@ function deleteSeniorSecondaryDetails(req, res, next) {
   });
 }
 
-router.post('/update', updateSeniorSecondaryDetails);
-router.delete('/delete', deleteSeniorSecondaryDetails);
+router.put('/', updateSeniorSecondaryDetails);
+router.delete('/', deleteSeniorSecondaryDetails);
 
 module.exports = router;
