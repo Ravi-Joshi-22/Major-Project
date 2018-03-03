@@ -60,8 +60,8 @@ function deleteSkillDetails(req, res, next) {
   });
 }
 
-router.post('/add', addSkillDetails);
-router.post('/update', updateSkillDetails);
-router.delete('/delete', deleteSkillDetails);
+router.post('/', addSkillDetails);
+router.put('/', updateSkillDetails);
+router.delete('/', deleteSkillDetails);
 
 module.exports = router;
