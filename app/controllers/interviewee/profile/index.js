@@ -6,9 +6,6 @@ const professionRoutes = require('./profession');
 
 const router = express.Router();
 
-router.use('/secondary', secondaryRoutes);
-router.use('/seniorSecondary', seniorSecondaryRoutes);
-router.use('/degree', degreeRoutes);
 router.use('/profession', professionRoutes);
 // router.use('/test', testRoutes);
 // router.use('/certification', certificationRoutes);
