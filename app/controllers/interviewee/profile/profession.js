@@ -14,7 +14,7 @@ function addProfessionDetails(req, res, next) {
   professionLib.addProfessionOfInterviewee(
     req.user._id,
     req.body[profession],
-    profession + 's',
+    profession,
     function(errInUpdation, updatedInstance) {
       if (errInUpdation) {
         res.status(500).json(errInUpdation);
@@ -36,7 +36,7 @@ function updateProfessionDetails(req, res, next) {
   professionLib.updateProfessionOfInterviewee(
     req.user._id,
     req.body[profession],
-    profession + 's',
+    profession,
     function(errInUpdation, updatedInstance) {
       if (errInUpdation) {
         res.status(500).json(errInUpdation);
@@ -58,7 +58,7 @@ function deleteProfessionDetails(req, res, next) {
   professionLib.deleteProfessionOfInterviewee(
     req.user._id,
     req.body[profession]._id,
-    profession + 's',
+    profession,
     function(errInUpdation, updatedInstance) {
       if (errInUpdation) {
         res.status(500).json(errInUpdation);
@@ -69,7 +69,7 @@ function deleteProfessionDetails(req, res, next) {
   );
 }
 
-router.post('/add', addProfessionDetails);
-router.post('/update', updateProfessionDetails);
-router.delete('/delete', deleteProfessionDetails);
+router.post('/', addProfessionDetails);
+router.put('/', updateProfessionDetails);
+router.delete('/', deleteProfessionDetails);
 module.exports = router;
