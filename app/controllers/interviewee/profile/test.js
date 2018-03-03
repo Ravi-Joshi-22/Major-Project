@@ -60,8 +60,7 @@ function deleteTestDetails(req, res, next) {
   });
 }
 
-router.post('/add', addTestDetails);
-router.post('/update', updateTestDetails);
-router.delete('/delete', deleteTestDetails);
-
+router.post('/', addTestDetails);
+router.put('/', updateTestDetails);
+router.delete('/', deleteTestDetails);
 module.exports = router;
