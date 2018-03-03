@@ -62,8 +62,8 @@ function deleteProjectDetails(req, res, next) {
   );
 }
 
-router.post('/add', addProjectDetails);
-router.post('/update', updateProjectDetails);
-router.delete('/delete', deleteProjectDetails);
+router.post('/', addProjectDetails);
+router.put('/', updateProjectDetails);
+router.delete('/', deleteProjectDetails);
 
 module.exports = router;
