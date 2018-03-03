@@ -160,7 +160,7 @@ function updateEmailVerifiactionStatus(userId, callback) {
     if (errInFind) {
       callback({
         type: CONSTANTS.ERROR_TYPES.DB_ERROR,
-        msg: 'Unable to get user details',
+        msg: 'Unable to get user details, please enter valid userID',
         errorDetail: JSON.stringify(errInFind),
       });
     } else {

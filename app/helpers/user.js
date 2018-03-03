@@ -25,7 +25,7 @@ function registerUser(userData, callback) {
     if (savedUserError) {
       callback({
         type: CONSTANTS.ERROR_TYPES.DB_ERROR,
-        msg: 'Unable to create user account',
+        msg: 'Unable to create user account , please enter valid information',
         errorDetail: JSON.stringify(savedUserError),
       });
     } else {
