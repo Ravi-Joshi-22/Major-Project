@@ -63,8 +63,8 @@ function deleteCertificationDetails(req, res, next) {
   );
 }
 
-router.post('/add', addCertificationDetails);
-router.post('/update', updateCertificationDetails);
-router.delete('/delete', deleteCertificationDetails);
+router.post('/', addCertificationDetails);
+router.put('/', updateCertificationDetails);
+router.delete('/', deleteCertificationDetails);
 
 module.exports = router;
