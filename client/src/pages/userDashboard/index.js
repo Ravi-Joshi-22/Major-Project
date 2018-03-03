@@ -1,42 +1,47 @@
-import React from "react";
-import UserDrawer from "../../components/userDashboard/userDrawer";
-import ElligibleTitle from "../../components/userDashboard/elligibleTitle";
-import PrefsCard from '../../components/userDashboard/preferencesCard';
-import FilterCard from '../../components/userDashboard/filterCard';
-import ElligibleOpenings from '../../components/userDashboard/elligibleOpenings';
-import Card from 'material-ui/Card';
+import React from 'react';
+import { connect } from 'react-redux';
+import BusyIndicator from '../../components/common/busyIndicator';
+import UserDrawer from '../../components/userDashboard/userDrawer';
+import MainArea from '../../components/userDashboard/MainArea';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 import Footer from '../../components/common/footer';
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppliedOpenings from '../../components/userDashboard/appliedOpenings';
 
 class UserDashboard extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      MainArea: 'home',
+    };
+    this.appliedOpening = this.appliedOpening.bind(this);
   }
+
+  home = () => this.setState({ MainArea: 'home' });
+
+  appliedOpening = () => this.setState({ MainArea: 'appliedOpening' });
 
   render() {
     return (
       <MuiThemeProvider>
-      <div>
-        <div className="content">
-        <UserDrawer />
-        <div className="columns">
-        <div className="column is-8">
-        <ElligibleTitle/>
-        <Card style={{ padding: 5, margin: 20 }}>
-        <ElligibleOpenings/>
-        </Card>
+        <div>
+          <div className="content">
+            <UserDrawer
+              appliedOpeningCallback={this.appliedOpening}
+              homeCallback={this.home}
+            />
+            <MainArea showArea={this.state.MainArea} />
+            {/* <Footer /> */}
+          </div>
         </div>
-        <div className="column is-4">
-        <PrefsCard/>
-        <FilterCard/>
-        </div>
-      </div>
-      <Footer/>
-      </div>
-      </div>
+        {this.props.loading.isloading ? <BusyIndicator /> : null}
       </MuiThemeProvider>
     );
   }
 }
 
-export default UserDashboard;
+function mapStateToProps({ loading }) {
+  return { loading };
+}
+export default connect(mapStateToProps)(UserDashboard);

@@ -5,6 +5,11 @@ import {
   CUREENT_STEP,
   VERIFY_OTP,
   REGISTER_USER,
+  CLEAR_ERROR,
+  ERROR,
+  START_LOADING,
+  SHOW_SUCCESS_BOX,
+  HIDE_SUCCESS_BOX,
 } from './types';
 
 export const registerCompany = (
@@ -12,6 +17,7 @@ export const registerCompany = (
   userData,
   history
 ) => async dispatch => {
+  dispatch({ type: START_LOADING });
   const company = {
     name: companyData.companyName,
     number: companyData.companyNumber,
@@ -32,9 +38,15 @@ export const registerCompany = (
     address,
     user,
   };
-  const res = await axios.post('/smarthyre/api/v1/app/company', data);
-  history.push('/');
-  dispatch({ type: REGISTER_COMPANY, payload: res.data });
+  axios
+    .post('/smarthyre/api/v1/app/company', data)
+    .then(res => {
+      history.push('/');
+      dispatch({ type: REGISTER_COMPANY, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: ERROR, payload: err.response.data });
+    });
 };
 
 export const registerInterview = (
@@ -64,17 +76,30 @@ export const registerInterview = (
   };
   intervieweeData.before_senior_sec = beforeSeniorSec;
   intervieweeData.user = userData;
-  const res = await axios.post(
-    '/smarthyre/api/v1/app/interviewee',
-    intervieweeData
-  );
-  history.push('/');
-  dispatch({ type: REGISTER_USER, payload: res.data });
+  axios
+    .post('/smarthyre/api/v1/app/interviewee', intervieweeData)
+    .then(res => {
+      history.push('/');
+      dispatch({ type: REGISTER_USER, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: ERROR, payload: err.response.data });
+    });
 };
 
 export const login = loginData => async dispatch => {
-  const res = await axios.post('/smarthyre/api/v1/app/login', loginData);
-  dispatch({ type: FETCH_USER, payload: res.data });
+  dispatch({ type: START_LOADING });
+  await axios
+    .post('/smarthyre/api/v1/app/login', loginData)
+    .then(res => {
+      dispatch({ type: FETCH_USER, payload: res.data });
+    })
+    .catch(err => {
+      const error = {
+        msg: 'Email and password do not matched',
+      };
+      dispatch({ type: ERROR, payload: error });
+    });
 };
 
 export const changeCurrentStep = stepNo => dispatch => {
@@ -87,10 +112,21 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const verifyOTP = (userId, OTP, history) => async dispatch => {
+  dispatch({ type: START_LOADING });
   const requestData = {
     id: userId,
     otp: OTP,
   };
-  const res = await axios.post('/smarthyre/api/v1/app/verifyOTP', requestData);
-  history.push('/');
+  axios
+    .post('/smarthyre/api/v1/app/verifyOTP', requestData)
+    .then(err => {
+      history.push('/');
+    })
+    .catch(err => {
+      dispatch({ type: ERROR, payload: err.response.data });
+    });
 };
+
+export const clearError = () => ({ type: CLEAR_ERROR });
+export const startLoading = () => ({ type: START_LOADING });
+export const hideSuccessBox = () => ({ type: HIDE_SUCCESS_BOX });

@@ -29,13 +29,12 @@ class Login extends React.Component {
       this.refs.usernameInput.className = 'input';
       if (this.state.password.length > 0) {
         this.refs.passwordInput.className = 'input';
-        await this.setState({ submitButton: 'loading' });
-        this.refs.submitButton.innerHTML = '  Loading...';
 
         await this.props.login(this.state);
         if (
-          this.props.auth.role === 'company_head' ||
-          this.props.auth.role === 'company_user'
+          this.props.auth &&
+          (this.props.auth.role === 'company_head' ||
+            this.props.auth.role === 'company_user')
         ) {
           switch (this.props.auth.verification_status) {
             case 'in_process':
@@ -49,7 +48,7 @@ class Login extends React.Component {
             case 'otp_verified':
               this.props.history.push('/companyDashboard');
           }
-        } else if (this.props.auth.role === 'interviewee') {
+        } else if (this.props.auth && this.props.auth.role === 'interviewee') {
           switch (this.props.auth.verification_status) {
             case 'in_process':
               this.props.changeCurrentStep(2);
