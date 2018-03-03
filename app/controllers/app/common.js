@@ -65,7 +65,7 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
   if (req.user) {
     res.status(200).json(req.user);
   } else {
-    res.status(500).json('Email and Password did not matched');
+    res.status(500).json('Email and Password do not match , please check !');
   }
 });
 
