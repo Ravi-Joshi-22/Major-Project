@@ -42,6 +42,24 @@ function newOpening(req, res, next) {
   });
 }
 
+/**
+ * delete  opening
+ * @param  {Object}   req  Request Object
+ * @param  {Object}   res  Response Object
+ * @param  {Function} next Function to pass control to the next middleware
+ */
+
+function deleteOpening(req, res, next) {
+  openingLib.deleteOpening(req.user, req.body, function(err, fetchedInstance) {
+    if (err) {
+      res.status(500).json(err);
+      return;
+    }
+    res.status(200).json(fetchedInstance);
+  });
+}
+
 router.post('/addCredits', addCredits);
 router.post('/new', newOpening);
+router.post('/delete', deleteOpening);
 module.exports = router;
