@@ -1,14 +1,14 @@
-import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import React from "react";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import {
   Table,
   TableBody,
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
-import IconButton from 'material-ui/IconButton/IconButton';
+  TableRowColumn
+} from "material-ui/Table";
+import IconButton from "material-ui/IconButton/IconButton";
 import ClearIcon from "material-ui/svg-icons/content/clear";
 import MoreIcon from "material-ui/svg-icons/hardware/keyboard-arrow-right";
 
@@ -25,45 +25,49 @@ class UpcomingTable extends React.Component {
       "EXPERIENCE",
       "START DATE",
       "END DATE",
-      "MORE",
+      "MORE"
     ];
     return (
       <MuiThemeProvider>
         <Table selectable={false}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
-            {fields.map((eachField, key) => (
+              {fields.map((eachField, key) => (
                 <TableHeader style={{ width: "14%" }}>{eachField}</TableHeader>
               ))}
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
-              <TableRow>
-                <TableRowColumn style={{ width: '15%' }}>
-                  {this.props.interviewData.companyName}
-                </TableRowColumn>
-                <TableRowColumn style={{ width: '20%' }}>
-                  {this.props.interviewData.profile}
-                </TableRowColumn>
-                <TableRowColumn style={{ width: '10%' }}>
-                  {this.props.interviewData.location}
-                </TableRowColumn>
-                <TableRowColumn style={{ width: '15%' }}>
-                  {this.props.interviewData.experience}
-                </TableRowColumn>
-                <TableRowColumn style={{ width: '10%' }}>
-                  {this.props.interviewData.startDate}
-                </TableRowColumn>
-                <TableRowColumn style={{ width: '10%' }}>
-                  {this.props.interviewData.endDate}
-                </TableRowColumn>
-                <TableRowColumn style={{ width: '10%' }}>
-                <IconButton><MoreIcon/></IconButton>
-                </TableRowColumn>
-                <TableRowColumn style={{ width: '10%' }}>
-                <IconButton><ClearIcon/></IconButton>
-                </TableRowColumn>
-              </TableRow>
+            <TableRow>
+              <TableRowColumn style={{ width: "15%" }}>
+                {this.props.interviewData.company_id.company_name}
+              </TableRowColumn>
+              <TableRowColumn style={{ width: "20%" }}>
+                {this.props.interviewData.position}
+              </TableRowColumn>
+              <TableRowColumn style={{ width: "10%" }}>
+                {this.props.interviewData.location}
+              </TableRowColumn>
+              <TableRowColumn style={{ width: "15%" }}>
+                {this.props.interviewData.experience_min} - {this.props.interviewData.experience_max} yrs
+              </TableRowColumn>
+              <TableRowColumn style={{ width: "10%" }}>
+                {this.props.interviewData.start_date}
+              </TableRowColumn>
+              <TableRowColumn style={{ width: "10%" }}>
+                {this.props.interviewData.end_date}
+              </TableRowColumn>
+              <TableRowColumn style={{ width: "10%" }}>
+                <IconButton>
+                  <MoreIcon />
+                </IconButton>
+              </TableRowColumn>
+              <TableRowColumn style={{ width: "10%" }}>
+                <IconButton>
+                  <ClearIcon />
+                </IconButton>
+              </TableRowColumn>
+            </TableRow>
             ))}
           </TableBody>
         </Table>

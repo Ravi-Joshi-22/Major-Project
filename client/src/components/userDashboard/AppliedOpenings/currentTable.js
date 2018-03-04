@@ -43,22 +43,24 @@ class CurrentTable extends React.Component {
           <TableBody displayRowCheckbox={false}>
             <TableRow>
               <TableRowColumn style={{ width: "15%" }}>
-                {this.props.interviewData.companyName}
+                {this.props.interviewData.company_id.company_name}
               </TableRowColumn>
               <TableRowColumn style={{ width: "20%" }}>
-                {this.props.interviewData.profile}
+                {this.props.interviewData.position}
               </TableRowColumn>
               <TableRowColumn style={{ width: "10%" }}>
                 {this.props.interviewData.location}
               </TableRowColumn>
               <TableRowColumn style={{ width: "15%" }}>
-                {this.props.interviewData.experience}
+              {this.props.interviewData.experience_min} - {
+                  this.props.interviewData.experience_max
+                } yrs
               </TableRowColumn>
               <TableRowColumn style={{ width: "10%" }}>
-                {this.props.interviewData.startDate}
+                {this.props.interviewData.start_date}
               </TableRowColumn>
               <TableRowColumn style={{ width: "10%" }}>
-                {this.props.interviewData.endDate}
+                {this.props.interviewData.end_date}
               </TableRowColumn>
               <TableRowColumn style={{ width: "5%" }}>
                 <IconButton>

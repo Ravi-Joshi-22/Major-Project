@@ -34,6 +34,9 @@ export default class NavDrawer extends React.Component {
                 <MenuItem onClick={() => {this.props.openingCallback()}}>
                     Add Openings
                 </MenuItem>
+                <MenuItem onClick={() => {this.props.viewOpeningCallback()}}>
+                    View Openings
+                </MenuItem>
             </div>
         );
     }

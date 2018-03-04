@@ -17,9 +17,7 @@ class Home extends React.Component {
             <div className="columns">
             <div className="column is-8">
                 <ElligibleTitle />
-                <Card style={{ padding: 5, margin: 20 }}>
                 <ElligibleOpenings />
-                </Card>
             </div>
             <div className="column is-4">
                 <PrefsCard />

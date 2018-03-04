@@ -11,7 +11,6 @@ import * as actions from '../../../actions/interviewee';
 class ElligibleOpenings extends React.Component {
   constructor(props) {
     super(props);
-
     this.renderTableContent = this.renderTableContent.bind(this);
   }
 
@@ -38,7 +37,6 @@ class ElligibleOpenings extends React.Component {
   }
 
   render() {
-    console.log(this.props.intervieweeOpenings);
     return (
       <MuiThemeProvider>
         <div>
