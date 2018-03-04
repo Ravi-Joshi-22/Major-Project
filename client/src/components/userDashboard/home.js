@@ -7,28 +7,27 @@ import Card from "material-ui/Card";
 
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {  };
-  }
-  render() {
-    return (
-        <div>
-            <div className="columns">
-            <div className="column is-8">
-                <ElligibleTitle />
-                <Card style={{ padding: 5, margin: 20 }}>
-                <ElligibleOpenings />
-                </Card>
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+    render() {
+        return (
+            <div>
+                <div className="columns">
+                    <div className="column is-8">
+                        <ElligibleTitle muiTheme={this.props.muiTheme} />
+                        <Card style={{ padding: 5, margin: 20 }}>
+                            <ElligibleOpenings muiTheme={this.props.muiTheme} />
+                        </Card>
+                    </div>
+                    <div className="column is-4">
+                        <PrefsCard muiTheme={this.props.muiTheme} />
+                    </div>
+                </div>
             </div>
-            <div className="column is-4">
-                <PrefsCard />
-                <FilterCard />
-            </div>
-            </div>
-        </div>
-    );
-  }
+        );
+    }
 }
 
 export default Home;

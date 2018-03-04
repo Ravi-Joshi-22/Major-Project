@@ -21,7 +21,7 @@ class PendingTable extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Table selectable={false}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
@@ -44,10 +44,10 @@ class PendingTable extends React.Component {
                 END DATE
               </TableHeaderColumn>
               <TableHeaderColumn style={{ width: '5%' }}>
-              MORE
+                MORE
               </TableHeaderColumn>
               <TableHeaderColumn style={{ width: '10%' }}>
-              GIVE INTERVIEW
+                GIVE INTERVIEW
               </TableHeaderColumn>
               <TableHeaderColumn style={{ width: '5%' }}>
               </TableHeaderColumn>
@@ -75,13 +75,13 @@ class PendingTable extends React.Component {
                   {eachInterview.endDate}
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '5%' }}>
-                <IconButton><MoreIcon/></IconButton>
+                  <IconButton><MoreIcon /></IconButton>
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '10%' }}>
-                <FlatButton label="GIVE" primary={true} icon={<GiveIcon/>}/>
+                  <FlatButton label="GIVE" primary={true} icon={<GiveIcon />} />
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '5%' }}>
-                <IconButton><ClearIcon/></IconButton>
+                  <IconButton><ClearIcon /></IconButton>
                 </TableRowColumn>
               </TableRow>
             ))}

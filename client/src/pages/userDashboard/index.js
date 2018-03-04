@@ -8,6 +8,18 @@ import FlatButton from 'material-ui/FlatButton';
 import Footer from '../../components/common/footer';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppliedOpenings from '../../components/userDashboard/appliedOpenings';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { teal300, teal100, teal200, lightBlue500, lightBlue50 } from 'material-ui/styles/colors';
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: teal300,
+    primary2Color: teal200,
+    accent1Color: teal200,
+    // canvasColor:lightBlue50,
+    shadowColor: lightBlue500,
+  },
+});
 
 class UserDashboard extends React.Component {
   constructor(props) {
@@ -28,10 +40,11 @@ class UserDashboard extends React.Component {
         <div>
           <div className="content">
             <UserDrawer
+              muiTheme={muiTheme}
               appliedOpeningCallback={this.appliedOpening}
               homeCallback={this.home}
             />
-            <MainArea showArea={this.state.MainArea} />
+            <MainArea showArea={this.state.MainArea} muiTheme={muiTheme}/>
             {/* <Footer /> */}
           </div>
         </div>

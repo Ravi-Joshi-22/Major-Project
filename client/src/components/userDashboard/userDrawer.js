@@ -29,7 +29,7 @@ class UserDrawer extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <div>
           <AppBar
             title="SmartHyre"

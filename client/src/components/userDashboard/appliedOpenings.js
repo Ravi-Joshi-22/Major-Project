@@ -98,15 +98,15 @@ class AppliedOpenings extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 10, margin: 0 }}>
           {/* <CardTitle title="Your Applied Openings" /> */}
           <CardText style={{ padding: 2 }}>
             <Subheader><font color='#00BCD4'>Pending Interviews</font></Subheader>
-            <Divider/>
+            <Divider />
             <PendingTable interviewData={notGivenAppliedData} />
             <Subheader><font color='#00BCD4'>Interviews Already Given</font></Subheader>
-            <Divider/>
+            <Divider />
             <GivenTable interviewData={givenAppliedData} />
             {/* <FlatButton label="BACK" primary={true} icon={<BackIcon />} /> */}
           </CardText>

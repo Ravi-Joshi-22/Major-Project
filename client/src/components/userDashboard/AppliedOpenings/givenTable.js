@@ -19,7 +19,7 @@ class GivenTable extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Table selectable={false}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>

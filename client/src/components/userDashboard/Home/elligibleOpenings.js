@@ -45,10 +45,10 @@ class ElligibleOpenings extends React.Component {
   render() {
     console.log(this.props.intervieweeOpenings);
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <div>
           {this.props.intervieweeOpenings &&
-          this.props.intervieweeOpenings.length > 0
+            this.props.intervieweeOpenings.length > 0
             ? this.renderTableContent()
             : this.noOpeningContent()}
         </div>

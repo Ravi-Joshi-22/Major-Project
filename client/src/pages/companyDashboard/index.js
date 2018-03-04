@@ -11,7 +11,18 @@ import InterviewOpening from '../../components/companyDashboard/DrawerArea/Inter
 import Drawer from 'material-ui/Drawer';
 import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { teal300, teal100, teal200, lightBlue500, lightBlue50 } from 'material-ui/styles/colors';
 
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: teal300,
+    primary2Color: teal200,
+    accent1Color: teal200,
+    // canvasColor:lightBlue50,
+    shadowColor: lightBlue500,
+  },
+});
 class CompanyDashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -103,11 +114,13 @@ class CompanyDashboard extends React.Component {
             />
             <div style={contentStyle}>
               <InterviewOpening
+                muiTheme={muiTheme}
                 currentModalClass={this.props.modals.companyOpeningModal}
                 openingCallback={this.openingForm}
               />
-              <Title credits={this.renderTitle()} />
+              <Title credits={this.renderTitle()} muiTheme={muiTheme} />
               <Drawer
+                muiTheme={muiTheme}
                 docked={false}
                 width={300}
                 open={this.state.open}
@@ -115,12 +128,13 @@ class CompanyDashboard extends React.Component {
               >
                 <div>
                   <NavDrawer
+                    muiTheme={muiTheme}
                     close={() => this.setState({ open: !this.state.open })}
                     openingCallback={this.openingForm}
                   />
                 </div>
-              </Drawer>
-              <MainArea dashData={this.renderMain()} />
+              </Drawer >
+              <MainArea dashData={this.renderMain()} muiTheme={muiTheme} />
             </div>
           </div>
           {this.props.loading.isloading ? <BusyIndicator /> : null}

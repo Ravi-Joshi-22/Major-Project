@@ -8,7 +8,7 @@ import AddIcon from 'material-ui/svg-icons/editor/mode-edit';
 class SkillsCard extends React.Component {
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 5, margin: 10 }}>
           <CardTitle title="Skills Acquired" />
           <CardText style={{ padding: 2 }}>

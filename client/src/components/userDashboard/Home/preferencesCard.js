@@ -12,12 +12,12 @@ class PrefsCard extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 5, margin: 20 }}>
           <CardTitle title="Your Preferences" />
           <CardText style={{ padding: 2 }}>
             <PrefsChip />
-            <FlatButton label="ADD MORE SKILLS" primary={true} icon={<AddIcon/>}/>
+            <FlatButton label="ADD MORE SKILLS" primary={true} icon={<AddIcon />} />
           </CardText>
         </Card>
       </MuiThemeProvider>
