@@ -38,25 +38,26 @@ class UpcomingTable extends React.Component {
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
-            {this.props.interviewData.map((eachInterview, key) => (
               <TableRow>
                 <TableRowColumn style={{ width: '15%' }}>
-                  {eachInterview.companyName}
+                {this.props.interviewData.company_id}
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '20%' }}>
-                  {eachInterview.profile}
+                  {this.props.interviewData.position}
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '10%' }}>
-                  {eachInterview.location}
+                  {this.props.interviewData.location}
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '15%' }}>
-                  {eachInterview.experience}
+                {this.props.interviewData.experience_min} - {
+                  this.props.interviewData.experience_max
+                } yrs
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '10%' }}>
-                  {eachInterview.startDate}
+                  {this.props.interviewData.start_date}
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '10%' }}>
-                  {eachInterview.endDate}
+                  {this.props.interviewData.end_date}
                 </TableRowColumn>
                 <TableRowColumn style={{ width: '10%' }}>
                 <IconButton><MoreIcon/></IconButton>
@@ -65,7 +66,6 @@ class UpcomingTable extends React.Component {
                 <IconButton><ClearIcon/></IconButton>
                 </TableRowColumn>
               </TableRow>
-            ))}
           </TableBody>
         </Table>
       </MuiThemeProvider>
