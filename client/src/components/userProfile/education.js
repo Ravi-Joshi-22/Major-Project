@@ -7,6 +7,7 @@ import AddIcon from 'material-ui/svg-icons/editor/mode-edit';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import { IconButton } from 'material-ui';
+import Graduation from "../IntervieweeRegister/Graduation";
 const iconStyles = {
   marginRight: 10,
   marginTop: 5,
@@ -49,6 +50,7 @@ class Education extends React.Component {
               <IconButton tooltip="Edit">
                 <AddIcon />
               </IconButton>
+              <Graduation/>
               <FloatingActionButton mini={true} style={iconStyles}>
                 <ContentAdd />
               </FloatingActionButton>
