@@ -37,7 +37,8 @@ function transporterMail(mailOptions, callback) {
     if (error) {
       callback({
         type: CONSTANTS.ERROR_TYPES.SEND_MAIL_ERROR,
-        msg: 'An Error encountered, while sending email.',
+        msg:
+          'An Error encountered while sending email ,make sure that you are connected to internet',
         errorDetail: String(error),
       });
       return;
@@ -127,20 +128,20 @@ function _decodeJwt(jwtToken, callback) {
       if (err.name === 'TokenExpiredError') {
         callback({
           type: CONSTANTS.ERROR_TYPES.JWT_ERROR,
-          msg: 'Token Expired. Request for a new password reset link.',
+          msg: 'Token has Expired ,Request for a new password reset link.',
           errorDetail: err,
         });
       } else {
         callback({
           type: CONSTANTS.ERROR_TYPES.JWT_ERROR,
-          msg: 'Invalid token. Request for a new password reset link.',
+          msg: 'Invalid token, Request for a new password reset link.',
           errorDetail: err,
         });
       }
     } else if (!decoded.userId) {
       callback({
         type: CONSTANTS.ERROR_TYPES.JWT_ERROR,
-        msg: 'Invalid link. Request for a new password reset link.',
+        msg: 'Invalid link, Request for a new password reset link.',
         errorDetail: 'UserId could not be located in the token',
       });
     } else {
@@ -159,7 +160,7 @@ function updateEmailVerifiactionStatus(userId, callback) {
     if (errInFind) {
       callback({
         type: CONSTANTS.ERROR_TYPES.DB_ERROR,
-        msg: 'Unable to get user details',
+        msg: 'Unable to get user details, please enter valid userID',
         errorDetail: JSON.stringify(errInFind),
       });
     } else {

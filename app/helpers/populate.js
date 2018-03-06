@@ -18,7 +18,8 @@ function _populateWithCompanyInfo(openings, callback) {
       if (companyPopulationError) {
         callback({
           type: ERROR_TYPES.DB_ERROR,
-          msg: 'Failed to give company info',
+          msg:
+            'Failed to provide company details , database error encountered ',
           errorDetail: JSON.stringify(companyPopulationError),
         });
       } else {

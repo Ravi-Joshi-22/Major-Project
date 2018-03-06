@@ -1,18 +1,18 @@
 const express = require('express');
-const profileLib = require('../../../lib/interviewee/profile');
+const seniorSecondaryLib = require('../../../../lib/interviewee/profile/seniorSecondary');
 
 const router = express.Router();
 
 /**
- * Function to update Secondary Details
+ * Function to update Senior Secondary Details
  * @param {Object} req Request Object
  * @param {Object} res Response Object
  * @param {Function} next Function to pass control to the next middleware
  */
-function updateSecondaryDetails(req, res, next) {
-  profileLib.updateSecondaryOfInterviewee(
+function updateSeniorSecondaryDetails(req, res, next) {
+  seniorSecondaryLib.updateSeniorSecondaryOfInterviewee(
     req.user._id,
-    req.body.secondary,
+    req.body.senior_secondary,
     function(errInUpdation, updatedInstance) {
       if (errInUpdation) {
         res.status(500).json(errInUpdation);
@@ -24,13 +24,13 @@ function updateSecondaryDetails(req, res, next) {
 }
 
 /**
- * Function to update Degree Details
+ * Function to delete Senior Secondary Details
  * @param {Object} req Request Object
  * @param {Object} res Response Object
  * @param {Function} next Function to pass control to the next middleware
  */
-function updateDegreeDetails(req, res, next) {
-  profileLib.updateDegreeOfInterviewee(req.user._id, req.body.degree, function(
+function deleteSeniorSecondaryDetails(req, res, next) {
+  seniorSecondaryLib.deleteSeniorSecondaryOfInterviewee(req.user._id, function(
     errInUpdation,
     updatedInstance
   ) {
@@ -42,7 +42,7 @@ function updateDegreeDetails(req, res, next) {
   });
 }
 
-router.post('/updateSecondaryDetails', updateSecondaryDetails);
-router.post('/updateDegreeDetails', updateDegreeDetails);
+router.put('/', updateSeniorSecondaryDetails);
+router.delete('/', deleteSeniorSecondaryDetails);
 
 module.exports = router;

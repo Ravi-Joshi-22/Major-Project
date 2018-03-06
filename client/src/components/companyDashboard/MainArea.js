@@ -1,8 +1,8 @@
+
 import React from "react";
 import CompanyDetails from "./MainArea/CompanyDetails";
+import UsersDetails from "./MainArea/UsersDetails";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Avatar from "material-ui/Avatar";
-import IconButton from "material-ui/IconButton";
 
 export default class MainArea extends React.Component {
   constructor(props) {
@@ -12,32 +12,28 @@ export default class MainArea extends React.Component {
 
   companyData() {
     let companyDetails = {
-      name: this.props.dashData.name,
-      cin: this.props.dashData.cin,
-      phone: this.props.dashData.phone,
-      website: this.props.dashData.website,
-      logo: this.props.dashData.logo,
-      country: this.props.dashData.country,
-      line: this.props.dashData.line,
-      city: this.props.dashData.city,
-      pin: this.props.dashData.pin,
-      state: this.props.dashData.state
+      name: this.props.companyDash.company_name,
+      cin: this.props.companyDash.company_cin,
+      phone: this.props.companyDash.company_phone,
+      website: this.props.companyDash.company_website,
+      logo: this.props.companyDash.company_logo,
+      address: {
+        country: this.props.companyDash.address.country,
+        line: this.props.companyDash.address.address_line,
+        city: this.props.companyDash.address.city,
+        pin: this.props.companyDash.address.pin,
+        state: this.props.companyDash.address.state
+      }
     };
     return companyDetails;
   }
 
+  usersData() {
+    let usersDetails = this.props.companyDash.users;
+    return usersDetails;
+  }
+
   render() {
-    const styles = {
-      largeIcon: {
-        width: 60,
-        height: 60
-      },
-      large: {
-        width: 120,
-        height: 120,
-        padding: 30
-      }
-    };
     return (
       <div>
         <MuiThemeProvider  muiTheme={this.props.muiTheme}>
@@ -66,14 +62,7 @@ export default class MainArea extends React.Component {
               <div className="tile is-parent">
                 <article className="tile is-child notification box">
                   <p className="title">
-                    Users
-                    <IconButton
-                      style={styles.medium}
-                      iconStyle={styles.mediumIcon}
-                      tooltip="user1"
-                    >
-                        <Avatar src="./Assets/Employee.svg" size={30} />
-                    </IconButton>
+                    <UsersDetails usersData={this.usersData()} style={{ display: "inline" }}/>
                   </p>
                 </article>
               </div>
