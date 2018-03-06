@@ -41,25 +41,25 @@ function newOpening(req, res, next) {
     res.status(200).json(fetchedInstance);
   });
 }
-
 /**
- * delete  opening
- * @param  {Object}   req  Request Object
- * @param  {Object}   res  Response Object
- * @param  {Function} next Function to pass control to the next middleware
+ * Function to update opening Details
+ * @param {Object} req Request Object
+ * @param {Object} res Response Object
+ * @param {Function} next Function to pass control to the next middleware
  */
-
-function deleteOpening(req, res, next) {
-  openingLib.deleteOpening(req.user, req.body, function(err, fetchedInstance) {
-    if (err) {
-      res.status(500).json(err);
-      return;
+function updateOpeningDetails(req, res, next) {
+  openingLib.updateJobOpening(req.user, req.body, function(
+    errInUpdation,
+    updatedInstance
+  ) {
+    if (errInUpdation) {
+      res.status(500).json(errInUpdation);
+    } else {
+      res.status(200).json(updatedInstance);
     }
-    res.status(200).json(fetchedInstance);
   });
 }
-
 router.post('/addCredits', addCredits);
 router.post('/new', newOpening);
-router.post('/delete', deleteOpening);
+router.post('/update', updateOpeningDetails);
 module.exports = router;
