@@ -107,7 +107,7 @@ class CompanyDashboard extends React.Component {
 
     return (
       <div>
-        <MuiThemeProvider>
+        <MuiThemeProvider  muiTheme={muiTheme} >
           <div>
             <AppBar
               title="SmartHyre"
