@@ -44,7 +44,7 @@ class ElligibleTable extends React.Component {
       eDate.getFullYear();
 
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <table>
           <thead>
             <tr>

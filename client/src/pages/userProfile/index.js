@@ -9,6 +9,18 @@ import Courses from '../../components/userProfile/courses';
 import SkillsCard from '../../components/userProfile/skills';
 import PerPaper from '../../components/userProfile/percentage';
 import Project from '../../components/userProfile/projects';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { teal300, teal100, teal200, lightBlue500, lightBlue50 } from 'material-ui/styles/colors';
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: teal300,
+    primary2Color: teal200,
+    accent1Color: teal200,
+    // canvasColor:lightBlue50,
+    shadowColor: lightBlue500,
+  },
+});
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -25,9 +37,9 @@ class UserProfile extends React.Component {
       <FlatButton label="Cancel" primary={true} onClick={this.handleToggle} />,
     ];
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider >
         <div className="content">
-          <UserDrawer />
+          <UserDrawer muiTheme={muiTheme} />
           <div className="columns">
             <div className="column is-8">
               <div className="columns">
@@ -44,17 +56,17 @@ class UserProfile extends React.Component {
                   />
                 </div>
                 <div className="column is-8">
-                  <Personal style={{ margin: 20 }} />
+                  <Personal style={{ margin: 20 }} muiTheme={muiTheme} />
                 </div>
               </div>
-              <Experience />
-              <Education />
-              <Project />
+              <Experience muiTheme={muiTheme} />
+              <Education muiTheme={muiTheme} />
+              <Project muiTheme={muiTheme} />
             </div>
             <div className="column is-4">
-              <PerPaper />
-              <SkillsCard />
-              <Courses />
+              <PerPaper muiTheme={muiTheme} />
+              <SkillsCard muiTheme={muiTheme} />
+              <Courses muiTheme={muiTheme} />
             </div>
           </div>
         </div>
