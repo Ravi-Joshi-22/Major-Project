@@ -60,7 +60,29 @@ function getAzureSentimentAnalytics(answer, callback) {
   });
 }
 
+/**
+ * Function to get all the available questions from a skill
+ * @param {String} name name of the skill
+ * @param {Function} callback having error and array of question
+ */
+function getSetOfQuestion(name, callback) {
+  Models.Question.find({
+    topic: name,
+  }).exec(function(err, questionSet) {
+    if (err) {
+      callback({
+        type: CONSTANTS.ERROR_TYPES.DB_ERROR,
+        msg: 'Failed to get questions',
+        errorDetail: JSON.stringify(err),
+      });
+    } else {
+      callback(null, questionSet);
+    }
+  });
+}
+
 module.exports = {
   getAzureAnalytics: getAzureAnalytics,
   getAzureSentimentAnalytics: getAzureSentimentAnalytics,
+  getSetOfQuestion: getSetOfQuestion,
 };
