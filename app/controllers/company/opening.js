@@ -48,7 +48,7 @@ function newOpening(req, res, next) {
  * @param {Function} next Function to pass control to the next middleware
  */
 function updateOpeningDetails(req, res, next) {
-  openingLib.updateJobOpening(req.user, req.body, function(
+  openingLib.updateJobOpening(req.user._id, req.body, function(
     errInUpdation,
     updatedInstance
   ) {
@@ -61,5 +61,5 @@ function updateOpeningDetails(req, res, next) {
 }
 router.post('/addCredits', addCredits);
 router.post('/new', newOpening);
-router.post('/update', updateOpeningDetails);
+router.put('/', updateOpeningDetails);
 module.exports = router;
