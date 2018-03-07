@@ -22,20 +22,19 @@ class AppliedOpenings extends React.Component {
 
   renderCurrentTableContent() {
     const { intervieweeOpenings } = this.props;
-    const renderCurrentOpeningContent = intervieweeOpenings.currentAppliedOpenings.map(
-      (eachOpening, key) => <CurrentTable interviewData={eachOpening} />
-    );
-    return renderCurrentOpeningContent;
-  }
-  renderUpcomingTableContent() {
-    const { intervieweeOpenings } = this.props;
-    const renderUpcomingOpeningContent = intervieweeOpenings.upcomingAppliedOpenings.map(
-      (eachOpening, key) => <UpcomingTable interviewData={eachOpening} />
-    );
-    return renderUpcomingOpeningContent;
+    const currentArray = intervieweeOpenings.currentOpenings;
+    <CurrentTable interviewData={currentArray}/>
+    return;
   }
 
-  render() {8
+  renderUpcomingTableContent() {
+    const { intervieweeOpenings } = this.props;
+    const upcomingArray = intervieweeOpenings.upcomingOpenings;
+    <UpcomingTable interviewData={upcomingArray}/>
+    return;
+  }
+
+  render() {
     return (
       <MuiThemeProvider>
         <Card style={{ padding: 10, margin: 0 }}>

@@ -20,7 +20,7 @@ class ElligibleOpenings extends React.Component {
 
   renderTableContent() {
     const { intervieweeOpenings } = this.props;
-    const renderOpeningContent = intervieweeOpenings.map((eachOpening, key) => (
+    const renderOpeningContent = intervieweeOpenings.elligibleOpenings.map((eachOpening, key) => (
       <Card style={{ padding: 5, margin: 20 }}>
         <CardHeader
           title={eachOpening.company_id.company_name}
