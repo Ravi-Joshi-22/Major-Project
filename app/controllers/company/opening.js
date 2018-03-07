@@ -48,7 +48,7 @@ function newOpening(req, res, next) {
  * @param {Function} next Function to pass control to the next middleware
  */
 function updateOpeningDetails(req, res, next) {
-  openingLib.updateJobOpening(req.user._id, req.body, function(
+  openingLib.updateOpeningOfCompany(req.user.id, req.body, function(
     errInUpdation,
     updatedInstance
   ) {
