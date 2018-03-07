@@ -50,7 +50,11 @@ function newOpening(req, res, next) {
  */
 
 function deleteOpening(req, res, next) {
-  openingLib.deleteOpening(req.user, req.body, function(err, fetchedInstance) {
+  const opening = req.body.openingId;
+  openingLib.deleteOpeningOfCompany(req.user, opening, function(
+    err,
+    fetchedInstance
+  ) {
     if (err) {
       res.status(500).json(err);
       return;
