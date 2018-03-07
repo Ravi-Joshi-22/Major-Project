@@ -50,7 +50,7 @@ function newOpening(req, res, next) {
  */
 
 function deleteOpening(req, res, next) {
-  const opening = req.body.openingId;
+  const opening = req.query.openingId;
   openingLib.deleteOpeningOfCompany(req.user, opening, function(
     err,
     fetchedInstance
@@ -65,5 +65,5 @@ function deleteOpening(req, res, next) {
 
 router.post('/addCredits', addCredits);
 router.post('/new', newOpening);
-router.post('/', deleteOpening);
+router.delete('/', deleteOpening);
 module.exports = router;
