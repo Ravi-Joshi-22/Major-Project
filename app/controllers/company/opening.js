@@ -65,5 +65,5 @@ function deleteOpening(req, res, next) {
 
 router.post('/addCredits', addCredits);
 router.post('/new', newOpening);
-router.post('/delete', deleteOpening);
+router.post('/', deleteOpening);
 module.exports = router;
