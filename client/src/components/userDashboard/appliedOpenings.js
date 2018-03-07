@@ -1,15 +1,15 @@
-import React from "react";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import RaisedButton from "material-ui/RaisedButton";
-import { Card, CardTitle, CardText } from "material-ui/Card";
-import CurrentTable from "./AppliedOpenings/currentTable";
-import UpcomingTable from "./AppliedOpenings/upcomingTable";
-import BackIcon from "material-ui/svg-icons/av/fast-rewind";
-import { FlatButton } from "material-ui";
-import Divider from "material-ui/Divider";
-import Subheader from "material-ui/Subheader";
-import { connect } from "react-redux";
-import * as actions from "../../actions/interviewee";
+import React from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+import { Card, CardTitle, CardText } from 'material-ui/Card';
+import CurrentTable from './AppliedOpenings/currentTable';
+import UpcomingTable from './AppliedOpenings/upcomingTable';
+import BackIcon from 'material-ui/svg-icons/av/fast-rewind';
+import { FlatButton } from 'material-ui';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/interviewee';
 
 class AppliedOpenings extends React.Component {
   constructor(props) {
@@ -23,15 +23,13 @@ class AppliedOpenings extends React.Component {
   renderCurrentTableContent() {
     const { intervieweeOpenings } = this.props;
     const currentArray = intervieweeOpenings.currentOpenings;
-    <CurrentTable interviewData={currentArray}/>
-    return;
+    return <CurrentTable interviewData={currentArray} />;
   }
 
   renderUpcomingTableContent() {
     const { intervieweeOpenings } = this.props;
     const upcomingArray = intervieweeOpenings.upcomingOpenings;
-    <UpcomingTable interviewData={upcomingArray}/>
-    return;
+    return <UpcomingTable interviewData={upcomingArray} />;
   }
 
   render() {
