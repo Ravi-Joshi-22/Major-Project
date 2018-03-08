@@ -62,8 +62,28 @@ function deleteOpening(req, res, next) {
     res.status(200).json(fetchedInstance);
   });
 }
+/**
+ * get all  openings
+ * @param  {Object}   req  Request Object
+ * @param  {Object}   res  Response Object
+ * @param  {Function} next Function to pass control to the next middleware
+ */
 
+function getAllOpening(req, res, next) {
+  const opening = req.query.openingId;
+  openingLib.getAllOpeningsOfCompany(req.user, opening, function(
+    err,
+    fetchedInstance
+  ) {
+    if (err) {
+      res.status(500).json(err);
+      return;
+    }
+    res.status(200).json(fetchedInstance);
+  });
+}
 router.post('/addCredits', addCredits);
 router.post('/new', newOpening);
 router.delete('/', deleteOpening);
+router.get('/all', getAllOpening);
 module.exports = router;
