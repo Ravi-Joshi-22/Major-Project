@@ -1,5 +1,6 @@
 const Models = require('../models');
 const CONSTANTS = require('../../config/constants');
+const async = require('async');
 
 const User = Models.User;
 const Company = Models.Company;
@@ -40,7 +41,7 @@ function registerUser(userData, callback) {
  * @param {Function} callback function two param err and fetched user
  */
 function fetchUser(userId, callback) {
-  User.findById(userId).exec(function(err, user) {
+  User.findById(userId, { password: 0 }).exec(function(err, user) {
     if (err) {
       callback({
         type: CONSTANTS.ERROR_TYPES.DB_ERROR,
@@ -80,12 +81,17 @@ function getCompanyDetailsFromUser(userId, callback) {
   });
 }
 
+/**
+ * Function to get interviewees details populated with interviewee's basic info given at the time of regstration
+ * @param {ObjectId} userId Users ObjectId
+ * @param {Function} callback function two param errInFetch and fetched interviewee
+ */
 function getIntervieweeDetails(userId, callback) {
-  Interviewee.findOne(
-    {
-      userId: userId,
-    },
-    function(errInFetch, fetchedInterviewe) {
+  Interviewee.findOne({
+    userId: userId,
+  })
+    .populate('userId', { password: 0 })
+    .exec(function(errInFetch, fetchedInterviewee) {
       if (errInFetch) {
         callback({
           type: CONSTANTS.ERROR_TYPES.DB_ERROR,
@@ -93,12 +99,16 @@ function getIntervieweeDetails(userId, callback) {
           errorDetail: JSON.stringify(errInFetch),
         });
       } else {
-        callback(null, fetchedInterviewe);
+        callback(null, fetchedInterviewee);
       }
-    }
-  );
+    });
 }
 
+/**
+ * Function to get users total experience if he/she is an interviewee
+ * @param {ObjectId} userId Users ObjectId
+ * @param {Function} callback function two param errInFetch and experience
+ */
 function getTotalExperience(userId, callback) {
   Interviewee.aggregate(
     [

@@ -1,4 +1,5 @@
 const express = require('express');
+const dashboardProfileRoutes = require('./dashboardProfile');
 const secondaryRoutes = require('./secondary');
 const seniorSecondaryRoutes = require('./seniorSecondary');
 const degreeRoutes = require('./degree');
@@ -12,6 +13,7 @@ const projectRoutes = require('./project');
 
 const router = express.Router();
 
+router.use('/', dashboardProfileRoutes);
 router.use('/secondary', secondaryRoutes);
 router.use('/seniorSecondary', seniorSecondaryRoutes);
 router.use('/degree', degreeRoutes);
@@ -22,4 +24,5 @@ router.use('/course', courseRoutes);
 router.use('/additional', additionalRoutes);
 router.use('/skill', skillRoutes);
 router.use('/project', projectRoutes);
+
 module.exports = router;
