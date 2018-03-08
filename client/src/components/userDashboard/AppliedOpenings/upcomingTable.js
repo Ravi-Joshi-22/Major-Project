@@ -45,7 +45,7 @@ class UpcomingTable extends React.Component {
           <tbody displayRowCheckbox={false}>
             {this.props.interviewData.map((eachOpening, key) => (
               <tr>
-                <td style={{ width: '15%' }}>{eachOpening.company_id}</td>
+                <td style={{ width: '15%' }}>{eachOpening.company_id.company_name}</td>
                 <td style={{ width: '20%' }}>{eachOpening.position}</td>
                 <td style={{ width: '10%' }}>{eachOpening.location}</td>
                 <td style={{ width: '15%' }}>
