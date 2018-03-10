@@ -11,8 +11,8 @@ class FilterCard extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
-        <Card style={{ padding: 5, margin: 20}}>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
+        <Card style={{ padding: 5, margin: 20 }}>
           <CardTitle title="Filters" />
           <CardText style={{ padding: 2 }}>
             <div class="field has-addons">
@@ -69,7 +69,7 @@ class FilterCard extends React.Component {
                 </div>
               </div>
             </div>
-            <FlatButton label="APPLY FILTERS" primary={true} icon={<ApplyIcon/>}/>
+            <FlatButton label="APPLY FILTERS" primary={true} icon={<ApplyIcon />} />
           </CardText>
         </Card>
       </MuiThemeProvider>

@@ -18,7 +18,7 @@ class Education extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 5, margin: 10 }}>
           <div className="columns">
             <div className="column is-10">

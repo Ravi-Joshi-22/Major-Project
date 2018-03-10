@@ -6,6 +6,9 @@ import ReactCardFlip from '../../components/login/ReactCardFlip';
 import LoginPage from '../../components/login/Login';
 import Register from '../../components/login/Register';
 import './index.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { lightBlue100 } from 'material-ui/styles/colors';
+let imgUrl="/Assets/Hire.png"
 
 class Login extends React.Component {
   constructor(props) {
@@ -23,41 +26,55 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="container" style={{ maxWidth: 600 }}>
-        <ReactCardFlip isFlipped={this.state.isFlipped}>
-          <div className="card" key="front" style={{ padding: 50 }}>
-            <h1 className="card-header-title title is-2 is-centered ">Login</h1>
-            <br />
-            <LoginPage className="card-content" />
-            <br />
-            <a
-              className="button is-primary card-footer"
-              onClick={this.handleClick}
-            >
-              New here?
-            </a>
-            <br />
-          </div>
+      <MuiThemeProvider muiTheme={this.props.muiTheme} >
+      <div >
+        <div className="columns " style={{marginTop: 40,backgroundColor: lightBlue100}} >
+          <div className="column is-7">
 
-          <div className="card" key="back" style={{ padding: 50 }}>
-            <h1 className="card-header-title title is-2 is-centered ">
-              Register
-            </h1>
-            <br />
-            <Register className="card-content" />
-            <br />
-            <br />
-            <a
-              className="button is-primary card-footer"
-              onClick={this.handleClick}
-            >
-              Been here! Sign in
-            </a>
-            <br />
+            <img src="./Assets/Hire.png" alt="SmartHyre" width="600" height="15" border="5px #ff0000" />
+
+
           </div>
-        </ReactCardFlip>
-        {this.props.loading.isloading ? <BusyIndicator /> : null}
-      </div>
+          <div className="column is-5">
+            <div className="container" style={{ maxWidth: 400, marginTop: 15 }}>
+              <ReactCardFlip isFlipped={this.state.isFlipped}>
+                <div key="front" >
+                  <h1 className="card-header-title title is-2 is-centered ">Login</h1>
+
+                  <LoginPage className="card-content" />
+                  <br />
+                  <a
+                    className="button is-primary card-footer"
+                    onClick={this.handleClick}
+                  >
+                    New here?
+            </a>
+                  <br />
+                </div>
+
+                <div key="back" >
+                  <h1 className="card-header-title title is-2 is-centered ">
+                    Register
+            </h1>
+
+                  <Register className="card-content" />
+                  <br />
+                  <br />
+                  <a
+                    className="button is-primary card-footer"
+                    onClick={this.handleClick}
+                  >
+                    Been here! Sign in
+            </a>
+                  <br />
+                </div>
+              </ReactCardFlip>
+              {this.props.loading.isloading ? <BusyIndicator /> : null}
+            </div>
+          </div>
+        </div>
+</div>
+      </MuiThemeProvider>
     );
   }
 }

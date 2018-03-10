@@ -47,6 +47,7 @@ function newOpening(req, res, next) {
  * @param {Object} res Response Object
  * @param {Function} next Function to pass control to the next middleware
  */
+
 function updateOpeningDetails(req, res, next) {
   openingLib.updateOpeningOfCompany(req.user.id, req.body, function(
     errInUpdation,
@@ -56,10 +57,21 @@ function updateOpeningDetails(req, res, next) {
       res.status(500).json(errInUpdation);
     } else {
       res.status(200).json(updatedInstance);
+
+function deleteOpening(req, res, next) {
+  const opening = req.query.openingId;
+  openingLib.deleteOpeningOfCompany(req.user, opening, function(
+    err,
+    fetchedInstance
+  ) {
+    if (err) {
+      res.status(500).json(err);
+      return;
     }
   });
 }
 router.post('/addCredits', addCredits);
 router.post('/new', newOpening);
 router.put('/', updateOpeningDetails);
+router.delete('/', deleteOpening);
 module.exports = router;

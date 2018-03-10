@@ -36,7 +36,7 @@ export default class MainArea extends React.Component {
   render() {
     return (
       <div>
-        <MuiThemeProvider>
+        <MuiThemeProvider  muiTheme={this.props.muiTheme}>
           <div className="tile is-ancestor">
             <div className="tile is-vertical is-8">
               <div className="tile">

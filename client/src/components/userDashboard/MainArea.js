@@ -10,11 +10,11 @@ class MainArea extends React.Component {
   }
 
   show() {
-    var showArea = <Home />;
+    var showArea = <Home muiTheme={this.props.muiTheme} />;
     if (this.props.showArea === "home") {
-      showArea = <Home />;
+      showArea = <Home muiTheme={this.props.muiTheme} />;
     } else if (this.props.showArea === "appliedOpening") {
-      showArea = <AppliedOpenings />;
+      showArea = <AppliedOpenings muiTheme={this.props.muiTheme} />;
     }
 
     return showArea;

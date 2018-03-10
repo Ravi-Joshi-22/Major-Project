@@ -25,7 +25,7 @@ class Title extends React.Component {
     render() {
         return (
             <div>
-            <MuiThemeProvider>
+            <MuiThemeProvider  muiTheme={this.props.muiTheme} >
                 <nav className="navbar is-transparent">
                     <div className="navbar-brand">
                         <a className="" href="#">

@@ -8,7 +8,7 @@ export default class Register extends React.Component {
 
   render() {
     return (
-      <div className="container" style={{ maxWidth: 600 }}>
+      <div className="container" style={{ maxWidth: 500 }}>
         <div className="columns">
           <div className="tile is-ancestor">
             <div className="tile is-vertical is-10">
@@ -19,7 +19,7 @@ export default class Register extends React.Component {
                 >
                   <article
                     className="tile is-child notification is-info has-text-centered"
-                    style={{ maxWidth: 250 }}
+                    style={{ maxWidth: 200 }}
                   >
                     <a href="/companyRegister">
                       As Recruiter<br />
@@ -37,7 +37,7 @@ export default class Register extends React.Component {
                 >
                   <article
                     className="tile is-child notification is-warning has-text-centered"
-                    style={{ maxWidth: 250 }}
+                    style={{ maxWidth: 200 }}
                   >
                     <a href="/intervieweeRegister">
                       As Employee<br />
