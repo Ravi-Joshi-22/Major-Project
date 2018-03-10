@@ -57,6 +57,9 @@ function updateOpeningDetails(req, res, next) {
       res.status(500).json(errInUpdation);
     } else {
       res.status(200).json(updatedInstance);
+    }
+  });
+}
 
 function deleteOpening(req, res, next) {
   const opening = req.query.openingId;
@@ -67,9 +70,12 @@ function deleteOpening(req, res, next) {
     if (err) {
       res.status(500).json(err);
       return;
+    } else {
+      res.status(200).json(fetchedInstance);
     }
   });
 }
+
 router.post('/addCredits', addCredits);
 router.post('/new', newOpening);
 router.put('/', updateOpeningDetails);
