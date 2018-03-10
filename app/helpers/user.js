@@ -98,6 +98,12 @@ function getIntervieweeDetails(userId, callback) {
           msg: 'Unable to get interviewee details from database',
           errorDetail: JSON.stringify(errInFetch),
         });
+      } else if (fetchedInterviewee == null) {
+        callback({
+          type: CONSTANTS.ERROR_TYPES.INVALID_RECORD,
+          msg: 'No Interviewee professional Data Exist for the logged user',
+          errorDetail: 'User does not have any professional data',
+        });
       } else {
         callback(null, fetchedInterviewee);
       }
