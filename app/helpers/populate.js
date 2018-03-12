@@ -1,4 +1,7 @@
+const mongoose = require('mongoose');
 const Models = require('../models');
+const JobOpening = Models.JobOpening;
+const Company = Models.Company;
 const CONSTANTS = require('../../config/constants');
 const ERROR_TYPES = CONSTANTS.ERROR_TYPES;
 
@@ -29,6 +32,33 @@ function _populateWithCompanyInfo(openings, callback) {
   );
 }
 
+/**
+ * Function to populate users array in company collection
+ * @param {objectId} userId Company objectId
+ * @param {Function} callback function two param err and fetched user
+ */
+function _populateCompanyUsers(companyId, callback) {
+  Models.Company.find({
+    _id: mongoose.Types.ObjectId(companyId),
+  })
+    .populate({
+      path: 'users',
+      select: { password: 0 },
+    })
+    .exec(function(err, fetchedData) {
+      if (err) {
+        callback({
+          type: CONSTANTS.ERROR_TYPES.DB_ERROR,
+          msg: 'Failed to check record, database error encountered !',
+          errorDetail: JSON.stringify(err),
+        });
+      } else {
+        callback(null, fetchedData);
+      }
+    });
+}
+
 module.exports = {
   _populateWithCompanyInfo: _populateWithCompanyInfo,
+  _populateCompanyUsers: _populateCompanyUsers,
 };
