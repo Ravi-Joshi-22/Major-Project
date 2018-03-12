@@ -70,11 +70,7 @@ function deleteOpening(req, res, next) {
  */
 
 function getAllOpening(req, res, next) {
-  const opening = req.query.openingId;
-  openingLib.getAllOpeningsOfCompany(req.user, opening, function(
-    err,
-    fetchedInstance
-  ) {
+  openingLib.getAllOpeningsOfCompany(req.user, function(err, fetchedInstance) {
     if (err) {
       res.status(500).json(err);
       return;
@@ -85,5 +81,5 @@ function getAllOpening(req, res, next) {
 router.post('/addCredits', addCredits);
 router.post('/new', newOpening);
 router.delete('/', deleteOpening);
-router.get('/all', getAllOpening);
+router.get('/', getAllOpening);
 module.exports = router;
