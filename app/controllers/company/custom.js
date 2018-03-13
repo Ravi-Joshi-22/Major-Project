@@ -19,16 +19,5 @@ function getDashboard(req, res, next) {
   });
 }
 
-function avgOpeningCreated(req, res, next) {
-  customLib.avgOpeningCreated(req.body._id, function(err, fetchedInstance) {
-    if (err) {
-      res.status(500).json(err);
-      return;
-    }
-    res.status(200).json(fetchedInstance);
-  });
-}
-
 router.get('/dashboard', getDashboard);
-router.post('/', avgOpeningCreated);
 module.exports = router;
