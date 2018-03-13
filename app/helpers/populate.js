@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Models = require('../models');
 const CONSTANTS = require('../../config/constants');
 const ERROR_TYPES = CONSTANTS.ERROR_TYPES;
@@ -80,5 +81,5 @@ function _populateTrackWithQuestion(trackDetail, callback) {
 module.exports = {
   _populateWithCompanyInfo: _populateWithCompanyInfo,
   _populateTrackWithQuestion: _populateTrackWithQuestion,
-  _populateCompanyUsers: _populateCompanyUsers
+  _populateCompanyUsers: _populateCompanyUsers,
 };
