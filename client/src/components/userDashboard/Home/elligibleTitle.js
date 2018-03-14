@@ -9,8 +9,8 @@ class ElligibleTitle extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
-        <Card style={{ padding: 5, margin: 20}}>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
+        <Card style={{ padding: 5, margin: 20 }}>
           <CardTitle
             title="Your Elligible Openings"
             subtitle="Following jobs are filtered out according to your profile"

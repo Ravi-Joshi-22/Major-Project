@@ -2,28 +2,24 @@ const mongoose = require('mongoose');
 const CONSTANTS = require('../../config/constants');
 
 const Schema = mongoose.Schema;
-const interviewAnsSchema = new Schema(
+const interviewAnsSchema = new Schema({
+  question_id: {
+    type: Schema.Types.ObjectId,
+    ref: 'Questions',
+  },
+  answer: {
+    type: String,
+  },
+  tags: [
     {
-        question_id: {
-            type: Schema.Types.ObjectId,
-            ref: 'Questions',
-        },
-        answer: {
-            type: String,
-        },
-        tags: [
-            {
-                type: String,
-            }
-        ],
-        score: {
-            type: Number,
-            required: true,
-        },
+      type: String,
     },
-    {
-        timestamps: true,
-    }
-);
+  ],
+  score: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+});
 
 module.exports = interviewAnsSchema;

@@ -32,7 +32,7 @@ class PerPaper extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <div style={{ margin: 15, marginLeft: 40 }}>
           <h4> Profile completion Percentile</h4>
           <CircularProgress

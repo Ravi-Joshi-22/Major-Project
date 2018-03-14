@@ -10,7 +10,7 @@ class Personal extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ margin: 10, marginTop: 20 }}>
           <CardActions>
             <IconButton className="icon" tooltip="Edit">

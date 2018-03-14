@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const interviewAnsScema = require('./intervieweeAns');
 const CONSTANTS = require('../../config/constants');
 
 const Schema = mongoose.Schema;
@@ -21,10 +22,13 @@ const interviewTrackSchema = new Schema(
       type: Number,
       default: 0,
     },
+    count: {
+      type: Number,
+      default: 0,
+    },
     questions: [
       {
-        type: Schema.Types.ObjectId,
-        ref: 'IntervieweeAns',
+        type: interviewAnsScema,
       },
     ],
   },

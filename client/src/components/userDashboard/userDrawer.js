@@ -29,7 +29,7 @@ class UserDrawer extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <div>
           <AppBar
             title="SmartHyre"
@@ -39,9 +39,6 @@ class UserDrawer extends React.Component {
               </IconButton>
             }
             onLeftIconButtonClick={this.handleToggle}
-            onTitleClick={() => {
-              this.props.homeCallback();
-            }}
             style={{ width: "114%", marginLeft: "-7%" }}
           />
           <Drawer
@@ -56,7 +53,13 @@ class UserDrawer extends React.Component {
               </MenuItem>
               <Divider />
               <Subheader> My Account </Subheader>
-              <MenuItem onClick={this.handleClose}>Elligible Openings</MenuItem>
+              <MenuItem 
+              onClick={() => {
+                this.handleToggle();
+                this.props.homeCallback();
+              }}>
+              Elligible Openings
+              </MenuItem>
               <MenuItem
                 onClick={() => {
                   this.handleToggle();
