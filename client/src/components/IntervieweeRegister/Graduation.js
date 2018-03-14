@@ -293,24 +293,12 @@ export default class Graduation extends React.Component {
                       </span>
                     </div>
                   </div>
-                </div>
-
-                <div className="field is-grouped">
-                  <div className="control">
-                    <button
-                      className="button is-link is-rounded"
-                      onClick={this.submit}
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </div>
-          
+                </div>          
             </section>
             <footer class="modal-card-foot">
-              <button
-                class="button is-primary has-addons is-right  is-rounded"
-                onClick={this.handleCollege}
+              <button 
+                class="button is-right is-primary  is-rounded" 
+                onClick={this.submit} 
               >
                 Save changes
               </button>

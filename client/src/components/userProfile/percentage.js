@@ -1,19 +1,6 @@
 import React from 'react';
-import { Card, CardTitle, CardText } from 'material-ui/Card';
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import FlatButton from 'material-ui/FlatButton';
-import AddIcon from 'material-ui/svg-icons/editor/mode-edit';
-import Paper from 'material-ui/Paper';
 import CircularProgress from 'material-ui/CircularProgress';
-import centerFocusStrong from 'material-ui/svg-icons/image/center-focus-strong';
-const style = {
-  height: 230,
-  width: 230,
-  margin: 10,
-  textAlign: 'center',
-  display: 'inline-block',
-};
 const prog = {
   margin: 10,
 };

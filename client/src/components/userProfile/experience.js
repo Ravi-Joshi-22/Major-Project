@@ -1,17 +1,10 @@
 import React from 'react';
-import { Card, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 import CardHeader from 'material-ui/Card/CardHeader';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import FlatButton from 'material-ui/FlatButton';
-import AddIcon from 'material-ui/svg-icons/editor/mode-edit';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import { IconButton } from 'material-ui';
-import style from 'material-ui/svg-icons/image/style';
-const iconStyles = {
-  marginRight: 10,
-  marginTop: 5,
-};
+import ExpModal from '../userProfile/modalOpening/expmodal';
+import EditIcon from 'material-ui/svg-icons/image/edit';
 
 class Experience extends React.Component {
   constructor(props) {
@@ -23,22 +16,22 @@ class Experience extends React.Component {
       <MuiThemeProvider>
         <Card style={{ padding: 5, margin: 10 }}>
           <div className="columns">
-            <div className="column is-10">
+            <div className="column is-11">
               <CardTitle title="Experience" />
             </div>
-            <div className="column is-2">
-              <IconButton tooltip="Edit">
-                <AddIcon />
-              </IconButton>
-              <FloatingActionButton mini={true} style={iconStyles}>
-                <ContentAdd />
-              </FloatingActionButton>
+            <div className="column is-1">
+              <ExpModal />
             </div>
           </div>
 
           <div className="columns">
             <div className="column is-6">
-              <Card style={{ padding: 5, margin: 10 }}>
+              <Card style={{ padding: 5, margin: 5 }}>
+                <CardActions>
+                  <IconButton className="icon" tooltip="Edit">
+                    <EditIcon />
+                  </IconButton>
+                </CardActions>
                 <CardHeader
                   title="Tata Consultancy Services"
                   subtitle="Software Developer"
@@ -52,7 +45,12 @@ class Experience extends React.Component {
               </Card>
             </div>
             <div className="column is-6">
-              <Card style={{ padding: 5, margin: 10 }}>
+              <Card style={{ padding: 5, margin: 5 }}>
+                <CardActions>
+                  <IconButton className="icon" tooltip="Edit">
+                    <EditIcon />
+                  </IconButton>
+                </CardActions>
                 <CardHeader
                   title="Zensar Technology"
                   subtitle=" Trainee"

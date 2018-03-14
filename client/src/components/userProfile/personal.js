@@ -1,18 +1,8 @@
 import React from 'react';
-import {
-  Card,
-  CardActions,
-  CardHeader,
-  CardMedia,
-  CardTitle,
-  CardText,
-} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import EditIcon from 'material-ui/svg-icons/image/edit';
-import borderLeft from 'material-ui/svg-icons/editor/border-left';
 import { IconButton } from 'material-ui';
-import formatAlignLeft from 'material-ui/svg-icons/editor/format-align-left';
 class Personal extends React.Component {
   constructor(props) {
     super(props);

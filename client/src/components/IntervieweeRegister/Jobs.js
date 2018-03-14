@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 
 export default class Jobs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      profile: "",
-      organization: "",
-      location: "",
-      home: "",
-      start_date: "",
-      end_date: "",
-      curently_working: "",
-      description: "",
-      currentModalClass: "modal"
+      profile: '',
+      organization: '',
+      location: '',
+      home: '',
+      start_date: '',
+      end_date: '',
+      curently_working: '',
+      description: '',
+      currentModalClass: 'modal',
     };
     this.updateProfile = this.updateProfile.bind(this);
     this.updateOrganization = this.updateOrganization.bind(this);
@@ -48,23 +48,32 @@ export default class Jobs extends React.Component {
   }
 
   async renderModal() {
-    if (this.state.currentModalClass === "modal") {
-      await this.setState({ currentModalClass: "modal is-active" });
+    if (this.state.currentModalClass === 'modal') {
+      await this.setState({ currentModalClass: 'modal is-active' });
     } else {
-      await this.setState({ currentModalClass: "modal" });
+      await this.setState({ currentModalClass: 'modal' });
     }
   }
   async submit() {
-    await this.setState({ currentModalClass: "modal" });
-    this.props.jobCB(this.state);
+    await this.setState({ currentModalClass: 'modal' });
   }
 
   render() {
     return (
-      <div
-        className="card"
-        style={{ width: '80%', maxWidth: 800, margin: 'auto', padding: 50 }}
-      >
+      <div>
+        <div className={this.state.currentModalClass}>
+          <div class="modal-background" />
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Jobs Details</p>
+              <button
+                class="delete"
+                aria-label="close"
+                onClick={this.renderModal}
+              />
+            </header>
+            <section class="modal-card-body">
+              {' '}
               <div className="field">
                 <label className="label">Profile</label>
                 <div className="control has-icons-left has-icons-right">
@@ -113,10 +122,9 @@ export default class Jobs extends React.Component {
                   </span>
                 </div>
               </div>
-
               <label class="label">Job Duration</label>
-              <div style={{ display: "flex" }}>
-                <div class="field" style={{ width: "47%", marginRight: "5%" }}>
+              <div style={{ display: 'flex' }}>
+                <div class="field" style={{ width: '47%', marginRight: '5%' }}>
                   <label class="label">Start date</label>
                   <p class="control has-icons-left ">
                     <input
@@ -132,7 +140,7 @@ export default class Jobs extends React.Component {
                     </span>
                   </p>
                 </div>
-                <div class="field" style={{ width: "50%" }}>
+                <div class="field" style={{ width: '50%' }}>
                   <label class="label">End day</label>
                   <p class="control has-icons-left ">
                     <input
@@ -169,18 +177,25 @@ export default class Jobs extends React.Component {
                   />
                 </div>
               </div>
-    
-              <div className="field is-grouped">
-                <div className="control">
-                  <button
-                    className="button is-link is-rounded"
-                    onClick={this.submit}
-                  >
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </div>
+            </section>
+            <footer class="modal-card-foot">
+              <button
+                class="button is-right is-primary  is-rounded"
+                onClick={this.submit}
+              >
+                Save changes
+              </button>
+            </footer>
+          </div>
+        </div>
+        <a
+          class="button is-black is-inverted  is-hovered"
+          onClick={this.renderModal}
+        >
+          {' '}
+          +Add Jobs{' '}
+        </a>
+      </div>
     );
   }
 }

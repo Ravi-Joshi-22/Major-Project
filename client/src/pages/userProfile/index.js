@@ -8,7 +8,7 @@ import Experience from '../../components/userProfile/experience';
 import Courses from '../../components/userProfile/courses';
 import SkillsCard from '../../components/userProfile/skills';
 import PerPaper from '../../components/userProfile/percentage';
-import Project from '../../components/userProfile/projects';
+import Projects from '../../components/userProfile/projects';
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -49,7 +49,7 @@ class UserProfile extends React.Component {
               </div>
               <Experience />
               <Education />
-              <Project />
+              <Projects />
             </div>
             <div className="column is-4">
               <PerPaper />
