@@ -32,6 +32,7 @@ module.exports = {
       },
       INTERVIEW_STATUS: {
         APPLIED: 'applied',
+        GIVING: 'giving',
         GIVEN: 'given',
         SELECTED: 'selected',
         REJECTED: 'rejected',

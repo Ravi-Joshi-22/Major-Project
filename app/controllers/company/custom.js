@@ -10,10 +10,7 @@ const router = express.Router();
  */
 
 function getDashboard(req, res, next) {
-  customLib.getDashboardDetails(req.user._id, function(
-    err,
-    fetchedInstance
-  ) {
+  customLib.getDashboardDetails(req.user._id, function(err, fetchedInstance) {
     if (err) {
       res.status(500).json(err);
       return;
