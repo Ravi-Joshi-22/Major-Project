@@ -29,6 +29,29 @@ function _populateWithCompanyInfo(openings, callback) {
   );
 }
 
+function _populateTrackWithQuestion(trackDetail, callback) {
+  Models.Question.populate(
+    trackDetail,
+    {
+      path: 'questions.question_id',
+      select: { tags: 0, answer: 0, createdAt: 0, updatedAt: 0 },
+    },
+    function(questionPopulationError, populatedResult) {
+      if (questionPopulationError) {
+        callback({
+          type: ERROR_TYPES.DB_ERROR,
+          msg:
+            'Failed to provide question details , database error encountered ',
+          errorDetail: JSON.stringify(questionPopulationError),
+        });
+      } else {
+        callback(null, populatedResult);
+      }
+    }
+  );
+}
+
 module.exports = {
   _populateWithCompanyInfo: _populateWithCompanyInfo,
+  _populateTrackWithQuestion: _populateTrackWithQuestion,
 };
