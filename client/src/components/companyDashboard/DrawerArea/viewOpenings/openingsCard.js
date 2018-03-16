@@ -13,7 +13,6 @@ import FlatButton from 'material-ui/FlatButton';
 import MoreIcon from 'material-ui/svg-icons/av/fast-forward';
 import EditIcon from 'material-ui/svg-icons/content/create';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import IconButton from 'material-ui/IconButton/IconButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Checkbox from 'material-ui/Checkbox';
 import Dialog from 'material-ui/Dialog';
@@ -94,7 +93,7 @@ class OpeningsCard extends React.Component {
               />
               <CardText expandable={true}>
                 <div className="columns">
-                  <div className="column is-10">
+                  <div className="column is-8">
                     <table>
                       <thead>
                         <tr>
@@ -120,11 +119,11 @@ class OpeningsCard extends React.Component {
                       </tbody>
                     </table>
                   </div>
-                  <div className="column is-2">
-                    <FloatingActionButton mini={true}>
+                  <div className="column is-4">
+                    <FloatingActionButton mini={true} style={{ margin: 5 }}>
                       <EditIcon />
                     </FloatingActionButton>
-                    <FloatingActionButton mini={true}>
+                    <FloatingActionButton mini={true} style={{ margin: 5 }}>
                       <DeleteIcon onClick={this.handleOpen} />
                     </FloatingActionButton>
                     <Dialog
