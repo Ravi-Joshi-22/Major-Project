@@ -17,6 +17,8 @@ import OpeningsCard from '../../components/companyDashboard/DrawerArea/viewOpeni
 import SettingsListCard from '../../components/companyDashboard/DrawerArea/viewOpenings/settingsListCard';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 import ClearIcon from 'material-ui/svg-icons/content/clear';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/company';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -36,13 +38,20 @@ class ViewOpenings extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.props.companyViewOpenings();
+  }
+
   handleToggle = () => this.setState({ open: !this.state.open });
 
   render() {
     const contentStyle = {
       marginTop: 30,
     };
-
+    const { intervieweeOpenings } = this.props;
+    console.log(intervieweeOpenings);
+    const companyOpenings = intervieweeOpenings.companyCreatedOpenings;
+    console.log(companyOpenings);
     return (
       <div>
         <MuiThemeProvider muiTheme={muiTheme}>
@@ -76,12 +85,9 @@ class ViewOpenings extends React.Component {
               <div>
                 <div className="columns">
                   <div className="column is-8">
-                    <OpeningsCard />
-                    <OpeningsCard />
-                    <OpeningsCard />
-                    <OpeningsCard />
-                    <OpeningsCard />
-                    <OpeningsCard />
+                    {companyOpenings.map((eachOpening, key) => (
+                      <OpeningsCard openingsData={eachOpening} />
+                    ))}
                     <RaisedButton
                       muiTheme={muiTheme}
                       label="Clear Selection"
@@ -103,4 +109,8 @@ class ViewOpenings extends React.Component {
     );
   }
 }
-export default ViewOpenings;
+
+function mapStateToProps({ intervieweeOpenings }) {
+  return { intervieweeOpenings };
+}
+export default connect(mapStateToProps, actions)(ViewOpenings);
