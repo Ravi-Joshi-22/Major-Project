@@ -9,8 +9,6 @@ import companyReducer from './company/companyReducers';
 import companyDashReducer from './company/companyDash';
 import intervieweeProfileReducer from './interviewee/profileReducer';
 import intervieweeOpeningReducer from './openingReducer';
-import successBoxReducer from './app/successBoxReducer';
-
 
 export default combineReducers({
   auth: userReducers,
