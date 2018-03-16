@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   Card,
   CardActions,
@@ -15,6 +16,8 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from 'material-ui/IconButton/IconButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Checkbox from 'material-ui/Checkbox';
+import Dialog from 'material-ui/Dialog';
+import * as actions from '../../../../actions/company';
 
 const styles = {
   checkbox: {
@@ -29,8 +32,17 @@ class OpeningsCard extends React.Component {
     this.state = {
       expanded: false,
       checked: false,
+      open: false,
     };
   }
+
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   getDateStr(date) {
     const dateStr = new Date(date);
@@ -49,6 +61,16 @@ class OpeningsCard extends React.Component {
 
   render() {
     const fields = ['START DATE', 'END DATE', 'SALARY'];
+    const actions = [
+      <FlatButton label="Cancel" primary={true} onClick={this.handleClose} />,
+      <FlatButton
+        label="Yes"
+        primary={true}
+        onClick={() =>
+          this.props.companyDeleteOpenings(this.props.openingsData._id)
+        }
+      />,
+    ];
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <div className="columns">
@@ -103,8 +125,15 @@ class OpeningsCard extends React.Component {
                       <EditIcon />
                     </FloatingActionButton>
                     <FloatingActionButton mini={true}>
-                      <DeleteIcon />
+                      <DeleteIcon onClick={this.handleOpen} />
                     </FloatingActionButton>
+                    <Dialog
+                      actions={actions}
+                      modal={true}
+                      open={this.state.open}
+                    >
+                      Are you sure, you want to delete this opening?
+                    </Dialog>
                   </div>
                 </div>
               </CardText>
@@ -123,4 +152,4 @@ class OpeningsCard extends React.Component {
   }
 }
 
-export default OpeningsCard;
+export default connect(null, actions)(OpeningsCard);
