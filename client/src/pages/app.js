@@ -5,12 +5,13 @@ import * as actions from '../actions/app';
 import CompanyRegister from './companyRegister/index';
 import Login from './login/index';
 import UserDashboard from './userDashboard/index';
-import UserProfile from "./userProfile";
+import UserProfile from './userProfile';
 import CompanyDashboard from './companyDashboard';
 import IntervieweeRegister from './interviewee registration';
+import ViewOpenings from './viewOpenings';
+import DetailsPage from '../components/companyDashboard/DrawerArea/viewOpenings/detailsPage';
 import ErrorBox from '../components/common/errorBoxContainer';
 import SuccessBox from '../components/common/successBox';
-
 
 //In jsx exact={true} is similar to exact
 class App extends Component {
@@ -20,15 +21,25 @@ class App extends Component {
     return (
       <div>
         <ErrorBox />
-        <SuccessBox/>
+        <SuccessBox />
         <BrowserRouter>
           <div className="container">
             <Route exact path="/" component={Login} />
             <Route exact path="/companyRegister" component={CompanyRegister} />
-            <Route exact path="/companyDashboard" component={CompanyDashboard} />
-            <Route exact path="/userDashboard" component={UserDashboard}/>
-            <Route exact path="/intervieweeRegister" component={IntervieweeRegister} />
+            <Route
+              exact
+              path="/companyDashboard"
+              component={CompanyDashboard}
+            />
+            <Route exact path="/userDashboard" component={UserDashboard} />
+            <Route
+              exact
+              path="/intervieweeRegister"
+              component={IntervieweeRegister}
+            />
             <Route exact path="/userProfile" component={UserProfile} />
+            <Route exact path="/viewOpenings" component={ViewOpenings} />
+            <Route exact path="/detailsPage" component={DetailsPage} />
           </div>
         </BrowserRouter>
       </div>

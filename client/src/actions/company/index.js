@@ -1,21 +1,22 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   FETCH_COMPANY,
   HIDE_COMPANY_OPENING_MODAL,
   SHOW_COMPANY_OPENING_MODAL,
-  COMPANY_DASH
-} from "./types";
-import { ERROR, START_LOADING, SHOW_SUCCESS_BOX } from "../app/types";
+  COMPANY_DASH,
+  COMPANY_VIEW_OPENINGS,
+} from './types';
+import { ERROR, START_LOADING, SHOW_SUCCESS_BOX } from '../app/types';
 
 export const handleToken = token => async dispatch => {
   axios
-    .post("/smarthyre/api/v1/company/opening/addCredits", token)
+    .post('/smarthyre/api/v1/company/opening/addCredits', token)
     .then(res => {
       dispatch({ type: FETCH_COMPANY, payload: res.data });
     })
     .then(() => {
       const success = {
-        msg: "Successfully added credit"
+        msg: 'Successfully added credit',
       };
       dispatch({ type: SHOW_SUCCESS_BOX, payload: success });
     })
@@ -27,7 +28,7 @@ export const handleToken = token => async dispatch => {
 export const newOpening = openingData => async dispatch => {
   dispatch({ type: START_LOADING });
   axios
-    .post("/smarthyre/api/v1/company/opening/new", openingData)
+    .post('/smarthyre/api/v1/company/opening/new', openingData)
     .then(res => {
       dispatch({ type: HIDE_COMPANY_OPENING_MODAL });
     })
@@ -39,8 +40,18 @@ export const newOpening = openingData => async dispatch => {
 export const fetchDash = () => async dispatch => {
   dispatch({ type: START_LOADING });
   axios
-    .get("/smarthyre/api/v1/company/custom/dashboard")
+    .get('/smarthyre/api/v1/company/custom/dashboard')
     .then(res => dispatch({ type: COMPANY_DASH, payload: res.data }))
+    .catch(err => {
+      dispatch({ type: ERROR, payload: err.response.data });
+    });
+};
+
+export const companyViewOpenings = () => async dispatch => {
+  dispatch({ type: START_LOADING });
+  axios
+    .get('/smarthyre/api/v1/company/opening')
+    .then(res => dispatch({ type: COMPANY_VIEW_OPENINGS, payload: res.data }))
     .catch(err => {
       dispatch({ type: ERROR, payload: err.response.data });
     });

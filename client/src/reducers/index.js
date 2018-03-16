@@ -7,8 +7,10 @@ import modalReducer from './app/modalReducer';
 import successBoxReducer from './app/successBoxReducer';
 import companyReducer from './company/companyReducers';
 import companyDashReducer from './company/companyDash';
-import intervieweeOpeningReducer from './interviewee/openingReducer';
 import intervieweeProfileReducer from './interviewee/profileReducer';
+import intervieweeOpeningReducer from './openingReducer';
+import successBoxReducer from './app/successBoxReducer';
+
 
 export default combineReducers({
   auth: userReducers,
