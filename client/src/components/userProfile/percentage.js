@@ -9,7 +9,7 @@ class PerPaper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      completed: 60,
+      completed: 0,
     };
   }
   /* componentDidMount() {
@@ -37,7 +37,7 @@ class PerPaper extends React.Component {
           <h4> Profile completion Percentile</h4>
           <CircularProgress
             mode="determinate"
-            value={this.state.completed}
+            value={this.props.percent}
             size={200}
             thickness={5}
             style={prog}
