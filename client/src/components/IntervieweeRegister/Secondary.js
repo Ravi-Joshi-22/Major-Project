@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
 export default class Secondary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      year_of_comp: "",
-      board: "",
-      performance: "",
-      value: "",
-      school: "",
-      currentModalClass: "modal"
+      year_of_comp: '',
+      board: '',
+      performance: '',
+      value: '',
+      school: '',
+      currentModalClass: 'modal',
     };
     this.updateYearOfCompletion = this.updateYearOfCompletion.bind(this);
     this.updateBoard = this.updateBoard.bind(this);
@@ -34,18 +34,18 @@ export default class Secondary extends React.Component {
 
   updateMarks(e) {
     const { performance, value } = this.state;
-    if (performance === "Percentage") {
+    if (performance === 'Percentage') {
       if (e.target.value < 100) {
         this.setState({ value: e.target.value });
-        this.refs.marksInput.className = "input is-success";
+        this.refs.marksInput.className = 'input is-success';
       }
-    } else if (performance === "CGPA(Scale of 10)") {
+    } else if (performance === 'CGPA(Scale of 10)') {
       if (e.target.value < 10) {
         this.setState({ value: e.target.value });
-        this.refs.marksInput.className = "input is-success";
+        this.refs.marksInput.className = 'input is-success';
       }
     } else {
-      this.refs.marksInput.className = "input is-danger";
+      this.refs.marksInput.className = 'input is-danger';
     }
   }
 
@@ -54,23 +54,31 @@ export default class Secondary extends React.Component {
   }
 
   async renderModal() {
-    if (this.state.currentModalClass === "modal") {
-      await this.setState({ currentModalClass: "modal is-active" });
+    if (this.state.currentModalClass === 'modal') {
+      await this.setState({ currentModalClass: 'modal is-active' });
     } else {
-      await this.setState({ currentModalClass: "modal" });
+      await this.setState({ currentModalClass: 'modal' });
     }
   }
   async submit() {
-    await this.setState({ currentModalClass: "modal" });
-    this.props.scCB(this.state);
+    await this.setState({ currentModalClass: 'modal' });
   }
 
   render() {
     return (
-      <div
-        className="card"
-        style={{ width: '80%', maxWidth: 800, margin: 'auto', padding: 50 }}
-      >
+      <div>
+        <div className={this.state.currentModalClass}>
+          <div class="modal-background" />
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Secondary Education Details</p>
+              <button
+                class="delete"
+                aria-label="close"
+                onClick={this.renderModal}
+              />
+            </header>
+            <section class="modal-card-body">
               <div class="field ">
                 <label class="label">Year Of Completion</label>
                 <p class="control has-icons-left ">
@@ -134,8 +142,8 @@ export default class Secondary extends React.Component {
                 </div>
               </div>
 
-              <div style={{ display: "flex" }}>
-                <div class="field" style={{ width: "47%", marginRight: "5%" }}>
+              <div style={{ display: 'flex' }}>
+                <div class="field" style={{ width: '47%', marginRight: '5%' }}>
                   <label class="label">Performance Scale</label>
                   <p class="control has-icons-left ">
                     <span class="select is-fullwidth ">
@@ -154,7 +162,7 @@ export default class Secondary extends React.Component {
                   </p>
                 </div>
 
-                <div class="field" style={{ width: "47%" }}>
+                <div class="field" style={{ width: '47%' }}>
                   <label className="label ">Performance</label>
                   <div className="control has-icons-left has-icons-right">
                     <input
@@ -189,18 +197,25 @@ export default class Secondary extends React.Component {
                   </span>
                 </div>
               </div>
-    
-              <div className="field is-grouped">
-                <div className="control">
-                  <button
-                    className="button is-link is-rounded"
-                    onClick={this.submit}
-                  >
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </div>
+            </section>
+            <footer class="modal-card-foot">
+              <button
+                class="button is-right is-primary  is-rounded"
+                onClick={this.submit}
+              >
+                Save changes
+              </button>
+            </footer>
+          </div>
+        </div>
+        <a
+          class="button is-black is-inverted  is-hovered"
+          onClick={this.renderModal}
+        >
+          {' '}
+          +Add Secondary{' '}
+        </a>
+      </div>
     );
   }
 }

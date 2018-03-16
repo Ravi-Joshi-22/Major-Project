@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
 export default class Certification extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      authority: "",
-      lic_number: "",
-      url: "",
-      currentModalClass: "modal"
+      name: '',
+      authority: '',
+      lic_number: '',
+      url: '',
+      currentModalClass: 'modal',
     };
     this.updateName = this.updateName.bind(this);
     this.updateAuthority = this.updateAuthority.bind(this);
@@ -30,23 +30,31 @@ export default class Certification extends React.Component {
     this.setState({ url: e.target.value });
   }
   async renderModal() {
-    if (this.state.currentModalClass === "modal") {
-      await this.setState({ currentModalClass: "modal is-active" });
+    if (this.state.currentModalClass === 'modal') {
+      await this.setState({ currentModalClass: 'modal is-active' });
     } else {
-      await this.setState({ currentModalClass: "modal" });
+      await this.setState({ currentModalClass: 'modal' });
     }
   }
   async submit() {
-    await this.setState({ currentModalClass: "modal" });
-    this.props.certiCB(this.state);
+    await this.setState({ currentModalClass: 'modal' });
   }
 
   render() {
     return (
-      <div
-        className="card"
-        style={{ width: '80%', maxWidth: 800, margin: 'auto', padding: 50 }}
-      >
+      <div>
+        <div className={this.state.currentModalClass}>
+          <div class="modal-background" />
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Certification Details</p>
+              <button
+                class="delete"
+                aria-label="close"
+                onClick={this.renderModal}
+              />
+            </header>
+            <section class="modal-card-body">
               <div className="field">
                 <label className="label">Certificate Name</label>
                 <div className="control has-icons-left ">
@@ -116,18 +124,25 @@ export default class Certification extends React.Component {
                 </div>
               </div>
               <br />
-    
-              <div className="field is-grouped">
-                <div className="control">
-                  <button
-                    className="button is-link is-rounded"
-                    onClick={this.submit}
-                  >
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </div>
+            </section>
+            <footer class="modal-card-foot">
+              <button
+                class="button is-right is-primary  is-rounded"
+                onClick={this.submit}
+              >
+                Save changes
+              </button>
+            </footer>
+          </div>
+        </div>
+        <a
+          class="button is-black is-inverted  is-hovered"
+          onClick={this.renderModal}
+        >
+          {' '}
+          +Add Certification{' '}
+        </a>
+      </div>
     );
   }
 }

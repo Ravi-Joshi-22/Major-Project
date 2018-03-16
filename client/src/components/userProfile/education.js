@@ -1,16 +1,11 @@
 import React from 'react';
-import { Card, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 import CardHeader from 'material-ui/Card/CardHeader';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import FlatButton from 'material-ui/FlatButton';
-import AddIcon from 'material-ui/svg-icons/editor/mode-edit';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import { IconButton } from 'material-ui';
-const iconStyles = {
-  marginRight: 10,
-  marginTop: 5,
-};
+import EduModal from '../userProfile/modalOpening/eduModal';
+import EditIcon from 'material-ui/svg-icons/image/edit';
+
 class Education extends React.Component {
   constructor(props) {
     super(props);
@@ -21,13 +16,18 @@ class Education extends React.Component {
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 5, margin: 10 }}>
           <div className="columns">
-            <div className="column is-10">
+            <div className="column is-11">
               <CardTitle title="Education" />
               <CardHeader
                 title="Medicaps Institute Of Technology and Management"
                 subtitle="Bachelor Of Enginnering"
                 avatar="/Assets/educ.jpg"
               />
+              <CardActions>
+                <IconButton className="icon" tooltip="Edit">
+                  <EditIcon />
+                </IconButton>
+              </CardActions>
               <CardText style={{ padding: 2 }}>
                 Computer Science and Enginnering<br />
                 2014-2018<br />
@@ -39,19 +39,19 @@ class Education extends React.Component {
                 subtitle="Senior Secondary"
                 avatar="/Assets/sec.jpg"
               />
+              <CardActions>
+                <IconButton className="icon" tooltip="Edit">
+                  <EditIcon />
+                </IconButton>
+              </CardActions>
               <CardText style={{ padding: 2 }}>
                 Science<br />
                 2012-2014<br />
                 Percentage:90%<br />
               </CardText>
             </div>
-            <div className="column is-2">
-              <IconButton tooltip="Edit">
-                <AddIcon />
-              </IconButton>
-              <FloatingActionButton mini={true} style={iconStyles}>
-                <ContentAdd />
-              </FloatingActionButton>
+            <div className="column is-1">
+              <EduModal />
             </div>
           </div>
         </Card>

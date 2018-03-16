@@ -8,7 +8,7 @@ import Experience from '../../components/userProfile/experience';
 import Courses from '../../components/userProfile/courses';
 import SkillsCard from '../../components/userProfile/skills';
 import PerPaper from '../../components/userProfile/percentage';
-import Project from '../../components/userProfile/projects';
+import Projects from '../../components/userProfile/projects';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { teal300, teal100, teal200, lightBlue500, lightBlue50 } from 'material-ui/styles/colors';
 
@@ -61,7 +61,7 @@ class UserProfile extends React.Component {
               </div>
               <Experience muiTheme={muiTheme} />
               <Education muiTheme={muiTheme} />
-              <Project muiTheme={muiTheme} />
+              <Projects muiTheme={muiTheme} />
             </div>
             <div className="column is-4">
               <PerPaper muiTheme={muiTheme} />
