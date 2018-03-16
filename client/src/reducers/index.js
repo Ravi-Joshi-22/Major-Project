@@ -6,7 +6,7 @@ import cureentStepReducer from './app/currentStepReducer';
 import modalReducer from './app/modalReducer';
 import companyReducer from './company/companyReducers';
 import companyDashReducer from './company/companyDash';
-import intervieweeOpeningReducer from './interviewee/openingReducer';
+import intervieweeOpeningReducer from './openingReducer';
 import successBoxReducer from './app/successBoxReducer';
 
 export default combineReducers({

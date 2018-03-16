@@ -15,6 +15,7 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from 'material-ui/IconButton/IconButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Checkbox from 'material-ui/Checkbox';
+
 const styles = {
   checkbox: {
     margin: 20,
@@ -29,6 +30,17 @@ class OpeningsCard extends React.Component {
       expanded: false,
       checked: false,
     };
+  }
+
+  getDateStr(date) {
+    const dateStr = new Date(date);
+    const sDateStr =
+      dateStr.getDate() +
+      '- ' +
+      (dateStr.getMonth() + 1) +
+      '- ' +
+      dateStr.getFullYear();
+    return sDateStr;
   }
 
   handleExpandChange = expanded => {
@@ -50,8 +62,11 @@ class OpeningsCard extends React.Component {
               onExpandChange={this.handleExpandChange}
             >
               <CardHeader
-                title="Software Developer"
-                subtitle="No of candidates applied: 8"
+                title={this.props.openingsData.position}
+                subtitle={
+                  'No of candidates applied: ' +
+                  this.props.openingsData.interviewees.length
+                }
                 actAsExpander={true}
                 showExpandableButton={true}
               />
@@ -68,9 +83,17 @@ class OpeningsCard extends React.Component {
                       </thead>
                       <tbody displayRowCheckbox={false}>
                         <tr>
-                          <td style={{ width: '25%' }}>23/04/2018</td>
-                          <td style={{ width: '25%' }}>31/04/2018</td>
-                          <td style={{ width: '25%' }}>5.5 lakhs</td>
+                          <td style={{ width: '25%' }}>
+                            {this.getDateStr(
+                              this.props.openingsData.start_date
+                            )}
+                          </td>
+                          <td style={{ width: '25%' }}>
+                            {this.getDateStr(this.props.openingsData.end_date)}
+                          </td>
+                          <td style={{ width: '25%' }}>
+                            {this.props.openingsData.salary}
+                          </td>
                         </tr>
                       </tbody>
                     </table>
