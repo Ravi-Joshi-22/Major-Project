@@ -116,5 +116,5 @@ router.post('/new', newOpening);
 router.put('/', updateOpeningDetails);
 router.delete('/', deleteOpening);
 router.get('/', getAllOpening);
-router.get('/detail', getOpeningDetails);
+router.get('/', getOpeningDetails);
 module.exports = router;
