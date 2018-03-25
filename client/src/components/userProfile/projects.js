@@ -5,7 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import { IconButton } from 'material-ui';
-import Project from '../IntervieweeRegister/Project';
+import Project from '../userProfile/UserDetailsForm/Project';
 import EditIcon from 'material-ui/svg-icons/image/edit';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 class Projects extends React.Component {

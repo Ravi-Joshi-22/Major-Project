@@ -1,7 +1,7 @@
 import React from 'react';
-import Graduation from '../../IntervieweeRegister/Graduation';
-import SeniorSecondary from '../../IntervieweeRegister/SeniorSecondary';
-import Secondary from '../../IntervieweeRegister/Secondary';
+import Graduation from '../UserDetailsForm/Graduation';
+import SeniorSecondary from '../UserDetailsForm/SeniorSecondary';
+import Secondary from '../UserDetailsForm/Secondary';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 export default class EduModal extends React.Component {

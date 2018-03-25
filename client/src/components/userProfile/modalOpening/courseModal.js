@@ -1,7 +1,7 @@
 import React from 'react';
-import Courses from '../../IntervieweeRegister/Courses';
-import Certification from '../../IntervieweeRegister/Certification';
-import Test from '../../IntervieweeRegister/Test';
+import Courses from '../UserDetailsForm/Courses';
+import Certification from '../UserDetailsForm/Certification';
+import Test from '../UserDetailsForm/Test';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 export default class CourseModal extends React.Component {
