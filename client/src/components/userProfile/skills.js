@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 import SkillChip from './skillchips';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Skills from '../IntervieweeRegister/Skills';
+import Skills from '../userProfile/UserDetailsForm/Skills';
 class SkillsCard extends React.Component {
   constructor(props) {
     super(props);

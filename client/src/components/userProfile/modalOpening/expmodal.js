@@ -1,8 +1,8 @@
 import React from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import Internship from '../../IntervieweeRegister/Internship';
-import Jobs from '../../IntervieweeRegister/Jobs';
+import Internship from '../UserDetailsForm/Internship';
+import Jobs from '../UserDetailsForm/Jobs';
 
 export default class ExpModal extends React.Component {
   constructor(props) {
