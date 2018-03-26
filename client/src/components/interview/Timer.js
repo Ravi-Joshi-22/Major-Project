@@ -103,7 +103,7 @@ class Timer extends React.Component {
   }
 }
 
-function mapStateToProps({ company }) {
-  return { company };
+function mapStateToProps({  }) {
+  return {  };
 }
 export default connect(mapStateToProps)(Timer);
