@@ -116,6 +116,7 @@ function getIntervieweeDetails(userId, callback) {
  * @param {Function} callback function two param errInFetch and experience
  */
 function getTotalExperience(userId, callback) {
+  let ed = new Date();
   Interviewee.aggregate(
     [
       {
@@ -133,7 +134,12 @@ function getTotalExperience(userId, callback) {
           duration: {
             $divide: [
               {
-                $subtract: ['$jobs.end_date', '$jobs.start_date'],
+                $subtract: [
+                  {
+                    $cond: ['$jobs.currently_working', ed, '$jobs.end_date'],
+                  },
+                  '$jobs.start_date',
+                ],
               },
               1000 * 60 * 60 * 24 * 365,
             ],
