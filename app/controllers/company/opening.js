@@ -100,7 +100,7 @@ function getAllOpening(req, res, next) {
  */
 
 function getOpeningDetails(req, res, next) {
-  openingLib.getOpeningDetails(req.user, req.query.openingId, function(
+  openingLib.AllDetailsOfOpening(req.user, req.query.openingId, function(
     err,
     fetchedInstance
   ) {
