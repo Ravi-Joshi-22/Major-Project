@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import * as actions from '../../../actions/app';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import IconButton from 'material-ui/IconButton/IconButton';
 import ClearIcon from 'material-ui/svg-icons/content/clear';
@@ -21,6 +24,11 @@ class CurrentTable extends React.Component {
       '- ' +
       dateStr.getFullYear();
     return sDateStr;
+  }
+
+  startInterview(trackId) {
+    this.props.storeTrackId(trackId);
+    this.props.history.push('/Interview');
   }
 
   render() {
@@ -48,7 +56,9 @@ class CurrentTable extends React.Component {
           <tbody displayRowCheckbox={false}>
             {this.props.interviewData.map((eachOpening, key) => (
               <tr>
-                <td style={{ width: '15%' }}>{eachOpening.company_id.company_name}</td>
+                <td style={{ width: '15%' }}>
+                  {eachOpening.company_id.company_name}
+                </td>
                 <td style={{ width: '20%' }}>{eachOpening.position}</td>
                 <td style={{ width: '10%' }}>{eachOpening.location}</td>
                 <td style={{ width: '15%' }}>
@@ -63,15 +73,23 @@ class CurrentTable extends React.Component {
                 </td>
                 <td style={{ width: '5%' }}>
                   <IconButton muiTheme={this.props.muiTheme}>
-                    <MoreIcon muiTheme={this.props.muiTheme}/>
+                    <MoreIcon muiTheme={this.props.muiTheme} />
                   </IconButton>
                 </td>
                 <td style={{ width: '10%' }}>
-                  <FlatButton label="GIVE" primary={true} icon={<GiveIcon />} muiTheme={this.props.muiTheme} />
+                  <FlatButton
+                    label="GIVE"
+                    primary={true}
+                    icon={<GiveIcon />}
+                    muiTheme={this.props.muiTheme}
+                    onClick={() =>
+                      this.startInterview(eachOpening.interviewees[0])
+                    }
+                  />
                 </td>
                 <td style={{ width: '5%' }}>
                   <IconButton muiTheme={this.props.muiTheme}>
-                    <ClearIcon muiTheme={this.props.muiTheme}/>
+                    <ClearIcon muiTheme={this.props.muiTheme} />
                   </IconButton>
                 </td>
               </tr>
@@ -83,4 +101,4 @@ class CurrentTable extends React.Component {
   }
 }
 
-export default CurrentTable;
+export default connect(null, actions)(withRouter(CurrentTable));

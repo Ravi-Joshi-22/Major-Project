@@ -5,10 +5,12 @@ import loadingReducer from './app/loadingReducer';
 import cureentStepReducer from './app/currentStepReducer';
 import modalReducer from './app/modalReducer';
 import successBoxReducer from './app/successBoxReducer';
+import trackIdReducer from './app/trackIdReducer';
 import companyReducer from './company/companyReducers';
 import companyDashReducer from './company/companyDash';
 import intervieweeProfileReducer from './interviewee/profileReducer';
 import intervieweeOpeningReducer from './openingReducer';
+import questionsReducer from './interview/questions';
 
 export default combineReducers({
   auth: userReducers,
@@ -21,4 +23,6 @@ export default combineReducers({
   modals: modalReducer,
   successBox: successBoxReducer,
   intervieweeProfile: intervieweeProfileReducer,
+  questionName: questionsReducer,
+  interviewId: trackIdReducer,
 });
