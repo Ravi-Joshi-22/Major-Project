@@ -100,7 +100,7 @@ function getAllOpening(req, res, next) {
  */
 
 function getOpeningDetails(req, res, next) {
-  openingLib.getOpeningDetails(req.user.openingId, req.body, function(
+  openingLib.getOpeningDetails(req.user, req.query.openingId, function(
     err,
     fetchedInstance
   ) {
@@ -116,5 +116,5 @@ router.post('/new', newOpening);
 router.put('/', updateOpeningDetails);
 router.delete('/', deleteOpening);
 router.get('/', getAllOpening);
-router.get('/all', getOpeningDetails);
+router.get('/:openingId', getOpeningDetails);
 module.exports = router;
