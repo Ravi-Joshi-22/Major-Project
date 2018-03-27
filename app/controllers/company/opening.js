@@ -91,9 +91,30 @@ function getAllOpening(req, res, next) {
     res.status(200).json(fetchedInstance);
   });
 }
+
+/**
+ * get result of all candidates applied in an opening after opening is closed
+ * @param  {Object}   req  Request Object
+ * @param  {Object}   res  Response Object
+ * @param  {Function} next Function to pass control to the next middleware
+ */
+function getResult(req, res, next) {
+  openingLib.getResult(req.user, req.query.openingId, function(
+    err,
+    fetchedInstance
+  ) {
+    if (err) {
+      res.status(500).json(err);
+      return;
+    }
+    res.status(200).json(fetchedInstance);
+  });
+}
+
 router.post('/addCredits', addCredits);
 router.post('/new', newOpening);
 router.put('/', updateOpeningDetails);
 router.delete('/', deleteOpening);
 router.get('/', getAllOpening);
+router.post('/result', getResult);
 module.exports = router;
