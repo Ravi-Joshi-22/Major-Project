@@ -1,6 +1,8 @@
 import React from 'react';
+import * as actions from '../../../actions/interviewee/courses';
+import { connect } from 'react-redux';
 
-export default class Test extends React.Component {
+class Test extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,6 +38,10 @@ export default class Test extends React.Component {
   }
   async submit() {
     await this.setState({ currentModalClass: 'modal' });
+    const requestObject = {
+      test: this.state,
+    };
+    this.props.addTest(requestObject);
   }
   render() {
     return (
@@ -121,3 +127,4 @@ export default class Test extends React.Component {
     );
   }
 }
+export default connect(null, actions)(Test);

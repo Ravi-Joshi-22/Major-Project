@@ -6,15 +6,18 @@ import {
   CardActions,
   CardText,
 } from 'material-ui/Card';
+import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import EditIcon from 'material-ui/svg-icons/image/edit';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import { IconButton } from 'material-ui';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Course from '../userProfile/UserDetailsForm/Courses';
 import Test from '../userProfile/UserDetailsForm/Test';
 import Certification from '../userProfile/UserDetailsForm/Certification';
+import * as actions from '../../actions/interviewee/courses';
 
 class Courses extends React.Component {
   constructor(props) {
@@ -22,7 +25,33 @@ class Courses extends React.Component {
     this.renderCourses = this.renderCourses.bind(this);
     this.renderTests = this.renderTests.bind(this);
     this.renderCertification = this.renderCertification.bind(this);
+    this.deleteCoure = this.deleteCourse.bind(this);
   }
+  deleteCourse(courseId) {
+    const requestObj = {
+      course: {
+        _id: courseId,
+      },
+    };
+    this.props.deleteCourses(requestObj);
+  }
+  deleteTests(testId) {
+    const requestObj = {
+      test: {
+        _id: testId,
+      },
+    };
+    this.props.deleteTest(requestObj);
+  }
+  deleteCertifications(testId) {
+    const requestObj = {
+      certification: {
+        _id: testId,
+      },
+    };
+    this.props.deleteCertificate(requestObj);
+  }
+
   renderCourses() {
     const courseCards = this.props.courses.map((eachCourse, key) => (
       <Card style={{ margin: 10 }}>
@@ -37,9 +66,9 @@ class Courses extends React.Component {
           <IconButton className="icon" tooltip="Edit">
             <EditIcon />
           </IconButton>
-          <IconButton className="icon" tooltip="Edit">
-            <DeleteIcon />
-          </IconButton>
+          <FloatingActionButton mini={true} style={{ margin: 5 }}>
+            <DeleteIcon onClick={() => this.deleteCourse(eachCourse._id)} />
+          </FloatingActionButton>
         </CardActions>
         <CardText style={{ margin: 5 }}>
           {eachCourse.description}
@@ -69,9 +98,9 @@ class Courses extends React.Component {
           <IconButton className="icon" tooltip="Edit">
             <EditIcon />
           </IconButton>
-          <IconButton className="icon" tooltip="Edit">
-            <DeleteIcon />
-          </IconButton>
+          <FloatingActionButton mini={true} style={{ margin: 5 }}>
+            <DeleteIcon onClick={() => this.deleteTests(eachTest._id)} />
+          </FloatingActionButton>
         </CardActions>
         <CardText style={{ margin: 5 }}>
           {eachTest.score} <br />
@@ -108,9 +137,11 @@ class Courses extends React.Component {
             <IconButton className="icon" tooltip="Edit">
               <EditIcon />
             </IconButton>
-            <IconButton className="icon" tooltip="Edit">
-              <DeleteIcon />
-            </IconButton>
+            <FloatingActionButton mini={true} style={{ margin: 5 }}>
+              <DeleteIcon
+                onClick={() => this.deleteCertifications(eachCertification._id)}
+              />
+            </FloatingActionButton>
           </CardActions>
           <CardText style={{ margin: 5 }}>
             {eachCertification.lic_number}
@@ -155,4 +186,4 @@ class Courses extends React.Component {
   }
 }
 
-export default Courses;
+export default connect(null, actions)(Courses);
