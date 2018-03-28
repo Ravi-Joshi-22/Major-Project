@@ -9,10 +9,13 @@ import {
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import CourseModal from '../userProfile/modalOpening/courseModal';
 import EditIcon from 'material-ui/svg-icons/image/edit';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import { IconButton } from 'material-ui';
+import Course from '../userProfile/UserDetailsForm/Courses';
+import Test from '../userProfile/UserDetailsForm/Test';
+import Certification from '../userProfile/UserDetailsForm/Certification';
+
 class Courses extends React.Component {
   constructor(props) {
     super(props);
@@ -131,11 +134,13 @@ class Courses extends React.Component {
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 5, margin: 10 }}>
           <div className="columns">
-            <div className="column is-10">
+            <div className="column is-8">
               <CardTitle title="Courses Done and Certification" />
             </div>
-            <div className="column is-2">
-              <CourseModal />
+            <div className="column is-4">
+              <Course />
+              <Test />
+              <Certification />
             </div>
           </div>
           <div>
