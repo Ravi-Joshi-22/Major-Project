@@ -8,6 +8,9 @@ import { IconButton } from 'material-ui';
 import Project from '../userProfile/UserDetailsForm/Project';
 import EditIcon from 'material-ui/svg-icons/image/edit';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
+import * as actions from '../../actions/interviewee/project';
+import { connect } from 'react-redux';
+
 class Projects extends React.Component {
   constructor(props) {
     super(props);
@@ -69,4 +72,4 @@ class Projects extends React.Component {
   }
 }
 
-export default Projects;
+export default connect(null, actions)(Projects);
