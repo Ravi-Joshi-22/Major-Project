@@ -10,8 +10,6 @@ export default class NavDrawer extends React.Component {
     this.state = {};
   }
 
-  renderAddOpening() {}
-
   render() {
     const fabStyle = {
       marginLeft: 205,
@@ -31,12 +29,25 @@ export default class NavDrawer extends React.Component {
         </Card>
         <MenuItem
           onClick={() => {
+            this.props.mainAreaCallback('mainArea');
+          }}
+        >
+          Home
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
             this.props.openingCallback();
           }}
         >
           Add Openings
         </MenuItem>
-        <MenuItem>View Openings</MenuItem>
+        <MenuItem
+          onClick={() => {
+            this.props.mainAreaCallback('View Opening');
+          }}
+        >
+          View Openings
+        </MenuItem>
       </div>
     );
   }

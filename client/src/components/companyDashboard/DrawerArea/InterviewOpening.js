@@ -43,6 +43,7 @@ class InterviewOpening extends React.Component {
     this.setState({ qualifications: trimmedQualifications });
     await this.props.newOpening(openingData);
   }
+
   updatePosition(e) {
     this.setState({ position: e.target.value });
     if (e.target.value == null) {
@@ -51,11 +52,13 @@ class InterviewOpening extends React.Component {
       this.refs.positionInput.className = 'input is-success';
     }
   }
+
   updateMaxExp(e) {
     if (e.target.value < 50) {
       this.setState({ exMax: e.target.value });
     }
   }
+
   updateMinExp(e) {
     if (e.target.value < 40) {
       this.setState({ exMin: e.target.value });
@@ -66,6 +69,7 @@ class InterviewOpening extends React.Component {
       this.refs.minExpInput.className = 'input is-success';
     }
   }
+
   updateLocation(e) {
     this.setState({ location: e.target.value });
     if (e.target.value == null) {
@@ -74,6 +78,7 @@ class InterviewOpening extends React.Component {
       this.refs.locationInput.className = 'input is-success';
     }
   }
+
   updateSalary(e) {
     if (e.target.value < 100000000) {
       this.setState({ salary: e.target.value });
@@ -84,9 +89,11 @@ class InterviewOpening extends React.Component {
       this.refs.salaryInput.className = 'input is-success';
     }
   }
+
   updateSDate(e) {
     this.setState({ sDate: e.target.value });
   }
+
   updateEDate(e) {
     this.setState({ eDate: e.target.value });
   }
@@ -109,12 +116,32 @@ class InterviewOpening extends React.Component {
     this.setState({ qualifications: qualArr });
   }
 
+  async fillData(openingPreviousData) {
+    {
+      await this.setState({
+        position: openingPreviousData.position,
+        responsibilities: openingPreviousData.responsibilities,
+        skills: openingPreviousData.skills,
+        qualifications: openingPreviousData.qualifications,
+        exMin: openingPreviousData.exMin,
+        exMax: openingPreviousData.exMax,
+        location: openingPreviousData.location,
+        salary: openingPreviousData.salary,
+        sDate: openingPreviousData.sDate,
+        eDate: openingPreviousData.eDate,
+      });
+    }
+  }
+
   render() {
+    if (this.props.openingPreviousData && this.state.position == '') {
+      this.fillData(this.props.openingPreviousData);
+    }
     return (
       <div>
         <div className={this.props.currentModalClass}>
           <div className="modal-background" />
-          <div className="modal-card" style={{marginTop: 80}}>
+          <div className="modal-card" style={{ marginTop: 80 }}>
             <header className="modal-card-head">
               <p className="modal-card-title">Create Opening</p>
               <button
@@ -355,4 +382,8 @@ class InterviewOpening extends React.Component {
     );
   }
 }
-export default connect(null, actions)(InterviewOpening);
+
+function mapStateToProps({ modals }) {
+  return { modals };
+}
+export default connect(mapStateToProps, actions)(InterviewOpening);

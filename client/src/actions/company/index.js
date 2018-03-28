@@ -74,5 +74,9 @@ export const companyDeleteOpenings = deleteObj => async dispatch => {
     });
 };
 
-export const showOpeningModal = () => ({ type: SHOW_COMPANY_OPENING_MODAL });
+export const showOpeningModal = data => ({
+  type: SHOW_COMPANY_OPENING_MODAL,
+  payload: data,
+});
+
 export const hideOpeningModal = () => ({ type: HIDE_COMPANY_OPENING_MODAL });
