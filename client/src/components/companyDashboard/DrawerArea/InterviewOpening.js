@@ -116,21 +116,34 @@ class InterviewOpening extends React.Component {
     this.setState({ qualifications: qualArr });
   }
 
-  async fillData(openingPreviousData) {
-    {
-      await this.setState({
-        position: openingPreviousData.position,
-        responsibilities: openingPreviousData.responsibilities,
-        skills: openingPreviousData.skills,
-        qualifications: openingPreviousData.qualifications,
-        exMin: openingPreviousData.exMin,
-        exMax: openingPreviousData.exMax,
-        location: openingPreviousData.location,
-        salary: openingPreviousData.salary,
-        sDate: openingPreviousData.sDate,
-        eDate: openingPreviousData.eDate,
-      });
+  isoToNormal(inDate) {
+    let date = new Date(inDate);
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let dt = date.getDate();
+
+    if (dt < 10) {
+      dt = '0' + dt;
     }
+    if (month < 10) {
+      month = '0' + month;
+    }
+    return year + '-' + month + '-' + dt;
+  }
+
+  async fillData(openingPreviousData) {
+    await this.setState({
+      position: openingPreviousData.position,
+      responsibilities: openingPreviousData.responsibilities,
+      skills: openingPreviousData.skills,
+      qualifications: openingPreviousData.qualifications,
+      exMin: openingPreviousData.experience_min,
+      exMax: openingPreviousData.experience_max,
+      location: openingPreviousData.location,
+      salary: openingPreviousData.salary,
+      sDate: this.isoToNormal(openingPreviousData.start_date),
+      eDate: this.isoToNormal(openingPreviousData.end_date),
+    });
   }
 
   render() {
@@ -238,7 +251,7 @@ class InterviewOpening extends React.Component {
                     className="textarea"
                     type="text"
                     placeholder="Expected Qualification"
-                    value={this.state.qualification}
+                    value={this.state.qualifications}
                     onChange={this.updateQualification}
                   />
                   <span className="icon is-small is-right">

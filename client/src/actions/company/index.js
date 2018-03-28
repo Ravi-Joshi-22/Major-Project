@@ -6,6 +6,7 @@ import {
   COMPANY_DASH,
   COMPANY_VIEW_OPENINGS,
   COMPANY_DELETE_OPENING,
+  COMPANY_UPDATE_OPENING,
 } from './types';
 import { ERROR, START_LOADING, SHOW_SUCCESS_BOX } from '../app/types';
 
@@ -67,6 +68,24 @@ export const companyDeleteOpenings = deleteObj => async dispatch => {
         msg: 'Successfully deleted',
       };
       dispatch({ type: SHOW_SUCCESS_BOX, payload: success });
+    })
+    .then(() => dispatch(companyViewOpenings()))
+    .catch(err => {
+      dispatch({ type: ERROR, payload: err.response.data });
+    });
+};
+
+export const companyUpdateOpenings = updateCompanyData => async dispatch => {
+  dispatch({ type: START_LOADING });
+  axios
+    .put('/smarthyre/api/v1/company/opening', {
+      data: updateCompanyData,
+    })
+    .then(res => {
+      const successMessage = {
+        msg: 'Successfully updated the opening',
+      };
+      dispatch({ type: SHOW_SUCCESS_BOX, payload: successMessage });
     })
     .then(() => dispatch(companyViewOpenings()))
     .catch(err => {
