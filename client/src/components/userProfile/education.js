@@ -3,9 +3,11 @@ import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 import CardHeader from 'material-ui/Card/CardHeader';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { IconButton } from 'material-ui';
-import EduModal from '../userProfile/modalOpening/eduModal';
 import EditIcon from 'material-ui/svg-icons/image/edit';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
+import Secondary from '../userProfile/UserDetailsForm/Secondary';
+import SeniorSecondary from '../userProfile/UserDetailsForm/SeniorSecondary';
+import Graduation from '../userProfile/UserDetailsForm/Graduation';
 
 class Education extends React.Component {
   constructor(props) {
@@ -106,15 +108,17 @@ class Education extends React.Component {
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 5, margin: 10 }}>
           <div className="columns">
-            <div className="column is-11">
+            <div className="column is-8">
               <CardTitle title="Education" />
               {!beforeEducation ? null : this.renderBeforeSeniorSecondary()}
               {afterEducation.length > 0
                 ? this.renderAfterSeniorSecondary()
                 : null}
             </div>
-            <div className="column is-1">
-              <EduModal />
+            <div className="column is-4">
+              <Graduation />
+              <SeniorSecondary />
+              <Secondary />
             </div>
           </div>
         </Card>
