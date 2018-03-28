@@ -1,7 +1,9 @@
 import React from 'react';
 import Chip from 'material-ui/Chip';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/interviewee/skills';
 
-export default class SkillChip extends React.Component {
+class SkillChip extends React.Component {
   constructor(props) {
     super(props);
 
@@ -16,13 +18,20 @@ export default class SkillChip extends React.Component {
     };
   }
 
-  handleRequestDelete = key => {};
+  handleRequestDelete = deleteId => {
+    const requestObject = {
+      skill: {
+        _id: deleteId,
+      },
+    };
+    this.props.deleteSkills(requestObject);
+  };
 
   renderChip(data) {
     return (
       <Chip
         key={data._id}
-        onRequestDelete={() => this.handleRequestDelete(data.key)}
+        onRequestDelete={() => this.handleRequestDelete(data._id)}
         style={this.styles.chip}
       >
         {data.name}
@@ -31,7 +40,6 @@ export default class SkillChip extends React.Component {
   }
 
   render() {
-    console.log(this.props.skillsArray);
     return (
       <div style={this.styles.wrapper}>
         {this.props.skillsArray.map(this.renderChip, this)}
@@ -39,3 +47,5 @@ export default class SkillChip extends React.Component {
     );
   }
 }
+
+export default connect(null, actions)(SkillChip);
