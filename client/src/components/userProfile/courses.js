@@ -26,6 +26,8 @@ class Courses extends React.Component {
     this.renderTests = this.renderTests.bind(this);
     this.renderCertification = this.renderCertification.bind(this);
     this.deleteCoure = this.deleteCourse.bind(this);
+    this.deleteTests = this.deleteTests.bind(this);
+    this.deleteCertifications = this.deleteCertifications.bind(this);
   }
   deleteCourse(courseId) {
     const requestObj = {

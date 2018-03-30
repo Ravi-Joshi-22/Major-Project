@@ -53,22 +53,6 @@ function addDegreeDetails(req, res, next) {
         'any of college or start_year or end_year or degree or stream or scale or value fields are empty or 0',
     };
     res.status(500).json(err);
-  } else if (
-    typeof req.body.degree.college != 'string' ||
-    typeof req.body.degree.start_year != 'number' ||
-    typeof req.body.degree.end_year != 'number' ||
-    typeof req.body.degree.degree != 'string' ||
-    typeof req.body.degree.stream != 'string' ||
-    typeof req.body.degree.performance.scale != 'string' ||
-    typeof req.body.degree.performance.value != 'number'
-  ) {
-    let err = {
-      type: CONSTANTS.ERROR_TYPES.INCORRECT_PAYLOAD,
-      msg: 'Insert correct values for property to be stored',
-      errorDetail:
-        'There exists some incorrect value for some property inside object requested',
-    };
-    res.status(500).json(err);
   } else {
     degreeLib.addDegreeOfInterviewee(req.user._id, req.body.degree, function(
       errInUpdation,

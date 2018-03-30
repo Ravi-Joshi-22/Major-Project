@@ -12,21 +12,21 @@ class PerPaper extends React.Component {
       completed: 0,
     };
   }
-  /* componentDidMount() {
-    this.timer = setTimeout(() => this.progress(5), 1000);
+  componentDidMount() {
+    this.timer = setTimeout(() => this.progress(2), 1000);
   }
 
   componentWillUnmount() {
     clearTimeout(this.timer);
   }
-*/
+
   progress(completed) {
     if (completed > 100) {
       this.setState({ completed: 100 });
     } else {
       this.setState({ completed });
-      const diff = Math.random() * 10;
-      //this.timer = setTimeout(() => this.progress(completed + diff), 1000);
+      const diff = Math.random() * 2;
+      this.timer = setTimeout(() => this.progress(completed + diff), 1000);
     }
   }
 
