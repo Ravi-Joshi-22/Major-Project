@@ -7,7 +7,6 @@ import { IconButton } from 'material-ui';
 import EditIcon from 'material-ui/svg-icons/image/edit';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import SeniorSecondary from '../userProfile/UserDetailsForm/SeniorSecondary';
 import Graduation from '../userProfile/UserDetailsForm/Graduation';
 import * as actions from '../../actions/interviewee/education';
 
@@ -122,7 +121,6 @@ class Education extends React.Component {
             </div>
             <div className="column is-4">
               <Graduation />
-              <SeniorSecondary />
             </div>
           </div>
         </Card>
