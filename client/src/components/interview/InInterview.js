@@ -81,6 +81,7 @@ class InInterview extends React.Component {
                   <Timer endCallback={this.timerEnd} />
                 </div>
               }
+              iconElementLeft={<div />}
               style={{ width: '114%', marginLeft: '-7%' }}
             />
 

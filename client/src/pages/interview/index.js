@@ -30,7 +30,7 @@ class Interview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      progress: "in"
+      progress: "post"
     };
   }
 
