@@ -1,13 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 import CardHeader from 'material-ui/Card/CardHeader';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { IconButton } from 'material-ui';
 import EditIcon from 'material-ui/svg-icons/image/edit';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import Secondary from '../userProfile/UserDetailsForm/Secondary';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
 import SeniorSecondary from '../userProfile/UserDetailsForm/SeniorSecondary';
 import Graduation from '../userProfile/UserDetailsForm/Graduation';
+import * as actions from '../../actions/interviewee/education';
 
 class Education extends React.Component {
   constructor(props) {
@@ -18,6 +20,15 @@ class Education extends React.Component {
     this.renderBeforeSeniorSecondary = this.renderBeforeSeniorSecondary.bind(
       this
     );
+    this.deleteGraduation = this.deleteGraduation.bind(this);
+  }
+  deleteGraduation(degreeId) {
+    const requestObj = {
+      degree: {
+        _id: degreeId,
+      },
+    };
+    this.props.deleteDegree(requestObj);
   }
   renderAfterSeniorSecondary() {
     const afterCards = this.props.afterEducation.map((eachDegree, key) => (
@@ -31,9 +42,9 @@ class Education extends React.Component {
           <IconButton className="icon" tooltip="Edit">
             <EditIcon />
           </IconButton>
-          <IconButton className="icon" tooltip="Edit">
-            <DeleteIcon />
-          </IconButton>
+          <FloatingActionButton mini={true} style={{ margin: 5 }}>
+            <DeleteIcon onClick={() => this.deleteGraduation(eachDegree._id)} />
+          </FloatingActionButton>
         </CardActions>
         <CardText style={{ padding: 2 }}>
           {eachDegree.stream}
@@ -59,9 +70,6 @@ class Education extends React.Component {
           <IconButton className="icon" tooltip="Edit">
             <EditIcon />
           </IconButton>
-          <IconButton className="icon" tooltip="Edit">
-            <DeleteIcon />
-          </IconButton>
         </CardActions>
         <CardText style={{ padding: 2 }}>
           {this.props.beforeEducation.secondary.board}
@@ -81,9 +89,6 @@ class Education extends React.Component {
         <CardActions>
           <IconButton className="icon" tooltip="Edit">
             <EditIcon />
-          </IconButton>
-          <IconButton className="icon" tooltip="Edit">
-            <DeleteIcon />
           </IconButton>
         </CardActions>
         <CardText style={{ padding: 2 }}>
@@ -118,7 +123,6 @@ class Education extends React.Component {
             <div className="column is-4">
               <Graduation />
               <SeniorSecondary />
-              <Secondary />
             </div>
           </div>
         </Card>
@@ -126,5 +130,4 @@ class Education extends React.Component {
     );
   }
 }
-
-export default Education;
+export default connect(null, actions)(Education);

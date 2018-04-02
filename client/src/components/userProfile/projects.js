@@ -16,6 +16,7 @@ class Projects extends React.Component {
   constructor(props) {
     super(props);
     this.renderProjects = this.renderProjects.bind(this);
+    this.deleteProjects = this.deleteProjects.bind(this);
   }
   deleteProjects(testId) {
     const requestObj = {
@@ -30,14 +31,15 @@ class Projects extends React.Component {
       <Card>
         <CardHeader
           title={eachProject.title}
-          subtitle={eachProject.currently_working}
+          subtitle={eachProject.end_date}
           actAsExpander={true}
           showExpandableButton={true}
         />
 
         <CardText expandable={true}>
           <h5>
-            {eachProject.start_date}-{eachProject.end_date}
+            {eachProject.start_date} to {eachProject.end_date}
+            {eachProject.currently_working}
           </h5>
           {eachProject.description}
           <CardActions>
