@@ -137,13 +137,6 @@ class OpeningsCard extends React.Component {
                       onClick={this.openingForm}
                     >
                       <EditIcon />
-                      {/* <InterviewOpening
-                        currentModalClass={
-                          this.props.modals.companyOpeningModal
-                        }
-                        openingCallback={this.openingForm}
-                        openingPreviousData={this.props.openingsData}
-                      /> */}
                     </FloatingActionButton>
                     <FloatingActionButton
                       mini={true}

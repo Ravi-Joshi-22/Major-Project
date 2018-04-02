@@ -78,9 +78,7 @@ export const companyDeleteOpenings = deleteObj => async dispatch => {
 export const companyUpdateOpenings = updateCompanyData => async dispatch => {
   dispatch({ type: START_LOADING });
   axios
-    .put('/smarthyre/api/v1/company/opening', {
-      data: updateCompanyData,
-    })
+    .put('/smarthyre/api/v1/company/opening', updateCompanyData)
     .then(res => {
       const successMessage = {
         msg: 'Successfully updated the opening',

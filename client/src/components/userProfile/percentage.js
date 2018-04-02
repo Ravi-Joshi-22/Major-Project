@@ -31,17 +31,32 @@ class PerPaper extends React.Component {
   }
 
   render() {
+    const myStyle = {
+      parentStyle: {
+        position: 'relative',
+      },
+      childStyle: {
+        position: 'absolute',
+        top: 82,
+        left: 52,
+      },
+    };
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <div style={{ margin: 15, marginLeft: 40 }}>
           <h4> Profile completion Percentile</h4>
-          <CircularProgress
-            mode="determinate"
-            value={this.props.percent}
-            size={200}
-            thickness={5}
-            style={prog}
-          />
+          <div style={myStyle.parentStyle}>
+            <CircularProgress
+              mode="determinate"
+              value={this.props.percent}
+              size={200}
+              thickness={5}
+              style={prog}
+            />
+            <div style={myStyle.childStyle}>
+              <h1 style={{ fontSize: 45 }}>{this.props.percent}%</h1>
+            </div>
+          </div>
         </div>
       </MuiThemeProvider>
     );

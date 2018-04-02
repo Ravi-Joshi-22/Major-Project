@@ -6,16 +6,17 @@ class InterviewOpening extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      openingId: '',
       position: '',
       responsibilities: [],
       skills: [],
       qualifications: [],
-      exMin: '',
-      exMax: '',
+      experience_min: '',
+      experience_max: '',
       location: '',
       salary: '',
-      sDate: '',
-      eDate: '',
+      start_date: '',
+      end_date: '',
     };
     this.updatePosition = this.updatePosition.bind(this);
     this.updateResponsibilities = this.updateResponsibilities.bind(this);
@@ -41,7 +42,34 @@ class InterviewOpening extends React.Component {
     this.setState({ responsibilities: trimmedResponsibilities });
     this.setState({ skills: trimmedSkills });
     this.setState({ qualifications: trimmedQualifications });
-    await this.props.newOpening(openingData);
+    let data = {
+      position: this.state.position,
+      responsibilities: this.state.responsibilities,
+      skills: this.state.skills,
+      qualifications: this.state.qualifications,
+      exMin: this.state.experience_min,
+      exMax: this.state.experience_max,
+      location: this.state.location,
+      salary: this.state.salary,
+      sDate: this.state.start_date,
+      eDate: this.state.end_date,
+    };
+    await this.props.newOpening(data);
+  }
+
+  async editOpening(openingData) {
+    var trimmedResponsibilities = openingData.responsibilities.map(
+      responsibility => responsibility.trim()
+    );
+    var trimmedSkills = openingData.skills.map(skill => skill.trim());
+    var trimmedQualifications = openingData.qualifications.map(qualification =>
+      qualification.trim()
+    );
+    this.setState({ responsibilities: trimmedResponsibilities });
+    this.setState({ skills: trimmedSkills });
+    this.setState({ qualifications: trimmedQualifications });
+    console.log(openingData);
+    await this.props.companyUpdateOpenings(openingData);
   }
 
   updatePosition(e) {
@@ -55,13 +83,13 @@ class InterviewOpening extends React.Component {
 
   updateMaxExp(e) {
     if (e.target.value < 50) {
-      this.setState({ exMax: e.target.value });
+      this.setState({ experience_max: e.target.value });
     }
   }
 
   updateMinExp(e) {
     if (e.target.value < 40) {
-      this.setState({ exMin: e.target.value });
+      this.setState({ experience_min: e.target.value });
     }
     if (e.target.value == null) {
       this.refs.minExpInput.className = 'input is-danger';
@@ -91,11 +119,11 @@ class InterviewOpening extends React.Component {
   }
 
   updateSDate(e) {
-    this.setState({ sDate: e.target.value });
+    this.setState({ start_date: e.target.value });
   }
 
   updateEDate(e) {
-    this.setState({ eDate: e.target.value });
+    this.setState({ end_date: e.target.value });
   }
 
   updateResponsibilities(e) {
@@ -132,18 +160,21 @@ class InterviewOpening extends React.Component {
   }
 
   async fillData(openingPreviousData) {
+    console.log(openingPreviousData);
     await this.setState({
+      openingId: openingPreviousData._id,
       position: openingPreviousData.position,
       responsibilities: openingPreviousData.responsibilities,
       skills: openingPreviousData.skills,
       qualifications: openingPreviousData.qualifications,
-      exMin: openingPreviousData.experience_min,
-      exMax: openingPreviousData.experience_max,
+      experience_min: openingPreviousData.experience_min,
+      experience_max: openingPreviousData.experience_max,
       location: openingPreviousData.location,
       salary: openingPreviousData.salary,
-      sDate: this.isoToNormal(openingPreviousData.start_date),
-      eDate: this.isoToNormal(openingPreviousData.end_date),
+      start_date: this.isoToNormal(openingPreviousData.start_date),
+      end_date: this.isoToNormal(openingPreviousData.end_date),
     });
+    console.log(this.state.openingId);
   }
 
   render() {
@@ -272,7 +303,7 @@ class InterviewOpening extends React.Component {
                       type="number"
                       required
                       placeholder="Minimum Experience(in years)"
-                      value={this.state.exMin}
+                      value={this.state.experience_min}
                       onChange={this.updateMinExp}
                     />
                     <span className="icon is-small is-left">
@@ -288,7 +319,7 @@ class InterviewOpening extends React.Component {
                       className="input"
                       type="number"
                       placeholder="Maximum Experience(in years)"
-                      value={this.state.exMax}
+                      value={this.state.experience_max}
                       onChange={this.updateMaxExp}
                     />
                     <span className="icon is-small is-left">
@@ -347,7 +378,7 @@ class InterviewOpening extends React.Component {
                       className="input"
                       type="date"
                       placeholder="Start Date"
-                      value={this.state.sDate}
+                      value={this.state.start_date}
                       onChange={this.updateSDate}
                     />
                     <span className="icon is-small is-left">
@@ -364,7 +395,7 @@ class InterviewOpening extends React.Component {
                       className="input"
                       type="date"
                       placeholder="End Date"
-                      value={this.state.eDate}
+                      value={this.state.end_date}
                       onChange={this.updateEDate}
                     />
                     <span className="icon is-small is-left">
@@ -379,7 +410,11 @@ class InterviewOpening extends React.Component {
                 <div className="control">
                   <button
                     className="button is-primary is-rounded"
-                    onClick={() => this.createNewOpening(this.state)}
+                    onClick={() => {
+                      if (this.props.openingPreviousData === null)
+                        this.createNewOpening(this.state);
+                      else this.editOpening(this.state);
+                    }}
                   >
                     <span className="icon is-small is-left">
                       <i className="fas fa-plus" />
