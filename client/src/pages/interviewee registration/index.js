@@ -88,9 +88,9 @@ class IntervieweeRegister extends React.Component {
   async componentDidMount() {
     await this.props.fetchUser();
     if (this.props.auth.verification_status === 'in_process') {
-      await this.props.changeCurrentStep(4);
+      await this.props.changeCurrentStep(3);
     } else if (this.props.auth.verification_status === 'email_verified') {
-      await this.props.changeCurrentStep(5);
+      await this.props.changeCurrentStep(4);
     }
     this.stepShow();
   }
