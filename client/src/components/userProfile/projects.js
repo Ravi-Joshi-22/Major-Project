@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import { IconButton } from 'material-ui';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Project from '../userProfile/UserDetailsForm/Project';
 import EditIcon from 'material-ui/svg-icons/image/edit';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
@@ -16,7 +17,14 @@ class Projects extends React.Component {
     super(props);
     this.renderProjects = this.renderProjects.bind(this);
   }
-
+  deleteProjects(testId) {
+    const requestObj = {
+      project: {
+        _id: testId,
+      },
+    };
+    this.props.deleteProject(requestObj);
+  }
   renderProjects() {
     const projectCards = this.props.project.map((eachProject, key) => (
       <Card>
@@ -41,9 +49,11 @@ class Projects extends React.Component {
             <IconButton className="icon" tooltip="Edit">
               <EditIcon />
             </IconButton>
-            <IconButton className="icon" tooltip="Edit">
-              <DeleteIcon />
-            </IconButton>
+            <FloatingActionButton mini={true} style={{ margin: 5 }}>
+              <DeleteIcon
+                onClick={() => this.deleteProjects(eachProject._id)}
+              />
+            </FloatingActionButton>
           </CardActions>
         </CardText>
       </Card>

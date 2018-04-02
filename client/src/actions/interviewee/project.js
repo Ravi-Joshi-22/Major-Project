@@ -19,3 +19,20 @@ export const addProject = projectData => async dispatch => {
       dispatch({ type: ERROR, payload: err.response.data });
     });
 };
+export const deleteProject = projectData => async dispatch => {
+  dispatch({ type: START_LOADING });
+  axios
+    .delete('/smarthyre/api/v1/interviewee/profile/project', {
+      data: projectData,
+    })
+    .then(res => {
+      const successMessage = {
+        msg: 'Successfully deleted Project.',
+      };
+      dispatch({ type: SHOW_SUCCESS_BOX, payload: successMessage });
+    })
+    .then(() => dispatch(getUserProfileData()))
+    .catch(err => {
+      dispatch({ type: ERROR, payload: err.response.data });
+    });
+};
