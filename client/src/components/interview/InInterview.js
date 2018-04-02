@@ -51,10 +51,8 @@ class InInterview extends React.Component {
   async componentDidMount() {
     if (this.props.interviewId) {
       await this.updateTrackId(this.props.interviewId);
-      console.log(this.state.trackId);
       this.props.getQuestions(this.state.trackId);
     } else {
-      console.log(this.state.trackId);
       this.props.getQuestions(this.state.trackId);
     }
   }
@@ -65,6 +63,15 @@ class InInterview extends React.Component {
 
   updateTrackId(id) {
     this.setState({ trackId: id });
+  }
+
+  giveAnswer() {
+    const responseObject = {
+      openingTrackId: this.state.trackId,
+      userAns: this.state.answer,
+    };
+    console.log(responseObject);
+    this.props.giveAnswer(responseObject);
   }
 
   timerEnd() {}
@@ -132,6 +139,7 @@ class InInterview extends React.Component {
                       label="Submit"
                       primary={true}
                       style={{ margin: 12 }}
+                      onClick={() => this.giveAnswer()}
                     />
                   </div>
                 </div>
