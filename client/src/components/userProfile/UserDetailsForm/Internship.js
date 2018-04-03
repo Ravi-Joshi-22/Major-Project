@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../../actions/interviewee/experience';
 
-export default class Internship extends React.Component {
+class Internship extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +12,7 @@ export default class Internship extends React.Component {
       home: '',
       start_date: '',
       end_date: '',
-      currently_working: '',
+      currently_working: 'false',
       description: '',
       currentModalClass: 'modal',
     };
@@ -61,6 +63,10 @@ export default class Internship extends React.Component {
 
   async submit() {
     await this.setState({ currentModalClass: 'modal' });
+    const requestObject = {
+      internships: this.state,
+    };
+    this.props.addProfession(requestObject);
   }
 
   render() {
@@ -204,3 +210,5 @@ export default class Internship extends React.Component {
     );
   }
 }
+
+export default connect(null, actions)(Internship);

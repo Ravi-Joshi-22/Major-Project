@@ -51,11 +51,11 @@ class Login extends React.Component {
         } else if (this.props.auth && this.props.auth.role === 'interviewee') {
           switch (this.props.auth.verification_status) {
             case 'in_process':
-              this.props.changeCurrentStep(2);
+              this.props.changeCurrentStep(3);
               this.props.history.push('/intervieweeRegister');
               break;
             case 'email_verified':
-              this.props.changeCurrentStep(3);
+              this.props.changeCurrentStep(4);
               this.props.history.push('/intervieweeRegister');
               break;
             case 'otp_verified':
@@ -71,6 +71,7 @@ class Login extends React.Component {
   }
 
   render() {
+    console.log(this.props.auth);
     return (
       <div>
         <div className="field">

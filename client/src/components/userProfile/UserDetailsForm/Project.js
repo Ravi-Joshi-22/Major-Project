@@ -1,15 +1,17 @@
 import React from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import * as actions from '../../../actions/interviewee/project';
+import { connect } from 'react-redux';
 
-export default class Project extends React.Component {
+class Project extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       title: '',
       start_date: '',
       end_date: '',
-      currently_working: '',
+      currently_working: 'false',
       description: '',
       url: '',
       currentModalClass: 'modal',
@@ -51,6 +53,10 @@ export default class Project extends React.Component {
   }
   async submit() {
     await this.setState({ currentModalClass: 'modal' });
+    const requestObject = {
+      project: this.state,
+    };
+    this.props.addProject(requestObject);
   }
   render() {
     return (
@@ -175,3 +181,4 @@ export default class Project extends React.Component {
     );
   }
 }
+export default connect(null, actions)(Project);
