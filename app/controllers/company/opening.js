@@ -99,7 +99,7 @@ function getAllOpening(req, res, next) {
  * @param  {Function} next Function to pass control to the next middleware
  */
 function getResult(req, res, next) {
-  openingLib.getResult(req.user, req.query.openingId, function(
+  openingLib.getResult(req.user._id, req.query.openingId, function(
     err,
     fetchedInstance
   ) {
@@ -118,15 +118,36 @@ function getResult(req, res, next) {
  * @param  {Function} next Function to pass control to the next middleware
  */
 function hiringCount(req, res, next) {
-  openingLib.hiringCount(req.user, req.body.openingId, req.body.count, function(
+  openingLib.hiringCount(
+    req.user._id,
+    req.body.openingId,
+    req.body.count,
+    function(err, fetchedInstance) {
+      if (err) {
+        res.status(500).json(err);
+        return;
+      }
+      res.status(200).json(fetchedInstance);
+    }
+  );
+}
+
+/**
+ * Function to close opening based on changing end_date of opening
+ * @param  {Object}   req  Request Object
+ * @param  {Object}   res  Response Object
+ * @param  {Function} next Function to pass control to the next middleware
+ */
+function closeHiring(req, res, next) {
+  openingLib.closeHiring(req.query.openingId, req.user._id, function(
     err,
-    fetchedInstance
+    updationResponse
   ) {
     if (err) {
       res.status(500).json(err);
       return;
     }
-    res.status(200).json(fetchedInstance);
+    res.status(200).json(updationResponse);
   });
 }
 
@@ -135,6 +156,7 @@ router.post('/new', newOpening);
 router.put('/', updateOpeningDetails);
 router.delete('/', deleteOpening);
 router.get('/', getAllOpening);
-router.post('/result', getResult);
+router.get('/result', getResult);
 router.post('/hire', hiringCount);
+router.get('/close', closeHiring);
 module.exports = router;
