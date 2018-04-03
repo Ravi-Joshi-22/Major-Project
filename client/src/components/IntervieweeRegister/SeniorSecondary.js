@@ -10,7 +10,6 @@ export default class SeniorSecondary extends React.Component {
       value: '',
       stream: '',
       school: '',
-      currentModalClass: 'modal',
     };
     this.updateYearOfCompletion = this.updateYearOfCompletion.bind(this);
     this.updateBoard = this.updateBoard.bind(this);
@@ -19,7 +18,6 @@ export default class SeniorSecondary extends React.Component {
     this.updateStream = this.updateStream.bind(this);
     this.updateSchool = this.updateSchool.bind(this);
     this.submit = this.submit.bind(this);
-    this.renderModal = this.renderModal.bind(this);
   }
 
   updateYearOfCompletion(e) {
@@ -58,184 +56,198 @@ export default class SeniorSecondary extends React.Component {
     this.setState({ school: e.target.value });
   }
 
-  async renderModal() {
-    if (this.state.currentModalClass === 'modal') {
-      await this.setState({ currentModalClass: 'modal is-active' });
-    } else {
-      await this.setState({ currentModalClass: 'modal' });
-    }
-  }
   async submit() {
-    await this.setState({ currentModalClass: 'modal' });
+    if (this.state.year_of_comp.length > 0) {
+      this.refs.yearofcompletion.className = 'input';
+      if (this.state.board.length > 0) {
+        this.refs.boardInput.className = 'input';
+        if (this.state.performance.length > 0) {
+          this.refs.perfInput.className = 'input';
+          if (this.state.value.length > 0) {
+            this.refs.marksInput.className = 'input';
+            if (this.state.stream.length > 0) {
+              this.refs.streamInput.className = 'input';
+              if (this.state.school.length > 0) {
+                this.refs.schoolInput.className = 'input';
+                this.refs.submitButton.innerHTML = 'Loading...';
+                this.props.ssCB(this.state);
+              } else {
+                this.refs.schoolInput.className = 'input is-danger';
+              }
+            } else {
+              this.refs.streamInput.className = 'input is-danger';
+            }
+          } else {
+            this.refs.marksInput.className = 'input is-danger';
+          }
+        } else {
+          this.refs.perfInput.className = 'input is-danger';
+        }
+      } else {
+        this.refs.boardInput.className = 'input is-danger';
+      }
+    } else {
+      this.refs.yearofcompletion.className = 'input is-danger';
+    }
   }
 
   render() {
     return (
-      <div>
-        <div className={this.state.currentModalClass}>
-          <div class="modal-background" />
-          <div class="modal-card">
-            <header class="modal-card-head">
-              <p class="modal-card-title">Senior secondary Details</p>
-              <button
-                class="delete"
-                aria-label="close"
-                onClick={this.renderModal}
-              />
-            </header>
-            <section class="modal-card-body">
-              <div class="field ">
-                <label class="label">Year Of Completion</label>
-                <p class="control has-icons-left ">
-                  <span class="select is-fullwidth ">
-                    <select
-                      value={this.state.year_of_comp}
-                      onChange={this.updateYearOfCompletion}
-                    >
-                      <option selected>Choose year</option>
-                      <option>2016</option>
-                      <option>2015</option>
-                      <option>2014</option>
-                      <option>2013</option>
-                      <option>2012</option>
-                      <option>2011</option>
-                      <option>2010</option>
-                      <option>2009</option>
-                      <option>2008</option>
-                      <option>2007</option>
-                      <option>2006</option>
-                      <option>2005</option>
-                      <option>2004</option>
-                      <option>2003</option>
-                      <option>2002</option>
-                      <option>2001</option>
-                      <option>2000</option>
-                      <option>1999</option>
-                      <option>1998</option>
-                      <option>1997</option>
-                      <option>1996</option>
-                      <option>1995</option>
-                      <option>1994</option>
-                      <option>1993</option>
-                      <option>1992</option>
-                      <option>1991</option>
-                      <option>1990</option>
-                      <option>1889</option>
-                    </select>
-                  </span>
-                  <span class="icon is-small is-left">
-                    <i class="fa fa-graduation-cap" />
-                  </span>
-                </p>
-              </div>
-
-              <div className="field">
-                <label className="label">Board</label>
-                <div className="control has-icons-left has-icons-right">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Ex: CBSE"
-                    value={this.state.board}
-                    onChange={this.updateBoard}
-                  />
-                  <span className="icon is-small is-left">
-                    <i class="fa fa-book" />
-                  </span>
-                </div>
-              </div>
-              <div style={{ display: 'flex' }}>
-                <div class="field" style={{ width: '47%', marginRight: '5%' }}>
-                  <label class="label">Performance Scale</label>
-                  <p class="control has-icons-left ">
-                    <span class="select is-fullwidth ">
-                      <select
-                        value={this.state.performance}
-                        onChange={this.updateCategory}
-                      >
-                        <option selected>Choose option</option>
-                        <option>Percentage</option>
-                        <option>CGPA(Scale of 10)</option>
-                      </select>
-                    </span>
-                    <span class="icon is-small is-left">
-                      <i class="fa fa-inbox" aria-hidden="true" />
-                    </span>
-                  </p>
-                </div>
-
-                <div class="field" style={{ width: '47%' }}>
-                  <label className="label ">Performance</label>
-                  <div className="control has-icons-left has-icons-right">
-                    <input
-                      ref="marksInput"
-                      className="input"
-                      type="number"
-                      placeholder="0.00"
-                      value={this.state.value}
-                      onChange={this.updateMarks}
-                    />
-                    <span className="icon is-small is-left">
-                      <i class="fa fa-percent" aria-hidden="true" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">Stream</label>
-                <p class="control has-icons-left ">
-                  <span class="select is-fullwidth">
-                    <select
-                      value={this.state.stream}
-                      onChange={this.updateStream}
-                    >
-                      <option selected>Choose Stream</option>
-                      <option>Maths</option>
-                      <option>Science</option>
-                      <option>Commerce</option>
-                      <option>Arts</option>
-                    </select>
-                  </span>
-                  <span class="icon is-small is-left">
-                    <i class="fa fa-folder" aria-hidden="true" />
-                  </span>
-                </p>
-              </div>
-
-              <div className="field">
-                <label className="label">School</label>
-                <div className="control has-icons-left has-icons-right">
-                  <input
-                    ref="nameInput"
-                    className="input"
-                    type="text"
-                    placeholder="Ex: Delhi public School"
-                    value={this.state.school}
-                    onChange={this.updateSchool}
-                  />
-                  <span className="icon is-small is-left">
-                    <i class="fa fa-university" aria-hidden="true" />
-                  </span>
-                </div>
-              </div>
-            </section>
-            <footer class="modal-card-foot">
-              <button
-                class="button is-right is-primary  is-rounded"
-                onClick={this.submit}
+      <div
+        className="card"
+        style={{ width: '80%', maxWidth: 800, margin: 'auto', padding: 50 }}
+      >
+        <div class="field ">
+          <label class="label">Year Of Completion</label>
+          <p class="control has-icons-left ">
+            <span class="select is-fullwidth ">
+              <select
+                ref="yearofcompletion"
+                value={this.state.year_of_comp}
+                onChange={this.updateYearOfCompletion}
               >
-                Save changes
-              </button>
-            </footer>
+                <option selected>Choose year</option>
+                <option>2016</option>
+                <option>2015</option>
+                <option>2014</option>
+                <option>2013</option>
+                <option>2012</option>
+                <option>2011</option>
+                <option>2010</option>
+                <option>2009</option>
+                <option>2008</option>
+                <option>2007</option>
+                <option>2006</option>
+                <option>2005</option>
+                <option>2004</option>
+                <option>2003</option>
+                <option>2002</option>
+                <option>2001</option>
+                <option>2000</option>
+                <option>1999</option>
+                <option>1998</option>
+                <option>1997</option>
+                <option>1996</option>
+                <option>1995</option>
+                <option>1994</option>
+                <option>1993</option>
+                <option>1992</option>
+                <option>1991</option>
+                <option>1990</option>
+                <option>1889</option>
+              </select>
+            </span>
+            <span class="icon is-small is-left">
+              <i class="fa fa-graduation-cap" />
+            </span>
+          </p>
+        </div>
+
+        <div className="field">
+          <label className="label">Board</label>
+          <div className="control has-icons-left has-icons-right">
+            <input
+              ref="boardInput"
+              className="input"
+              type="text"
+              placeholder="Ex: CBSE"
+              value={this.state.board}
+              onChange={this.updateBoard}
+            />
+            <span className="icon is-small is-left">
+              <i class="fa fa-book" />
+            </span>
           </div>
         </div>
-        <a
-          class="button is-black is-inverted  is-hovered"
-          onClick={this.renderModal}
-        >
-          {' '}
-          +Add Senior secondary{' '}
-        </a>
+        <div style={{ display: 'flex' }}>
+          <div class="field" style={{ width: '47%', marginRight: '5%' }}>
+            <label class="label">Performance Scale</label>
+            <p class="control has-icons-left ">
+              <span class="select is-fullwidth ">
+                <select
+                  ref="perfInput"
+                  value={this.state.performance}
+                  onChange={this.updateCategory}
+                >
+                  <option selected>Choose option</option>
+                  <option>Percentage</option>
+                  <option>CGPA(Scale of 10)</option>
+                </select>
+              </span>
+              <span class="icon is-small is-left">
+                <i class="fa fa-inbox" aria-hidden="true" />
+              </span>
+            </p>
+          </div>
+
+          <div class="field" style={{ width: '47%' }}>
+            <label className="label ">Performance</label>
+            <div className="control has-icons-left has-icons-right">
+              <input
+                ref="marksInput"
+                className="input"
+                type="number"
+                placeholder="0.00"
+                value={this.state.value}
+                onChange={this.updateMarks}
+              />
+              <span className="icon is-small is-left">
+                <i class="fa fa-percent" aria-hidden="true" />
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Stream</label>
+          <p class="control has-icons-left ">
+            <span class="select is-fullwidth">
+              <select
+                ref="streamInput"
+                value={this.state.stream}
+                onChange={this.updateStream}
+              >
+                <option selected>Choose Stream</option>
+                <option>Maths</option>
+                <option>Science</option>
+                <option>Commerce</option>
+                <option>Arts</option>
+              </select>
+            </span>
+            <span class="icon is-small is-left">
+              <i class="fa fa-folder" aria-hidden="true" />
+            </span>
+          </p>
+        </div>
+
+        <div className="field">
+          <label className="label">School</label>
+          <div className="control has-icons-left has-icons-right">
+            <input
+              ref="schoolInput"
+              className="input"
+              type="text"
+              placeholder="Ex: Delhi public School"
+              value={this.state.school}
+              onChange={this.updateSchool}
+            />
+            <span className="icon is-small is-left">
+              <i class="fa fa-university" aria-hidden="true" />
+            </span>
+          </div>
+        </div>
+        <br />
+
+        <div className="field is-grouped">
+          <div className="control">
+            <button
+              ref="submitButton"
+              className="button is-link is-rounded"
+              onClick={this.submit}
+            >
+              Submit
+            </button>
+          </div>
+        </div>
       </div>
     );
   }

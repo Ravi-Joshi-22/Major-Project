@@ -3,7 +3,6 @@ import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import EditIcon from 'material-ui/svg-icons/image/edit';
 import { IconButton } from 'material-ui';
-import DeleteIcon from 'material-ui/svg-icons/action/delete';
 class Personal extends React.Component {
   constructor(props) {
     super(props);
@@ -32,9 +31,6 @@ class Personal extends React.Component {
           <CardActions>
             <IconButton className="icon" tooltip="Edit">
               <EditIcon />
-            </IconButton>
-            <IconButton className="icon" tooltip="Edit">
-              <DeleteIcon />
             </IconButton>
           </CardActions>
           <br />

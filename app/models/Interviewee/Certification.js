@@ -12,11 +12,9 @@ const certificationSchema = new Schema({
   },
   lic_number: {
     type: String,
-    required: true,
   },
   url: {
     type: String,
-    required: true,
   },
 });
 

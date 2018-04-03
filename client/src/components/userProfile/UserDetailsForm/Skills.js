@@ -1,7 +1,10 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import AddIcon from 'material-ui/svg-icons/editor/mode-edit';
-export default class Skills extends React.Component {
+import { connect } from 'react-redux';
+import * as actions from '../../../actions/interviewee/skills';
+
+class Skills extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,6 +28,13 @@ export default class Skills extends React.Component {
   }
   async submit() {
     await this.setState({ currentModalClass: 'modal' });
+    const skillObject = {
+      skill: {
+        rate: this.state.rate,
+        name: this.state.name,
+      },
+    };
+    this.props.addSkills(skillObject);
   }
 
   render() {
@@ -80,3 +90,5 @@ export default class Skills extends React.Component {
     );
   }
 }
+
+export default connect(null, actions)(Skills);
