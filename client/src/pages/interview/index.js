@@ -30,12 +30,31 @@ class Interview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      progress: "post"
+      progress: "pre"
     };
+    this.startInterview = this.startInterview.bind(this);
+  }
+
+  async startInterview() {
+    console.log("1111");
+    await this.setState({progress: 'in'});
+  }
+
+  async setProgress() {
+    if (
+      this.props.interviewId.interview_status === "applied" &&
+      this.props.interviewId.count == 0
+    )
+      await this.setState({ progress: "pre" });
+    else if (this.props.interviewId.interview_status === "applied")
+      await this.setState({ progress: "in" });
+    else if (this.props.interviewId.interview_status === "given")
+      await this.setState({ progress: "post" });
   }
 
   renderMain() {
-    if (this.state.progress === "pre") return <PreInterview />;
+    if (this.state.progress === "pre")
+      return <PreInterview startInterviewCallback={this.startInterview}/>;
     else if (this.state.progress === "in") return <InInterview />;
     else if (this.state.progress === "post") return <PostInterview />;
   }
@@ -51,7 +70,7 @@ class Interview extends React.Component {
   }
 }
 
-function mapStateToProps({}) {
-  return {};
+function mapStateToProps({ interviewId }) {
+  return { interviewId };
 }
 export default connect(mapStateToProps, actions)(Interview);

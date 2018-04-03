@@ -49,8 +49,9 @@ class InInterview extends React.Component {
   }
 
   async componentDidMount() {
+    console.log(this.props.interviewId);
     if (this.props.interviewId) {
-      await this.updateTrackId(this.props.interviewId);
+      await this.updateTrackId(this.props.interviewId._id);
       this.props.getQuestions(this.state.trackId);
     } else {
       this.props.getQuestions(this.state.trackId);

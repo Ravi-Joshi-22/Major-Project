@@ -1,6 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import * as actions from "../../actions/interview/";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { blue300, red300, indigo900, red900 } from "material-ui/styles/colors";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
@@ -186,6 +184,7 @@ class PreInterview extends React.Component {
                         margin: "auto",
                         maxWidth: 100
                       }}
+                      onClick={() => this.props.startInterviewCallback()}
                     />
                   </centre>
                 </CardText>
@@ -198,7 +197,4 @@ class PreInterview extends React.Component {
   }
 }
 
-function mapStateToProps({}) {
-  return {};
-}
-export default connect(mapStateToProps, actions)(PreInterview);
+export default (PreInterview);
