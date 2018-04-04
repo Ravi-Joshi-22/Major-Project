@@ -158,5 +158,5 @@ router.delete('/', deleteOpening);
 router.get('/', getAllOpening);
 router.get('/result', getResult);
 router.post('/hire', hiringCount);
-router.get('/close', closeHiring);
+router.put('/close', closeHiring);
 module.exports = router;
