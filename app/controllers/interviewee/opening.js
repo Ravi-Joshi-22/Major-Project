@@ -64,10 +64,7 @@ function appliedOpenings(req, res, next) {
  * @param  {Function} next Function to pass control to the next middleware
  */
 function getResult(req, res, next) {
-  openingLib.getResult(req.query.openingId, req.user._id, function(
-    err,
-    fetchedOpening
-  ) {
+  openingLib.getAllResults(req.user._id, function(err, fetchedOpening) {
     if (err) {
       res.status(500).json(err);
       return;
@@ -79,5 +76,5 @@ function getResult(req, res, next) {
 router.post('/apply', applyForOpening);
 router.get('/eligible', eligibleOpenings);
 router.get('/applied', appliedOpenings);
-router.get('/result', getResult);
+router.get('/results', getResult);
 module.exports = router;
