@@ -111,10 +111,30 @@ function getResult(req, res, next) {
   });
 }
 
+/**
+ * get hired and rejected candidates list and send mails to all applied candidates as per their interview status
+ * @param  {Object}   req  Request Object
+ * @param  {Object}   res  Response Object
+ * @param  {Function} next Function to pass control to the next middleware
+ */
+function hiringCount(req, res, next) {
+  openingLib.hiringCount(req.user, req.body.openingId, req.body.count, function(
+    err,
+    fetchedInstance
+  ) {
+    if (err) {
+      res.status(500).json(err);
+      return;
+    }
+    res.status(200).json(fetchedInstance);
+  });
+}
+
 router.post('/addCredits', addCredits);
 router.post('/new', newOpening);
 router.put('/', updateOpeningDetails);
 router.delete('/', deleteOpening);
 router.get('/', getAllOpening);
 router.post('/result', getResult);
+router.post('/hire', hiringCount);
 module.exports = router;
