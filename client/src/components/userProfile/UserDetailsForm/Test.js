@@ -1,29 +1,34 @@
 import React from 'react';
+import * as actions from '../../../actions/interviewee/courses';
+import { connect } from 'react-redux';
 
-export default class Courses extends React.Component {
+class Test extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      number: '',
-      description: '',
+      score: '',
+      date: '',
       currentModalClass: 'modal',
     };
     this.updateName = this.updateName.bind(this);
-    this.updateNumber = this.updateNumber.bind(this);
-    this.updatedDescription = this.updatedDescription.bind(this);
+    this.updateScore = this.updateScore.bind(this);
+    this.updatedDate = this.updatedDate.bind(this);
     this.renderModal = this.renderModal.bind(this);
     this.submit = this.submit.bind(this);
   }
   updateName(e) {
     this.setState({ name: e.target.value });
   }
-  updateNumber(e) {
-    this.setState({ number: e.target.value });
+  updateScore(e) {
+    if (e.target.value < 100) {
+      this.setState({ score: e.target.value });
+    }
   }
-  updatedDescription(e) {
-    this.setState({ description: e.target.value });
+  updatedDate(e) {
+    this.setState({ date: e.target.value });
   }
+
   async renderModal() {
     if (this.state.currentModalClass === 'modal') {
       await this.setState({ currentModalClass: 'modal is-active' });
@@ -33,8 +38,11 @@ export default class Courses extends React.Component {
   }
   async submit() {
     await this.setState({ currentModalClass: 'modal' });
+    const requestObject = {
+      test: this.state,
+    };
+    this.props.addTest(requestObject);
   }
-
   render() {
     return (
       <div>
@@ -42,7 +50,7 @@ export default class Courses extends React.Component {
           <div class="modal-background" />
           <div class="modal-card">
             <header class="modal-card-head">
-              <p class="modal-card-title">Courses Details</p>
+              <p class="modal-card-title">Test Details</p>
               <button
                 class="delete"
                 aria-label="close"
@@ -51,12 +59,12 @@ export default class Courses extends React.Component {
             </header>
             <section class="modal-card-body">
               <div className="field">
-                <label className="label">Course Name</label>
-                <div className="control has-icons-left has-icons-right">
+                <label className="label">Test Name</label>
+                <div className="control has-icons-left ">
                   <input
                     className="input"
                     type="text"
-                    placeholder="Ex:Full Stack Developer"
+                    placeholder="Ex:Gate"
                     required
                     value={this.state.name}
                     onChange={this.updateName}
@@ -67,15 +75,15 @@ export default class Courses extends React.Component {
                 </div>
               </div>
               <div className="field">
-                <label className="label"> Course Number</label>
-                <div className="control has-icons-left has-icons-right">
+                <label className="label"> Test Score Percentile</label>
+                <div className="control has-icons-left ">
                   <input
                     className="input"
                     type="number"
-                    placeholder="Ex:Course number"
+                    placeholder="Should be less than 100"
                     required
-                    value={this.state.number}
-                    onChange={this.updateNumber}
+                    value={this.state.score}
+                    onChange={this.updateScore}
                   />
                   <span className="icon is-small is-left">
                     <i class="fa fa-id-card" />
@@ -83,16 +91,18 @@ export default class Courses extends React.Component {
                 </div>
               </div>
 
-              <div className="field">
-                <label className="label">Description</label>
-                <div className="control has-icons-left has-icons-right">
-                  <textarea
-                    class="textarea is-hovered"
-                    type="text"
-                    placeholder="Course Description"
-                    value={this.state.description}
-                    onChange={this.updatedDescription}
+              <div className="field " style={{ width: '100%' }}>
+                <label className="label">Test Date</label>
+                <div className="control has-icons-left ">
+                  <input
+                    className="input"
+                    type="date"
+                    value={this.state.date}
+                    onChange={this.updatedDate}
                   />
+                  <span className="icon is-small is-left">
+                    <i class="fa fa-calendar" />
+                  </span>
                 </div>
               </div>
             </section>
@@ -111,9 +121,10 @@ export default class Courses extends React.Component {
           onClick={this.renderModal}
         >
           {' '}
-          +Add Courses{' '}
+          +Add Test{' '}
         </a>
       </div>
     );
   }
 }
+export default connect(null, actions)(Test);

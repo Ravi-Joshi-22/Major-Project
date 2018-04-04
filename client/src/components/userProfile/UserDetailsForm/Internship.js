@@ -1,20 +1,24 @@
 import React from 'react';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import { connect } from 'react-redux';
+import * as actions from '../../../actions/interviewee/experience';
 
-export default class Project extends React.Component {
+class Internship extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
+      profile: '',
+      organization: '',
+      location: '',
+      home: '',
       start_date: '',
       end_date: '',
-      currently_working: '',
+      currently_working: 'false',
       description: '',
-      url: '',
       currentModalClass: 'modal',
     };
-    this.updateTitle = this.updateTitle.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
+    this.updateOrganization = this.updateOrganization.bind(this);
+    this.updateLocation = this.updateLocation.bind(this);
     this.updateStart = this.updateStart.bind(this);
     this.updateEnd = this.updateEnd.bind(this);
     this.updateOngoing = this.updateOngoing.bind(this);
@@ -23,8 +27,14 @@ export default class Project extends React.Component {
     this.renderModal = this.renderModal.bind(this);
     this.submit = this.submit.bind(this);
   }
-  updateTitle(e) {
-    this.setState({ title: e.target.value });
+  updateProfile(e) {
+    this.setState({ profile: e.target.value });
+  }
+  updateOrganization(e) {
+    this.setState({ organization: e.target.value });
+  }
+  updateLocation(e) {
+    this.setState({ location: e.target.value });
   }
   updateStart(e) {
     this.setState({ start_date: e.target.value });
@@ -33,14 +43,15 @@ export default class Project extends React.Component {
   updateEnd(e) {
     this.setState({ end_date: e.target.value });
   }
-  updateOngoing(e) {
-    this.setState({ currently_working: e.target.value });
+
+  async updateOngoing(e) {
+    await this.setState({ currently_working: e.target.value });
   }
   updatedDescription(e) {
     this.setState({ description: e.target.value });
   }
   updateLink(e) {
-    this.setState({ url: e.target.value });
+    this.setState({ link: e.target.value });
   }
   async renderModal() {
     if (this.state.currentModalClass === 'modal') {
@@ -49,9 +60,15 @@ export default class Project extends React.Component {
       await this.setState({ currentModalClass: 'modal' });
     }
   }
+
   async submit() {
     await this.setState({ currentModalClass: 'modal' });
+    const requestObject = {
+      internships: this.state,
+    };
+    this.props.addProfession(requestObject);
   }
+
   render() {
     return (
       <div>
@@ -59,7 +76,7 @@ export default class Project extends React.Component {
           <div class="modal-background" />
           <div class="modal-card">
             <header class="modal-card-head">
-              <p class="modal-card-title">Project Details</p>
+              <p class="modal-card-title">Internship Details</p>
               <button
                 class="delete"
                 aria-label="close"
@@ -68,23 +85,55 @@ export default class Project extends React.Component {
             </header>
             <section class="modal-card-body">
               <div className="field">
-                <label className="label">Project Title</label>
+                <label className="label">Profile</label>
                 <div className="control has-icons-left has-icons-right">
                   <input
                     className="input"
                     type="text"
-                    placeholder="Smart Hyre"
+                    placeholder="Ex:operations"
                     required
-                    value={this.state.title}
-                    onChange={this.updateTitle}
+                    value={this.state.profile}
+                    onChange={this.updateProfile}
                   />
                   <span className="icon is-small is-left">
-                    <i class="fa fa-address-book" />
+                    <i class="fa fa-user" />
+                  </span>
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Organization</label>
+                <div className="control has-icons-left has-icons-right">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Ex:TCS"
+                    required
+                    value={this.state.organization}
+                    onChange={this.updateOrganization}
+                  />
+                  <span className="icon is-small is-left">
+                    <i class="fa fa-building" />
+                  </span>
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Location</label>
+                <div className="control has-icons-left has-icons-right">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Ex:Indore"
+                    required
+                    value={this.state.location}
+                    onChange={this.updateLocation}
+                  />
+                  <span className="icon is-small is-left">
+                    <i class="fa fa-globe" />
                   </span>
                 </div>
               </div>
 
-              <label class="label">Project Duration</label>
+              <label class="label">Internship Duration</label>
               <div style={{ display: 'flex' }}>
                 <div class="field" style={{ width: '47%', marginRight: '5%' }}>
                   <label class="label">Start date</label>
@@ -125,36 +174,18 @@ export default class Project extends React.Component {
                   value={this.state.currently_working}
                   onChange={this.updateOngoing}
                 />
-                Currently ongoing
+                Currently working here
               </label>
               <div className="field">
-                <label className="label">Project Description</label>
+                <label className="label">Description</label>
                 <div className="control has-icons-left has-icons-right">
                   <textarea
                     class="textarea is-hovered"
                     type="text"
-                    placeholder="Project Description"
+                    placeholder="Internship Description"
                     value={this.state.description}
                     onChange={this.updatedDescription}
                   />
-                </div>
-              </div>
-
-              <div className="field">
-                <label className="label">Projet Link</label>
-                <div className="control has-icons-left has-icons-right">
-                  <input
-                    className="input"
-                    type="url"
-                    pattern="https?://.+"
-                    placeholder="https://www.example.com"
-                    required
-                    value={this.state.url}
-                    onChange={this.updateLink}
-                  />
-                  <span className="icon is-small is-left">
-                    <i class="fa fa-book" />
-                  </span>
                 </div>
               </div>
             </section>
@@ -168,10 +199,16 @@ export default class Project extends React.Component {
             </footer>
           </div>
         </div>
-        <FloatingActionButton mini={true} onClick={this.renderModal}>
-          <ContentAdd />
-        </FloatingActionButton>
+        <a
+          class="button is-black is-inverted  is-hovered"
+          onClick={this.renderModal}
+        >
+          {' '}
+          +Add Internship{' '}
+        </a>
       </div>
     );
   }
 }
+
+export default connect(null, actions)(Internship);

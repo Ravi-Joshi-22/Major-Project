@@ -1,22 +1,22 @@
 import React from 'react';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import * as actions from '../../../actions/interviewee/project';
+import { connect } from 'react-redux';
 
-export default class Internship extends React.Component {
+class Project extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      profile: '',
-      organization: '',
-      location: '',
-      home: '',
+      title: '',
       start_date: '',
       end_date: '',
-      currently_working: '',
+      currently_working: 'false',
       description: '',
+      url: '',
       currentModalClass: 'modal',
     };
-    this.updateProfile = this.updateProfile.bind(this);
-    this.updateOrganization = this.updateOrganization.bind(this);
-    this.updateLocation = this.updateLocation.bind(this);
+    this.updateTitle = this.updateTitle.bind(this);
     this.updateStart = this.updateStart.bind(this);
     this.updateEnd = this.updateEnd.bind(this);
     this.updateOngoing = this.updateOngoing.bind(this);
@@ -25,14 +25,8 @@ export default class Internship extends React.Component {
     this.renderModal = this.renderModal.bind(this);
     this.submit = this.submit.bind(this);
   }
-  updateProfile(e) {
-    this.setState({ profile: e.target.value });
-  }
-  updateOrganization(e) {
-    this.setState({ organization: e.target.value });
-  }
-  updateLocation(e) {
-    this.setState({ location: e.target.value });
+  updateTitle(e) {
+    this.setState({ title: e.target.value });
   }
   updateStart(e) {
     this.setState({ start_date: e.target.value });
@@ -41,15 +35,14 @@ export default class Internship extends React.Component {
   updateEnd(e) {
     this.setState({ end_date: e.target.value });
   }
-
-  async updateOngoing(e) {
-    await this.setState({ currently_working: e.target.value });
+  updateOngoing(e) {
+    this.setState({ currently_working: e.target.value });
   }
   updatedDescription(e) {
     this.setState({ description: e.target.value });
   }
   updateLink(e) {
-    this.setState({ link: e.target.value });
+    this.setState({ url: e.target.value });
   }
   async renderModal() {
     if (this.state.currentModalClass === 'modal') {
@@ -58,11 +51,13 @@ export default class Internship extends React.Component {
       await this.setState({ currentModalClass: 'modal' });
     }
   }
-
   async submit() {
     await this.setState({ currentModalClass: 'modal' });
+    const requestObject = {
+      project: this.state,
+    };
+    this.props.addProject(requestObject);
   }
-
   render() {
     return (
       <div>
@@ -70,7 +65,7 @@ export default class Internship extends React.Component {
           <div class="modal-background" />
           <div class="modal-card">
             <header class="modal-card-head">
-              <p class="modal-card-title">Internship Details</p>
+              <p class="modal-card-title">Project Details</p>
               <button
                 class="delete"
                 aria-label="close"
@@ -79,55 +74,23 @@ export default class Internship extends React.Component {
             </header>
             <section class="modal-card-body">
               <div className="field">
-                <label className="label">Profile</label>
+                <label className="label">Project Title</label>
                 <div className="control has-icons-left has-icons-right">
                   <input
                     className="input"
                     type="text"
-                    placeholder="Ex:operations"
+                    placeholder="Smart Hyre"
                     required
-                    value={this.state.profile}
-                    onChange={this.updateProfile}
+                    value={this.state.title}
+                    onChange={this.updateTitle}
                   />
                   <span className="icon is-small is-left">
-                    <i class="fa fa-user" />
-                  </span>
-                </div>
-              </div>
-              <div className="field">
-                <label className="label">Organization</label>
-                <div className="control has-icons-left has-icons-right">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Ex:TCS"
-                    required
-                    value={this.state.organization}
-                    onChange={this.updateOrganization}
-                  />
-                  <span className="icon is-small is-left">
-                    <i class="fa fa-building" />
-                  </span>
-                </div>
-              </div>
-              <div className="field">
-                <label className="label">Location</label>
-                <div className="control has-icons-left has-icons-right">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Ex:Indore"
-                    required
-                    value={this.state.location}
-                    onChange={this.updateLocation}
-                  />
-                  <span className="icon is-small is-left">
-                    <i class="fa fa-globe" />
+                    <i class="fa fa-address-book" />
                   </span>
                 </div>
               </div>
 
-              <label class="label">Internship Duration</label>
+              <label class="label">Project Duration</label>
               <div style={{ display: 'flex' }}>
                 <div class="field" style={{ width: '47%', marginRight: '5%' }}>
                   <label class="label">Start date</label>
@@ -168,18 +131,36 @@ export default class Internship extends React.Component {
                   value={this.state.currently_working}
                   onChange={this.updateOngoing}
                 />
-                Currently working here
+                Currently ongoing
               </label>
               <div className="field">
-                <label className="label">Description</label>
+                <label className="label">Project Description</label>
                 <div className="control has-icons-left has-icons-right">
                   <textarea
                     class="textarea is-hovered"
                     type="text"
-                    placeholder="Internship Description"
+                    placeholder="Project Description"
                     value={this.state.description}
                     onChange={this.updatedDescription}
                   />
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label">Projet Link</label>
+                <div className="control has-icons-left has-icons-right">
+                  <input
+                    className="input"
+                    type="url"
+                    pattern="https?://.+"
+                    placeholder="https://www.example.com"
+                    required
+                    value={this.state.url}
+                    onChange={this.updateLink}
+                  />
+                  <span className="icon is-small is-left">
+                    <i class="fa fa-book" />
+                  </span>
                 </div>
               </div>
             </section>
@@ -193,14 +174,11 @@ export default class Internship extends React.Component {
             </footer>
           </div>
         </div>
-        <a
-          class="button is-black is-inverted  is-hovered"
-          onClick={this.renderModal}
-        >
-          {' '}
-          +Add Internship{' '}
-        </a>
+        <FloatingActionButton mini={true} onClick={this.renderModal}>
+          <ContentAdd />
+        </FloatingActionButton>
       </div>
     );
   }
 }
+export default connect(null, actions)(Project);

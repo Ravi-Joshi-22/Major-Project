@@ -12,7 +12,7 @@ function getAzureAnalytics(answer, callback) {
     method: 'POST',
     url: `https://westcentralus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases`,
     headers: {
-      'Ocp-Apim-Subscription-Key': 'e18719887ac24f63b306ea5ed4c06d55',
+      'Ocp-Apim-Subscription-Key': '4bca4bb7a0ce4f0fa830eff47c97dfe0',
     },
     body: JSON.stringify(documents),
   };
@@ -40,7 +40,7 @@ function getAzureSentimentAnalytics(answer, callback) {
     method: 'POST',
     url: `https://westcentralus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment`,
     headers: {
-      'Ocp-Apim-Subscription-Key': 'e18719887ac24f63b306ea5ed4c06d55',
+      'Ocp-Apim-Subscription-Key': '4bca4bb7a0ce4f0fa830eff47c97dfe0',
     },
     body: JSON.stringify(documents),
   };

@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../../actions/interviewee/experience';
 
-export default class Jobs extends React.Component {
+class Jobs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +12,7 @@ export default class Jobs extends React.Component {
       home: '',
       start_date: '',
       end_date: '',
-      curently_working: '',
+      currently_working: 'false',
       description: '',
       currentModalClass: 'modal',
     };
@@ -56,6 +58,10 @@ export default class Jobs extends React.Component {
   }
   async submit() {
     await this.setState({ currentModalClass: 'modal' });
+    const requestObject = {
+      jobs: this.state,
+    };
+    this.props.addProfession(requestObject);
   }
 
   render() {
@@ -199,3 +205,5 @@ export default class Jobs extends React.Component {
     );
   }
 }
+
+export default connect(null, actions)(Jobs);

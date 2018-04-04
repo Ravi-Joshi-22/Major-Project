@@ -1,6 +1,8 @@
 import React from 'react';
+import * as actions from '../../../actions/interviewee/courses';
+import { connect } from 'react-redux';
 
-export default class Certification extends React.Component {
+class Certification extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,6 +40,10 @@ export default class Certification extends React.Component {
   }
   async submit() {
     await this.setState({ currentModalClass: 'modal' });
+    const requestObject = {
+      certification: this.state,
+    };
+    this.props.addCertification(requestObject);
   }
 
   render() {
@@ -146,3 +152,4 @@ export default class Certification extends React.Component {
     );
   }
 }
+export default connect(null, actions)(Certification);

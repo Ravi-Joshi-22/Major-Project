@@ -6,9 +6,25 @@ import { IconButton } from 'material-ui';
 class Personal extends React.Component {
   constructor(props) {
     super(props);
+    this.renderPersonal = this.renderPersonal.bind(this);
+  }
+  renderPersonal() {
+    return (
+      <div>
+        <CardTitle
+          title={
+            this.props.personal.first_name + ' ' + this.props.personal.last_name
+          }
+          subtitle={this.props.personal.email}
+        />
+
+        <CardText>{this.props.personal.phone}</CardText>
+      </div>
+    );
   }
 
   render() {
+    const { personal } = this.props;
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ margin: 10, marginTop: 20 }}>
@@ -19,15 +35,7 @@ class Personal extends React.Component {
           </CardActions>
           <br />
           <div className="center">
-            <CardTitle
-              title="Shreya Jhunjhunwala"
-              subtitle="shreyajhunjhunwala7@gmail.com"
-            />
-
-            <CardText>
-              Student At Medicaps Instiute Of Technology And Management<br />
-              Indore, Madhya Pradesh <br />
-            </CardText>
+            {!personal ? null : this.renderPersonal()}
           </div>
         </Card>
 
