@@ -10,6 +10,7 @@ class OTPVerification extends React.Component {
 
     this.state = {
       otp: '',
+      requestClass: 'button is-link is-rounded',
     };
     this.updateOtp = this.updateOtp.bind(this);
     this.requestOtp = this.requestOtp.bind(this);
@@ -22,7 +23,9 @@ class OTPVerification extends React.Component {
 
   async requestOtp() {
     const userId = this.props.auth._id;
+    await this.setState({ requestClass: 'button is-rounded' });
     await axios.get(`/smarthyre/api/v1/app/requestOTP?id=${userId}`);
+    await this.setState({ requestClass: 'button is-link is-rounded' });
   }
 
   async verifyOtp() {
@@ -63,7 +66,7 @@ class OTPVerification extends React.Component {
         <div className="field is-grouped">
           <div className="control" style={{ margin: 'auto' }}>
             <button
-              className="button is-link is-rounded"
+              className={this.state.requestClass}
               onClick={this.requestOtp}
             >
               Request
