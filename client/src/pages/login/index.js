@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import BusyIndicator from "../../components/common/busyIndicator";
 import ReactCardFlip from "../../components/login/ReactCardFlip";
@@ -7,8 +6,6 @@ import LoginPage from "../../components/login/Login";
 import Register from "../../components/login/Register";
 import "./index.css";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import { lightBlue100 } from "material-ui/styles/colors";
-let imgUrl = "/Assets/Hire.png";
 
 class Login extends React.Component {
   constructor(props) {

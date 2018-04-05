@@ -43,6 +43,7 @@ class InInterview extends React.Component {
     this.state = {
       question: '',
       answer: '',
+      timerVar: 0,
     };
     this.updateAnswer = this.updateAnswer.bind(this);
     this.timerEnd = this.timerEnd.bind(this);
@@ -72,12 +73,16 @@ class InInterview extends React.Component {
       userAns: this.state.answer,
     };
     console.log(responseObject);
+    this.setState({answer: ''});
     this.props.giveAnswer(responseObject);
   }
 
   timerEnd() {}
 
+
   render() {
+    console.log(this.props.progress );
+
     return (
       <div>
         <MuiThemeProvider muiTheme={this.props.muiTheme}>
@@ -153,7 +158,7 @@ class InInterview extends React.Component {
   }
 }
 
-function mapStateToProps({ interviewId, questionName }) {
-  return { interviewId, questionName };
+function mapStateToProps({ interviewId, questionName, progress }) {
+  return { interviewId, questionName, progress };
 }
 export default connect(mapStateToProps, actions)(InInterview);

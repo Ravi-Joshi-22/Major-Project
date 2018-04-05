@@ -10,7 +10,9 @@ import companyReducer from './company/companyReducers';
 import companyDashReducer from './company/companyDash';
 import intervieweeProfileReducer from './interviewee/profileReducer';
 import intervieweeOpeningReducer from './openingReducer';
+import progressReducer from './interview/progress';
 import questionsReducer from './interview/questions';
+import timerReducer from './interview/timer';
 
 export default combineReducers({
   auth: userReducers,
@@ -25,4 +27,6 @@ export default combineReducers({
   intervieweeProfile: intervieweeProfileReducer,
   questionName: questionsReducer,
   interviewId: trackIdReducer,
+  progress: progressReducer,
+  timerTime: timerReducer,
 });

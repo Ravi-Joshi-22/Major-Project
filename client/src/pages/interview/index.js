@@ -33,30 +33,43 @@ class Interview extends React.Component {
       progress: "pre"
     };
     this.startInterview = this.startInterview.bind(this);
+    this.endInterview = this.endInterview.bind(this);
   }
 
   async startInterview() {
-    console.log("1111");
-    await this.setState({progress: 'in'});
+    await this.setState({ progress: "in" });
+  }
+
+  async endInterview() {
+    await this.setState({ progress: "post" });
   }
 
   async setProgress() {
+    console.log(this.props.interviewId);
     if (
       this.props.interviewId.interview_status === "applied" &&
-      this.props.interviewId.count == 0
+      this.props.interviewId.count < 1
     )
       await this.setState({ progress: "pre" });
-    else if (this.props.interviewId.interview_status === "applied")
-      await this.setState({ progress: "in" });
     else if (this.props.interviewId.interview_status === "given")
       await this.setState({ progress: "post" });
+    else {
+      await this.setState({ progress: "in" });
+    }
   }
 
   renderMain() {
+    console.log(this.state.progress + "   " + this.props.progress);
     if (this.state.progress === "pre")
-      return <PreInterview startInterviewCallback={this.startInterview}/>;
-    else if (this.state.progress === "in") return <InInterview />;
-    else if (this.state.progress === "post") return <PostInterview />;
+      return <PreInterview startInterviewCallback={this.startInterview} />;
+    else if (this.state.progress === "in")
+      return <InInterview endInterviewCallback={this.endInterview} />;
+    else if (this.state.progress === "post" || this.props.progress === "post")
+      return <PostInterview />;
+  }
+
+  componentDidMount() {
+    this.setProgress();
   }
 
   render() {
@@ -70,7 +83,7 @@ class Interview extends React.Component {
   }
 }
 
-function mapStateToProps({ interviewId }) {
-  return { interviewId };
+function mapStateToProps({ interviewId, progress }) {
+  return { interviewId, progress };
 }
 export default connect(mapStateToProps, actions)(Interview);

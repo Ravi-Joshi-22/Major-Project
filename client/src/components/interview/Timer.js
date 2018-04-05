@@ -22,6 +22,7 @@ class Timer extends React.Component {
     this.state = { time: {}, seconds: 120 };
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
+    this.restartTimer = this.restartTimer.bind(this);
     this.countDown = this.countDown.bind(this);
   }
 
@@ -44,7 +45,8 @@ class Timer extends React.Component {
 
   componentDidMount() {
     let timeLeftVar = this.secondsToTime(this.state.seconds);
-    this.setState({ time: timeLeftVar });
+    this.setState({ time: timeLeftVar,
+    seconds: this.props.timerTime });
     this.startTimer();
   }
 
@@ -103,7 +105,7 @@ class Timer extends React.Component {
   }
 }
 
-function mapStateToProps({  }) {
-  return {  };
+function mapStateToProps({ timerTime }) {
+  return { timerTime };
 }
 export default connect(mapStateToProps)(Timer);

@@ -15,7 +15,9 @@ class AppliedOpenings extends React.Component {
     super(props);
     this.noOpeningContent = this.noOpeningContent.bind(this);
     this.renderCurrentTableContent = this.renderCurrentTableContent.bind(this);
-    this.renderUpcomingTableContent = this.renderUpcomingTableContent.bind(this);
+    this.renderUpcomingTableContent = this.renderUpcomingTableContent.bind(
+      this
+    );
   }
 
   componentDidMount() {
@@ -41,29 +43,31 @@ class AppliedOpenings extends React.Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
-        <Card style={{ padding: 10, margin: 20 }}>
-          <CardTitle title="Your Applied Openings" />
-        </Card>
-        <Card style={{ padding: 10, margin: 20 }}>
-          <CardText style={{ padding: 2 }}>
-            <Tabs>
-              <Tab label="Current Applied Openings">
-                <div>
-                  {this.props.intervieweeOpenings
-                    ? this.renderCurrentTableContent()
-                    : this.noOpeningContent()}
-                </div>
-              </Tab>
-              <Tab label="Upcoming Applied Openings">
-                <div>
-                  {this.props.intervieweeOpenings
-                    ? this.renderUpcomingTableContent()
-                    : this.noOpeningContent()}
-                </div>
-              </Tab>
-            </Tabs>
-          </CardText>
-        </Card>
+        <div>
+          <Card style={{ padding: 10, margin: 20 }}>
+            <CardTitle title="Your Applied Openings" />
+          </Card>
+          <Card style={{ padding: 10, margin: 20 }}>
+            <CardText style={{ padding: 2 }}>
+              <Tabs>
+                <Tab label="Current Applied Openings">
+                  <div>
+                    {this.props.intervieweeOpenings
+                      ? this.renderCurrentTableContent()
+                      : this.noOpeningContent()}
+                  </div>
+                </Tab>
+                <Tab label="Upcoming Applied Openings">
+                  <div>
+                    {this.props.intervieweeOpenings
+                      ? this.renderUpcomingTableContent()
+                      : this.noOpeningContent()}
+                  </div>
+                </Tab>
+              </Tabs>
+            </CardText>
+          </Card>
+        </div>
       </MuiThemeProvider>
     );
   }

@@ -1,7 +1,7 @@
 import { START_INTERVIEW } from '../../actions/interview/types';
 
 const initialState = {
-  question: 'No questions Available',
+  question: 'Loading Question...',
 };
 
 export default function(state = null, action) {

@@ -1,27 +1,11 @@
 import React from "react";
+import * as actions from '../../actions/interview/';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import { blue300, red300, indigo900, red900 } from "material-ui/styles/colors";
-import getMuiTheme from "material-ui/styles/getMuiTheme";
 import { Card, CardTitle, CardText } from "material-ui/Card";
 import Divider from "material-ui/Divider";
-import {
-  teal300,
-  teal100,
-  teal200,
-  lightBlue500,
-  lightBlue50
-} from "material-ui/styles/colors";
+import { teal300 } from "material-ui/styles/colors";
 import AppBar from "material-ui/AppBar";
 import RaisedButton from "material-ui/RaisedButton";
-
-const muiTheme = getMuiTheme({
-  palette: {
-    primary1Color: teal300,
-    primary2Color: teal200,
-    accent1Color: teal200,
-    shadowColor: lightBlue500
-  }
-});
 
 class PreInterview extends React.Component {
   constructor(props) {
@@ -30,7 +14,6 @@ class PreInterview extends React.Component {
   }
 
   render() {
-    const style = {};
     return (
       <div>
         <MuiThemeProvider muiTheme={this.props.muiTheme}>
@@ -66,34 +49,41 @@ class PreInterview extends React.Component {
                       Ensure that your system is{" "}
                       <font color={teal300}>not affected</font> by
                       malware/adware.
-                    </li><br/>
+                    </li>
+                    <br />
                     <li>
                       Please <font color={teal300}>disable any add-ons</font>{" "}
                       installed on your browser as they might disrupt the test
                       activity.
-                    </li><br/>
+                    </li>
+                    <br />
                     <li>
                       Please <font color={teal300}>do not refresh</font> your
                       page while taking up test as it will disrupt the test
                       activity.
-                    </li><br/>
+                    </li>
+                    <br />
                     <li>
                       Ensure that there are{" "}
                       <font color={teal300}>no frequent connection drops</font>.
-                    </li><br/>
+                    </li>
+                    <br />
                     <li>
                       The test window will{" "}
                       <font color={teal300}>automatically close</font> upon
                       successful completion of the test.
-                    </li><br/>
+                    </li>
+                    <br />
                     <li>
                       Make sure your{" "}
                       <font color={teal300}>browser is updated</font>.
-                    </li><br/>
+                    </li>
+                    <br />
                     <li>
                       We recommend using{" "}
                       <font color={teal300}>Google Chrome</font>.
-                    </li><br/>
+                    </li>
+                    <br />
                   </ul>
                 </CardText>
               </Card>
@@ -153,40 +143,43 @@ class PreInterview extends React.Component {
                       Each question in the interview needs to be answered within
                       120 seconds.
                     </li>
-                    <br/>
+                    <br />
                     <li>
                       You will have to answer questions in a sequential manner,
                       you will not be able to navigate across questions.
                     </li>
-                    <br/>
-                    <li> Answers once submitted cannot be changed</li><br/>
+                    <br />
+                    <li> Answers once submitted cannot be changed</li>
+                    <br />
                     <li>
                       You are allowed to take up one interview at a time, not
                       abiding by this rule would result in interview session
                       loss.
-                    </li><br/>
-                    <li> You have a single attempt to complete the quiz.</li><br/>
+                    </li>
+                    <br />
+                    <li> You have a single attempt to complete the quiz.</li>
+                    <br />
                     <li>
                       In case of power failure or shut down, your current
                       progress will be saved and next question will be appeared
                       automatically when reopened.
-                    </li><br/>
-                    <li> No of maximum allowed breaks : 2</li><br/>
+                    </li>
+                    <br />
+                    <li> No of maximum allowed breaks : 2</li>
+                    <br />
                   </ol>
-                  <br/>
-                  <centre>
-                    <RaisedButton
-                      label="START THE INTERVIEW"
-                      primary={true}
-                      fullWidth={true}
-                      style={{
-                        display: "block",
-                        margin: "auto",
-                        maxWidth: 100
-                      }}
-                      onClick={() => this.props.startInterviewCallback()}
-                    />
-                  </centre>
+                  <br />
+                  <RaisedButton
+                    label="START THE INTERVIEW"
+                    primary={true}
+                    fullWidth={true}
+                    style={{
+                      display: "block",
+                      margin: "auto",
+                      maxWidth: 100
+                    }}
+                    onClick={() => this.props.startInterviewCallback()}
+                  />
                 </CardText>
               </Card>
             </div>
@@ -197,4 +190,4 @@ class PreInterview extends React.Component {
   }
 }
 
-export default (PreInterview);
+export default PreInterview;
