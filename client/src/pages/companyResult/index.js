@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/company';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NavDrawer from '../../components/companyDashboard/NavDrawer';
 import Drawer from 'material-ui/Drawer';
@@ -36,13 +38,44 @@ class CompanyResult extends React.Component {
     this.state = {
       open: false,
     };
+    this.renderDetailsContent = this.renderDetailsContent.bind(this);
+    this.renderResultContent = this.renderResultContent.bind(this);
+    this.renderContent = this.renderContent.bind(this);
   }
+
+  async componentDidMount() {
+    await this.props.companyOpeningResults('5ab6171c38d25118a8f0e0cc', '');
+  }
+
   handleToggle = () => this.setState({ open: !this.state.open });
+  renderDetailsContent() {
+    return (
+      <OpeningDetailCard
+        details={this.props.intervieweeOpenings.individualOpening}
+      />
+    );
+  }
+
+  renderResultContent() {
+    return (
+      <OpeningResultCard
+        results={this.props.intervieweeOpenings.individualOpening.interviewees}
+      />
+    );
+  }
+
+  renderContent() {
+    this.renderDetailsContent();
+    this.renderResultContent();
+  }
   render() {
     const contentStyle = {
       marginTop: 30,
     };
 
+    console.log(
+      Object.keys(this.props.intervieweeOpenings.individualOpening).length
+    );
     return (
       <div>
         <MuiThemeProvider muiTheme={muiTheme}>
@@ -109,11 +142,18 @@ class CompanyResult extends React.Component {
                 />
               </div>
             </Drawer>
-          </div>
-          <div className="columns">
-            <div className="column is-10">
-              <OpeningDetailCard />
-              <OpeningResultCard />
+            <div className="columns">
+              <div className="column is-10">
+                <OpeningDetailCard
+                  details={this.props.intervieweeOpenings.individualOpening}
+                />
+                <OpeningResultCard
+                  results={
+                    this.props.intervieweeOpenings.individualOpening
+                      .interviewees
+                  }
+                />
+              </div>
             </div>
           </div>
         </MuiThemeProvider>
@@ -122,4 +162,7 @@ class CompanyResult extends React.Component {
   }
 }
 
-export default CompanyResult;
+function mapStateToProps({ intervieweeOpenings, loading }) {
+  return { intervieweeOpenings, loading };
+}
+export default connect(mapStateToProps, actions)(CompanyResult);

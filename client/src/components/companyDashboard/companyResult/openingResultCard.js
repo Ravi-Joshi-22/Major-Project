@@ -13,9 +13,33 @@ import {
 class OpeningResultCard extends React.Component {
   constructor(props) {
     super(props);
+
+    this.renderResults = this.renderResults.bind(this);
+  }
+
+  renderResults() {
+    if (this.props.results && this.props.results.length > 0) {
+      const resultData = this.props.results.map((eachResult, key) => {
+        return (
+          <TableRow>
+            <TableRowColumn>
+              {eachResult.user_id.first_name +
+                ' ' +
+                eachResult.user_id.last_name}
+            </TableRowColumn>
+            <TableRowColumn>{eachResult.score}</TableRowColumn>
+            <TableRowColumn>{eachResult.interview_status}</TableRowColumn>
+          </TableRow>
+        );
+      });
+      return resultData;
+    } else {
+      return <p> No data available </p>;
+    }
   }
 
   render() {
+    console.log(this.props.results);
     const fields = ['NAME OF INTERVIEWEE', 'SCORE OBTAINED', 'STATUS'];
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
@@ -32,33 +56,7 @@ class OpeningResultCard extends React.Component {
                   ))}
                 </TableHeaderColumn>
               </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableRowColumn>John Smith</TableRowColumn>
-                  <TableRowColumn>25</TableRowColumn>
-                  <TableRowColumn>Selected</TableRowColumn>
-                </TableRow>
-                <TableRow>
-                  <TableRowColumn>Randal White</TableRowColumn>
-                  <TableRowColumn>50</TableRowColumn>
-                  <TableRowColumn>Selected</TableRowColumn>
-                </TableRow>
-                <TableRow>
-                  <TableRowColumn>Stephanie Sanders</TableRowColumn>
-                  <TableRowColumn>60</TableRowColumn>
-                  <TableRowColumn>Rejected</TableRowColumn>
-                </TableRow>
-                <TableRow>
-                  <TableRowColumn>Steve Brown</TableRowColumn>
-                  <TableRowColumn>44</TableRowColumn>
-                  <TableRowColumn>Given</TableRowColumn>
-                </TableRow>
-                <TableRow>
-                  <TableRowColumn>Christopher Nolan</TableRowColumn>
-                  <TableRowColumn>53</TableRowColumn>
-                  <TableRowColumn>Applied</TableRowColumn>
-                </TableRow>
-              </TableBody>
+              <TableBody>{this.renderResults()}</TableBody>
             </Table>
           </CardText>
         </Card>
