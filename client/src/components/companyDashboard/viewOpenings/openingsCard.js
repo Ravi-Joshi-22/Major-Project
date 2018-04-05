@@ -11,7 +11,7 @@ import {
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
 import ResultIcon from 'material-ui/svg-icons/action/assessment';
-import EditIcon from 'material-ui/svg-icons/content/create';
+import EndOpeningIcon from 'material-ui/svg-icons/action/lock';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Dialog from 'material-ui/Dialog';
@@ -51,7 +51,7 @@ class OpeningsCard extends React.Component {
 
   render() {
     const fields = ['START DATE', 'END DATE', 'SALARY'];
-    const actions = [
+    const deleteOpeningActions = [
       <FlatButton label="Cancel" primary={true} onClick={this.handleClose} />,
       <FlatButton
         label="Yes"
@@ -60,6 +60,10 @@ class OpeningsCard extends React.Component {
           this.props.companyDeleteOpenings(this.props.openingsData._id)
         }
       />,
+    ];
+    const endOpeningActions = [
+      <FlatButton label="Cancel" primary={true} onClick={this.handleClose} />,
+      <FlatButton label="Yes" primary={true} onClick={this.handleClose} />,
     ];
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
@@ -104,9 +108,6 @@ class OpeningsCard extends React.Component {
                 </table>
               </div>
               <div className="column is-4">
-                <FloatingActionButton mini={true} style={{ margin: 5 }}>
-                  <EditIcon />
-                </FloatingActionButton>
                 <FloatingActionButton
                   mini={true}
                   style={{ margin: 5 }}
@@ -114,19 +115,44 @@ class OpeningsCard extends React.Component {
                 >
                   <DeleteIcon />
                 </FloatingActionButton>
-                <Dialog actions={actions} modal={true} open={this.state.open}>
+                <Dialog
+                  actions={deleteOpeningActions}
+                  modal={true}
+                  open={this.state.open}
+                >
                   Are you sure, you want to delete this opening?
                 </Dialog>
               </div>
             </div>
           </CardText>
-          <CardActions expandable={true}>
-            <FlatButton
-              label="VIEW RESULTS"
-              primary={true}
-              icon={<ResultIcon />}
-            />
-          </CardActions>
+          <div className="columns">
+            <div className="column is-4">
+              <CardActions expandable={true}>
+                <FlatButton
+                  label="VIEW RESULTS"
+                  primary={true}
+                  icon={<ResultIcon />}
+                />
+              </CardActions>
+            </div>
+            <div className="column is-4">
+              <CardActions expandable={true}>
+                <FlatButton
+                  label="END OPENING"
+                  primary={true}
+                  icon={<EndOpeningIcon />}
+                  onClick={this.handleOpen}
+                />
+                <Dialog
+                  actions={endOpeningActions}
+                  modal={true}
+                  open={this.state.open}
+                >
+                  Are you sure, you want to end this opening right now?
+                </Dialog>
+              </CardActions>
+            </div>
+          </div>
         </Card>
       </MuiThemeProvider>
     );

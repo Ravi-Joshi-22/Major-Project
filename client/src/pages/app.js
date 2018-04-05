@@ -8,6 +8,7 @@ import UserDashboard from './userDashboard/index';
 import UserProfile from './userProfile';
 import CompanyDashboard from './companyDashboard';
 import IntervieweeRegister from './interviewee registration';
+import CompanyResult from './companyResult';
 import ErrorBox from '../components/common/errorBoxContainer';
 import SuccessBox from '../components/common/successBox';
 
@@ -36,6 +37,7 @@ class App extends Component {
               component={IntervieweeRegister}
             />
             <Route exact path="/userProfile" component={UserProfile} />
+            <Route exact path="/companyResult" component={CompanyResult} />
           </div>
         </BrowserRouter>
       </div>

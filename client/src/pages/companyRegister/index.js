@@ -43,12 +43,10 @@ class CompanyRegister extends React.Component {
   }
 
   stepShow() {
-    console.log('cureentStep' + this.props.currentStep);
     this.refs.step0.className = 'hidden';
     this.refs.step1.className = 'hidden';
     this.refs.step2.className = 'hidden';
     this.refs.step3.className = 'hidden';
-    // this.refs.step4.className = 'hidden';
 
     switch (this.props.currentStep) {
       case 0:
@@ -63,9 +61,6 @@ class CompanyRegister extends React.Component {
       case 3:
         this.refs.step3.className = '';
         break;
-      //   case 4:
-      //     this.refs.step4.className = '';
-      //     break;
     }
   }
 
@@ -87,8 +82,6 @@ class CompanyRegister extends React.Component {
           <Step title="Company Registration" />
           <Step title="E-Mail Verification" />
           <Step title="OTP Verification" />
-          {/* <Step title="Upload Documents" />
-          <Step title="Admin Validation" /> */}
         </Steps>
         <br />
         <br />
@@ -104,12 +97,6 @@ class CompanyRegister extends React.Component {
         <div ref="step3" className="hidden">
           <OTPVerification />
         </div>
-        {/* <div ref="step4" className="hidden">
-          <UploadDocument />
-        </div>
-        <div ref="step5" className="hidden">
-          <AdminValidation />
-        </div> */}
         {this.props.loading.isloading ? <BusyIndicator /> : null}
       </div>
     );
