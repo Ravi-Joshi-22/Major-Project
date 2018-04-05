@@ -57,7 +57,24 @@ function appliedOpenings(req, res, next) {
   });
 }
 
+/**
+ * Function to fetch result of interviewee for a particular opening which is closed
+ * @param  {Object}   req  Request Object
+ * @param  {Object}   res  Response Object
+ * @param  {Function} next Function to pass control to the next middleware
+ */
+function getResult(req, res, next) {
+  openingLib.getAllResults(req.user._id, function(err, fetchedOpening) {
+    if (err) {
+      res.status(500).json(err);
+      return;
+    }
+    res.status(200).json(fetchedOpening);
+  });
+}
+
 router.post('/apply', applyForOpening);
 router.get('/eligible', eligibleOpenings);
 router.get('/applied', appliedOpenings);
+router.get('/results', getResult);
 module.exports = router;
