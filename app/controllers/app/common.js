@@ -73,6 +73,11 @@ router.get('/fetchUser', (req, res) => {
   res.send(req.user);
 });
 
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.status(200).json({ message: 'Successfully Logged Out.' });
+});
+
 router.get('/verifyEmail', verifyUserEmail);
 router.get('/requestOTP', sendOTP);
 router.post('/verifyOTP', verifyOTP);
