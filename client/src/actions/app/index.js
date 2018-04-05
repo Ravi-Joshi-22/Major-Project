@@ -112,7 +112,6 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const verifyOTP = (userId, OTP, history) => async dispatch => {
-  dispatch({ type: START_LOADING });
   const requestData = {
     id: userId,
     otp: OTP,

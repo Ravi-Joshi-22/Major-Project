@@ -111,25 +111,6 @@ function getOpeningDetails(req, res, next) {
   });
 }
 
-/** get result of all candidates applied in an opening after opening is closed
- * @param  {Object}   req  Request Object
- * @param  {Object}   res  Response Object
- * @param  {Function} next Function to pass control to the next middleware
- */
-
-function getResult(req, res, next) {
-  openingLib.getResult(req.user._id, req.query.openingId, function(
-    err,
-    fetchedInstance
-  ) {
-    if (err) {
-      res.status(500).json(err);
-      return;
-    }
-    res.status(200).json(fetchedInstance);
-  });
-}
-
 /**
  * get hired and rejected candidates list and send mails to all applied candidates as per their interview status
  * @param  {Object}   req  Request Object
@@ -175,8 +156,7 @@ router.post('/new', newOpening);
 router.put('/', updateOpeningDetails);
 router.delete('/', deleteOpening);
 router.get('/', getAllOpening);
-router.get('/each', getOpeningDetails);
-router.get('/result', getResult);
+router.get('/result', getOpeningDetails);
 router.post('/hire', hiringCount);
 router.put('/close', closeHiring);
 module.exports = router;
