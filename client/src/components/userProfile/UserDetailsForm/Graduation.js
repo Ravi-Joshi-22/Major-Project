@@ -1,6 +1,8 @@
 import React from 'react';
 import * as actions from '../../../actions/interviewee/education';
 import { connect } from 'react-redux';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
 
 class Graduation extends React.Component {
   constructor(props) {
@@ -301,13 +303,9 @@ class Graduation extends React.Component {
             </footer>
           </div>
         </div>
-        <a
-          class="button is-black is-inverted  is-hovered"
-          onClick={this.renderModal}
-        >
-          {' '}
-          +Add Graduation{' '}
-        </a>
+        <FloatingActionButton mini={true} onClick={this.renderModal} style={{ padding: 2 }}>
+          <ContentAdd />
+        </FloatingActionButton>
       </div>
     );
   }

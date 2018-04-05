@@ -10,9 +10,7 @@ import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import EditIcon from 'material-ui/svg-icons/image/edit';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import { IconButton } from 'material-ui';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Course from '../userProfile/UserDetailsForm/Courses';
 import Test from '../userProfile/UserDetailsForm/Test';
@@ -65,9 +63,6 @@ class Courses extends React.Component {
           <img src="/Assets/andriod.png" alt="" />
         </CardMedia>
         <CardActions>
-          <IconButton className="icon" tooltip="Edit">
-            <EditIcon />
-          </IconButton>
           <FloatingActionButton mini={true} style={{ margin: 5 }}>
             <DeleteIcon onClick={() => this.deleteCourse(eachCourse._id)} />
           </FloatingActionButton>
@@ -97,9 +92,6 @@ class Courses extends React.Component {
           <img src="/Assets/andriod.png" alt="" />
         </CardMedia>
         <CardActions>
-          <IconButton className="icon" tooltip="Edit">
-            <EditIcon />
-          </IconButton>
           <FloatingActionButton mini={true} style={{ margin: 5 }}>
             <DeleteIcon onClick={() => this.deleteTests(eachTest._id)} />
           </FloatingActionButton>
@@ -136,9 +128,6 @@ class Courses extends React.Component {
             <img src="/Assets/andriod.png" alt="" />
           </CardMedia>
           <CardActions>
-            <IconButton className="icon" tooltip="Edit">
-              <EditIcon />
-            </IconButton>
             <FloatingActionButton mini={true} style={{ margin: 5 }}>
               <DeleteIcon
                 onClick={() => this.deleteCertifications(eachCertification._id)}

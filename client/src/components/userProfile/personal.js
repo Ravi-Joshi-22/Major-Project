@@ -1,7 +1,6 @@
 import React from 'react';
-import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardTitle, CardText } from 'material-ui/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import EditIcon from 'material-ui/svg-icons/image/edit';
 import { IconButton } from 'material-ui';
 class Personal extends React.Component {
   constructor(props) {
@@ -28,11 +27,6 @@ class Personal extends React.Component {
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ margin: 10, marginTop: 20 }}>
-          <CardActions>
-            <IconButton className="icon" tooltip="Edit">
-              <EditIcon />
-            </IconButton>
-          </CardActions>
           <br />
           <div className="center">
             {!personal ? null : this.renderPersonal()}

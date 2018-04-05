@@ -2,6 +2,7 @@ import React from 'react';
 import Chip from 'material-ui/Chip';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/interviewee/skills';
+import { teal100 } from 'material-ui/styles/colors';
 
 class SkillChip extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class SkillChip extends React.Component {
   renderChip(data) {
     return (
       <Chip
+        backgroundColor={teal100}
         key={data._id}
         onRequestDelete={() => this.handleRequestDelete(data._id)}
         style={this.styles.chip}
