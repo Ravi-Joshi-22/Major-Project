@@ -50,8 +50,13 @@ class ScoreCard extends React.Component {
                           width="1000"
                         />
                         <CardText>
-                          interview status<br /> Salary <br />
-                          location
+                          {
+                            this.props.resultInfo.interviewees[0]
+                              .interview_status
+                          }
+                          <br /> {this.props.resultInfo.salary}
+                          <br />
+                          {this.props.resultInfo.location}
                         </CardText>
                       </div>
                     </div>
@@ -73,8 +78,8 @@ class ScoreCard extends React.Component {
                   }}
                 >
                   <CardText>
-                    start date end date<br /> Score job location<br />{' '}
-                    responsiblities<br />
+                    <b>{this.props.resultInfo.interviewees[0].score}</b>
+                    <br />{' '}
                   </CardText>
                   <div>
                     <FloatingActionButton
