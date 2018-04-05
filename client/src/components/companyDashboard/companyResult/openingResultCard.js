@@ -16,18 +16,21 @@ class OpeningResultCard extends React.Component {
   }
 
   render() {
+    const fields = ['NAME OF INTERVIEWEE', 'SCORE OBTAINED', 'STATUS'];
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 25, margin: 20 }}>
           <CardTitle title="Interviewee Details" />
           <CardText style={{ padding: 2 }}>
-            <Table displayRowCheckbox={false}>
+            <Table displayRowCheckbox={false} selectable={false}>
               <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-                <TableRow>
-                  <TableHeaderColumn>Name Of Interviewee</TableHeaderColumn>
-                  <TableHeaderColumn>Score Obtained</TableHeaderColumn>
-                  <TableHeaderColumn>Status</TableHeaderColumn>
-                </TableRow>
+                <TableHeaderColumn>
+                  {fields.map((eachField, key) => (
+                    <TableRowColumn style={{ width: '15%' }}>
+                      {eachField}
+                    </TableRowColumn>
+                  ))}
+                </TableHeaderColumn>
               </TableHeader>
               <TableBody>
                 <TableRow>

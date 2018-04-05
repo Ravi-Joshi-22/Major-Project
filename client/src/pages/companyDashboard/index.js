@@ -58,7 +58,7 @@ class CompanyDashboard extends React.Component {
   }
 
   async mainAreaShow(e) {
-    +await this.setState({ open: false, mainArea: e });
+    await this.setState({ open: false, mainArea: e });
   }
 
   renderMainArea() {
