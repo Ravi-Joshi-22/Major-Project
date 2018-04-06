@@ -39,7 +39,6 @@ class OpeningResultCard extends React.Component {
   }
 
   render() {
-    console.log(this.props.results);
     const fields = ['NAME OF INTERVIEWEE', 'SCORE OBTAINED', 'STATUS'];
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>

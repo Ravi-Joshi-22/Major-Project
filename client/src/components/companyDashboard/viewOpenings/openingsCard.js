@@ -132,6 +132,9 @@ class OpeningsCard extends React.Component {
                   label="VIEW RESULTS"
                   primary={true}
                   icon={<ResultIcon />}
+                  onClick={() => {
+                    this.props.mainAreaCallback(this.props.openingsData._id);
+                  }}
                 />
               </CardActions>
             </div>

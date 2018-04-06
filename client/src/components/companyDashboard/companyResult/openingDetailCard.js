@@ -22,6 +22,19 @@ class OpeningDetailCard extends React.Component {
   handleChange = (event, index, value) => this.setState({ value });
 
   render() {
+    {
+      /* const fields = [
+      'START DATE',
+      'END DATE',
+      'LOCATION',
+      'SALARY',
+      'SKILLS',
+      'MINIMUM EXPERIENCE',
+      'MAXIMUM EXPERIENCE',
+      'RESPONSIBILITIES',
+      'QUALIFICATIONS',
+   ];*/
+    }
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 25, margin: 20 }}>
@@ -31,6 +44,13 @@ class OpeningDetailCard extends React.Component {
               <div className="column is-8">
                 <table>
                   <tbody displayRowCheckbox={false}>
+                    {/* <TableHeaderColumn>
+                  {fields.map((eachField, key) => (
+                    <TableRowColumn style={{ width: '15%' }}>
+                      {eachField}
+                    </TableRowColumn>
+                  ))}
+                </TableHeaderColumn>*/}
                     <tr>
                       <td style={{ width: '25%' }}>
                         <b>START DATE</b>

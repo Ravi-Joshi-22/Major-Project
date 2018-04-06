@@ -36,6 +36,12 @@ class ViewOpeningsMainPage extends React.Component {
       open: false,
       companyOpenings: '',
     };
+    this.showResult = this.showResult.bind(this);
+  }
+
+  showResult(e) {
+    console.log('eE0    ' + e);
+    this.props.resultCallback(e);
   }
 
   componentDidMount() {
@@ -55,26 +61,14 @@ class ViewOpeningsMainPage extends React.Component {
         <MuiThemeProvider muiTheme={muiTheme}>
           <div>
             <div style={contentStyle}>
-              <Drawer
-                muiTheme={muiTheme}
-                docked={false}
-                width={300}
-                open={this.state.open}
-                onRequestChange={open => this.setState({ open })}
-              >
-                <div>
-                  <NavDrawer
-                    muiTheme={muiTheme}
-                    close={() => this.setState({ open: !this.state.open })}
-                    openingCallback={this.openingForm}
-                  />
-                </div>
-              </Drawer>
               <div>
                 <div className="columns">
                   <div className="column is-8">
                     {companyOpenings.map((eachOpening, key) => (
-                      <OpeningsCard openingsData={eachOpening} />
+                      <OpeningsCard
+                        openingsData={eachOpening}
+                        mainAreaCallback={this.showResult}
+                      />
                     ))}
                     <RaisedButton
                       muiTheme={muiTheme}

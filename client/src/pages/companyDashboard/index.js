@@ -15,6 +15,7 @@ import IconButton from 'material-ui/IconButton';
 import HamburgerIcon from 'material-ui/svg-icons/navigation/menu';
 import Avatar from 'material-ui/Avatar';
 import Payment from '../../components/companyDashboard/payment';
+import CompanyResult from '../../components/companyDashboard/CompanyResult';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {
   teal300,
@@ -39,10 +40,12 @@ class CompanyDashboard extends React.Component {
     this.state = {
       open: false,
       mainArea: 'mainArea',
+      resultOpeningId: '',
     };
     this.openingForm = this.openingForm.bind(this);
     this.mainAreaShow = this.mainAreaShow.bind(this);
     this.renderMain = this.renderMain.bind(this);
+    this.resultShow = this.resultShow.bind(this);
   }
 
   handleToggle = () => this.setState({ open: !this.state.open });
@@ -61,10 +64,20 @@ class CompanyDashboard extends React.Component {
     await this.setState({ open: false, mainArea: e });
   }
 
+  async resultShow(e) {
+    await this.setState({
+      open: false,
+      mainArea: 'Company Result',
+      resultOpeningId: e,
+    });
+  }
+
   renderMainArea() {
     const { mainArea } = this.state;
     if (mainArea === 'View Opening') {
-      return <ViewOpeningsMainPage />;
+      return <ViewOpeningsMainPage resultCallback={this.resultShow} />;
+    } else if (mainArea === 'Company Result') {
+      return <CompanyResult resultOpeningId={this.state.resultOpeningId} />;
     } else {
       return <MainArea companyDash={this.renderMain()} muiTheme={muiTheme} />;
     }

@@ -1,4 +1,3 @@
-
 import React from "react";
 import CompanyDetails from "./MainArea/CompanyDetails";
 import UsersDetails from "./MainArea/UsersDetails";

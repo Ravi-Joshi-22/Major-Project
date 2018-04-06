@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/company';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NavDrawer from './NavDrawer';
 import Drawer from 'material-ui/Drawer';
@@ -33,87 +35,45 @@ const muiTheme = getMuiTheme({
 class CompanyResult extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      open: false,
-    };
+    this.state = {};
+    this.renderDetailsContent = this.renderDetailsContent.bind(this);
+    this.renderResultContent = this.renderResultContent.bind(this);
   }
+
   handleToggle = () => this.setState({ open: !this.state.open });
+
+  async componentDidMount() {
+    await this.props.companyOpeningResults(this.props.resultOpeningId, '');
+    console.log(this.props.resultOpeningId + '  ');
+  }
+
+  renderDetailsContent() {
+    return (
+      <OpeningDetailCard
+        details={this.props.intervieweeOpenings.individualOpening}
+      />
+    );
+  }
+
+  renderResultContent() {
+    return (
+      <OpeningResultCard
+        results={this.props.intervieweeOpenings.individualOpening.interviewees}
+      />
+    );
+  }
+
   render() {
     const contentStyle = {
       marginTop: 30,
     };
-
     return (
       <div>
         <MuiThemeProvider muiTheme={muiTheme}>
-          <div>
-            <AppBar
-              title="SmartHyre"
-              iconElementLeft={
-                <IconButton>
-                  <HamburgerIcon />
-                </IconButton>
-              }
-              iconElementRight={
-                <div
-                  className="control columns"
-                  style={{ margin: 'auto 15px auto 0' }}
-                >
-                  <div className="column-84">
-                    <span>
-                      <span
-                        style={{
-                          color: '#fff',
-                          fontSize: 27,
-                          marginTop: 'auto',
-                        }}
-                      >
-                        <img src="./Assets/coin.svg" style={{ height: 20 }} />{' '}
-                      </span>
-                      <Payment />
-                    </span>
-                  </div>
-                  <div
-                    className="navbar-item has-dropdown is-hoverable column-8"
-                    style={{ paddingRight: 40 }}
-                  >
-                    <a className="navbar-link" href="#">
-                      <Avatar src="./Assets/Employee.svg" size={30} />
-                    </a>
-                    <div className="navbar-dropdown">
-                      <a className="navbar-item" href="#">
-                        Profile
-                      </a>
-                      <hr className="navbar-divider" />
-                      <a className="navbar-item is-active" href="#">
-                        Logout
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              }
-              onLeftIconButtonClick={this.handleToggle}
-              style={{ width: '114%', marginLeft: '-7%' }}
-            />
-            <Drawer
-              muiTheme={muiTheme}
-              docked={false}
-              width={300}
-              open={this.state.open}
-              onRequestChange={open => this.setState({ open })}
-            >
-              <div>
-                <NavDrawer
-                  muiTheme={muiTheme}
-                  close={() => this.setState({ open: !this.state.open })}
-                />
-              </div>
-            </Drawer>
-          </div>
           <div className="columns">
             <div className="column is-10">
-              <OpeningDetailCard />
-              <OpeningResultCard />
+              {this.renderDetailsContent()}
+              {this.renderResultContent()}
             </div>
           </div>
         </MuiThemeProvider>
@@ -122,7 +82,7 @@ class CompanyResult extends React.Component {
   }
 }
 
-function mapStateToProps({}) {
-  return {};
+function mapStateToProps({ intervieweeOpenings, loading }) {
+  return { intervieweeOpenings, loading };
 }
-export default connect(mapStateToProps)(CompanyResult);
+export default connect(mapStateToProps, actions)(CompanyResult);

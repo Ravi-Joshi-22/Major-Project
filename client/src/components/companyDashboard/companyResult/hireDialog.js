@@ -9,10 +9,19 @@ class HireCard extends React.Component {
     super(props);
     this.state = {
       currentModalClass: 'modal',
+      noOfCandidatesToHire: '',
     };
+    this.updateNumber = this.updateNumber.bind(this);
     this.renderModal = this.renderModal.bind(this);
     this.submit = this.submit.bind(this);
   }
+
+  updateNumber(e) {
+    if (e.target.value < 100) {
+      this.setState({ noOfCandidatesToHire: e.target.value });
+    }
+  }
+
   async renderModal() {
     if (this.state.currentModalClass === 'modal') {
       await this.setState({ currentModalClass: 'modal is-active' });
@@ -39,13 +48,25 @@ class HireCard extends React.Component {
                 onClick={this.renderModal}
               />
             </header>
-            <section class="modal-card-body" />
+            <section class="modal-card-body">
+              <div class="field">
+                <div class="control">
+                  <input
+                    class="input is-primary"
+                    type="text"
+                    placeholder="No. Of Candidates"
+                    value={this.state.noOfCandidatesToHire}
+                    onChange={this.updateNumber}
+                  />
+                </div>
+              </div>
+            </section>
             <footer class="modal-card-foot">
               <button
                 class="button is-right is-primary  is-rounded"
                 onClick={this.submit}
               >
-                Save changes
+                Hire!
               </button>
             </footer>
           </div>
