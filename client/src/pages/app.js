@@ -9,6 +9,7 @@ import UserProfile from './userProfile';
 import CompanyDashboard from './companyDashboard';
 import Interview from './interview';
 import IntervieweeRegister from './interviewee registration';
+import ViewResult from './viewResultInterviewee';
 import ViewOpenings from './viewOpenings';
 import DetailsPage from '../components/companyDashboard/DrawerArea/viewOpenings/detailsPage';
 import ErrorBox from '../components/common/errorBoxContainer';
@@ -41,6 +42,7 @@ class App extends Component {
             <Route exact path="/userProfile" component={UserProfile} />
             <Route exact path="/viewOpenings" component={ViewOpenings} />
             <Route exact path="/detailsPage" component={DetailsPage} />
+            <Route path="/viewResult" component={ViewResult} />
             <Route path="/Interview" component={Interview} />
           </div>
         </BrowserRouter>
