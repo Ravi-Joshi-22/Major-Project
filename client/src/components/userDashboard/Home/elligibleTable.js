@@ -23,7 +23,7 @@ class ElligibleTable extends React.Component {
   }
 
   applyOpening(elligibleOpeningId) {
-    const { applyForOpening, getElligibleOpenings } = this.props;
+    const { applyForOpening } = this.props;
     const openingData = {
       openingId: elligibleOpeningId
     };

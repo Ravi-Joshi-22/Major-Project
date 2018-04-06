@@ -7,6 +7,7 @@ import Login from './login/index';
 import UserDashboard from './userDashboard/index';
 import UserProfile from './userProfile';
 import CompanyDashboard from './companyDashboard';
+import Interview from './interview';
 import IntervieweeRegister from './interviewee registration';
 import ViewResult from './viewResultInterviewee';
 import ViewOpenings from './viewOpenings';
@@ -42,6 +43,7 @@ class App extends Component {
             <Route exact path="/viewOpenings" component={ViewOpenings} />
             <Route exact path="/detailsPage" component={DetailsPage} />
             <Route path="/viewResult" component={ViewResult} />
+            <Route path="/Interview" component={Interview} />
           </div>
         </BrowserRouter>
       </div>
