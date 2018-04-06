@@ -63,7 +63,11 @@ class OpeningsCard extends React.Component {
     ];
     const endOpeningActions = [
       <FlatButton label="Cancel" primary={true} onClick={this.handleClose} />,
-      <FlatButton label="Yes" primary={true} onClick={this.handleClose} />,
+      <FlatButton
+        label="Yes"
+        primary={true}
+        onClick={() => this.props.endOpening(this.props.openingsData._id)}
+      />,
     ];
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>

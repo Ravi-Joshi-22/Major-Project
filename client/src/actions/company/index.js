@@ -93,5 +93,21 @@ export const companyOpeningResults = (
     });
 };
 
+export const endOpening = openingId => async dispatch => {
+  dispatch({ type: START_LOADING });
+  axios
+    .put('/smarthyre/api/v1/company/opening/close?openingId=' + openingId)
+    .then(res => {
+      const success = {
+        msg: 'Successfully ended this opening.',
+      };
+      dispatch({ type: SHOW_SUCCESS_BOX, payload: success });
+    })
+    .then(() => dispatch(companyViewOpenings()))
+    .catch(err => {
+      dispatch({ type: ERROR, payload: err.response.data });
+    });
+};
+
 export const showOpeningModal = () => ({ type: SHOW_COMPANY_OPENING_MODAL });
 export const hideOpeningModal = () => ({ type: HIDE_COMPANY_OPENING_MODAL });

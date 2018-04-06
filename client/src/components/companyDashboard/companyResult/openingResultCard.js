@@ -13,7 +13,6 @@ import {
 class OpeningResultCard extends React.Component {
   constructor(props) {
     super(props);
-
     this.renderResults = this.renderResults.bind(this);
   }
 
