@@ -18,7 +18,7 @@ class ViewResult extends React.Component {
     return (
       <MuiThemeProvider>
         <div>
-          <Card style={{ padding: 10, margin: 20 }}>
+          <Card style={{ padding: 10, margin: 7 }}>
             <CardTitle title="Previous Interviews" />
           </Card>
           {this.props.intervieweeOpenings.results.length === 0 ? null : (

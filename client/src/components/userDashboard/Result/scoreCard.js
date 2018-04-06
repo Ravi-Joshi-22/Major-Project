@@ -26,39 +26,43 @@ class ScoreCard extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
+
     this.setState({ isFlipped: !this.state.isFlipped });
   }
   render() {
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <div>
-          <div className="container" style={{ maxWidth: 400, marginTop: 30 }}>
+          <div
+            className="container"
+            style={{ maxWidth: 500, marginTop: 27, maxHeight: 200 }}
+          >
             <ReactCardFlip isFlipped={this.state.isFlipped}>
               <div key="front">
-                <Card
-                  style={{
-                    Width: '100%',
-                    margin: 'auto',
-                  }}
-                >
+                <Card>
                   <div className="columns">
                     <div className="column is-10">
                       <div style={{ display: 'flex' }}>
                         <CardHeader
-                          title="Postion"
-                          avatar="http://1000logos.net/wp-content/uploads/2017/07/dell-symbol.jpg"
+                          title={this.props.resultInfo.company_id.company_name}
+                          subtitle={this.props.resultInfo.position}
+                          avatar={this.props.resultInfo.company_id.company_logo}
                           width="1000"
                         />
                         <CardText>
-                          {
-                            this.props.resultInfo.interviewees[0]
-                              .interview_status
-                          }
-                          <br /> {this.props.resultInfo.salary}
                           <br />
-                          {this.props.resultInfo.location}
+                          Rs{this.props.resultInfo.salary}
+                          <br />
                         </CardText>
                       </div>
+                      <CardText>
+                        <b>
+                          <center>
+                            {' '}
+                            {this.props.resultInfo.interviewees[0].interview_status.toUpperCase()}
+                          </center>
+                        </b>
+                      </CardText>
                     </div>
                     <div className="column is-2">
                       <FloatingActionButton
@@ -72,14 +76,23 @@ class ScoreCard extends React.Component {
                 </Card>
               </div>
               <div key="back">
-                <Card
-                  style={{
-                    maxWidth: 800,
-                  }}
-                >
-                  <CardText>
-                    <b>{this.props.resultInfo.interviewees[0].score}</b>
-                    <br />{' '}
+                <Card>
+                  <CardText className="columns">
+                    <p className="column">
+                      <b>
+                        {' '}
+                        Score: {this.props.resultInfo.interviewees[0].score}
+                      </b>
+                      <br />
+                      Location: {this.props.resultInfo.location}
+                      <br />
+                    </p>
+                    <p className="column">
+                      Skills: {this.props.resultInfo.skills}
+                      <br />
+                      Experience: {this.props.resultInfo.experience_min}-
+                      {this.props.resultInfo.experience_max} Years
+                    </p>
                   </CardText>
                   <div>
                     <FloatingActionButton
