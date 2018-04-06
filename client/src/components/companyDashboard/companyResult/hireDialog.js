@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../../actions/company';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -9,7 +11,7 @@ class HireCard extends React.Component {
     super(props);
     this.state = {
       currentModalClass: 'modal',
-      noOfCandidatesToHire: '',
+      noOfCandidatesToHire: 0,
     };
     this.updateNumber = this.updateNumber.bind(this);
     this.renderModal = this.renderModal.bind(this);
@@ -31,6 +33,11 @@ class HireCard extends React.Component {
   }
   async submit() {
     await this.setState({ currentModalClass: 'modal' });
+    const reqObj = {
+      openingId: this.props.openingId,
+      count: this.state.noOfCandidatesToHire,
+    };
+    await this.props.hire(reqObj);
   }
   render() {
     return (
@@ -82,4 +89,4 @@ class HireCard extends React.Component {
   }
 }
 
-export default HireCard;
+export default connect(null, actions)(HireCard);

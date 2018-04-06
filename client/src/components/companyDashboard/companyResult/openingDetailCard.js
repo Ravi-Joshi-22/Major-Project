@@ -126,7 +126,7 @@ class OpeningDetailCard extends React.Component {
             <div className="columns">
               <div className="column is-10" />
               <div className="column is-2">
-                <HireCard />
+                <HireCard openingId={this.props.details._id} />
               </div>
             </div>
           </CardText>

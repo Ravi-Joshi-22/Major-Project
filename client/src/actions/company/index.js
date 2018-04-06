@@ -109,5 +109,23 @@ export const endOpening = openingId => async dispatch => {
     });
 };
 
+export const hire = hireObj => async dispatch => {
+  axios
+    .post('/smarthyre/api/v1/company/opening/hire', hireObj)
+    .then(res => {
+      dispatch({ type: FETCH_COMPANY, payload: res.data });
+    })
+    .then(() => {
+      const success = {
+        msg: 'Successfully hired.',
+      };
+      dispatch({ type: SHOW_SUCCESS_BOX, payload: success });
+    })
+    .then(() => dispatch(companyOpeningResults(hireObj.openingId, '')))
+    .catch(err => {
+      dispatch({ type: ERROR, payload: err.response.data });
+    });
+};
+
 export const showOpeningModal = () => ({ type: SHOW_COMPANY_OPENING_MODAL });
 export const hideOpeningModal = () => ({ type: HIDE_COMPANY_OPENING_MODAL });
