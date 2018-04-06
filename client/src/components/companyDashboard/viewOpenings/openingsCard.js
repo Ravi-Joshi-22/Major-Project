@@ -16,7 +16,8 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Checkbox from 'material-ui/Checkbox';
 import Dialog from 'material-ui/Dialog';
-import * as actions from '../../../../actions/company';
+import * as actions from '../../../actions/company';
+import InterviewOpening from '../DrawerArea/InterviewOpening';
 
 const styles = {
   checkbox: {
@@ -33,6 +34,7 @@ class OpeningsCard extends React.Component {
       checked: false,
       open: false,
     };
+    this.openingForm = this.openingForm.bind(this);
   }
 
   handleOpen = () => {
@@ -42,6 +44,15 @@ class OpeningsCard extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  async openingForm() {
+    const { showOpeningModal, hideOpeningModal } = this.props;
+    if (this.props.modals.companyOpeningModal.show === 'modal') {
+      showOpeningModal(this.props.openingsData);
+    } else {
+      hideOpeningModal();
+    }
+  }
 
   getDateStr(date) {
     const dateStr = new Date(date);
@@ -120,11 +131,19 @@ class OpeningsCard extends React.Component {
                     </table>
                   </div>
                   <div className="column is-4">
-                    <FloatingActionButton mini={true} style={{ margin: 5 }}>
+                    <FloatingActionButton
+                      mini={true}
+                      style={{ margin: 5 }}
+                      onClick={this.openingForm}
+                    >
                       <EditIcon />
                     </FloatingActionButton>
-                    <FloatingActionButton mini={true} style={{ margin: 5 }}>
-                      <DeleteIcon onClick={this.handleOpen} />
+                    <FloatingActionButton
+                      mini={true}
+                      style={{ margin: 5 }}
+                      onClick={this.handleOpen}
+                    >
+                      <DeleteIcon />
                     </FloatingActionButton>
                     <Dialog
                       actions={actions}
@@ -151,4 +170,8 @@ class OpeningsCard extends React.Component {
   }
 }
 
-export default connect(null, actions)(OpeningsCard);
+function mapStateToProps({ modals }) {
+  return { modals };
+}
+
+export default connect(mapStateToProps, actions)(OpeningsCard);

@@ -12,9 +12,9 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import HamburgerIcon from 'material-ui/svg-icons/navigation/menu';
 import Drawer from 'material-ui/Drawer';
-import NavDrawer from '../../components/companyDashboard/NavDrawer';
-import OpeningsCard from '../../components/companyDashboard/DrawerArea/viewOpenings/openingsCard';
-import SettingsListCard from '../../components/companyDashboard/DrawerArea/viewOpenings/settingsListCard';
+import NavDrawer from './NavDrawer';
+import OpeningsCard from './viewOpenings/openingsCard';
+import SettingsListCard from './viewOpenings/settingsListCard';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 import ClearIcon from 'material-ui/svg-icons/content/clear';
 import { connect } from 'react-redux';
@@ -30,11 +30,12 @@ const muiTheme = getMuiTheme({
   },
 });
 
-class ViewOpenings extends React.Component {
+class ViewOpeningsMainPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
+      companyOpenings: '',
     };
   }
 
@@ -49,23 +50,12 @@ class ViewOpenings extends React.Component {
       marginTop: 30,
     };
     const { intervieweeOpenings } = this.props;
-    console.log(intervieweeOpenings);
     const companyOpenings = intervieweeOpenings.companyCreatedOpenings;
-    console.log(companyOpenings);
+
     return (
       <div>
         <MuiThemeProvider muiTheme={muiTheme}>
           <div>
-            <AppBar
-              title="SmartHyre"
-              iconElementLeft={
-                <IconButton>
-                  <HamburgerIcon />
-                </IconButton>
-              }
-              onLeftIconButtonClick={this.handleToggle}
-              style={{ width: '114%', marginLeft: '-7%' }}
-            />
             <div style={contentStyle}>
               <Drawer
                 muiTheme={muiTheme}
@@ -113,4 +103,4 @@ class ViewOpenings extends React.Component {
 function mapStateToProps({ intervieweeOpenings }) {
   return { intervieweeOpenings };
 }
-export default connect(mapStateToProps, actions)(ViewOpenings);
+export default connect(mapStateToProps, actions)(ViewOpeningsMainPage);
