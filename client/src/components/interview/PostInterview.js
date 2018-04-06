@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/interview/';
-import './textStyle.css'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { blue300, red300, indigo900, red900 } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';

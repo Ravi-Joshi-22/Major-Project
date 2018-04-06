@@ -34,6 +34,8 @@ class UserDashboard extends React.Component {
 
   appliedOpening = () => this.setState({ MainArea: 'appliedOpening' });
 
+  profile = () => this.setState({ MainArea: 'profile' });
+
   render() {
     return (
       <MuiThemeProvider>
@@ -43,6 +45,7 @@ class UserDashboard extends React.Component {
               muiTheme={muiTheme}
               appliedOpeningCallback={this.appliedOpening}
               homeCallback={this.home}
+              profileCallBack={this.profile}
             />
             <MainArea showArea={this.state.MainArea} muiTheme={muiTheme}/>
             {/* <Footer /> */}

@@ -1,6 +1,7 @@
 import React from "react";
 import Home from "./home";
 import AppliedOpenings from "./appliedOpenings";
+import UserProfile from "../userProfile/UserProfile";
 
 class MainArea extends React.Component {
   constructor(props) {
@@ -15,6 +16,8 @@ class MainArea extends React.Component {
       showArea = <Home muiTheme={this.props.muiTheme} />;
     } else if (this.props.showArea === "appliedOpening") {
       showArea = <AppliedOpenings muiTheme={this.props.muiTheme} />;
+    } else if (this.props.showArea === "profile") {
+      showArea = <UserProfile muiTheme={this.props.muiTheme} />;
     }
 
     return showArea;

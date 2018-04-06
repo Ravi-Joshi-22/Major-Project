@@ -53,12 +53,21 @@ class UserDrawer extends React.Component {
               </MenuItem>
               <Divider />
               <Subheader> My Account </Subheader>
-              <MenuItem 
-              onClick={() => {
-                this.handleToggle();
-                this.props.homeCallback();
-              }}>
-              Elligible Openings
+              <MenuItem
+                onClick={() => {
+                  this.handleToggle();
+                  this.props.homeCallback();
+                }}
+              >
+                Home
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  this.handleToggle();
+                  this.props.profileCallBack();
+                }}
+              >
+                My Profile
               </MenuItem>
               <MenuItem
                 onClick={() => {
@@ -68,13 +77,7 @@ class UserDrawer extends React.Component {
               >
                 Applied Openings
               </MenuItem>
-              <MenuItem onClick={this.handleClose}>
-                Previous Interviews
-              </MenuItem>
-              <MenuItem onClick={this.handleClose}>My History</MenuItem>
-              <MenuItem onClick={this.handleClose}>Home</MenuItem>
-              <MenuItem onClick={this.handleClose}>Help</MenuItem>
-              <MenuItem onClick={this.handleClose}>Feedback</MenuItem>
+              <MenuItem onClick={this.handleClose}>Results</MenuItem>
               <MenuItem onClick={this.handleClose}>Logout</MenuItem>
             </List>
           </Drawer>
