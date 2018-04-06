@@ -15,11 +15,12 @@ const styles = {
     flexWrap: "wrap"
   }
 };
+const time = 120;
 
 class Timer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { time: {}, seconds: 120 };
+    this.state = { time: {}, seconds: time };
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
     this.restartTimer = this.restartTimer.bind(this);
@@ -45,8 +46,6 @@ class Timer extends React.Component {
 
   componentDidMount() {
     let timeLeftVar = this.secondsToTime(this.state.seconds);
-    this.setState({ time: timeLeftVar,
-    seconds: this.props.timerTime });
     this.startTimer();
   }
 
@@ -56,8 +55,10 @@ class Timer extends React.Component {
     }
   }
 
-  restartTimer() {
-    this.timer = setInterval(this.countDown, 1000);
+  async restartTimer() {
+    await this.setState({
+      seconds: time
+    });
   }
 
   countDown() {
@@ -70,12 +71,15 @@ class Timer extends React.Component {
 
     // Check if we're at zero.
     if (seconds == 0) {
-      clearInterval(this.timer);
       this.props.endCallback();
     }
   }
 
   render() {
+    if (this.props.timerVar === 1) {
+      this.restartTimer();
+      this.props.resetCallback();
+    }
     return (
       <div>
         <MuiThemeProvider muiTheme={this.props.muiTheme}>

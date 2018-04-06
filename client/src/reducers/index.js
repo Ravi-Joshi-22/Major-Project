@@ -12,7 +12,6 @@ import intervieweeProfileReducer from './interviewee/profileReducer';
 import intervieweeOpeningReducer from './openingReducer';
 import progressReducer from './interview/progress';
 import questionsReducer from './interview/questions';
-import timerReducer from './interview/timer';
 
 export default combineReducers({
   auth: userReducers,
@@ -28,5 +27,4 @@ export default combineReducers({
   questionName: questionsReducer,
   interviewId: trackIdReducer,
   progress: progressReducer,
-  timerTime: timerReducer,
 });

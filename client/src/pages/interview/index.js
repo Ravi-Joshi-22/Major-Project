@@ -45,7 +45,6 @@ class Interview extends React.Component {
   }
 
   async setProgress() {
-    console.log(this.props.interviewId);
     if (
       this.props.interviewId.interview_status === "applied" &&
       this.props.interviewId.count < 1
@@ -59,7 +58,6 @@ class Interview extends React.Component {
   }
 
   renderMain() {
-    console.log(this.state.progress + "   " + this.props.progress);
     if (this.state.progress === "pre")
       return <PreInterview startInterviewCallback={this.startInterview} />;
     else if (this.state.progress === "in")
