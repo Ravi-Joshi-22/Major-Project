@@ -1,25 +1,19 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../../actions/interviewee';
-import BusyIndicator from '../../components/common/busyIndicator';
-import UserDrawer from '../../components/userDashboard/userDrawer';
-import FlatButton from 'material-ui/FlatButton';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Personal from '../../components/userProfile/personal';
-import Education from '../../components/userProfile/education';
-import Experience from '../../components/userProfile/experience';
-import Courses from '../../components/userProfile/courses';
-import SkillsCard from '../../components/userProfile/skills';
-import PerPaper from '../../components/userProfile/percentage';
-import Projects from '../../components/userProfile/projects';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {
-  teal300,
-  teal100,
-  teal200,
-  lightBlue500,
-  lightBlue50,
-} from 'material-ui/styles/colors';
+import React from "react";
+import { connect } from "react-redux";
+import * as actions from "../../actions/interviewee";
+import BusyIndicator from "../../components/common/busyIndicator";
+import UserDrawer from "../../components/userDashboard/userDrawer";
+import FlatButton from "material-ui/FlatButton";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import Personal from "../../components/userProfile/personal";
+import Education from "../../components/userProfile/education";
+import Experience from "../../components/userProfile/experience";
+import Courses from "../../components/userProfile/courses";
+import SkillsCard from "../../components/userProfile/skills";
+import PerPaper from "../../components/userProfile/percentage";
+import Projects from "../../components/userProfile/projects";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import { teal300, teal200, lightBlue500 } from "material-ui/styles/colors";
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -27,8 +21,8 @@ const muiTheme = getMuiTheme({
     primary2Color: teal200,
     accent1Color: teal200,
     // canvasColor:lightBlue50,
-    shadowColor: lightBlue500,
-  },
+    shadowColor: lightBlue500
+  }
 });
 class UserProfile extends React.Component {
   constructor(props) {
@@ -42,13 +36,9 @@ class UserProfile extends React.Component {
   handleToggle = () => this.setState({ open: !this.state.open });
 
   render() {
-    const customContentStyle = {
-      width: '80%',
-      maxWidth: 'none',
-    };
-    const actions = [
-      <FlatButton label="Cancel" primary={true} onClick={this.handleToggle} />,
-    ];
+    // const actions = [
+    //   <FlatButton label="Cancel" primary={true} onClick={this.handleToggle} />
+    // ];
 
     return (
       <MuiThemeProvider>
@@ -63,7 +53,7 @@ class UserProfile extends React.Component {
                       borderRadius: 3000,
                       height: 200,
                       width: 200,
-                      margin: 15,
+                      margin: 15
                     }}
                     src="/Assets/headprofile.png"
                     alt="UserProfile"
