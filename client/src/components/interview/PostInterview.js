@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/interview/';
-import './textStyle.css'
+import './textStyle.scss';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { blue300, red300, indigo900, red900 } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {Card, CardText} from 'material-ui/Card';
+import { Card, CardText } from 'material-ui/Card';
 import {
   teal300,
   teal100,
@@ -27,8 +27,7 @@ const muiTheme = getMuiTheme({
 class PostInterview extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
   render() {
@@ -42,19 +41,20 @@ class PostInterview extends React.Component {
               style={{ width: '114%', marginLeft: '-7%' }}
             />
             <div>
-            <Card
+              <Card
                 style={{
                   maxWidth: 900,
                   padding: 10,
-                  margin: "auto",
-                  marginTop: 30
+                  margin: 'auto',
+                  marginTop: 30,
                 }}
               >
                 <CardText style={{ padding: 20 }}>
-                  <b>Heyaaaaaa!!</b><br/>
-                  You have successfully completed the  interview.:)<br/>
-                  Thankyou!<br/>
-                  The results will be sent to you via mails.<br/>
+                  <b>Heyaaaaaa!!</b>
+                  <br />
+                  You have successfully completed the interview.:)<br />
+                  Thankyou!<br />
+                  The results will be sent to you via mails.<br />
                 </CardText>
               </Card>
             </div>
@@ -65,7 +65,7 @@ class PostInterview extends React.Component {
   }
 }
 
-function mapStateToProps({ }) {
-  return { };
+function mapStateToProps({}) {
+  return {};
 }
 export default connect(mapStateToProps, actions)(PostInterview);
