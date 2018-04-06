@@ -1,6 +1,7 @@
 import React from "react";
 import Home from "./home";
 import AppliedOpenings from "./appliedOpenings";
+import ViewResult from "./ViewResult";
 import UserProfile from "../userProfile/UserProfile";
 
 class MainArea extends React.Component {
@@ -18,6 +19,8 @@ class MainArea extends React.Component {
       showArea = <AppliedOpenings muiTheme={this.props.muiTheme} />;
     } else if (this.props.showArea === "profile") {
       showArea = <UserProfile muiTheme={this.props.muiTheme} />;
+    }else if (this.props.showArea === "result") {
+      showArea = <ViewResult muiTheme={this.props.muiTheme} />;
     }
 
     return showArea;

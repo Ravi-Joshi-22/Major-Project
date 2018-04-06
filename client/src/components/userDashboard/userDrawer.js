@@ -77,7 +77,14 @@ class UserDrawer extends React.Component {
               >
                 Applied Openings
               </MenuItem>
-              <MenuItem onClick={this.handleClose}>Results</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  this.handleToggle();
+                  this.props.resultCallback();
+                }}
+              >
+                Results
+              </MenuItem>
               <MenuItem onClick={this.handleClose}>Logout</MenuItem>
             </List>
           </Drawer>
