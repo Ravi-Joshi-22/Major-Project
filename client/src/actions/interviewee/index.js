@@ -3,6 +3,7 @@ import {
   FETCH_ELLIGIBLE_OPENING,
   FETCH_APPLIED_OPENING,
   FETCH_USER_PROFILE,
+  FETCH_RESULTS,
 } from './types';
 import { ERROR, START_LOADING, SHOW_SUCCESS_BOX } from '../app/types';
 
@@ -47,6 +48,16 @@ export const getUserProfileData = () => async dispatch => {
   await axios
     .get('/smarthyre/api/v1/interviewee/profile')
     .then(res => dispatch({ type: FETCH_USER_PROFILE, payload: res.data }))
+    .catch(err => {
+      dispatch({ type: ERROR, payload: err.response.data });
+    });
+};
+
+export const getUserResults = () => async dispatch => {
+  dispatch({ type: START_LOADING });
+  await axios
+    .get('/smarthyre/api/v1/interviewee/opening/results')
+    .then(res => dispatch({ type: FETCH_RESULTS, payload: res.data }))
     .catch(err => {
       dispatch({ type: ERROR, payload: err.response.data });
     });

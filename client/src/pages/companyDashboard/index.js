@@ -174,17 +174,13 @@ class CompanyDashboard extends React.Component {
                     className="navbar-item has-dropdown is-hoverable column-8"
                     style={{ paddingRight: 40 }}
                   >
-                    <a className="navbar-link" href="#">
+                    <a className="navbar-link">
                       <Avatar src="./Assets/Employee.svg" size={30} />
                     </a>
                     <div className="navbar-dropdown">
-                      <a className="navbar-item" href="#">
-                        Profile
-                      </a>
+                      <a className="navbar-item">Profile</a>
                       <hr className="navbar-divider" />
-                      <a className="navbar-item is-active" href="#">
-                        Logout
-                      </a>
+                      <a className="navbar-item is-active">Logout</a>
                     </div>
                   </div>
                 </div>

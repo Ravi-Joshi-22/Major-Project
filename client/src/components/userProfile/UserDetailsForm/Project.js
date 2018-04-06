@@ -174,7 +174,11 @@ class Project extends React.Component {
             </footer>
           </div>
         </div>
-        <FloatingActionButton mini={true} onClick={this.renderModal}>
+        <FloatingActionButton
+          mini={true}
+          onClick={this.renderModal}
+          style={{ padding: 2 }}
+        >
           <ContentAdd />
         </FloatingActionButton>
       </div>

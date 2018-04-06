@@ -1,8 +1,6 @@
 import React from 'react';
 import MenuItem from 'material-ui/MenuItem';
-import Avatar from 'material-ui/Avatar';
 import { Card, CardMedia, CardTitle } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
 
 export default class NavDrawer extends React.Component {
   constructor(props) {
@@ -11,11 +9,6 @@ export default class NavDrawer extends React.Component {
   }
 
   render() {
-    const fabStyle = {
-      marginLeft: 205,
-      marginTop: 10,
-    };
-
     return (
       <div>
         <Card>

@@ -1,7 +1,6 @@
 import 'rc-steps/assets/index.css';
 import 'rc-steps/assets/iconfont.css';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router-dom';
 import './index.css';
 import { connect } from 'react-redux';

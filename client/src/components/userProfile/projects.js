@@ -4,10 +4,8 @@ import CardHeader from 'material-ui/Card/CardHeader';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import { IconButton } from 'material-ui';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Project from '../userProfile/UserDetailsForm/Project';
-import EditIcon from 'material-ui/svg-icons/image/edit';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import * as actions from '../../actions/interviewee/project';
 import { connect } from 'react-redux';
@@ -48,10 +46,7 @@ class Projects extends React.Component {
               primary={true}
               href={eachProject.url}
             />
-            <IconButton className="icon" tooltip="Edit">
-              <EditIcon />
-            </IconButton>
-            <FloatingActionButton mini={true} style={{ margin: 5 }}>
+            <FloatingActionButton mini={true} style={{ margin: 5, padding: 2 }}>
               <DeleteIcon
                 onClick={() => this.deleteProjects(eachProject._id)}
               />

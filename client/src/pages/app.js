@@ -7,6 +7,7 @@ import Login from './login/index';
 import UserDashboard from './userDashboard/index';
 import UserProfile from './userProfile';
 import CompanyDashboard from './companyDashboard';
+import Interview from './interview';
 import IntervieweeRegister from './interviewee registration';
 import ErrorBox from '../components/common/errorBoxContainer';
 import SuccessBox from '../components/common/successBox';

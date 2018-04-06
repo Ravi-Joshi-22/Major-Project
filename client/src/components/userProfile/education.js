@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 import CardHeader from 'material-ui/Card/CardHeader';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { IconButton } from 'material-ui';
-import EditIcon from 'material-ui/svg-icons/image/edit';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Graduation from '../userProfile/UserDetailsForm/Graduation';
 import * as actions from '../../actions/interviewee/education';
+import Divider from 'material-ui/Divider';
 
 class Education extends React.Component {
   constructor(props) {
@@ -31,28 +30,33 @@ class Education extends React.Component {
   }
   renderAfterSeniorSecondary() {
     const afterCards = this.props.afterEducation.map((eachDegree, key) => (
-      <div>
-        <CardHeader
-          title={eachDegree.college}
-          subtitle={eachDegree.degree}
-          avatar="/Assets/educ.jpg"
-        />
-        <CardActions>
-          <IconButton className="icon" tooltip="Edit">
-            <EditIcon />
-          </IconButton>
-          <FloatingActionButton mini={true} style={{ margin: 5 }}>
-            <DeleteIcon onClick={() => this.deleteGraduation(eachDegree._id)} />
-          </FloatingActionButton>
-        </CardActions>
-        <CardText style={{ padding: 2 }}>
-          {eachDegree.stream}
-          <br />
-          {eachDegree.start_year}-{eachDegree.end_year}
-          <br />
-          {eachDegree.performance.scale}:{eachDegree.performance.value}
-          <br />
-        </CardText>
+      <div className="columns">
+        <div className="column is-11">
+          <Divider />
+          <CardHeader
+            title={eachDegree.college}
+            subtitle={eachDegree.degree}
+            avatar="/Assets/educ.jpg"
+          />
+
+          <CardText style={{ padding: 2 }}>
+            {eachDegree.stream}
+            <br />
+            {eachDegree.start_year}-{eachDegree.end_year}
+            <br />
+            {eachDegree.performance.scale}:{eachDegree.performance.value}
+            <br />
+          </CardText>
+        </div>
+        <div className="column is-1">
+          <CardActions>
+            <FloatingActionButton mini={true} style={{ margin: 5, padding: 2 }}>
+              <DeleteIcon
+                onClick={() => this.deleteGraduation(eachDegree._id)}
+              />
+            </FloatingActionButton>
+          </CardActions>
+        </div>
       </div>
     ));
     return afterCards;
@@ -60,16 +64,12 @@ class Education extends React.Component {
   renderBeforeSeniorSecondary() {
     return (
       <div>
+        <Divider />
         <CardHeader
           title={this.props.beforeEducation.secondary.school}
           subtitle="10"
           avatar="/Assets/educ.jpg"
         />
-        <CardActions>
-          <IconButton className="icon" tooltip="Edit">
-            <EditIcon />
-          </IconButton>
-        </CardActions>
         <CardText style={{ padding: 2 }}>
           {this.props.beforeEducation.secondary.board}
           <br />
@@ -80,16 +80,12 @@ class Education extends React.Component {
           }
           <br />
         </CardText>
+        <Divider />
         <CardHeader
           title={this.props.beforeEducation.senior_sec.school}
           subtitle="12"
           avatar="/Assets/sec.jpg"
         />
-        <CardActions>
-          <IconButton className="icon" tooltip="Edit">
-            <EditIcon />
-          </IconButton>
-        </CardActions>
         <CardText style={{ padding: 2 }}>
           {this.props.beforeEducation.senior_sec.year_of_comp}
           <br />
@@ -112,14 +108,14 @@ class Education extends React.Component {
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 5, margin: 10 }}>
           <div className="columns">
-            <div className="column is-8">
+            <div className="column is-11">
               <CardTitle title="Education" />
               {!beforeEducation ? null : this.renderBeforeSeniorSecondary()}
               {afterEducation.length > 0
                 ? this.renderAfterSeniorSecondary()
-                : null}
+                : 'No Graduation Details are added. click on add button to add data'}
             </div>
-            <div className="column is-4">
+            <div className="column is-1">
               <Graduation />
             </div>
           </div>
