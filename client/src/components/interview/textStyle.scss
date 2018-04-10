@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa:700|Roboto:900|Russo+One');
+
+body {
+  background: #fff;
+  text-align: center;
+}
+
+.heart {
+  color:#33d9b2;
+  position: fixed;
+  animation: heart 5s linear infinite;
+  margin-left: -30px; /* optical correction */
+}
+
+@function makelongshadow($color) {
+  $val: 0px 0px $color;
+  @for $i from 1 through 300 {
+    $val: #{$val}, #{$i}px #{$i}px #{$color};
+  }
+  @return $val;
+}
+
+$color: #aeb;
+
+.text {
+  margin-left: -30px; /* optical correction */
+}
+
+p {
+  margin-top:50vh;
+  width: 45px;
+  display: inline-block;
+  font-size: 0px;
+  font-family: 'Russo One';
+  font-weight: 900;
+  color:#33d9b2;
+}
+
+@for $i from 1 to 10 {
+  p:nth-child(#{$i}) { 
+  text-shadow: makelongshadow(adjust-hue($color, $i * 30));
+  animation: showup 5s infinite $i * 0.20s; }
+}
+
+@keyframes showup {
+  0% {
+    font-size:0px;
+    transform:rotate(90deg);
+  }
+  5% {
+    font-size:60px;
+    
+  }
+  10% {
+    font-size:66px;
+    transform:rotate(0deg);
+  }
+  60% {
+    font-size:66px;
+    opacity: 1; 
+  }
+  71% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    font-size:66px;
+    transform:rotate(0deg);
+  }
+}
+
+
+@keyframes heart {
+  0% { opacity: 0; }
+  30% { left: 50vw; top: 35vh; opacity: 0; font-size: 42px; }
+  40% { left: 50vw; top: 35vh; opacity: 1; font-size: 42px; }
+  70% { left: 50vw; top: 35vh; opacity: 1; font-size: 42px; }
+  80% { left: 50vw; top: 30vh; opacity: 0; font-size: 30px; }
+  100% { opacity: 0; }
+}
