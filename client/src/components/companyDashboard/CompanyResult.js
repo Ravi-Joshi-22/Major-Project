@@ -44,7 +44,6 @@ class CompanyResult extends React.Component {
 
   async componentDidMount() {
     await this.props.companyOpeningResults(this.props.resultOpeningId, '');
-    console.log(this.props.resultOpeningId + '  ');
   }
 
   renderDetailsContent() {
@@ -71,6 +70,7 @@ class CompanyResult extends React.Component {
       <div>
         <MuiThemeProvider muiTheme={muiTheme}>
           <div className="columns">
+            <div className="column is-1" />
             <div className="column is-10">
               {this.renderDetailsContent()}
               {this.renderResultContent()}

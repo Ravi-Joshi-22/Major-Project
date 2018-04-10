@@ -22,16 +22,25 @@ class OpeningsCard extends React.Component {
     super(props);
     this.state = {
       expanded: false,
-      open: false,
+      deleteOpen: false,
+      endOpen: false,
     };
   }
 
-  handleOpen = () => {
-    this.setState({ open: true });
+  handleDeleteOpen = () => {
+    this.setState({ deleteOpen: true });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
+  handleDeleteClose = () => {
+    this.setState({ deleteOpen: false });
+  };
+
+  handleEndOpen = () => {
+    this.setState({ endOpen: true });
+  };
+
+  handleEndClose = () => {
+    this.setState({ endOpen: false });
   };
 
   getDateStr(date) {
@@ -52,7 +61,11 @@ class OpeningsCard extends React.Component {
   render() {
     const fields = ['START DATE', 'END DATE', 'SALARY'];
     const deleteOpeningActions = [
-      <FlatButton label="Cancel" primary={true} onClick={this.handleClose} />,
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onClick={this.handleDeleteClose}
+      />,
       <FlatButton
         label="Yes"
         primary={true}
@@ -62,7 +75,11 @@ class OpeningsCard extends React.Component {
       />,
     ];
     const endOpeningActions = [
-      <FlatButton label="Cancel" primary={true} onClick={this.handleClose} />,
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onClick={this.handleEndClose}
+      />,
       <FlatButton
         label="Yes"
         primary={true}
@@ -115,14 +132,14 @@ class OpeningsCard extends React.Component {
                 <FloatingActionButton
                   mini={true}
                   style={{ margin: 5 }}
-                  onClick={this.handleOpen}
+                  onClick={this.handleDeleteOpen}
                 >
                   <DeleteIcon />
                 </FloatingActionButton>
                 <Dialog
                   actions={deleteOpeningActions}
                   modal={true}
-                  open={this.state.open}
+                  open={this.state.deleteOpen}
                 >
                   Are you sure, you want to delete this opening?
                 </Dialog>
@@ -131,7 +148,7 @@ class OpeningsCard extends React.Component {
           </CardText>
           <div className="columns">
             <div className="column is-4">
-              <CardActions expandable={true}>
+              <CardActions>
                 <FlatButton
                   label="VIEW RESULTS"
                   primary={true}
@@ -143,17 +160,17 @@ class OpeningsCard extends React.Component {
               </CardActions>
             </div>
             <div className="column is-4">
-              <CardActions expandable={true}>
+              <CardActions>
                 <FlatButton
                   label="END OPENING"
                   primary={true}
                   icon={<EndOpeningIcon />}
-                  onClick={this.handleOpen}
+                  onClick={this.handleEndOpen}
                 />
                 <Dialog
                   actions={endOpeningActions}
                   modal={true}
-                  open={this.state.open}
+                  open={this.state.endOpen}
                 >
                   Are you sure, you want to end this opening right now?
                 </Dialog>

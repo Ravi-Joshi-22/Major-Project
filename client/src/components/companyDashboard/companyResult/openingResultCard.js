@@ -10,6 +10,12 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 
+const styles = {
+  customWidth: {
+    width: 200,
+  },
+};
+
 class OpeningResultCard extends React.Component {
   constructor(props) {
     super(props);
@@ -38,7 +44,7 @@ class OpeningResultCard extends React.Component {
   }
 
   render() {
-    const fields = ['NAME OF INTERVIEWEE', 'SCORE OBTAINED', 'STATUS'];
+    const fields = ['NAME OF INTERVIEWEE', 'SCORE OBTAINED'];
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 25, margin: 20 }}>
