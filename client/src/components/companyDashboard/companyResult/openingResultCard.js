@@ -63,7 +63,6 @@ class OpeningResultCard extends React.Component {
   }
 
   render() {
-    const fields = ['NAME OF INTERVIEWEE', 'SCORE OBTAINED', 'STATUS'];
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 25, margin: 20 }}>
