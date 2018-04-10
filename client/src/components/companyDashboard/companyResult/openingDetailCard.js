@@ -1,15 +1,24 @@
 import React from 'react';
-import { Card, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardTitle, CardText, CardHeader } from 'material-ui/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 import FlatButton from 'material-ui/FlatButton/FlatButton';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import HireCard from './hireDialog';
+import { teal300 } from 'material-ui/styles/colors';
+import Chip from 'material-ui/Chip';
 
 const styles = {
   customWidth: {
     width: 200,
+  },
+  chip: {
+    margin: 4,
+  },
+  wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
   },
 };
 
@@ -20,109 +29,91 @@ class OpeningDetailCard extends React.Component {
   }
 
   handleChange = (event, index, value) => this.setState({ value });
+  getDateStr(date) {
+    const dateStr = new Date(date);
+    const sDateStr =
+      dateStr.getDate() +
+      '- ' +
+      (dateStr.getMonth() + 1) +
+      '- ' +
+      dateStr.getFullYear();
+    return sDateStr;
+  }
+
+  renderChip(openingData) {
+    return (
+      <Chip
+        key={openingData._id}
+        style={this.styles.chip}
+        backgroundColor={teal300}
+      >
+        {openingData.skills}
+      </Chip>
+    );
+  }
 
   render() {
-    {
-      /* const fields = [
+    const fields = [
       'START DATE',
       'END DATE',
       'LOCATION',
       'SALARY',
-      'SKILLS',
-      'MINIMUM EXPERIENCE',
-      'MAXIMUM EXPERIENCE',
-      'RESPONSIBILITIES',
-      'QUALIFICATIONS',
-   ];*/
-    }
+      'EXPERIENCE',
+      'QUALIFICATION',
+    ];
+    const openingData = this.props.details;
+    const skillsArray = openingData.skills;
+    console.log(skillsArray);
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 25, margin: 20 }}>
-          <CardTitle title="Software Developer" />
+          <CardHeader
+            title={openingData.position}
+            subtitle={openingData.responsibilities}
+            avatar="/Assets/workIcon.png"
+          />
+          {/*<div style={styles.wrapper}>
+            {skillsArray.map(this.renderChip, this)}
+    </div>*/}
           <CardText style={{ padding: 2 }}>
-            <div className="columns">
-              <div className="column is-8">
-                <table>
-                  <tbody displayRowCheckbox={false}>
-                    {/* <TableHeaderColumn>
+            <table>
+              <thead>
+                <tr>
                   {fields.map((eachField, key) => (
-                    <TableRowColumn style={{ width: '15%' }}>
-                      {eachField}
-                    </TableRowColumn>
+                    <th style={{ width: '15%' }}>{eachField}</th>
                   ))}
-                </TableHeaderColumn>*/}
-                    <tr>
-                      <td style={{ width: '25%' }}>
-                        <b>START DATE</b>
-                      </td>
-                      <td style={{ width: '25%' }}>12/04/2018</td>
-                    </tr>
-                    <tr>
-                      <td style={{ width: '25%' }}>
-                        <b>END DATE</b>
-                      </td>
-                      <td style={{ width: '25%' }}>23/04/2018</td>
-                    </tr>
-                    <tr>
-                      <td style={{ width: '25%' }}>
-                        <b>LOCATION</b>
-                      </td>
-                      <td style={{ width: '25%' }}>Indore</td>
-                    </tr>
-                    <tr>
-                      <td style={{ width: '25%' }}>
-                        <b>SALARY</b>
-                      </td>
-                      <td style={{ width: '25%' }}>5.5 lakhs</td>
-                    </tr>
-                    <tr>
-                      <td style={{ width: '25%' }}>
-                        <b>SKILLS</b>
-                      </td>
-                      <td style={{ width: '25%' }}>Java, C, HTML, Oracle</td>
-                    </tr>
-                    <tr>
-                      <td style={{ width: '25%' }}>
-                        <b>MINIMUM EXPERIENCE</b>
-                      </td>
-                      <td style={{ width: '25%' }}>0 yr(s)</td>
-                    </tr>
-                    <tr>
-                      <td style={{ width: '25%' }}>
-                        <b>MAXIMUM EXPERIENCE</b>
-                      </td>
-                      <td style={{ width: '25%' }}>5 yr(s)</td>
-                    </tr>
-                    <tr>
-                      <td style={{ width: '25%' }}>
-                        <b>RESPONSIBILITIES</b>
-                      </td>
-                      <td style={{ width: '25%' }}>To develop java software</td>
-                    </tr>
-                    <tr>
-                      <td style={{ width: '25%' }}>
-                        <b>QUALIFICATIONS</b>
-                      </td>
-                      <td style={{ width: '25%' }}>B.E./B.Tech</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div className="column is-4">
-                <DropDownMenu
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                  style={styles.customWidth}
-                  autoWidth={false}
-                >
-                  <MenuItem value={1} primaryText="All Results" />
-                  <MenuItem value={2} primaryText="Selected" />
-                  <MenuItem value={3} primaryText="Rejected" />
-                  <MenuItem value={4} primaryText="Given" />
-                  <MenuItem value={5} primaryText="Applied" />
-                </DropDownMenu>
-              </div>
-            </div>
+                </tr>
+              </thead>
+              <tbody displayRowCheckbox={false}>
+                <tr>
+                  <td style={{ width: '15%' }}>
+                    {this.getDateStr(openingData.start_date)}
+                  </td>
+                  <td style={{ width: '15%' }}>
+                    {this.getDateStr(openingData.end_date)}
+                  </td>
+                  <td style={{ width: '15%' }}>{openingData.location}</td>
+                  <td style={{ width: '15%' }}>{openingData.salary} lakhs</td>
+                  <td style={{ width: '15%' }}>
+                    {openingData.experience_min} - {openingData.experience_max}{' '}
+                    yrs
+                  </td>
+                  <td style={{ width: '15%' }}>{openingData.qualifications}</td>
+                </tr>
+              </tbody>
+            </table>
+            <DropDownMenu
+              value={this.state.value}
+              onChange={this.handleChange}
+              style={styles.customWidth}
+              autoWidth={false}
+            >
+              <MenuItem value={1} primaryText="All Results" />
+              <MenuItem value={2} primaryText="Selected" />
+              <MenuItem value={3} primaryText="Rejected" />
+              <MenuItem value={4} primaryText="Given" />
+              <MenuItem value={5} primaryText="Applied" />
+            </DropDownMenu>
             <div className="columns">
               <div className="column is-10" />
               <div className="column is-2">

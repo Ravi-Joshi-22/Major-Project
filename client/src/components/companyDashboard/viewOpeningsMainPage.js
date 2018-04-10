@@ -40,7 +40,6 @@ class ViewOpeningsMainPage extends React.Component {
   }
 
   showResult(e) {
-    console.log('eE0    ' + e);
     this.props.resultCallback(e);
   }
 
@@ -63,6 +62,7 @@ class ViewOpeningsMainPage extends React.Component {
             <div style={contentStyle}>
               <div>
                 <div className="columns">
+                  <div className="column is-2" />
                   <div className="column is-8">
                     {companyOpenings.map((eachOpening, key) => (
                       <OpeningsCard
@@ -70,14 +70,6 @@ class ViewOpeningsMainPage extends React.Component {
                         mainAreaCallback={this.showResult}
                       />
                     ))}
-                    <RaisedButton
-                      muiTheme={muiTheme}
-                      label="Clear Selection"
-                      primary={true}
-                      fullWidth={true}
-                      labelPosition="after"
-                      icon={<ClearIcon />}
-                    />
                   </div>
                 </div>
               </div>
