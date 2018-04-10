@@ -3,17 +3,13 @@ import {
   FETCH_APPLIED_OPENING,
   FETCH_RESULTS,
 } from '../actions/interviewee/types';
-import {
-  COMPANY_VIEW_OPENINGS,
-  COMPANY_OPENING_RESULTS,
-} from '../actions/company/types';
+import { COMPANY_VIEW_OPENINGS } from '../actions/company/types';
 
 const initialState = {
   elligibleOpenings: [],
   currentOpenings: [],
   upcomingOpenings: [],
   companyCreatedOpenings: [],
-  individualOpening: {},
   results: [],
 };
 
@@ -25,7 +21,6 @@ export default function(state = null, action) {
         currentOpenings: [],
         upcomingOpenings: [],
         companyCreatedOpenings: [],
-        individualOpening: {},
         results: [],
       };
       return newState;
@@ -35,7 +30,6 @@ export default function(state = null, action) {
         currentOpenings: action.payload.currentAppliedOpenings,
         upcomingOpenings: action.payload.upcomingAppliedOpenings,
         companyCreatedOpenings: [],
-        individualOpening: {},
         results: [],
       };
       return newState2;
@@ -45,30 +39,18 @@ export default function(state = null, action) {
         currentOpenings: [],
         upcomingOpenings: [],
         companyCreatedOpenings: action.payload,
-        individualOpening: {},
         results: [],
       };
       return newState3;
-    case COMPANY_OPENING_RESULTS:
+    case FETCH_RESULTS:
       const newState4 = {
         elligibleOpenings: [],
         currentOpenings: [],
         upcomingOpenings: [],
         companyCreatedOpenings: [],
-        individualOpening: action.payload[0],
         results: action.payload,
       };
       return newState4;
-    case FETCH_RESULTS:
-      const newState5 = {
-        elligibleOpenings: [],
-        currentOpenings: [],
-        upcomingOpenings: [],
-        companyCreatedOpenings: [],
-        individualOpening: {},
-        results: action.payload,
-      };
-      return newState5;
     default:
       return initialState;
   }

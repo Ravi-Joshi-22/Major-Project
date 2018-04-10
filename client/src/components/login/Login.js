@@ -77,6 +77,7 @@ class Login extends React.Component {
   }
 
   render() {
+    console.log(this.props.auth);
     return (
       <div>
         <div className="field">

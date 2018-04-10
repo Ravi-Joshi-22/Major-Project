@@ -8,6 +8,8 @@ export default class NavDrawer extends React.Component {
     this.state = {};
   }
 
+  renderAddOpening() {}
+
   render() {
     return (
       <div>
@@ -22,25 +24,12 @@ export default class NavDrawer extends React.Component {
         </Card>
         <MenuItem
           onClick={() => {
-            this.props.mainAreaCallback('mainArea');
-          }}
-        >
-          Home
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
             this.props.openingCallback();
           }}
         >
           Add Openings
         </MenuItem>
-        <MenuItem
-          onClick={() => {
-            this.props.mainAreaCallback('View Opening');
-          }}
-        >
-          View Openings
-        </MenuItem>
+        <MenuItem>View Openings</MenuItem>
       </div>
     );
   }
