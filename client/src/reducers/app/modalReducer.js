@@ -4,10 +4,7 @@ import {
 } from '../../actions/company/types';
 
 const initialState = {
-  companyOpeningModal: {
-    show: 'modal',
-    data: null,
-  },
+  companyOpeningModal: 'modal',
 };
 
 export default function(state = initialState, action) {
@@ -15,18 +12,12 @@ export default function(state = initialState, action) {
     case HIDE_COMPANY_OPENING_MODAL:
       return {
         ...state,
-        companyOpeningModal: {
-          show: 'modal',
-          data: '',
-        },
+        companyOpeningModal: 'modal',
       };
     case SHOW_COMPANY_OPENING_MODAL:
       return {
         ...state,
-        companyOpeningModal: {
-          show: 'modal is-active',
-          data: action.payload,
-        },
+        companyOpeningModal: 'modal is-active',
       };
     default:
       return initialState;

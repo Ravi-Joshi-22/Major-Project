@@ -10,17 +10,17 @@ class InterviewOpening extends React.Component {
       responsibilities: [],
       skills: [],
       qualifications: [],
-      experience_min: '',
-      experience_max: '',
+      exMin: '',
+      exMax: '',
       location: '',
       salary: '',
-      start_date: '',
-      end_date: '',
+      sDate: '',
+      eDate: '',
     };
     this.updatePosition = this.updatePosition.bind(this);
     this.updateResponsibilities = this.updateResponsibilities.bind(this);
     this.updateSkills = this.updateSkills.bind(this);
-    this.updateQualifications = this.updateQualifications.bind(this);
+    this.updateQualification = this.updateQualification.bind(this);
     this.updateMinExp = this.updateMinExp.bind(this);
     this.updateMaxExp = this.updateMaxExp.bind(this);
     this.updateLocation = this.updateLocation.bind(this);
@@ -53,12 +53,12 @@ class InterviewOpening extends React.Component {
   }
   updateMaxExp(e) {
     if (e.target.value < 50) {
-      this.setState({ experience_max: e.target.value });
+      this.setState({ exMax: e.target.value });
     }
   }
   updateMinExp(e) {
     if (e.target.value < 40) {
-      this.setState({ experience_min: e.target.value });
+      this.setState({ exMin: e.target.value });
     }
     if (e.target.value == null) {
       this.refs.minExpInput.className = 'input is-danger';
@@ -85,10 +85,10 @@ class InterviewOpening extends React.Component {
     }
   }
   updateSDate(e) {
-    this.setState({ start_date: e.target.value });
+    this.setState({ sDate: e.target.value });
   }
   updateEDate(e) {
-    this.setState({ end_date: e.target.value });
+    this.setState({ eDate: e.target.value });
   }
 
   updateResponsibilities(e) {
@@ -103,7 +103,7 @@ class InterviewOpening extends React.Component {
     this.setState({ skills: skillsArr });
   }
 
-  updateQualifications(e) {
+  updateQualification(e) {
     var qualifications = e.target.value;
     var qualArr = qualifications.split(',');
     this.setState({ qualifications: qualArr });
@@ -114,7 +114,7 @@ class InterviewOpening extends React.Component {
       <div>
         <div className={this.props.currentModalClass}>
           <div className="modal-background" />
-          <div className="modal-card" style={{ marginTop: 80 }}>
+          <div className="modal-card" style={{marginTop: 80}}>
             <header className="modal-card-head">
               <p className="modal-card-title">Create Opening</p>
               <button
@@ -211,8 +211,8 @@ class InterviewOpening extends React.Component {
                     className="textarea"
                     type="text"
                     placeholder="Expected Qualification"
-                    value={this.state.qualifications}
-                    onChange={this.updateQualifications}
+                    value={this.state.qualification}
+                    onChange={this.updateQualification}
                   />
                   <span className="icon is-small is-right">
                     <i className="fas fa-graduation-cap" />
@@ -232,7 +232,7 @@ class InterviewOpening extends React.Component {
                       type="number"
                       required
                       placeholder="Minimum Experience(in years)"
-                      value={this.state.experience_min}
+                      value={this.state.exMin}
                       onChange={this.updateMinExp}
                     />
                     <span className="icon is-small is-left">
@@ -248,7 +248,7 @@ class InterviewOpening extends React.Component {
                       className="input"
                       type="number"
                       placeholder="Maximum Experience(in years)"
-                      value={this.state.experience_max}
+                      value={this.state.exMax}
                       onChange={this.updateMaxExp}
                     />
                     <span className="icon is-small is-left">
@@ -307,7 +307,7 @@ class InterviewOpening extends React.Component {
                       className="input"
                       type="date"
                       placeholder="Start Date"
-                      value={this.state.start_date}
+                      value={this.state.sDate}
                       onChange={this.updateSDate}
                     />
                     <span className="icon is-small is-left">
@@ -324,7 +324,7 @@ class InterviewOpening extends React.Component {
                       className="input"
                       type="date"
                       placeholder="End Date"
-                      value={this.state.end_date}
+                      value={this.state.eDate}
                       onChange={this.updateEDate}
                     />
                     <span className="icon is-small is-left">
