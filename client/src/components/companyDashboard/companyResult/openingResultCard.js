@@ -26,7 +26,7 @@ class OpeningResultCard extends React.Component {
     if (this.props.results && this.props.results.length > 0) {
       const resultData = this.props.results.map((eachResult, key) => {
         return (
-          <TableRow style={{ width: '100%' }}>
+          <TableRow>
             <TableRowColumn style={{ width: '33%' }}>
               {eachResult.user_id.first_name.toUpperCase() +
                 ' ' +
@@ -62,23 +62,13 @@ class OpeningResultCard extends React.Component {
   }
 
   render() {
-    const fields = ['NAME OF INTERVIEWEE', 'SCORE OBTAINED', 'STATUS'];
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 25, margin: 20 }}>
-          <CardTitle title="Interviewee Details" />
+          <CardTitle title="Results" />
           <CardText style={{ padding: 2 }}>
             <Table selectable={false}>
-              <TableHeader displaySelectAll={false} adjustForCheckbox={true}>
-                <TableHeaderColumn>
-                  {fields.map((eachField, key) => (
-                    <TableRowColumn style={{ width: '33%' }}>
-                      {eachField}
-                    </TableRowColumn>
-                  ))}
-                </TableHeaderColumn>
-              </TableHeader>
-              <TableBody displayRowCheckbox={false} adjustForCheckbox={true}>
+              <TableBody displayRowCheckbox={false} adjustForCheckbox={false}>
                 {this.renderResults()}
               </TableBody>
             </Table>
