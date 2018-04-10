@@ -40,7 +40,7 @@ class OpeningResultCard extends React.Component {
                 {eachResult.interview_status.toUpperCase()}
               </TableRowColumn>
             ) : eachResult.interview_status === 'applied' ? (
-              <TableRowColumn style={{ color: 'yellow', width: '33%' }}>
+              <TableRowColumn style={{ color: 'brown', width: '33%' }}>
                 {eachResult.interview_status.toUpperCase()}
               </TableRowColumn>
             ) : eachResult.interview_status === 'rejected' ? (

@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../../actions/company';
 import { Card, CardTitle, CardText, CardHeader } from 'material-ui/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
@@ -26,10 +28,16 @@ class OpeningDetailCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: 1 };
-    //this.renderSkills = this.renderSkills.bind(this);
   }
 
-  handleChange = (event, index, value) => this.setState({ value });
+  handleChange = async (event, index, value) => {
+    await this.setState({ value });
+    const array = ['', '', 'selected', 'rejected', 'given', 'applied'];
+    await this.props.companyOpeningResults(
+      this.props.openingId,
+      array[this.state.value]
+    );
+  };
   getDateStr(date) {
     const dateStr = new Date(date);
     const sDateStr =
@@ -40,29 +48,6 @@ class OpeningDetailCard extends React.Component {
       dateStr.getFullYear();
     return sDateStr;
   }
-
-  renderChip(openingData) {
-    return (
-      <Chip
-        key={openingData._id}
-        style={this.styles.chip}
-        backgroundColor={teal300}
-      >
-        {openingData.skills}
-      </Chip>
-    );
-  }
-
-  /*renderSkills() {
-    if (this.props.details.skills) {
-      const skillsArray = this.props.details.skills;
-      skillsArray.map((eachSkill.key) => (
-        {
-          if(eachSkill)
-        }
-      ))
-    } else return null;
-  }*/
 
   render() {
     const fields = [
@@ -84,12 +69,6 @@ class OpeningDetailCard extends React.Component {
             subtitle={openingData.responsibilities}
             avatar="/Assets/workIcon.png"
           />
-          <div style={styles.wrapper}>
-            {
-              //skillsArray.map(this.renderChip, this)
-              //this.renderSkills()
-            }
-          </div>
           <CardText style={{ padding: 2 }}>
             <table>
               <thead>
@@ -142,4 +121,4 @@ class OpeningDetailCard extends React.Component {
   }
 }
 
-export default OpeningDetailCard;
+export default connect(null, actions)(OpeningDetailCard);

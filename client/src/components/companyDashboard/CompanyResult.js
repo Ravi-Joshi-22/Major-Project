@@ -50,6 +50,7 @@ class CompanyResult extends React.Component {
     return (
       <OpeningDetailCard
         details={this.props.intervieweeOpenings.individualOpening}
+        openingId={this.props.resultOpeningId}
       />
     );
   }
