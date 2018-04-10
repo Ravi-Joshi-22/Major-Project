@@ -13,9 +13,8 @@ import IconButton from "material-ui/IconButton";
 import HamburgerIcon from "material-ui/svg-icons/navigation/menu";
 import Avatar from "material-ui/Avatar";
 import Payment from "../../components/companyDashboard/payment";
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { teal300, teal200, lightBlue500 } from 'material-ui/styles/colors';
-
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import { teal300, teal200, lightBlue500 } from "material-ui/styles/colors";
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -23,8 +22,8 @@ const muiTheme = getMuiTheme({
     primary2Color: teal200,
     accent1Color: teal200,
     // canvasColor:lightBlue50,
-    shadowColor: lightBlue500,
-  },
+    shadowColor: lightBlue500
+  }
 });
 class CompanyDashboard extends React.Component {
   constructor(props) {
@@ -106,10 +105,11 @@ class CompanyDashboard extends React.Component {
 
     return (
       <div>
-        <MuiThemeProvider  muiTheme={muiTheme} >
+        <MuiThemeProvider muiTheme={muiTheme}>
           <div>
             <AppBar
               title="SmartHyre"
+              style={{ width: "114%", marginLeft: "-7%" }}
               iconElementLeft={
                 <IconButton>
                   <HamburgerIcon />
@@ -129,7 +129,11 @@ class CompanyDashboard extends React.Component {
                           marginTop: "auto"
                         }}
                       >
-                        <img src="./Assets/coin.svg" alt="Credits" style={{ height: 20 }} />{" "}
+                        <img
+                          src="./Assets/coin.svg"
+                          alt="Credits"
+                          style={{ height: 20 }}
+                        />{" "}
                         {this.renderCredits()}{" "}
                       </span>
                       <Payment />
@@ -143,13 +147,9 @@ class CompanyDashboard extends React.Component {
                       <Avatar src="./Assets/Employee.svg" size={30} />
                     </a>
                     <div className="navbar-dropdown">
-                      <a className="navbar-item">
-                        Profile
-                      </a>
+                      <a className="navbar-item">Profile</a>
                       <hr className="navbar-divider" />
-                      <a className="navbar-item is-active">
-                        Logout
-                      </a>
+                      <a className="navbar-item is-active">Logout</a>
                     </div>
                   </div>
                 </div>
@@ -181,7 +181,7 @@ class CompanyDashboard extends React.Component {
                   />
                 </div>
               </Drawer>
-              <MainArea companyDash={this.renderMain()}  muiTheme={muiTheme} />
+              <MainArea companyDash={this.renderMain()} muiTheme={muiTheme} />
             </div>
           </div>
           {this.props.loading.isloading ? <BusyIndicator /> : null}
