@@ -10,6 +10,7 @@ import {
   START_LOADING,
   SHOW_SUCCESS_BOX,
   HIDE_SUCCESS_BOX,
+  STORE_TRACK_ID,
 } from './types';
 
 export const registerCompany = (
@@ -125,6 +126,11 @@ export const verifyOTP = (userId, OTP, history) => async dispatch => {
       dispatch({ type: ERROR, payload: err.response.data });
     });
 };
+
+export const storeTrackId = trackId => ({
+  type: STORE_TRACK_ID,
+  payload: trackId,
+});
 
 export const clearError = () => ({ type: CLEAR_ERROR });
 export const startLoading = () => ({ type: START_LOADING });

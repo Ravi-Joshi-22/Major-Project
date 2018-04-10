@@ -15,12 +15,12 @@ class FilterCard extends React.Component {
         <Card style={{ padding: 5, margin: 20 }}>
           <CardTitle title="Filters" />
           <CardText style={{ padding: 2 }}>
-            <div class="field has-addons">
-              <div class="control">
-                <input class="input" type="text" placeholder="Search Jobs" />
+            <div className="field has-addons">
+              <div className="control">
+                <input className="input" type="text" placeholder="Search Jobs" />
               </div>
-              <div class="control">
-                <a class="button is-info">Search</a>
+              <div className="control">
+                <a className="button is-info">Search</a>
               </div>
             </div>
             <div className="field">
@@ -56,10 +56,10 @@ class FilterCard extends React.Component {
                 />
               </div>
             </div>
-            <div class="field">
-              <label class="label">Type Of Job</label>
-              <div class="control">
-                <div class="select">
+            <div className="field">
+              <label className="label">Type Of Job</label>
+              <div className="control">
+                <div className="select">
                   <select>
                     <option>Select Type</option>
                     <option>Full Time</option>
