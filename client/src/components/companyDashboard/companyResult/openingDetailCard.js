@@ -26,6 +26,7 @@ class OpeningDetailCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: 1 };
+    //this.renderSkills = this.renderSkills.bind(this);
   }
 
   handleChange = (event, index, value) => this.setState({ value });
@@ -52,6 +53,17 @@ class OpeningDetailCard extends React.Component {
     );
   }
 
+  /*renderSkills() {
+    if (this.props.details.skills) {
+      const skillsArray = this.props.details.skills;
+      skillsArray.map((eachSkill.key) => (
+        {
+          if(eachSkill)
+        }
+      ))
+    } else return null;
+  }*/
+
   render() {
     const fields = [
       'START DATE',
@@ -72,9 +84,12 @@ class OpeningDetailCard extends React.Component {
             subtitle={openingData.responsibilities}
             avatar="/Assets/workIcon.png"
           />
-          {/*<div style={styles.wrapper}>
-            {skillsArray.map(this.renderChip, this)}
-    </div>*/}
+          <div style={styles.wrapper}>
+            {
+              //skillsArray.map(this.renderChip, this)
+              //this.renderSkills()
+            }
+          </div>
           <CardText style={{ padding: 2 }}>
             <table>
               <thead>
