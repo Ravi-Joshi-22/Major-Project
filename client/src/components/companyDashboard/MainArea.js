@@ -1,8 +1,7 @@
-
-import React from "react";
-import CompanyDetails from "./MainArea/CompanyDetails";
-import UsersDetails from "./MainArea/UsersDetails";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import React from 'react';
+import CompanyDetails from './MainArea/CompanyDetails';
+import UsersDetails from './MainArea/UsersDetails';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 export default class MainArea extends React.Component {
   constructor(props) {
@@ -22,8 +21,8 @@ export default class MainArea extends React.Component {
         line: this.props.companyDash.address.address_line,
         city: this.props.companyDash.address.city,
         pin: this.props.companyDash.address.pin,
-        state: this.props.companyDash.address.state
-      }
+        state: this.props.companyDash.address.state,
+      },
     };
     return companyDetails;
   }
@@ -36,7 +35,7 @@ export default class MainArea extends React.Component {
   render() {
     return (
       <div>
-        <MuiThemeProvider  muiTheme={this.props.muiTheme}>
+        <MuiThemeProvider muiTheme={this.props.muiTheme}>
           <div className="tile is-ancestor">
             <div className="tile is-vertical is-8">
               <div className="tile">
@@ -62,12 +61,15 @@ export default class MainArea extends React.Component {
               <div className="tile is-parent">
                 <article className="tile is-child notification box">
                   <p className="title">
-                    <UsersDetails usersData={this.usersData()} style={{ display: "inline" }}/>
+                    <UsersDetails
+                      usersData={this.usersData()}
+                      style={{ display: 'inline' }}
+                    />
                   </p>
                 </article>
               </div>
             </div>
-            <div className="tile is-parent">
+            {/* <div className="tile is-parent">
               <article className="tile is-child notification box">
                 <div className="content">
                   <p className="title">Recent</p>
@@ -75,7 +77,7 @@ export default class MainArea extends React.Component {
                   <div className="content" />
                 </div>
               </article>
-            </div>
+            </div> */}
           </div>
         </MuiThemeProvider>
       </div>
