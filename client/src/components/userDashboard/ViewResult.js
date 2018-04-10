@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/interviewee';
-import GridView from '../../components/userDashboard/Result/GridView';
+import GridView from './Result/GridView';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 

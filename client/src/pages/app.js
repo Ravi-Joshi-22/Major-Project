@@ -5,7 +5,6 @@ import * as actions from '../actions/app';
 import CompanyRegister from './companyRegister/index';
 import Login from './login/index';
 import UserDashboard from './userDashboard/index';
-import UserProfile from './userProfile';
 import CompanyDashboard from './companyDashboard';
 import Interview from './interview';
 import IntervieweeRegister from './interviewee registration';
@@ -36,7 +35,7 @@ class App extends Component {
               path="/intervieweeRegister"
               component={IntervieweeRegister}
             />
-            <Route exact path="/userProfile" component={UserProfile} />
+            <Route path="/Interview" component={Interview} />
           </div>
         </BrowserRouter>
       </div>

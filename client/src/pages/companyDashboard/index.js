@@ -4,26 +4,17 @@ import * as actions from '../../actions/company';
 import './index.css';
 import BusyIndicator from '../../components/common/busyIndicator';
 import MainArea from '../../components/companyDashboard/MainArea';
-import ViewOpeningsMainPage from '../../components/companyDashboard/viewOpeningsMainPage';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NavDrawer from '../../components/companyDashboard/NavDrawer';
 import InterviewOpening from '../../components/companyDashboard/DrawerArea/InterviewOpening';
 import Drawer from 'material-ui/Drawer';
-import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import HamburgerIcon from 'material-ui/svg-icons/navigation/menu';
 import Avatar from 'material-ui/Avatar';
 import Payment from '../../components/companyDashboard/payment';
-import CompanyResult from '../../components/companyDashboard/CompanyResult';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {
-  teal300,
-  teal100,
-  teal200,
-  lightBlue500,
-  lightBlue50,
-} from 'material-ui/styles/colors';
+import { teal300, teal200, lightBlue500 } from 'material-ui/styles/colors';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -145,6 +136,7 @@ class CompanyDashboard extends React.Component {
           <div>
             <AppBar
               title="SmartHyre"
+              style={{ width: '114%', marginLeft: '-7%' }}
               iconElementLeft={
                 <IconButton>
                   <HamburgerIcon />
@@ -213,7 +205,7 @@ class CompanyDashboard extends React.Component {
                   />
                 </div>
               </Drawer>
-              {this.renderMainArea()}
+              <MainArea companyDash={this.renderMain()} muiTheme={muiTheme} />
             </div>
           </div>
           {this.props.loading.isloading ? <BusyIndicator /> : null}

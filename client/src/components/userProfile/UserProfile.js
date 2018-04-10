@@ -1,17 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../../actions/interviewee";
-import BusyIndicator from "../../components/common/busyIndicator";
-import UserDrawer from "../../components/userDashboard/userDrawer";
+import BusyIndicator from "../common/busyIndicator";
+import UserDrawer from "../userDashboard/userDrawer";
 import FlatButton from "material-ui/FlatButton";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Personal from "../../components/userProfile/personal";
-import Education from "../../components/userProfile/education";
-import Experience from "../../components/userProfile/experience";
-import Courses from "../../components/userProfile/courses";
-import SkillsCard from "../../components/userProfile/skills";
-import PerPaper from "../../components/userProfile/percentage";
-import Projects from "../../components/userProfile/projects";
+import Personal from "./personal";
+import Education from "./education";
+import Experience from "./experience";
+import Courses from "./courses";
+import SkillsCard from "./skills";
+import PerPaper from "./percentage";
+import Projects from "./projects";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import { teal300, teal200, lightBlue500 } from "material-ui/styles/colors";
 
@@ -36,14 +36,9 @@ class UserProfile extends React.Component {
   handleToggle = () => this.setState({ open: !this.state.open });
 
   render() {
-    // const actions = [
-    //   <FlatButton label="Cancel" primary={true} onClick={this.handleToggle} />
-    // ];
-
     return (
       <MuiThemeProvider>
         <div className="content">
-          <UserDrawer muiTheme={muiTheme} />
           <div className="columns">
             <div className="column is-8">
               <div className="columns">
