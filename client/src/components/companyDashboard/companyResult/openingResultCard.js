@@ -27,28 +27,29 @@ class OpeningResultCard extends React.Component {
       const resultData = this.props.results.map((eachResult, key) => {
         return (
           <TableRow style={{ width: '100%' }}>
-            <TableRowColumn style={{ width: '33%' }}>
+            <TableRowColumn style={{ width: '5%' }}>{key + 1}</TableRowColumn>
+            <TableRowColumn style={{ width: '25%' }}>
               {eachResult.user_id.first_name.toUpperCase() +
                 ' ' +
                 eachResult.user_id.last_name.toUpperCase()}
             </TableRowColumn>
-            <TableRowColumn style={{ width: '33%' }}>
+            <TableRowColumn style={{ width: '25%' }}>
               {eachResult.score.toFixed(2)}
             </TableRowColumn>
             {eachResult.interview_status === 'selected' ? (
-              <TableRowColumn style={{ color: 'green', width: '33%' }}>
+              <TableRowColumn style={{ color: 'green', width: '25%' }}>
                 {eachResult.interview_status.toUpperCase()}
               </TableRowColumn>
             ) : eachResult.interview_status === 'applied' ? (
-              <TableRowColumn style={{ color: 'brown', width: '33%' }}>
+              <TableRowColumn style={{ color: 'brown', width: '25%' }}>
                 {eachResult.interview_status.toUpperCase()}
               </TableRowColumn>
             ) : eachResult.interview_status === 'rejected' ? (
-              <TableRowColumn style={{ color: 'red', width: '33%' }}>
+              <TableRowColumn style={{ color: 'red', width: '25%' }}>
                 {eachResult.interview_status.toUpperCase()}
               </TableRowColumn>
             ) : (
-              <TableRowColumn style={{ color: 'blue', width: '33%' }}>
+              <TableRowColumn style={{ color: 'blue', width: '25%' }}>
                 {eachResult.interview_status.toUpperCase()}
               </TableRowColumn>
             )}
@@ -66,18 +67,9 @@ class OpeningResultCard extends React.Component {
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 25, margin: 20 }}>
-          <CardTitle title="Interviewee Details" />
+          <CardTitle title="Results" />
           <CardText style={{ padding: 2 }}>
             <Table selectable={false}>
-              <TableHeader displaySelectAll={false} adjustForCheckbox={true}>
-                <TableHeaderColumn>
-                  {fields.map((eachField, key) => (
-                    <TableRowColumn style={{ width: '33%' }}>
-                      {eachField}
-                    </TableRowColumn>
-                  ))}
-                </TableHeaderColumn>
-              </TableHeader>
               <TableBody displayRowCheckbox={false} adjustForCheckbox={true}>
                 {this.renderResults()}
               </TableBody>

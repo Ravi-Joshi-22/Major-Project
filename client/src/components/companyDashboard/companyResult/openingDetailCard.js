@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { teal100 } from 'material-ui/styles/colors';
 import * as actions from '../../../actions/company';
 import { Card, CardTitle, CardText, CardHeader } from 'material-ui/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -28,6 +29,49 @@ class OpeningDetailCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: 1 };
+    this.styles = {
+      chip: {
+        margin: 4,
+      },
+      wrapper: {
+        display: 'flex',
+        flexWrap: 'wrap',
+      },
+    };
+    this.getSubtitle = this.getSubtitle.bind(this);
+    this.renderChip = this.renderChip.bind(this);
+  }
+
+  renderChip(data) {
+    if (data) {
+      return (
+        <div style={this.styles.wrapper}>
+          {data.map((eachMap, key) => {
+            <Chip backgroundColor={teal100} style={this.styles.chip}>
+              {eachMap}
+            </Chip>;
+          })}
+        </div>
+      );
+    } else {
+      return null;
+    }
+  }
+
+  getSubtitle(respon) {
+    let resStr = '';
+    if (respon) {
+      respon.map((eachRes, key) => {
+        if (key === 0) {
+          resStr = resStr + eachRes;
+        } else {
+          resStr = resStr + ', ' + eachRes;
+        }
+      });
+      return resStr;
+    } else {
+      return resStr;
+    }
   }
 
   handleChange = async (event, index, value) => {
@@ -38,6 +82,7 @@ class OpeningDetailCard extends React.Component {
       array[this.state.value]
     );
   };
+
   getDateStr(date) {
     const dateStr = new Date(date);
     const sDateStr =
@@ -59,17 +104,17 @@ class OpeningDetailCard extends React.Component {
       'QUALIFICATION',
     ];
     const openingData = this.props.details;
-    const skillsArray = openingData.skills;
-    console.log(skillsArray);
+
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 25, margin: 20 }}>
           <CardHeader
             title={openingData.position}
-            subtitle={openingData.responsibilities}
+            subtitle={this.getSubtitle(openingData.responsibilities)}
             avatar="/Assets/workIcon.png"
           />
           <CardText style={{ padding: 2 }}>
+            <div>{this.renderChip(openingData.skills)}</div>
             <table>
               <thead>
                 <tr>
