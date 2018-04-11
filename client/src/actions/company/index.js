@@ -6,6 +6,7 @@ import {
   COMPANY_DASH,
   COMPANY_VIEW_OPENINGS,
   COMPANY_DELETE_OPENING,
+  COMPANY_OPENING_RESULTS,
 } from './types';
 import { ERROR, START_LOADING, SHOW_SUCCESS_BOX } from '../app/types';
 
@@ -69,6 +70,58 @@ export const companyDeleteOpenings = deleteObj => async dispatch => {
       dispatch({ type: SHOW_SUCCESS_BOX, payload: success });
     })
     .then(() => dispatch(companyViewOpenings()))
+    .catch(err => {
+      dispatch({ type: ERROR, payload: err.response.data });
+    });
+};
+
+export const companyOpeningResults = (
+  openingId,
+  intervieweeStatus
+) => async dispatch => {
+  dispatch({ type: START_LOADING });
+  axios
+    .get(
+      '/smarthyre/api/v1/company/opening/result?openingId=' +
+        openingId +
+        '&condition=' +
+        intervieweeStatus
+    )
+    .then(res => dispatch({ type: COMPANY_OPENING_RESULTS, payload: res.data }))
+    .catch(err => {
+      dispatch({ type: ERROR, payload: err.response.data });
+    });
+};
+
+export const endOpening = openingId => async dispatch => {
+  dispatch({ type: START_LOADING });
+  axios
+    .put('/smarthyre/api/v1/company/opening/close?openingId=' + openingId)
+    .then(res => {
+      const success = {
+        msg: 'Successfully ended this opening.',
+      };
+      dispatch({ type: SHOW_SUCCESS_BOX, payload: success });
+    })
+    .then(() => dispatch(companyViewOpenings()))
+    .catch(err => {
+      dispatch({ type: ERROR, payload: err.response.data });
+    });
+};
+
+export const hire = hireObj => async dispatch => {
+  axios
+    .post('/smarthyre/api/v1/company/opening/hire', hireObj)
+    .then(res => {
+      dispatch({ type: FETCH_COMPANY, payload: res.data });
+    })
+    .then(() => {
+      const success = {
+        msg: 'Successfully hired.',
+      };
+      dispatch({ type: SHOW_SUCCESS_BOX, payload: success });
+    })
+    .then(() => dispatch(companyOpeningResults(hireObj.openingId, '')))
     .catch(err => {
       dispatch({ type: ERROR, payload: err.response.data });
     });
