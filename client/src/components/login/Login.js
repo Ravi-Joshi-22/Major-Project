@@ -81,8 +81,8 @@ class Login extends React.Component {
     return (
       <div>
         <div className="field">
-          <label className="label">
-            <font color="white">Username</font>
+          <label className="label" style={{ color: '#fff' }}>
+            Username
           </label>
           <div className="control has-icons-left has-icons-right">
             <input
@@ -99,8 +99,8 @@ class Login extends React.Component {
           </div>
         </div>
         <div className="field">
-          <label className="label">
-            <font color="white">Password</font>
+          <label className="label" style={{ color: '#fff' }}>
+            Password
           </label>
           <div className="control has-icons-left has-icons-right">
             <input

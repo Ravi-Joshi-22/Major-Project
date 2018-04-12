@@ -1,8 +1,8 @@
-
-import React from "react";
-import CompanyDetails from "./MainArea/CompanyDetails";
-import UsersDetails from "./MainArea/UsersDetails";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import React from 'react';
+import CompanyDetails from './MainArea/CompanyDetails';
+import UsersDetails from './MainArea/UsersDetails';
+import Reports from './MainArea/Reports';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 export default class MainArea extends React.Component {
   constructor(props) {
@@ -22,8 +22,8 @@ export default class MainArea extends React.Component {
         line: this.props.companyDash.address.address_line,
         city: this.props.companyDash.address.city,
         pin: this.props.companyDash.address.pin,
-        state: this.props.companyDash.address.state
-      }
+        state: this.props.companyDash.address.state,
+      },
     };
     return companyDetails;
   }
@@ -34,9 +34,10 @@ export default class MainArea extends React.Component {
   }
 
   render() {
+    console.log(this.props.companyDash);
     return (
       <div>
-        <MuiThemeProvider  muiTheme={this.props.muiTheme}>
+        <MuiThemeProvider muiTheme={this.props.muiTheme}>
           <div className="tile is-ancestor">
             <div className="tile is-vertical is-8">
               <div className="tile">
@@ -45,8 +46,21 @@ export default class MainArea extends React.Component {
                     <CompanyDetails companyData={this.companyData()} />
                   </article>
                   <article className="tile is-child notification box">
-                    <p className="title">Current</p>
-                    <p className="subtitle">Openings</p>
+                    <div className="columns">
+                      <div className="column">
+                        <p className="title">Current</p>
+                        <p className="subtitle">Openings:</p>
+                      </div>
+                      <div className="column">
+                        <p className="subtitle">
+                          <br />
+                          {this.props.companyDash.no_of_current_openings}{' '}
+                          {this.props.companyDash.no_of_current_openings == 1
+                            ? 'Opening'
+                            : 'Openings'}
+                        </p>
+                      </div>
+                    </div>
                   </article>
                 </div>
                 <div className="tile is-parent">
@@ -62,7 +76,10 @@ export default class MainArea extends React.Component {
               <div className="tile is-parent">
                 <article className="tile is-child notification box">
                   <p className="title">
-                    <UsersDetails usersData={this.usersData()} style={{ display: "inline" }}/>
+                    <UsersDetails
+                      usersData={this.usersData()}
+                      style={{ display: 'inline' }}
+                    />
                   </p>
                 </article>
               </div>
@@ -70,9 +87,8 @@ export default class MainArea extends React.Component {
             <div className="tile is-parent">
               <article className="tile is-child notification box">
                 <div className="content">
-                  <p className="title">Recent</p>
-                  <p className="subtitle">Reports</p>
-                  <div className="content" />
+                  <p className="title">Recent Reports</p>
+                  <Reports companyDash={this.props.companyDash} />
                 </div>
               </article>
             </div>

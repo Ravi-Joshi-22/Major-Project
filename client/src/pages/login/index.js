@@ -66,8 +66,11 @@ class Login extends React.Component {
                 >
                   <ReactCardFlip isFlipped={this.state.isFlipped}>
                     <div key="front">
-                      <h1 className="card-header-title title is-2 is-centered ">
-                        <font color="white">Login</font>
+                      <h1
+                        className="card-header-title title is-2 is-centered "
+                        style={{ color: '#fff' }}
+                      >
+                        Login
                       </h1>
 
                       <LoginPage className="card-content" />
@@ -82,8 +85,11 @@ class Login extends React.Component {
                     </div>
 
                     <div key="back">
-                      <h1 className="card-header-title title is-2 is-centered ">
-                        <font color="white">Register</font>
+                      <h1
+                        className="card-header-title title is-2 is-centered "
+                        style={{ color: '#fff' }}
+                      >
+                        Register
                       </h1>
 
                       <Register className="card-content" />
