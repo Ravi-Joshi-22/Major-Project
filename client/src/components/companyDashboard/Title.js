@@ -1,10 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import connect from 'react-redux';
 import Avatar from 'material-ui/Avatar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Payment from './payment';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import * as actions from '../../actions/app';
 
 class Title extends React.Component {
   constructor(props) {
@@ -14,10 +13,8 @@ class Title extends React.Component {
 
   renderContents() {
     if (this.props.company) {
-      console.log('comp');
       return this.props.company.credits;
     } else {
-      console.log('dash');
       return this.props.credits;
     }
   }
@@ -65,11 +62,7 @@ class Title extends React.Component {
                             Profile
                           </a>
                           <hr className="navbar-divider" />
-                          <a
-                            className="navbar-item is-active"
-                            href="#"
-                            onClick={() => this.props.logout()}
-                          >
+                          <a className="navbar-item is-active" href="#">
                             Logout
                           </a>
                         </div>
@@ -89,4 +82,4 @@ class Title extends React.Component {
 function mapStateToProps({ company }) {
   return { company };
 }
-export default connect(mapStateToProps, actions)(Title);
+export default connect(mapStateToProps)(Title);
