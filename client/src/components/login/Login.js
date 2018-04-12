@@ -1,15 +1,15 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import * as actions from "../../actions/app";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/app';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
-      submitButton: ""
+      username: '',
+      password: '',
+      submitButton: '',
     };
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
@@ -26,53 +26,53 @@ class Login extends React.Component {
 
   async authorize() {
     if (this.state.username.length > 0) {
-      this.refs.usernameInput.className = "input";
+      this.refs.usernameInput.className = 'input';
       if (this.state.password.length > 0) {
-        this.refs.passwordInput.className = "input";
+        this.refs.passwordInput.className = 'input';
 
         await this.props.login(this.state);
         if (
           this.props.auth &&
-          (this.props.auth.role === "company_head" ||
-            this.props.auth.role === "company_user")
+          (this.props.auth.role === 'company_head' ||
+            this.props.auth.role === 'company_user')
         ) {
           switch (this.props.auth.verification_status) {
-            case "in_process":
+            case 'in_process':
               this.props.changeCurrentStep(2);
-              this.props.history.push("/companyRegister");
+              this.props.history.push('/companyRegister');
               break;
-            case "email_verified":
+            case 'email_verified':
               this.props.changeCurrentStep(3);
-              this.props.history.push("/companyRegister");
+              this.props.history.push('/companyRegister');
               break;
-            case "otp_verified":
-              this.props.history.push("/companyDashboard");
+            case 'otp_verified':
+              this.props.history.push('/companyDashboard');
               break;
             default:
-              this.props.history.push("/");
+              this.props.history.push('/');
           }
-        } else if (this.props.auth && this.props.auth.role === "interviewee") {
+        } else if (this.props.auth && this.props.auth.role === 'interviewee') {
           switch (this.props.auth.verification_status) {
-            case "in_process":
+            case 'in_process':
               this.props.changeCurrentStep(3);
-              this.props.history.push("/intervieweeRegister");
+              this.props.history.push('/intervieweeRegister');
               break;
-            case "email_verified":
+            case 'email_verified':
               this.props.changeCurrentStep(4);
-              this.props.history.push("/intervieweeRegister");
+              this.props.history.push('/intervieweeRegister');
               break;
-            case "otp_verified":
-              this.props.history.push("/userDashboard");
+            case 'otp_verified':
+              this.props.history.push('/userDashboard');
               break;
             default:
-              this.props.history.push("/");
+              this.props.history.push('/');
           }
         }
       } else {
-        this.refs.passwordInput.className = "input is-danger";
+        this.refs.passwordInput.className = 'input is-danger';
       }
     } else {
-      this.refs.usernameInput.className = "input is-danger";
+      this.refs.usernameInput.className = 'input is-danger';
     }
   }
 
@@ -81,7 +81,9 @@ class Login extends React.Component {
     return (
       <div>
         <div className="field">
-          <label className="label">Username</label>
+          <label className="label" style={{ color: '#fff' }}>
+            Username
+          </label>
           <div className="control has-icons-left has-icons-right">
             <input
               ref="usernameInput"
@@ -97,7 +99,9 @@ class Login extends React.Component {
           </div>
         </div>
         <div className="field">
-          <label className="label">Password</label>
+          <label className="label" style={{ color: '#fff' }}>
+            Password
+          </label>
           <div className="control has-icons-left has-icons-right">
             <input
               ref="passwordInput"

@@ -4,18 +4,26 @@ import * as actions from '../../actions/company';
 import './index.css';
 import BusyIndicator from '../../components/common/busyIndicator';
 import MainArea from '../../components/companyDashboard/MainArea';
+import ViewOpeningsMainPage from '../../components/companyDashboard/viewOpeningsMainPage';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NavDrawer from '../../components/companyDashboard/NavDrawer';
 import InterviewOpening from '../../components/companyDashboard/DrawerArea/InterviewOpening';
-import Dropdown from '../../components/companyDashboard/Dropdown';
 import Drawer from 'material-ui/Drawer';
+import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import HamburgerIcon from 'material-ui/svg-icons/navigation/menu';
 import Avatar from 'material-ui/Avatar';
 import Payment from '../../components/companyDashboard/payment';
+import CompanyResult from '../../components/companyDashboard/CompanyResult';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { teal300, teal200, lightBlue500 } from 'material-ui/styles/colors';
+import {
+  teal300,
+  teal100,
+  teal200,
+  lightBlue500,
+  lightBlue50,
+} from 'material-ui/styles/colors';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -31,20 +39,46 @@ class CompanyDashboard extends React.Component {
     super(props);
     this.state = {
       open: false,
+      mainArea: 'mainArea',
+      resultOpeningId: '',
     };
     this.openingForm = this.openingForm.bind(this);
+    this.mainAreaShow = this.mainAreaShow.bind(this);
     this.renderMain = this.renderMain.bind(this);
+    this.resultShow = this.resultShow.bind(this);
   }
 
   handleToggle = () => this.setState({ open: !this.state.open });
 
   async openingForm() {
     const { showOpeningModal, hideOpeningModal } = this.props;
-    if (this.props.modals.companyOpeningModal === 'modal') {
+    if (this.props.modals.companyOpeningModal.show === 'modal') {
       this.handleToggle();
-      showOpeningModal();
+      showOpeningModal(null);
     } else {
       hideOpeningModal();
+    }
+  }
+  async mainAreaShow(e) {
+    await this.setState({ open: false, mainArea: e });
+  }
+
+  async resultShow(e) {
+    await this.setState({
+      open: false,
+      mainArea: 'Company Result',
+      resultOpeningId: e,
+    });
+  }
+
+  renderMainArea() {
+    const { mainArea } = this.state;
+    if (mainArea === 'View Opening') {
+      return <ViewOpeningsMainPage resultCallback={this.resultShow} />;
+    } else if (mainArea === 'Company Result') {
+      return <CompanyResult resultOpeningId={this.state.resultOpeningId} />;
+    } else {
+      return <MainArea companyDash={this.renderMain()} muiTheme={muiTheme} />;
     }
   }
 
@@ -154,7 +188,7 @@ class CompanyDashboard extends React.Component {
             <div style={contentStyle}>
               <InterviewOpening
                 muiTheme={muiTheme}
-                currentModalClass={this.props.modals.companyOpeningModal}
+                currentModalClass={this.props.modals.companyOpeningModal.show}
                 openingCallback={this.openingForm}
               />
               <Drawer
@@ -169,10 +203,11 @@ class CompanyDashboard extends React.Component {
                     muiTheme={muiTheme}
                     close={() => this.setState({ open: !this.state.open })}
                     openingCallback={this.openingForm}
+                    mainAreaCallback={this.mainAreaShow}
                   />
                 </div>
               </Drawer>
-              <MainArea companyDash={this.renderMain()} muiTheme={muiTheme} />
+              {this.renderMainArea()}
             </div>
           </div>
           {this.props.loading.isloading ? <BusyIndicator /> : null}
