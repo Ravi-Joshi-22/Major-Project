@@ -1,8 +1,11 @@
 import React from 'react';
 import MenuItem from 'material-ui/MenuItem';
+import { withRouter } from 'react-router-dom';
 import { Card, CardMedia, CardTitle } from 'material-ui/Card';
+import * as actions from '../../actions/app';
+import { connect } from 'react-redux';
 
-export default class NavDrawer extends React.Component {
+class NavDrawer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -41,7 +44,16 @@ export default class NavDrawer extends React.Component {
         >
           View Openings
         </MenuItem>
+        <MenuItem
+          onClick={() => {
+            this.props.logout(this.props.history);
+          }}
+        >
+          Log Out
+        </MenuItem>
       </div>
     );
   }
 }
+
+export default connect(null, actions)(withRouter(NavDrawer));

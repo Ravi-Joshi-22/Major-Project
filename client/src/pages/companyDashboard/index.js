@@ -7,6 +7,7 @@ import MainArea from '../../components/companyDashboard/MainArea';
 import ViewOpeningsMainPage from '../../components/companyDashboard/viewOpeningsMainPage';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NavDrawer from '../../components/companyDashboard/NavDrawer';
+import Dropdown from '../../components/companyDashboard/Dropdown';
 import InterviewOpening from '../../components/companyDashboard/DrawerArea/InterviewOpening';
 import Drawer from 'material-ui/Drawer';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -174,18 +175,8 @@ class CompanyDashboard extends React.Component {
                       <Payment />
                     </span>
                   </div>
-                  <div
-                    className="navbar-item has-dropdown is-hoverable column-8"
-                    style={{ paddingRight: 40 }}
-                  >
-                    <a className="navbar-link">
-                      <Avatar src="./Assets/Employee.svg" size={30} />
-                    </a>
-                    <div className="navbar-dropdown">
-                      <a className="navbar-item">Profile</a>
-                      <hr className="navbar-divider" />
-                      <a className="navbar-item is-active">Logout</a>
-                    </div>
+                  <div>
+                    <Dropdown />
                   </div>
                 </div>
               }
