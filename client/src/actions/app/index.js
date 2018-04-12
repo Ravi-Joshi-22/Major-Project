@@ -127,6 +127,24 @@ export const verifyOTP = (userId, OTP, history) => async dispatch => {
     });
 };
 
+export const logout = () => async dispatch => {
+  dispatch({ type: START_LOADING });
+  axios
+    .get('/smarthyre/api/v1/app/logout')
+    .then(() => {
+      const success = {
+        msg: 'Successfully Logged Out!!',
+      };
+      dispatch({ type: SHOW_SUCCESS_BOX, payload: success });
+    })
+    .catch(err => {
+      const error = {
+        msg: 'Failed To Logout!!!',
+      };
+      dispatch({ type: ERROR, payload: error });
+    });
+};
+
 export const storeTrackId = trackId => ({
   type: STORE_TRACK_ID,
   payload: trackId,
