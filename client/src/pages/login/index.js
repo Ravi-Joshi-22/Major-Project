@@ -1,17 +1,17 @@
-import React from "react";
-import { connect } from "react-redux";
-import BusyIndicator from "../../components/common/busyIndicator";
-import ReactCardFlip from "../../components/login/ReactCardFlip";
-import LoginPage from "../../components/login/Login";
-import Register from "../../components/login/Register";
-import "./index.css";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import React from 'react';
+import { connect } from 'react-redux';
+import BusyIndicator from '../../components/common/busyIndicator';
+import ReactCardFlip from '../../components/login/ReactCardFlip';
+import LoginPage from '../../components/login/Login';
+import Register from '../../components/login/Register';
+import './index.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFlipped: false
+      isFlipped: false,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -33,22 +33,22 @@ class Login extends React.Component {
             <div
               className="columns "
               style={{
-                backgroundColor: "rgba(189, 195, 199, 0.5)",
-                margin: "auto",
-                marginTop: "10%",
-                maxWidth: "80%"
+                backgroundColor: 'rgba(189, 195, 199, 0.5)',
+                margin: 'auto',
+                marginTop: '10%',
+                maxWidth: '80%',
               }}
             >
-              <div className="column is-6" style={{ position: "relative" }}>
+              <div className="column is-6" style={{ position: 'relative' }}>
                 <img
                   src="./Assets/logoTrans.svg"
                   alt="SmartHyre"
                   style={{
-                    position: "absolute",
-                    background: "rgba(255,255,255,0.0)",
-                    width: "50%",
-                    height: "auto",
-                    margin: '5%'
+                    position: 'absolute',
+                    background: 'rgba(255,255,255,0.0)',
+                    width: '50%',
+                    height: 'auto',
+                    margin: '5%',
                   }}
                 />
                 <img
@@ -62,12 +62,12 @@ class Login extends React.Component {
               <div className="column is-6">
                 <div
                   className="container"
-                  style={{ maxWidth: "80%", marginTop: 15 }}
+                  style={{ maxWidth: '80%', marginTop: 15 }}
                 >
                   <ReactCardFlip isFlipped={this.state.isFlipped}>
                     <div key="front">
                       <h1 className="card-header-title title is-2 is-centered ">
-                        Login
+                        <font color="white">Login</font>
                       </h1>
 
                       <LoginPage className="card-content" />
@@ -83,7 +83,7 @@ class Login extends React.Component {
 
                     <div key="back">
                       <h1 className="card-header-title title is-2 is-centered ">
-                        Register
+                        <font color="white">Register</font>
                       </h1>
 
                       <Register className="card-content" />

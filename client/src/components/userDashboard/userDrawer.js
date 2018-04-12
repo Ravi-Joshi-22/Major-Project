@@ -1,15 +1,13 @@
-import React from "react";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import AppBar from "material-ui/AppBar";
-import Drawer from "material-ui/Drawer";
-import MenuItem from "material-ui/MenuItem";
-import List from "material-ui/List";
-import Subheader from "material-ui/Subheader";
-import IconButton from "material-ui/IconButton";
-import IconMenu from "material-ui/IconMenu";
-import HamburgerIcon from "material-ui/svg-icons/navigation/menu";
-import Divider from "material-ui/Divider";
-import ProfileAvatar from "./UserDrawer/profileAvatar";
+import React from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import List from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui/IconMenu';
+import HamburgerIcon from 'material-ui/svg-icons/navigation/menu';
 
 class UserDrawer extends React.Component {
   constructor(props) {
@@ -39,7 +37,7 @@ class UserDrawer extends React.Component {
               </IconButton>
             }
             onLeftIconButtonClick={this.handleToggle}
-            style={{ width: "114%", marginLeft: "-7%" }}
+            style={{ width: '114%', marginLeft: '-7%' }}
           />
           <Drawer
             docked={false}
@@ -48,11 +46,6 @@ class UserDrawer extends React.Component {
             onRequestChange={this.handleToggle}
           >
             <List>
-              <MenuItem onClick={this.handleClose}>
-                <ProfileAvatar />
-              </MenuItem>
-              <Divider />
-              <Subheader> My Account </Subheader>
               <MenuItem
                 onClick={() => {
                   this.handleToggle();
