@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions/app';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Avatar from 'material-ui/Avatar';
@@ -25,7 +26,7 @@ class Dropdown extends React.Component {
               <hr className="navbar-divider" />
               <a
                 className="navbar-item is-active"
-                onClick={() => this.props.logout()}
+                onClick={() => this.props.logout(this.props.history)}
               >
                 Logout
               </a>
@@ -37,4 +38,4 @@ class Dropdown extends React.Component {
   }
 }
 
-export default connect(null, actions)(Dropdown);
+export default connect(null, actions)(withRouter(Dropdown));

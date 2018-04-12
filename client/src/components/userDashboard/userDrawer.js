@@ -10,6 +10,7 @@ import IconMenu from 'material-ui/IconMenu';
 import HamburgerIcon from 'material-ui/svg-icons/navigation/menu';
 import Divider from 'material-ui/Divider';
 import * as actions from '../../actions/app';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class UserDrawer extends React.Component {
@@ -81,7 +82,9 @@ class UserDrawer extends React.Component {
               >
                 Results
               </MenuItem>
-              <MenuItem onClick={() => this.props.logout()}>Logout</MenuItem>
+              <MenuItem onClick={() => this.props.logout(this.props.history)}>
+                Logout
+              </MenuItem>
             </List>
           </Drawer>
         </div>
@@ -90,4 +93,4 @@ class UserDrawer extends React.Component {
   }
 }
 
-export default connect(null, actions)(UserDrawer);
+export default connect(null, actions)(withRouter(UserDrawer));

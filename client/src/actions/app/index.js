@@ -127,11 +127,12 @@ export const verifyOTP = (userId, OTP, history) => async dispatch => {
     });
 };
 
-export const logout = () => async dispatch => {
+export const logout = history => async dispatch => {
   dispatch({ type: START_LOADING });
   axios
     .get('/smarthyre/api/v1/app/logout')
     .then(() => {
+      history.push('/');
       const success = {
         msg: 'Successfully Logged Out!!',
       };

@@ -7,6 +7,7 @@ import MainArea from '../../components/companyDashboard/MainArea';
 import ViewOpeningsMainPage from '../../components/companyDashboard/viewOpeningsMainPage';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NavDrawer from '../../components/companyDashboard/NavDrawer';
+import Dropdown from '../../components/companyDashboard/Dropdown';
 import InterviewOpening from '../../components/companyDashboard/DrawerArea/InterviewOpening';
 import Drawer from 'material-ui/Drawer';
 import RaisedButton from 'material-ui/RaisedButton';

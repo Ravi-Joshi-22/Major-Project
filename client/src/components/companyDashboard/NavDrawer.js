@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuItem from 'material-ui/MenuItem';
+import { withRouter } from 'react-router-dom';
 import { Card, CardMedia, CardTitle } from 'material-ui/Card';
 import * as actions from '../../actions/app';
 import { connect } from 'react-redux';
@@ -45,14 +46,14 @@ class NavDrawer extends React.Component {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            this.props.logout();
+            this.props.logout(this.props.history);
           }}
         >
           Log Out
-      </MenuItem>
+        </MenuItem>
       </div>
     );
   }
 }
 
-export default connect(null, actions)(NavDrawer);
+export default connect(null, actions)(withRouter(NavDrawer));
