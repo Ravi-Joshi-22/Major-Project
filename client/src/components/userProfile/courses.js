@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   Card,
   CardTitle,
@@ -13,18 +14,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Course from '../userProfile/UserDetailsForm/Courses';
-import Test from '../userProfile/UserDetailsForm/Test';
 import Certification from '../userProfile/UserDetailsForm/Certification';
 import * as actions from '../../actions/interviewee/courses';
-
 class Courses extends React.Component {
   constructor(props) {
     super(props);
     this.renderCourses = this.renderCourses.bind(this);
-    this.renderTests = this.renderTests.bind(this);
     this.renderCertification = this.renderCertification.bind(this);
     this.deleteCoure = this.deleteCourse.bind(this);
-    this.deleteTests = this.deleteTests.bind(this);
     this.deleteCertifications = this.deleteCertifications.bind(this);
   }
   deleteCourse(courseId) {
@@ -35,14 +32,7 @@ class Courses extends React.Component {
     };
     this.props.deleteCourses(requestObj);
   }
-  deleteTests(testId) {
-    const requestObj = {
-      test: {
-        _id: testId,
-      },
-    };
-    this.props.deleteTest(requestObj);
-  }
+
   deleteCertifications(testId) {
     const requestObj = {
       certification: {
@@ -60,10 +50,10 @@ class Courses extends React.Component {
             <CardTitle title={eachCourse.name} subtitle={eachCourse.number} />
           }
         >
-          <img src="/Assets/andriod.png" alt="" />
+          <img src="/Assets/full.jpg" alt="" />
         </CardMedia>
         <CardActions>
-          <FloatingActionButton mini={true} style={{ margin: 5 }}>
+          <FloatingActionButton mini={true} style={{ margin: 5, padding: 2 }}>
             <DeleteIcon onClick={() => this.deleteCourse(eachCourse._id)} />
           </FloatingActionButton>
         </CardActions>
@@ -73,7 +63,7 @@ class Courses extends React.Component {
         </CardText>
         <CardActions>
           <RaisedButton
-            label="View Certificate"
+            label="View Courses Details"
             primary={true}
             fullWidth={true}
             href={eachCourse.url}
@@ -82,36 +72,6 @@ class Courses extends React.Component {
       </Card>
     ));
     return courseCards;
-  }
-  renderTests() {
-    const testCards = this.props.test.map((eachTest, key) => (
-      <Card style={{ margin: 10 }}>
-        <CardMedia
-          overlay={<CardTitle title={eachTest.name} subtitle="By google" />}
-        >
-          <img src="/Assets/andriod.png" alt="" />
-        </CardMedia>
-        <CardActions>
-          <FloatingActionButton mini={true} style={{ margin: 5 }}>
-            <DeleteIcon onClick={() => this.deleteTests(eachTest._id)} />
-          </FloatingActionButton>
-        </CardActions>
-        <CardText style={{ margin: 5 }}>
-          {eachTest.score} <br />
-          {eachTest.description}
-          <br />
-        </CardText>
-        <CardActions>
-          <RaisedButton
-            label="View Certificate"
-            primary={true}
-            fullWidth={true}
-            href={eachTest.url}
-          />
-        </CardActions>
-      </Card>
-    ));
-    return testCards;
   }
   renderCertification() {
     const certificationCards = this.props.certification.map(
@@ -128,7 +88,7 @@ class Courses extends React.Component {
             <img src="/Assets/andriod.png" alt="" />
           </CardMedia>
           <CardActions>
-            <FloatingActionButton mini={true} style={{ margin: 5 }}>
+            <FloatingActionButton mini={true} style={{ margin: 5, padding: 2 }}>
               <DeleteIcon
                 onClick={() => this.deleteCertifications(eachCertification._id)}
               />
@@ -151,25 +111,36 @@ class Courses extends React.Component {
     return certificationCards;
   }
   render() {
-    const { courses, test, certification } = this.props;
+    const { courses, certification } = this.props;
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <Card style={{ padding: 5, margin: 10 }}>
           <div className="columns">
-            <div className="column is-8">
-              <CardTitle title="Courses Done and Certification" />
+            <div className="column is-10">
+              <CardTitle title="Courses Done" />
             </div>
-            <div className="column is-4">
+            <div className="column is-2">
               <Course />
-              <Test />
+            </div>
+          </div>
+          {courses.length > 0 ? this.renderCourses() : 'No Courses done'}
+          <br />
+        </Card>
+        <br />
+
+        <Card style={{ padding: 5, margin: 10 }}>
+          <div className="columns">
+            <div className="column is-10">
+              <CardTitle title="Certification Done" />
+            </div>
+            <div className="column is-2">
               <Certification />
             </div>
           </div>
-          <div>
-            {courses.length > 0 ? this.renderCourses() : null}
-            {test.length > 0 ? this.renderTests() : null}
-            {certification.length > 0 ? this.renderCertification() : null}
-          </div>
+          {certification.length > 0
+            ? this.renderCertification()
+            : 'No certifications'}
+
           <FlatButton label=">>View More" primary={true} fullWidth={true} />
         </Card>
       </MuiThemeProvider>

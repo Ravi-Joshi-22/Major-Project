@@ -1,6 +1,8 @@
 import React from 'react';
 import * as actions from '../../../actions/interviewee/courses';
 import { connect } from 'react-redux';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
 
 class Test extends React.Component {
   constructor(props) {
@@ -116,13 +118,13 @@ class Test extends React.Component {
             </footer>
           </div>
         </div>
-        <a
-          class="button is-black is-inverted  is-hovered"
+        <FloatingActionButton
+          mini={true}
           onClick={this.renderModal}
+          style={{ padding: 2 }}
         >
-          {' '}
-          +Add Test{' '}
-        </a>
+          <ContentAdd />
+        </FloatingActionButton>
       </div>
     );
   }

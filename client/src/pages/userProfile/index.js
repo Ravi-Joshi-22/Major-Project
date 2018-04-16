@@ -13,6 +13,7 @@ import SkillsCard from '../../components/userProfile/skills';
 import PerPaper from '../../components/userProfile/percentage';
 import Projects from '../../components/userProfile/projects';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Tests from '../../components/userProfile/test';
 import {
   teal300,
   teal100,
@@ -61,11 +62,11 @@ class UserProfile extends React.Component {
                   <img
                     style={{
                       borderRadius: 3000,
-                      height: 200,
-                      width: 200,
-                      margin: 15,
+                      height: 150,
+                      width: 150,
+                      margin: 18,
                     }}
-                    src="/Assets/headprofile.png"
+                    src="/Assets/Profile.jpeg"
                     alt="UserProfile"
                   />
                 </div>
@@ -93,7 +94,12 @@ class UserProfile extends React.Component {
                 muiTheme={muiTheme}
                 project={this.props.intervieweeProfile.projects}
               />
+              <Tests
+                muiTheme={muiTheme}
+                test={this.props.intervieweeProfile.tests}
+              />
             </div>
+
             <div className="column is-4">
               <PerPaper
                 muiTheme={muiTheme}
@@ -105,7 +111,6 @@ class UserProfile extends React.Component {
               />
               <Courses
                 muiTheme={muiTheme}
-                test={this.props.intervieweeProfile.tests}
                 certification={this.props.intervieweeProfile.certifications}
                 courses={this.props.intervieweeProfile.courses}
               />
