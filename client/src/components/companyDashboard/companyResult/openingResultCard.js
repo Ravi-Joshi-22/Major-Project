@@ -28,9 +28,10 @@ class OpeningResultCard extends React.Component {
         return (
           <TableRow>
             <TableRowColumn style={{ width: '33%' }}>
-              {eachResult.user_id.first_name.toUpperCase() +
-                ' ' +
-                eachResult.user_id.last_name.toUpperCase()}
+              {eachResult.user_id.first_name.toUpperCase()}{' '}
+              {eachResult.user_id.last_name
+                ? eachResult.user_id.last_name.toUpperCase()
+                : ' '}
             </TableRowColumn>
             <TableRowColumn style={{ width: '33%' }}>
               {eachResult.score.toFixed(2)}

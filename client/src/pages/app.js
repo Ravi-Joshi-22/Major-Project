@@ -35,6 +35,7 @@ class App extends Component {
               path="/intervieweeRegister"
               component={IntervieweeRegister}
             />
+            <Route exact path="/Interview" component={Interview} />
           </div>
         </BrowserRouter>
       </div>
