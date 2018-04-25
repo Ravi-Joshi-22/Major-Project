@@ -131,6 +131,9 @@ export const logout = history => async dispatch => {
   dispatch({ type: START_LOADING });
   axios
     .get('/smarthyre/api/v1/app/logout')
+    .then(res => {
+      dispatch({ type: FETCH_USER, payload: '' });
+    })
     .then(() => {
       history.push('/');
       const success = {
