@@ -1,8 +1,16 @@
-import React from 'react';
-import CompanyDetails from './MainArea/CompanyDetails';
-import UsersDetails from './MainArea/UsersDetails';
-import Reports from './MainArea/Reports';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import React from "react";
+import CompanyDetails from "./MainArea/CompanyDetails";
+import UsersDetails from "./MainArea/UsersDetails";
+import Reports from "./MainArea/Reports";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip
+} from "recharts";
 
 export default class MainArea extends React.Component {
   constructor(props) {
@@ -22,10 +30,28 @@ export default class MainArea extends React.Component {
         line: this.props.companyDash.address.address_line,
         city: this.props.companyDash.address.city,
         pin: this.props.companyDash.address.pin,
-        state: this.props.companyDash.address.state,
-      },
+        state: this.props.companyDash.address.state
+      }
     };
     return companyDetails;
+  }
+
+  graphData() {
+    let data = [
+      {
+        name: "Last Month",
+        openings: this.props.companyDash.no_of_openings_created_in_last_month
+      },
+      {
+        name: "This Month",
+        openings: this.props.companyDash.no_of_openings_created_in_running_month
+      },
+      {
+        name: "Upcoming",
+        openings: this.props.companyDash.no_of_upcoming_openings
+      }
+    ];
+    return data;
   }
 
   usersData() {
@@ -54,10 +80,10 @@ export default class MainArea extends React.Component {
                       <div className="column">
                         <p className="subtitle">
                           <br />
-                          {this.props.companyDash.no_of_current_openings}{' '}
+                          {this.props.companyDash.no_of_current_openings}{" "}
                           {this.props.companyDash.no_of_current_openings == 1
-                            ? 'Opening'
-                            : 'Openings'}
+                            ? "Opening"
+                            : "Openings"}
                         </p>
                       </div>
                     </div>
@@ -65,11 +91,24 @@ export default class MainArea extends React.Component {
                 </div>
                 <div className="tile is-parent">
                   <article className="tile is-child notification box">
-                    <p className="title">Unknown</p>
-                    <p className="subtitle">Graph</p>
-                    <figure className="image is-4by3">
-                      <img src="./Assets/graph.png" />
-                    </figure>
+                    <p className="title">Statistics</p>
+                    <AreaChart
+                      width={450}
+                      height={300}
+                      data={this.graphData()}
+                      margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Area
+                        type="monotone"
+                        dataKey="openings"
+                        stroke="#8884d8"
+                        fill="#8884d8"
+                      />
+                    </AreaChart>
                   </article>
                 </div>
               </div>
@@ -78,7 +117,7 @@ export default class MainArea extends React.Component {
                   <p className="title">
                     <UsersDetails
                       usersData={this.usersData()}
-                      style={{ display: 'inline' }}
+                      style={{ display: "inline" }}
                     />
                   </p>
                 </article>
