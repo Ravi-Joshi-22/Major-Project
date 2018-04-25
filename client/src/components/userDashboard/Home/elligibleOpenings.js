@@ -1,12 +1,10 @@
-import React from "react";
-import { Card, CardText } from "material-ui/Card";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import CardHeader from "material-ui/Card/CardHeader";
-import ElligibleTable from "./elligibleTable";
-import MoreIcon from "material-ui/svg-icons/av/fast-forward";
-import FlatButton from "material-ui/FlatButton";
-import { connect } from "react-redux";
-import * as actions from "../../../actions/interviewee";
+import React from 'react';
+import { Card, CardText } from 'material-ui/Card';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import CardHeader from 'material-ui/Card/CardHeader';
+import ElligibleTable from './elligibleTable';
+import { connect } from 'react-redux';
+import * as actions from '../../../actions/interviewee';
 
 class ElligibleOpenings extends React.Component {
   constructor(props) {
@@ -32,11 +30,6 @@ class ElligibleOpenings extends React.Component {
           />
           <CardText style={{ padding: 2 }}>
             <ElligibleTable interviewData={eachOpening} />
-            <FlatButton
-              label="MORE DETAILS"
-              primary={true}
-              icon={<MoreIcon />}
-            />
           </CardText>
         </Card>
       )
