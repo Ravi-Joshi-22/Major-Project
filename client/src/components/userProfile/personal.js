@@ -26,10 +26,10 @@ class Personal extends React.Component {
     const { personal } = this.props;
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
-        <Card style={{ margin: 10, marginTop: 20 }}>
+        <Card style={{ margin: 10, marginTop: 17 }}>
           <br />
           <div className="center">
-            {!personal ? null : this.renderPersonal()}
+            {!personal ? "Add Personal details" : this.renderPersonal()}
           </div>
         </Card>
 

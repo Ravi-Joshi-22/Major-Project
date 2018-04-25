@@ -126,9 +126,6 @@ class Experience extends React.Component {
             <Tab label="JOBS" value="a">
               <div className="columns">
                 <div className="column is-11">
-                  <h2 style={styles.headline}>
-                    Job going on or previously done
-                  </h2>
                   <p>
                     {jobExperience.length > 0
                       ? this.renderExperience()
@@ -143,9 +140,6 @@ class Experience extends React.Component {
             <Tab label="INTERNSHIPS" value="b">
               <div className="columns">
                 <div className="column is-11">
-                  <h2 style={styles.headline}>
-                    Internships going on or previously done
-                  </h2>
                   <p>
                     {internshipExperience.length > 0
                       ? this.renderInternships()

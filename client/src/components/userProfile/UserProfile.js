@@ -1,19 +1,26 @@
-import React from "react";
-import { connect } from "react-redux";
-import * as actions from "../../actions/interviewee";
-import BusyIndicator from "../common/busyIndicator";
-import UserDrawer from "../userDashboard/userDrawer";
-import FlatButton from "material-ui/FlatButton";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Personal from "./personal";
-import Education from "./education";
-import Experience from "./experience";
-import Courses from "./courses";
-import SkillsCard from "./skills";
-import PerPaper from "./percentage";
-import Projects from "./projects";
-import getMuiTheme from "material-ui/styles/getMuiTheme";
-import { teal300, teal200, lightBlue500 } from "material-ui/styles/colors";
+import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/interviewee';
+import BusyIndicator from '../../components/common/busyIndicator';
+import UserDrawer from '../../components/userDashboard/userDrawer';
+import FlatButton from 'material-ui/FlatButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Personal from '../../components/userProfile/personal';
+import Education from '../../components/userProfile/education';
+import Experience from '../../components/userProfile/experience';
+import Courses from '../../components/userProfile/courses';
+import SkillsCard from '../../components/userProfile/skills';
+import PerPaper from '../../components/userProfile/percentage';
+import Projects from '../../components/userProfile/projects';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Tests from '../../components/userProfile/test';
+import {
+  teal300,
+  teal100,
+  teal200,
+  lightBlue500,
+  lightBlue50,
+} from 'material-ui/styles/colors';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -21,8 +28,8 @@ const muiTheme = getMuiTheme({
     primary2Color: teal200,
     accent1Color: teal200,
     // canvasColor:lightBlue50,
-    shadowColor: lightBlue500
-  }
+    shadowColor: lightBlue500,
+  },
 });
 class UserProfile extends React.Component {
   constructor(props) {
@@ -48,9 +55,9 @@ class UserProfile extends React.Component {
                       borderRadius: 3000,
                       height: 200,
                       width: 200,
-                      margin: 15
+                      margin: 15,
                     }}
-                    src="/Assets/headprofile.png"
+                    src="/Assets/Profile.jpeg"
                     alt="UserProfile"
                   />
                 </div>
@@ -78,7 +85,12 @@ class UserProfile extends React.Component {
                 muiTheme={muiTheme}
                 project={this.props.intervieweeProfile.projects}
               />
+              <Tests
+                muiTheme={muiTheme}
+                test={this.props.intervieweeProfile.tests}
+              />
             </div>
+
             <div className="column is-4">
               <PerPaper
                 muiTheme={muiTheme}
@@ -90,7 +102,6 @@ class UserProfile extends React.Component {
               />
               <Courses
                 muiTheme={muiTheme}
-                test={this.props.intervieweeProfile.tests}
                 certification={this.props.intervieweeProfile.certifications}
                 courses={this.props.intervieweeProfile.courses}
               />

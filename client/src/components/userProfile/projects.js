@@ -66,7 +66,9 @@ class Projects extends React.Component {
           <div className="columns">
             <div className="column is-11">
               <CardTitle title="Project Undertaken" />
-              {project.length > 0 ? this.renderProjects() : null}
+              {project.length > 0
+                ? this.renderProjects()
+                : 'No Project Details'}
             </div>
             <div className="column is-1">
               <Project />
