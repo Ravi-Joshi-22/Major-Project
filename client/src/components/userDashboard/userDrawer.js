@@ -1,15 +1,17 @@
-import React from "react";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import AppBar from "material-ui/AppBar";
-import Drawer from "material-ui/Drawer";
-import MenuItem from "material-ui/MenuItem";
-import List from "material-ui/List";
-import Subheader from "material-ui/Subheader";
-import IconButton from "material-ui/IconButton";
-import IconMenu from "material-ui/IconMenu";
-import HamburgerIcon from "material-ui/svg-icons/navigation/menu";
-import Divider from "material-ui/Divider";
-import ProfileAvatar from "./UserDrawer/profileAvatar";
+import React from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import List from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui/IconMenu';
+import HamburgerIcon from 'material-ui/svg-icons/navigation/menu';
+import Divider from 'material-ui/Divider';
+import * as actions from '../../actions/app';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class UserDrawer extends React.Component {
   constructor(props) {
@@ -39,7 +41,7 @@ class UserDrawer extends React.Component {
               </IconButton>
             }
             onLeftIconButtonClick={this.handleToggle}
-            style={{ width: "114%", marginLeft: "-7%" }}
+            style={{ width: '114%', marginLeft: '-7%' }}
           />
           <Drawer
             docked={false}
@@ -48,17 +50,21 @@ class UserDrawer extends React.Component {
             onRequestChange={this.handleToggle}
           >
             <List>
-              <MenuItem onClick={this.handleClose}>
-                <ProfileAvatar />
+              <MenuItem
+                onClick={() => {
+                  this.handleToggle();
+                  this.props.homeCallback();
+                }}
+              >
+                Home
               </MenuItem>
-              <Divider />
-              <Subheader> My Account </Subheader>
-              <MenuItem 
-              onClick={() => {
-                this.handleToggle();
-                this.props.homeCallback();
-              }}>
-              Elligible Openings
+              <MenuItem
+                onClick={() => {
+                  this.handleToggle();
+                  this.props.profileCallBack();
+                }}
+              >
+                My Profile
               </MenuItem>
               <MenuItem
                 onClick={() => {
@@ -68,14 +74,17 @@ class UserDrawer extends React.Component {
               >
                 Applied Openings
               </MenuItem>
-              <MenuItem onClick={this.handleClose}>
-                Previous Interviews
+              <MenuItem
+                onClick={() => {
+                  this.handleToggle();
+                  this.props.resultCallback();
+                }}
+              >
+                Results
               </MenuItem>
-              <MenuItem onClick={this.handleClose}>My History</MenuItem>
-              <MenuItem onClick={this.handleClose}>Home</MenuItem>
-              <MenuItem onClick={this.handleClose}>Help</MenuItem>
-              <MenuItem onClick={this.handleClose}>Feedback</MenuItem>
-              <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+              <MenuItem onClick={() => this.props.logout(this.props.history)}>
+                Logout
+              </MenuItem>
             </List>
           </Drawer>
         </div>
@@ -84,4 +93,4 @@ class UserDrawer extends React.Component {
   }
 }
 
-export default UserDrawer;
+export default connect(null, actions)(withRouter(UserDrawer));

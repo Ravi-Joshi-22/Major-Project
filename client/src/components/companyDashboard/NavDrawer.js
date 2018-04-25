@@ -1,23 +1,17 @@
 import React from 'react';
 import MenuItem from 'material-ui/MenuItem';
-import Avatar from 'material-ui/Avatar';
+import { withRouter } from 'react-router-dom';
 import { Card, CardMedia, CardTitle } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
+import * as actions from '../../actions/app';
+import { connect } from 'react-redux';
 
-export default class NavDrawer extends React.Component {
+class NavDrawer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  renderAddOpening() {}
-
   render() {
-    const fabStyle = {
-      marginLeft: 205,
-      marginTop: 10,
-    };
-
     return (
       <div>
         <Card>
@@ -31,13 +25,35 @@ export default class NavDrawer extends React.Component {
         </Card>
         <MenuItem
           onClick={() => {
+            this.props.mainAreaCallback('mainArea');
+          }}
+        >
+          Home
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
             this.props.openingCallback();
           }}
         >
           Add Openings
         </MenuItem>
-        <MenuItem>View Openings</MenuItem>
+        <MenuItem
+          onClick={() => {
+            this.props.mainAreaCallback('View Opening');
+          }}
+        >
+          View Openings
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            this.props.logout(this.props.history);
+          }}
+        >
+          Log Out
+        </MenuItem>
       </div>
     );
   }
 }
+
+export default connect(null, actions)(withRouter(NavDrawer));

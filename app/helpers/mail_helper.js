@@ -18,6 +18,23 @@ const activation = new EmailTemplate(activationTemplateDir);
 const openingTemplateDir = path.join(__dirname, '../../templates', 'opening');
 const opening = new EmailTemplate(openingTemplateDir);
 
+const selectionTemplateDir = path.join(
+  __dirname,
+  '../../templates',
+  'selection'
+);
+const selection = new EmailTemplate(selectionTemplateDir);
+
+const rejectionTemplateDir = path.join(
+  __dirname,
+  '../../templates',
+  'rejection'
+);
+const rejection = new EmailTemplate(rejectionTemplateDir);
+
+const appliedTemplateDir = path.join(__dirname, '../../templates', 'applied');
+const applied = new EmailTemplate(appliedTemplateDir);
+
 /**
  * Send mail using transporter
  * @param {Object} mailOptions //setup email data with unicode symbols
@@ -208,8 +225,101 @@ function emailVerifier(jwtToken, callback) {
   );
 }
 
+/**
+ * Send selection mail
+ * @param {object} recipientObject object containing recipient details
+ * @param {Function} callback error and mail results
+ */
+function sendSelectionMail(recipientObject, callback) {
+  /**
+   * Render Function of email-templates library .
+   * renders html  ,text , subject also style as well.
+   */
+
+  selection.render(recipientObject, function(err, result) {
+    if (err) {
+      callback(err);
+      return;
+    }
+    //setup email data with unicode symbols
+    const mailOptions = {
+      from: `"SmartHyre" <${KEYS.MAIL.USER}>`, // sender address
+      to: recipientObject.email, // list of receivers
+      subject: result.subject, // Subject line
+      html: result.html, //rendered text goes here
+    };
+
+    transporterMail(mailOptions, function(errorInSending, sentMail) {
+      callback(errorInSending, sentMail);
+    });
+  });
+}
+
+/**
+ * Send rejection  mail
+ * @param {object} recipientObject object containing recipient details
+ * @param {Function} callback error and mail results
+ */
+function sendRejectionMail(recipientObject, callback) {
+  /**
+   * Render Function of email-templates library .
+   * renders html  ,text , subject also style as well.
+   */
+
+  rejection.render(recipientObject, function(err, result) {
+    if (err) {
+      callback(err);
+      return;
+    }
+    //setup email data with unicode symbols
+    const mailOptions = {
+      from: `"SmartHyre" <${KEYS.MAIL.USER}>`, // sender address
+      to: recipientObject.email, // list of receivers
+      subject: result.subject, // Subject line
+      html: result.html, //rendered text goes here
+    };
+
+    transporterMail(mailOptions, function(errorInSending, sentMail) {
+      callback(errorInSending, sentMail);
+    });
+  });
+}
+
+/**
+ * Send   mail to applied candidates
+ * @param {object} recipientObject object containing recipient details
+ * @param {Function} callback error and mail results
+ */
+function sendAppliedCandidatesMail(recipientObject, callback) {
+  /**
+   * Render Function of email-templates library .
+   * renders html  ,text , subject also style as well.
+   */
+
+  applied.render(recipientObject, function(err, result) {
+    if (err) {
+      callback(err);
+      return;
+    }
+    //setup email data with unicode symbols
+    const mailOptions = {
+      from: `"SmartHyre" <${KEYS.MAIL.USER}>`, // sender address
+      to: recipientObject.email, // list of receivers
+      subject: result.subject, // Subject line
+      html: result.html, //rendered text goes here
+    };
+
+    transporterMail(mailOptions, function(errorInSending, sentMail) {
+      callback(errorInSending, sentMail);
+    });
+  });
+}
+
 module.exports = {
   sendVerificationMail: sendVerificationMail,
   emailVerifier: emailVerifier,
   sendOpeningMail: sendOpeningMail,
+  sendSelectionMail: sendSelectionMail,
+  sendRejectionMail: sendRejectionMail,
+  sendAppliedCandidatesMail: sendAppliedCandidatesMail,
 };

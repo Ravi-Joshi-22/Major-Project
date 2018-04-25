@@ -43,18 +43,9 @@ class UserProfile extends React.Component {
   handleToggle = () => this.setState({ open: !this.state.open });
 
   render() {
-    const customContentStyle = {
-      width: '80%',
-      maxWidth: 'none',
-    };
-    const actions = [
-      <FlatButton label="Cancel" primary={true} onClick={this.handleToggle} />,
-    ];
-
     return (
       <MuiThemeProvider>
         <div className="content">
-          <UserDrawer muiTheme={muiTheme} />
           <div className="columns">
             <div className="column is-8">
               <div className="columns">
@@ -62,9 +53,9 @@ class UserProfile extends React.Component {
                   <img
                     style={{
                       borderRadius: 3000,
-                      height: 150,
-                      width: 150,
-                      margin: 18,
+                      height: 200,
+                      width: 200,
+                      margin: 15,
                     }}
                     src="/Assets/Profile.jpeg"
                     alt="UserProfile"

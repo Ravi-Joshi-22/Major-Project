@@ -7,3 +7,4 @@ export const ERROR = 'error';
 export const START_LOADING = 'start_loading';
 export const SHOW_SUCCESS_BOX = 'show_success_box';
 export const HIDE_SUCCESS_BOX = 'hide_success_box';
+export const STORE_TRACK_ID = 'store_track_id';

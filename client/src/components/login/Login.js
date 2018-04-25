@@ -47,6 +47,9 @@ class Login extends React.Component {
               break;
             case 'otp_verified':
               this.props.history.push('/companyDashboard');
+              break;
+            default:
+              this.props.history.push('/');
           }
         } else if (this.props.auth && this.props.auth.role === 'interviewee') {
           switch (this.props.auth.verification_status) {
@@ -60,6 +63,9 @@ class Login extends React.Component {
               break;
             case 'otp_verified':
               this.props.history.push('/userDashboard');
+              break;
+            default:
+              this.props.history.push('/');
           }
         }
       } else {
@@ -75,7 +81,9 @@ class Login extends React.Component {
     return (
       <div>
         <div className="field">
-          <label className="label">Username</label>
+          <label className="label" style={{ color: '#fff' }}>
+            Username
+          </label>
           <div className="control has-icons-left has-icons-right">
             <input
               ref="usernameInput"
@@ -91,7 +99,9 @@ class Login extends React.Component {
           </div>
         </div>
         <div className="field">
-          <label className="label">Password</label>
+          <label className="label" style={{ color: '#fff' }}>
+            Password
+          </label>
           <div className="control has-icons-left has-icons-right">
             <input
               ref="passwordInput"
