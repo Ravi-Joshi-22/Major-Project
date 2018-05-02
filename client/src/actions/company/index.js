@@ -33,7 +33,7 @@ export const newOpening = openingData => async dispatch => {
     .post('/smarthyre/api/v1/company/opening/new', openingData)
     .then(res => {
       dispatch({ type: HIDE_COMPANY_OPENING_MODAL });
-    })
+    }).then(() => dispatch(fetchDash()))
     .catch(err => {
       dispatch({ type: ERROR, payload: err.response.data });
     });

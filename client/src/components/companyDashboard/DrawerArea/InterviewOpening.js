@@ -6,11 +6,11 @@ class InterviewOpening extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      position: '',
+      position: null,
       responsibilities: [],
       skills: [],
       qualifications: [],
-      exMin: '',
+      exMin: 0,
       exMax: '',
       location: '',
       salary: '',
@@ -41,29 +41,48 @@ class InterviewOpening extends React.Component {
     this.setState({ responsibilities: trimmedResponsibilities });
     this.setState({ skills: trimmedSkills });
     this.setState({ qualifications: trimmedQualifications });
-    await this.props.newOpening(openingData);
+
+    if (this.state.position == null) {
+      this.refs.positionInput.className = 'input is-danger';
+    } else {
+      this.refs.positionInput.className = 'input is-success';
+      if (this.state.exMax < 50) {
+        if (this.state.exMax < this.state.exMin) {
+          this.refs.maxExpInput.className = 'input is-danger';
+          this.refs.minExpInput.className = 'input is-danger';
+        } else {
+          this.refs.maxExpInput.className = 'input';
+          this.refs.minExpInput.className = 'input';
+          await this.props.newOpening(openingData);
+        }
+      }
+    }
   }
   updatePosition(e) {
-    this.setState({ position: e.target.value });
     if (e.target.value == null) {
       this.refs.positionInput.className = 'input is-danger';
     } else {
+      this.setState({ position: e.target.value });
       this.refs.positionInput.className = 'input is-success';
     }
   }
   updateMaxExp(e) {
     if (e.target.value < 50) {
-      this.setState({ exMax: e.target.value });
+      console.log(e.target.value);
+      if (e.target.value < this.state.exMin) {
+        this.refs.maxExpInput.className = 'input is-danger';
+        this.refs.minExpInput.className = 'input is-danger';
+        this.setState({ exMax: e.target.value });
+      } else {
+        this.setState({ exMax: e.target.value });
+        this.refs.maxExpInput.className = 'input';
+        this.refs.minExpInput.className = 'input';
+      }
     }
   }
   updateMinExp(e) {
     if (e.target.value < 40) {
       this.setState({ exMin: e.target.value });
-    }
-    if (e.target.value == null) {
-      this.refs.minExpInput.className = 'input is-danger';
-    } else {
-      this.refs.minExpInput.className = 'input is-success';
     }
   }
   updateLocation(e) {
@@ -114,7 +133,7 @@ class InterviewOpening extends React.Component {
       <div>
         <div className={this.props.currentModalClass}>
           <div className="modal-background" />
-          <div className="modal-card" style={{marginTop: 80}}>
+          <div className="modal-card" style={{ marginTop: 80 }}>
             <header className="modal-card-head">
               <p className="modal-card-title">Create Opening</p>
               <button
