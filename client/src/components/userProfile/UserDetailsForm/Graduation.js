@@ -75,17 +75,52 @@ class Graduation extends React.Component {
   }
 
   async submit() {
-    await this.setState({ currentModalClass: 'modal' });
-    const perfObj = {
-      scale: this.state.scale,
-      value: this.state.value,
-    };
-    const degreeobj = this.state;
-    degreeobj.performance = perfObj;
-    const requestObject = {
-      degree: degreeobj,
-    };
-    this.props.addDegree(requestObject);
+    if (this.state.college.length > 0) {
+      this.refs.collegeInput.className = 'input';
+      if (this.state.start_year.length > 0) {
+        this.refs.startyear.className = 'input';
+        if (this.state.end_year.length > 0) {
+          this.refs.endyear.className = 'input';
+          if (this.state.degree.length > 0) {
+            this.refs.degreeInput.className = 'input';
+            if (this.state.stream.length > 0) {
+              this.refs.streamInput.className = 'input';
+              if (this.state.scale.length > 0) {
+                this.refs.perfInput.className = 'input';
+                if (this.state.value.length > 0) {
+                  this.refs.marksInput.className = 'input';
+                  await this.setState({ currentModalClass: 'modal' });
+                  const perfObj = {
+                    scale: this.state.scale,
+                    value: this.state.value,
+                  };
+                  const degreeobj = this.state;
+                  degreeobj.performance = perfObj;
+                  const requestObject = {
+                    degree: degreeobj,
+                  };
+                  this.props.addDegree(requestObject);
+                } else {
+                  this.refs.marksInput.className = 'input is-danger';
+                }
+              } else {
+                this.refs.perfInput.className = 'input is-danger';
+              }
+            } else {
+              this.refs.streamInput.className = 'input is-danger';
+            }
+          } else {
+            this.refs.degreeInput.className = 'input is-danger';
+          }
+        } else {
+          this.refs.endyear.className = 'input is-danger';
+        }
+      } else {
+        this.refs.startyear.className = 'input is-danger';
+      }
+    } else {
+      this.refs.collegeInput.className = 'input is-danger';
+    }
   }
 
   render() {
@@ -107,6 +142,7 @@ class Graduation extends React.Component {
                 <label className="label">College</label>
                 <div className="control has-icons-left has-icons-right">
                   <input
+                    ref="collegeInput"
                     className="input"
                     type="text"
                     placeholder="Ex: Medicaps University"
@@ -128,6 +164,8 @@ class Graduation extends React.Component {
                       <select
                         required
                         value={this.state.start_year}
+                        ref="startyear"
+                        className="input"
                         onChange={this.updateStart}
                       >
                         <option selected>Choose year</option>
@@ -173,7 +211,9 @@ class Graduation extends React.Component {
                       <select
                         required
                         value={this.state.end_year}
+                        ref="endyear"
                         onChange={this.updateEnd}
+                        className="input"
                       >
                         <option selected>Choose year</option>
                         <option>2016</option>
@@ -217,10 +257,10 @@ class Graduation extends React.Component {
                 <label class="label">Degree</label>
                 <p class="control has-icons-left ">
                   <input
-                    ref="nameInput"
+                    ref="degreeInput"
                     className="input"
                     type="text"
-                    placeholder="Degree"
+                    placeholder="degree"
                     required
                     value={this.state.degree}
                     onChange={this.updateDegree}
@@ -238,6 +278,8 @@ class Graduation extends React.Component {
                     <select
                       required
                       value={this.state.stream}
+                      ref="streamInput"
+                      className="input"
                       onChange={this.updateStream}
                     >
                       <option selected>Choose Stream</option>
@@ -261,6 +303,8 @@ class Graduation extends React.Component {
                       <select
                         required
                         value={this.state.scale}
+                        ref="perfInput"
+                        className="input"
                         onChange={this.updateCategory}
                       >
                         <option selected>Choose option</option>
@@ -303,7 +347,11 @@ class Graduation extends React.Component {
             </footer>
           </div>
         </div>
-        <FloatingActionButton mini={true} onClick={this.renderModal} style={{ padding: 2 }}>
+        <FloatingActionButton
+          mini={true}
+          onClick={this.renderModal}
+          style={{ padding: 2 }}
+        >
           <ContentAdd />
         </FloatingActionButton>
       </div>

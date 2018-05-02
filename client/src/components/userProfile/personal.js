@@ -11,9 +11,7 @@ class Personal extends React.Component {
     return (
       <div>
         <CardTitle
-          title={
-            this.props.personal.first_name + ' ' + this.props.personal.last_name
-          }
+          title={this.props.personal.first_name + ' '}
           subtitle={this.props.personal.email}
         />
 
@@ -29,7 +27,7 @@ class Personal extends React.Component {
         <Card style={{ margin: 10, marginTop: 17 }}>
           <br />
           <div className="center">
-            {!personal ? "Add Personal details" : this.renderPersonal()}
+            {!personal ? 'Add Personal details' : this.renderPersonal()}
           </div>
         </Card>
 
