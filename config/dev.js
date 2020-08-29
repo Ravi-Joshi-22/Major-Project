@@ -5,7 +5,7 @@
 
 module.exports = {
   MONGO_DB_URI: 'mongodb://localhost:27017/smartHyre',
-  // MONGO_DB_URI: 'mongodb://shreya:shreya@ds249718.mlab.com:49718/smarthyre',
+  //MONGO_DB_URI: 'mongodb://shreya:shreya@ds249718.mlab.com:49718/smarthyre',
   COOKIE_KEY: 'sygfdjsnfjdsffrmtniioscnaqiwi2774',
   MAIL: {
     SERVICE: 'gmail',

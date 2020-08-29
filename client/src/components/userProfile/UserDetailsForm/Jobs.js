@@ -59,11 +59,42 @@ class Jobs extends React.Component {
     }
   }
   async submit() {
-    await this.setState({ currentModalClass: 'modal' });
-    const requestObject = {
-      jobs: this.state,
-    };
-    this.props.addProfession(requestObject);
+    if (this.state.profile.length > 0) {
+      this.refs.profile.className = 'input';
+      if (this.state.organization.length > 0) {
+        this.refs.organization.className = 'input';
+        if (this.state.location.length > 0) {
+          this.refs.location.className = 'input';
+
+          if (this.state.start_date.length > 0) {
+            this.refs.startyear.className = 'input';
+            if (this.state.end_date.length > 0) {
+              this.refs.endyear.className = 'input';
+              if (this.state.description.length > 0) {
+                this.refs.desc.className = 'input';
+                await this.setState({ currentModalClass: 'modal' });
+                const requestObject = {
+                  jobs: this.state,
+                };
+                this.props.addProfession(requestObject);
+              } else {
+                this.refs.desc.className = 'input is-danger';
+              }
+            } else {
+              this.refs.endyear.className = 'input is-danger';
+            }
+          } else {
+            this.refs.startyear.className = 'input is-danger';
+          }
+        } else {
+          this.refs.location.className = 'input is-danger';
+        }
+      } else {
+        this.refs.organization.className = 'input is-danger';
+      }
+    } else {
+      this.refs.profile.className = 'input is-danger';
+    }
   }
 
   render() {
@@ -89,6 +120,7 @@ class Jobs extends React.Component {
                     className="input"
                     type="text"
                     placeholder="Ex:operations"
+                    ref="profile"
                     required
                     value={this.state.profile}
                     onChange={this.updateProfile}
@@ -106,6 +138,7 @@ class Jobs extends React.Component {
                     type="text"
                     placeholder="Ex:TCS"
                     required
+                    ref="organization"
                     value={this.state.organization}
                     onChange={this.updateOrganization}
                   />
@@ -122,6 +155,7 @@ class Jobs extends React.Component {
                     type="text"
                     placeholder="Ex:Indore"
                     required
+                    ref="location"
                     value={this.state.location}
                     onChange={this.updateLocation}
                   />
@@ -137,8 +171,10 @@ class Jobs extends React.Component {
                   <p class="control has-icons-left ">
                     <input
                       class="input"
+                      className="input"
                       type="date"
                       required
+                      ref="startyear"
                       value={this.state.start_date}
                       onChange={this.updateStart}
                     />
@@ -153,8 +189,10 @@ class Jobs extends React.Component {
                   <p class="control has-icons-left ">
                     <input
                       class="input"
+                      className="input"
                       type="date"
                       required
+                      ref="endyear"
                       value={this.state.end_date}
                       onChange={this.updateEnd}
                     />
@@ -178,8 +216,10 @@ class Jobs extends React.Component {
                 <div className="control has-icons-left has-icons-right">
                   <textarea
                     class="textarea is-hovered"
+                    className="input"
                     type="text"
                     placeholder="Job Description"
+                    ref="desc"
                     value={this.state.description}
                     onChange={this.updatedDescription}
                   />
